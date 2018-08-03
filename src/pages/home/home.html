@@ -1,0 +1,84 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <div class="top">
+      <img src="assets/imgs/home_logo.png">
+      <button ion-button (click)="toReceiveCar()">输入手机号或车牌号查询</button>
+    </div>
+
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-item color="primary" no-lines>
+      <ion-avatar item-start>
+        <img src="{{userInfo.headImg}}">
+      </ion-avatar>
+      <h2>{{userInfo[0].userMobile}}</h2>
+      <p>{{userInfo[0].userName}}</p>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="outer-content">
+  <div class="countBanner fineThread">
+    <ion-row>
+      <ion-col>
+        {{tipMsg.autoCount}}
+        <div>到店车辆</div>
+      </ion-col>
+      <ion-col>
+        {{tipMsg.mcCount}}
+        <div>会员新增</div>
+      </ion-col>
+      <ion-col>
+        {{tipMsg.memberCount}}
+        <div>客户新增</div>
+      </ion-col>
+      <ion-col>
+        {{tipMsg.wxCount}}
+        <div>微信新增</div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="businessBanner">
+    <ion-row>
+      <ion-col col-3 *ngFor="let item of itemList" (click)="itemClick(item.tag)">
+        <div class="unreadMsg" *ngIf="item.tag === 7 && unreadMsg != '0'">1</div>
+        <img src="assets/imgs/{{item.img}}" alt="">
+        <div>{{item.name}}</div>
+      </ion-col>
+    </ion-row>
+    <div class="coverLine"></div>
+  </div>
+  <ion-list class="serveBanner" no-lines>
+    <button ion-item (click)="onAppointmentMng()">
+      <div class="serveTitle row">
+        <img src="assets/imgs/home_30.gif" alt="">
+        <div>服务预约</div>
+      </div>
+      <div class="serveDetail">
+        你有
+        <span class="dangerInfo">{{bookCount.bookCount}}</span>位客户，通过
+        <span class="specialInfo">公众号</span>预约到店服务
+      </div>
+    </button>
+  </ion-list>
+  <ion-list class="serveBanner" no-lines *ngIf="itemList.length == 8">
+    <button ion-item (click)="onCX()">
+      <div class="serveTitle row">
+        <img src="assets/imgs/home_32.gif" alt=""> 车险提醒
+      </div>
+      <div class="serveDetail">
+        有
+        <span class="dangerInfo">{{InsuranceList.records}}</span>位客户的车险即将到期
+      </div>
+      <div class="serveDetail">
+        最近车险到期时间为：
+        <span class="dangerInfo">{{InsuranceList.expireDate}}</span>
+      </div>
+    </button>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-segment color="secondary" [(ngModel)]="segmentType" (ngModelChange)="segmentChange()">
+      <ion-segment-button value="topUp">
+        会员卡充值
+      </ion-segment-button>
+      <ion-segment-button value="open">
+        开立会员卡
+      </ion-segment-button>
+    </ion-segment>
+  </ion-navbar>
+  <ion-toolbar class="searchStyle">
+    <ion-searchbar [(ngModel)]="keyWords" placeholder="{{searchPlaceholder}}" (ngModelChange)="searchAction()">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="outer-content">
+  <div [ngSwitch]="segmentType">
+    <ion-list no-border-top *ngSwitchCase="'topUp'">
+      <button ion-item *ngFor="let c of memberList" (click)="selectItem(c)">
+        <ion-row>
+          <ion-col>
+            <p style="color: #000;padding-bottom: 5px">{{c.plateNumber}}</p>
+            <span>{{c.mcardName}}&nbsp;&nbsp;&nbsp;&nbsp;[{{c.mcardNo}}]</span>
+          </ion-col>
+          <ion-col>
+            <p style="color: #000;padding-bottom: 5px">{{c.memberName}}</p>
+            {{c.mobileNumber}}
+          </ion-col>
+        </ion-row>
+      </button>
+    </ion-list>
+    <ion-list no-border-top *ngSwitchCase=" 'open' ">
+      <button ion-item *ngFor="let c of memberList " (click)="selectItem(c) ">
+        <ion-row>
+          <ion-col>
+            {{c.plateNumber}}
+          </ion-col>
+          <ion-col>
+            {{c.mobileNumber}}
+          </ion-col>
+          <ion-col>
+            {{c.memberName}}
+          </ion-col>
+        </ion-row>
+      </button>
+    </ion-list>
+  </div>
+  <ion-item class="newBanner " text-center no-lines *ngIf="memberList ">
+    <div *ngIf="memberList.length==0 ">
+      <p>暂无符合数据，您可以新增会员..</p>
+    </div>
+    <button ion-button small color="secondary" icon-start (click)="openMemberCard()">
+      开立会员卡
+    </button>
+    <div>若无您所要的会员卡信息，请开立会员
+    </div>
+  </ion-item>
+  <div class="search-car " *ngIf="!memberList ">
+    <img src="assets/imgs/search_03.gif ">
+    <p>{{searchPlaceholder}}</p>
+  </div>
+</ion-content>

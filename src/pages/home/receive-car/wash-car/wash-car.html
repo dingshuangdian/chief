@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      洗车接车
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="outer-content">
+  <div class="titp" *ngIf="amountUnpaid&&amountUnpaid!=0">
+    <div class="tt">
+      <img src="assets/imgs/777_03.gif">
+      <span>该客户还有挂账订单
+        <span>{{amountUnpaid}}</span>元未销</span>
+      <img src="assets/imgs/777_06.gif" (click)='close()'>
+    </div>
+  </div>
+  <div class="carInfo row-distance">
+    <ion-grid no-padding>
+      <ion-row *ngIf="!isNewCustomer">
+        <div class="colName">
+          车 辆：
+        </div>
+        <ion-col class="colSelect">
+          <ion-select [(ngModel)]="selectCar" interface="action-sheet" okText="确定" cancelText="取消" (ngModelChange)="changeCarID(selectCar)">
+            <ion-option *ngFor="let auto of customer.autos;" [value]="auto">{{auto.plateNumber}}</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isNewCustomer || isNewCar">
+        <div class="colName">
+          车 牌：
+        </div>
+        <ion-col class="carNum">
+          <button ion-button icon-right color="dark" clear (click)="showProvince()">
+            {{carInfo.provinces}}
+            <ion-icon name="ios-arrow-down"></ion-icon>
+          </button>
+          <input type="text" placeholder="请输入车牌号码" [(ngModel)]="carInfo.plateNB" (ngModelChange)="changePlateNumber(carInfo.plateNB)"
+            [disabled]="carInfo.plateNB=='无牌'">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="colName">
+          车 型：
+        </div>
+        <ion-col class="colEdit">
+          <ion-row>
+            <ion-col text-left no-padding [ngClass]="{true: 'autoType', false: ''}[true]" (click)="selectCarType()">
+              {{carInfo.autoType}}
+            </ion-col>
+            <button ion-button color="secondary" (click)="toCarEdit()" [disabled]="isNewCustomer || isNewCar">
+              编辑
+            </button>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="colName">
+          手 机：
+        </div>
+        <ion-col>
+          <ion-input placeholder="请输入正确的手机号码" type="phone" (ionBlur)="mobileNumberBlurInput()" [(ngModel)]="customer.mobileNumber"
+            [disabled]="!isNullmobileNumber" (ngModelChange)="changeMobileNumber(customer.mobileNumber)"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="colName">
+          姓 名：
+        </div>
+        <ion-col>
+          <ion-input placeholder="请输入客户姓名" [(ngModel)]="customer.memberName" [disabled]="!isNewCustomer"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="colName">
+          微信：
+        </div>
+        <ion-col *ngIf="!isNewCustomer">
+          <div class="wechatInfo safeInfo" *ngIf="customer.bindUid">已关注</div>
+          <div class="wechatInfo dangerInfo" *ngIf="!customer.bindUid">没有关注</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <button ion-button color="secondary" (click)="presentPrompt()">
+
+      添加送修人信息
+    </button>
+  </div>
+
+  <mcard-grid *ngIf="customer.memberId" [memberId]="customer.memberId"></mcard-grid>
+  
+  <div class="row-distance mcardSCss">
+    <ion-list class="lis-distance">
+      <button ion-item class="itemRow">
+        会员卡项目
+      </button>
+      <div class="itemGrid">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 *ngFor="let mcardP of mcardServices">
+              <button ion-button full color="selectItem" [ngClass]="{'isSelect': mcardP.select}" (click)="selectItem(mcardP)">{{mcardP.serviceName}}</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-list>
+  </div>
+  <div class="row-distance mcardSCss">
+    <ion-list class="lis-distance">
+      <button ion-item class="itemRow">
+        普通项目
+      </button>
+      <div class="itemGrid">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 *ngFor="let servicesP of servicesList">
+              <button ion-button full color="selectItem" [ngClass]="{'isSelect': servicesP.select}" (click)="selectItem(servicesP)">{{servicesP.serviceName}}</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-list>
+  </div>
+
+  <div class="row-distance">
+    <ion-list class="lis-distance">
+      <button ion-item class="itemRow" (click)="goOrderSelect()">
+        技师
+        <div item-end class="selecText">选择</div>
+      </button>
+      <div class="itemText">
+        <span *ngFor="let t of technicianList;let i = index">{{t.userName}}
+          <span *ngIf="i != technicianList.length - 1">,</span>
+        </span>
+
+      </div>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <button ion-button color="secondary" (click)="onConfirm()">提交</button>
+</ion-footer>

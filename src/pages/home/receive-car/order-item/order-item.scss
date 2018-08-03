@@ -1,0 +1,199 @@
+page-order-item {
+  .lis-distance {
+    margin-bottom: initial;
+  }
+  .dangerInfo {
+    color: #f53d3d;
+  }
+  .footer {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .carInfo {
+    background-color: #fff;
+    padding: 15px 25px 10px 25px;
+    font-size: 1.6rem;
+    text-align: center;
+    button {
+      height: 36px;
+    }
+    input {
+      border-width: 1px;
+      border-style: solid;
+      border-color: #888;
+      border-image: initial;
+      border-radius: 2px;
+      margin: 0px;
+      height: 32px;
+      padding-left: 7px;
+      width: 100%;
+    }
+    ion-row {
+      margin: 6px 0;
+    }
+    .colName {
+      width: 70px;
+      text-align: right;
+      line-height: 34px;
+    }
+    .carNum {
+      text-align: left;
+      border: 1px solid #888;
+      border-radius: 2px;
+      button {
+        height: initial;
+        margin: initial;
+        vertical-align: initial;
+        padding: 0;
+        margin-left: 10px;
+      }
+      input {
+        border: initial;
+        background-color: #fff;
+        width: 120px;
+        text-transform: uppercase;
+      }
+    }
+    .colSelect {
+      ion-select {
+        text-align: left;
+        border: 1px solid #888;
+        border-radius: 2px;
+        max-width: initial;
+        padding: 5px 8px;
+        .select-icon-inner {
+          left: 0;
+        }
+      }
+    }
+    .colEdit {
+      ion-row {
+        margin: 0;
+        .col {
+          height: 34px;
+          line-height: 34px;
+          color: #888;
+          border: 1px solid #888;
+          padding-left: 7px;
+          border-radius: 2px;
+          overflow: hidden;
+        }
+      }
+      button {
+        margin: initial;
+        margin-left: 15px;
+        height: initial;
+      }
+    }
+  }
+  .commonRow {
+    font-size: 1.5rem;
+  }
+  .itemRow {
+    font-weight: bold;
+    .item-inner {
+      padding-right: initial !important;
+    }
+  }
+  .itemGrid {
+    background-color: #fff;
+    button {
+      margin: 0;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 5px;
+      font-size: 1.4rem;
+      white-space: initial;
+      height: 3.3em;
+    }
+    .isSelect {
+      background-color: color($colors, assist, base);
+      color: color($colors, assist, contrast);
+    }
+    .bdg {
+      position: relative;
+      .red-point {
+        position: absolute;
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        background-color: red;
+        top: -7px;
+        right: -7px;
+        font-size: 12px;
+        color: #fff;
+        line-height: 14px;
+        text-align: center
+      }
+    }
+  }
+  ion-footer {
+    background-color: #fff;
+    /*border-top: 1px solid #888;*/
+    border-top: 0.55px solid #c8c7cc;
+    button {
+      margin: 8px 1rem !important;
+      height: 43px !important;
+      width: 90px;
+    }
+    .priceInfo {
+      padding: 8px 0;
+      margin-left: 1rem; // line-height: calc(14px + 3.2rem);
+      .totalClass {
+        font-size: 14px;
+      }
+      .detailClass {
+        font-size: 13px;
+      }
+    }
+  }
+  .autoType {
+    color: #000;
+  }
+  .mcardSCss {
+    .mcardNo {
+      font-size: 12px;
+    }
+    .item-inner {
+      background-image: initial !important;
+    }
+  }
+  .text-input[disabled] {
+    opacity: initial;
+  }
+  .titp {
+    background-color: #fbfcdd;
+    .tt {
+      width: 100%;
+      justify-content: space-around;
+      display: flex;
+      height: 30px;
+      align-items: center;
+      img {
+        width: 17px;
+        height: 17px;
+      }
+    }
+  }
+  .insuranceRow {
+    .title {
+      font-weight: bold;
+    }
+    .item-button {
+      padding: 0 1em;
+      height: 2.8em;
+    }
+    .list {
+      margin: initial;
+      .item-block:first-child {
+        border-top: initial;
+      }
+      .item {
+        font-size: 1.4rem;
+        padding-right: 16px;
+        min-height: 3.5rem;
+        line-height: 20px;
+      }
+    }
+  }
+}

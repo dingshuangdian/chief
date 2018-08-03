@@ -1,0 +1,66 @@
+page-appointment-mng {
+  .dateBarStyle {
+    .toolbar-background {
+      background-color: #fff;
+    }
+    ion-datetime {
+      padding: 5px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    ion-icon {
+      vertical-align: sub;
+    }
+  }
+  .publicItem {
+    margin-top: 10px;
+    background-color: white;
+    border-bottom: 0.55px solid #c8c7cc;
+    border-top: 0.55px solid #c8c7cc;
+    position: relative;
+    .itemT {
+      padding: 10px 16px;
+      .pNumber {
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 17px;
+      }
+      .state {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+      }
+      .otherState {
+        color: color($colors, secondary);
+      }
+      .detail {
+        color: #888;
+        ion-row:first-child {
+          img {
+            padding: 5px 0;
+            height: 25px;
+            width: 16px;
+          }
+        }
+        ion-row:nth-child(2) {
+          img {
+            padding: 7px 0;
+            height: 30px;
+            width: 16px;
+          }
+        }
+
+        .vertical{
+            margin: 0 5px;
+        }
+      }
+    }
+    .itemB {
+      padding: 5px 16px;
+      border-top: 0.55px solid #c8c7cc;
+      button {
+          height: 35px;
+      }
+    }
+  }
+}

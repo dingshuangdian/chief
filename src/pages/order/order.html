@@ -1,0 +1,136 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>订单管理</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar class="fixedTab">
+    <div class="course_tabBox" *ngFor="let tab of courseTab; let i = index">
+      <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(courseTab,i)">{{tab.name }}
+      </span>
+    </div>
+    <ion-toolbar class="searchStyle">
+      <ion-row>
+        <ion-col no-padding>
+          <ion-searchbar [(ngModel)]="queryText" placeholder="请输入车牌、手机号搜索" (ngModelChange)="moduleShow($event)">
+          </ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+    <div class="ordertime" [hidden]='courseTab[3].bol' (click)="sordTime()">
+      下单时间
+      <img src="assets/imgs/qie_07.gif" alt="" [hidden]='!flag_sord'>
+      <img src="assets/imgs/qie_07.gif" alt="" [hidden]='flag_sord'>
+    </div>
+    <div class="ordertime" [hidden]='courseTab[0].bol||courseTab[1].bol||courseTab[2].bol||courseTab[4].bol' (click)="sordTime()">
+      结算时间
+      <img src="assets/imgs/qie_07.gif" alt="" [hidden]='!flag_sord'>
+      <img src="assets/imgs/qie_07.gif" alt="" [hidden]='flag_sord'>
+    </div>
+  </ion-toolbar>
+
+</ion-header>
+<!-- <div class="fixedTab">
+  <div class="course_tabBox" *ngFor="let tab of courseTab; let i = index">
+    <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(courseTab,i)">{{tab.name }}
+    </span>
+  </div>
+  <ion-toolbar class="searchStyle">
+    <ion-row>
+      <ion-col no-padding>
+        <ion-searchbar [(ngModel)]="queryText" placeholder="请输入车牌模糊搜索" (click)="moduleShow()">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <div class="ordertime" [hidden]='courseTab[3].bol' (click)="sordTime()">
+    下单时间
+    <img src="assets/imgs/qie_07.gif" alt="" [hidden]='!flag_sord'>
+    <img src="assets/imgs/qie_07.gif" alt="" [hidden]='flag_sord'>
+  </div>
+  <div class="ordertime" [hidden]='courseTab[0].bol||courseTab[1].bol||courseTab[2].bol||courseTab[4].bol' (click)="sordTime()">
+    结算时间
+    <img src="assets/imgs/qie_07.gif" alt="" [hidden]='!flag_sord'>
+    <img src="assets/imgs/qie_07.gif" alt="" [hidden]='flag_sord'>
+  </div>
+</div> -->
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div style='padding-bottom: 181px;'>
+    <ion-list no-lines *ngFor="let item of items;let num = index">
+        <div class="lstop">
+  
+          <button ion-item (click)="itemSelected(item)">
+            <div class="tit">
+              <button disabled="disabled">{{num + 1}}</button>
+              <div>
+                <div> <span>{{item.plateNumber}}</span> <span> &nbsp;&nbsp;| {{item.automakeName}}</span></div>
+                <span>{{item.memberName}}({{item.mobileNumber}})</span>
+              </div>
+            </div>
+          </button>
+        </div>
+        <div class="con" (click)="goOrderDetail(item.orderId)">
+          <!-- 服务 -->
+          <span [hidden]="!item.services">
+            <img src="assets/imgs/qie_15.gif" alt="">
+            <span *ngFor="let service of item.services; let num = index">
+              <i>{{service.serviceName}}</i>
+              <i *ngIf="num < item.services.length-1">,</i>
+            </span>
+          </span>
+          <!-- 配件 -->
+          <span [hidden]="!item.goods">
+            <img src="assets/imgs/qie_18.gif" alt="">
+            <span *ngFor="let good of item.goods; let num = index">
+              <i>{{good.goodsName}}</i>
+              <i *ngIf="num < item.goods.length-1">,</i>
+            </span>
+          </span>
+          <span>
+            <img src="assets/imgs/qie_20.gif">
+            <span [hidden]='courseTab[3].bol'>{{item.pickupUname}}</span>
+            <span [hidden]='courseTab[0].bol||courseTab[1].bol||courseTab[2].bol||courseTab[4].bol'>{{item.settlementUname}}</span>
+            <span class="fr" [hidden]='courseTab[3].bol'>{{item.fillDate}}</span>
+            <span class="fr" [hidden]='courseTab[0].bol||courseTab[1].bol||courseTab[2].bol||courseTab[4].bol'>{{item.settlementTime}}</span>
+          </span>
+        </div>
+  
+        <div class="bot">
+  
+          <span class="spn">￥{{item.orderAmount}}</span>
+          <div class="btn" [hidden]='courseTab[2].bol||courseTab[3].bol||courseTab[4].bol'>
+            <button ion-button (click)="cansolOrderConfirm(item.plateNumber,item.fillDate,item.orderId)">取消</button>
+            <button ion-button (click)="goOrderEdit(item.orderId,item.orderTypeId)">修改</button>
+            <button ion-button (click)="susupendOrderConfirm(item.orderId)" [hidden]='courseTab[1].bol'>挂起</button>
+            <button ion-button (click)="goAccountOrder(item.orderId)">结算</button>
+          </div>
+        </div>
+    </ion-list>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData"> 
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="加载中..."> 
+      </ion-infinite-scroll-content> 
+  </ion-infinite-scroll>
+  <div class="noResultCon" [hidden]="items">
+    <span>--暂无记录--</span>
+  </div>
+</ion-content>

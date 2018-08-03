@@ -1,0 +1,51 @@
+page-record-registere {
+    ion-label {
+        font-size: 14px;
+    }
+    .datetime-text {
+        font-size: 14px;
+    }
+    .item-ios.item-block .item-inner {
+        border-bottom: 0.55px solid #f0f1f4;
+    }
+    .memo {
+        padding: 10px 22px;
+        margin-top: 5px;
+        font-size: 14px;
+        ion-textarea {
+            border: 1px solid #f0f1f4;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+    }
+    .top1 {
+        background-color: #fff;
+        margin-top: 10px;
+        .selectItem {
+            padding-left: 16px;
+            border-bottom: 0.55px solid #f0f1f4;
+            div {
+                font-size: 14px;
+                background-color: initial;
+                line-height: 45px;
+            }
+            .input {
+                height: 35px;
+                line-height: 35px;
+                padding: 1px 20px 0 10px;
+                background-color: #fff;
+                -webkit-box-flex: initial;
+                -webkit-flex: initial;
+                -ms-flex: initial;
+                flex: initial;
+                .text-input {
+                    margin: initial;
+                }
+            }
+        }
+    }
+    .button {
+        height: 35px;
+        width: 30%;
+    }
+}

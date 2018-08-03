@@ -1,0 +1,40 @@
+<!--
+  Generated template for the RecordPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <div class="course_tabBox" *ngFor="let tab of courseTab">
+        <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name   
+            ,courseTab)">{{tab.name}}
+        </span>
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="inp">
+    <ion-item>
+      <ion-input type="text" placeholder="请填写新类型" [(ngModel)]="typeName"></ion-input>
+    </ion-item>
+    <button ion-button (click)="editDiv()">记一笔</button>
+  </div>
+  <div class="las">
+    <div style="background-color:#edf1f6;height: 30px;line-height: 30px;padding-left: 10px;color: #89909e; ">
+      快速选择
+    </div>
+    <ion-list>
+      <ion-item>
+        <ion-row>
+          <ion-col col-4 *ngFor="let item of classic">
+            <button ion-button full (click)="goRecordRegister(item)">{{item.journalTypeName}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

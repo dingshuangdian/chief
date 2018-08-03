@@ -1,0 +1,175 @@
+page-new-custom {
+    .list-ios>.item-block:last-child,
+    .list-ios>.item-wrapper:last-child .item-block {
+        border-bottom: none;
+    }
+    .list {
+        .item {
+            font-size: 1.4rem;
+            padding-right: 16px;
+            min-height: 3.8rem;
+            .item-inner {
+                background-image: initial !important;
+                padding-right: initial !important;
+                .label-ios {
+                    margin: 5px 0 !important;
+                }
+            }
+        }
+    }
+    .list-ios {
+        margin: 0;
+    }
+    .carNum {
+        button {
+            height: initial;
+            margin: initial;
+            vertical-align: initial;
+            padding: 0;
+        }
+        input {
+            border: initial;
+            width: 70px;
+            background-color: #fff;
+            text-transform: uppercase;
+        }
+        .scanner {
+            height: 20px;
+            vertical-align: bottom;
+            .icon {
+                padding: 0;
+                margin: 0 0 0 8px;
+                font-size: 25px;
+            }
+        }
+    }
+    .selectType {
+        button {
+            height: initial;
+            margin: initial;
+            padding: 0;
+            vertical-align: middle;
+            font-size: 1.4rem;
+            .icon {
+                margin-left: 10px;
+            }
+        }
+    }
+    .detailTitle {
+        font-size: 15px;
+        color: #888;
+        img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        div {
+            line-height: 30px;
+        }
+    }
+    .inputType {
+        input {
+            border: initial;
+        }
+    }
+    .cameraType {
+        button {
+            margin: initial;
+            height: 20px;
+            vertical-align: bottom;
+            .icon {
+                padding: 0;
+                margin: 0 0 0 8px;
+                font-size: 25px;
+            }
+        }
+    }
+    .footBT {
+        background-color: #fff;
+        padding: 10px;
+        button {
+            width: 100%;
+            margin: initial;
+            height: 35px;
+        }
+    }
+    .selectTimeBT {
+        padding: 0 5px 0 0 !important;
+        margin: 0 !important;
+    }
+    .more {
+        .item-ios {
+            font-size: 13px !important;
+            P {
+                color: #000;
+            }
+        }
+        .item-inner {
+            //border-bottom: 0.55px solid #eaeaea;
+            margin-right: 10px;
+        }
+        .inputType {
+            input {
+                border: initial;
+            }
+        }
+        .list-ios>.item-block:first-child {
+            border-top: none;
+        }
+    }
+    .cen {
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p {
+            margin: 0 10px;
+            font-weight: bolder;
+        }
+        img {
+            width: auto;
+            height: 1px;
+            position: absolute;
+        }
+    }
+    .head {
+        margin-bottom: 10px;
+        .item-ios.item-block .item-inner {
+            border-bottom: none;
+        }
+        img {
+            width: 45px;
+            height: 45px;
+        }
+    }
+    .head-c {
+        margin-bottom: 10px;
+    }
+    ion-footer {
+        text-align: center;
+        background-color: #fff;
+        /*border-top: 1px solid #888;*/
+        width: 100%;
+        button {
+            margin: 8px 1rem !important;
+            height: 43px !important;
+            width: -webkit-fill-available;
+            width: fill-available;
+        }
+        .priceInfo {
+            padding: 8px 0;
+            margin-left: 1rem; // line-height: calc(14px + 3.2rem);
+            .totalClass {
+                font-size: 14px;
+            }
+            .detailClass {
+                font-size: 13px;
+            }
+        }
+    }
+    .head-c-e {
+        .item-ios.item-block .item-inner {
+            border-bottom: none;
+        }
+    }
+}

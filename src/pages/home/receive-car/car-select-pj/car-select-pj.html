@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      选择配件
+    </ion-title>
+  </ion-navbar>
+
+  <!-- <ion-toolbar class="searchStyle">
+    <ion-row>
+      <ion-col no-padding>
+        <ion-searchbar [(ngModel)]="queryText" placeholder="名称、规则、模糊搜索">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar> -->
+</ion-header>
+<ion-content overflow-scroll="true" scroll="false">
+  <div class="cate_content">
+    <ion-scroll scrollY="true" style="width: 25%;">
+      <div class="cate_left">
+        <ion-list>
+          <ion-item *ngFor="let items of leftCate" color="selectItem" [ngClass]="{'isSelect':items.select}" (click)="selectItem(items)">
+            {{items.category_name}}
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-scroll>
+    <ion-scroll scrollY="true" style="width: 75%;background-color: #f0f0f0;">
+      <div class="cate_right">
+        <ion-list [hidden]="!flag">
+          <ion-item *ngFor="let item of rightCate " (click)="hyselectItem(item)">
+            <div class="con-se">
+              <div class="f">
+                <p>{{item.goodsName}}</p>
+                <p>￥{{item.salePrice}}</p>
+              </div>
+
+
+
+              
+              <div class="g">
+                <p>编号
+                  <span style="margin-left:5px;">{{item.goodsCode}}</span>
+                </p>
+
+              </div>
+              <div class="h">
+                <p>产地
+                  <span style="margin-left:5px;">{{item.producingArea}}</span>
+                </p>
+                <p style="margin-left:50px;">库存
+                  <span style="color: #ff5a10;">{{item.sumNum}}</span>
+                </p>
+              </div>
+            </div>
+
+
+
+          </ion-item>
+        </ion-list>
+
+      </div>
+    </ion-scroll>
+  </div>
+
+
+</ion-content>

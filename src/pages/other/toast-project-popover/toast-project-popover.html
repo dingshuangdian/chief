@@ -1,0 +1,12 @@
+<ion-grid>
+  <p style="font-size: 15px;font-weight: bold;">{{msg}}</p>
+  <div class="fineThread"></div>
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="cancelBT" (click)="close(false)">继续接单</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button block color="secondary" (click)="close(true)">查看订单</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

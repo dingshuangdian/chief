@@ -1,0 +1,20 @@
+<!-- Generated template for the AgentPopoverComponent component -->
+
+<ion-grid>
+  <div text-center class="titleCss">
+    添加跟进信息
+  </div>
+  <ion-row class="inputRow">
+    <ion-textarea placeholder="请输入跟进内容" [(ngModel)]='memoContent'></ion-textarea>
+  </ion-row>
+  <div class="fineThread"></div>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="cancelBT" (click)="close(false)">取消</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button block color="secondary" (click)="close(true)">确定</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

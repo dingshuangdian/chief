@@ -1,0 +1,327 @@
+page-account-order {
+    .bg {
+        background-color: #f0f0f0;
+        .scroll-content{
+            margin-bottom: 20px;
+        }
+        .or-top {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .or-top-a {
+                width: 95%;
+                display: inline-flex;
+                justify-content: space-between;
+                border-bottom: 0.55px solid#f0f0f0;
+                 :first-child {
+                    font-size: 18px;
+                }
+                 :last-child {
+                    font-size: 16px;
+                    color: #ff5001;
+                }
+            }
+            .or-top-b {
+                width: 95%;
+                p {
+                    font-weight: bolder;
+                    font-size: 13px;
+                    margin-left: 15px;
+                    -webkit-margin-after: 8px;
+                }
+                input {
+                    width: 80%;
+                    height: 45px;
+                }
+            }
+        }
+        .or-center {
+            margin-top: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            h3 {
+                font-size: 19px;
+                height: 55px;
+                line-height: 45px;
+                margin-left: 15px;
+                -webkit-margin-before: 10px;
+                -webkit-margin-after: -5px;
+            }
+            .pr-t {
+                margin-top: 10px;
+                div{
+                    margin-left: 15px;
+                    margin-right: 15px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    span{
+                        
+                    }
+                    i {
+                        font-size: 14px; 
+                        font-style: normal;
+                    }
+                }
+            }
+            .pr {
+                margin: 0 15px;
+                width: 90%;
+            }
+            .totalAmount{
+                display: inline-block;
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 10px;
+            }
+            .tot {
+                height: 60px;
+                line-height: 60px;
+                span{
+                    float: right;
+                    margin-right: 15px;
+                }
+            }
+        }
+        .tot-a {
+            background-color: #fff;
+            margin-top: 10px;
+            clear: both;
+            p {
+                margin-right: 15px;
+                font-size: 20px;
+                font-weight: 500;
+            }
+            input {
+                width: 70%;
+                height: 35px;
+            }
+        }
+        .payState{
+            background: #fff;
+            padding: 10px;
+            padding-right: 0;
+            display: flex;
+            flex-direction: row;
+            p{
+                margin: 0;
+            }
+            &>div:first-child{
+                margin-right: 15px;
+                font-size: 20px;
+                font-weight: 500;
+                flex-grow: 0;
+                p{
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+            &>div:last-child{
+                flex-grow: 1;
+                div{
+                    background: #f0f0f0;
+                    height: 30px;
+                    line-height: 30px;
+                    border-bottom: 1px solid #fff;
+                    padding: 0 8px;
+                    span{
+                        color: red;
+                        font-size: 12px;
+                    }
+                    button{
+                        float: right;
+                        position: relative;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: #fff;
+                        border-radius: 2px;
+                        background: #ffb413; 
+                        height: 18px;
+                        line-height: 18px;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        .noPayState:after{
+            display: block;
+            content: '.';
+            clear: both;
+            line-height: 0;
+            visibility: hidden;
+        }
+        .noPayState{
+            background: #fff;
+            padding: 10px;
+            padding-right: 0;
+            p{
+                margin: 0;
+                float: left;
+            }
+            p:first-child{
+                margin-right: 15px;
+                font-size: 20px;
+            }
+            p:last-child{
+                font-size: 24px;
+                color: #ef5112;
+            }
+        }
+        // .pay {
+        //     background-color: #fff;
+        //     margin-top: 10px;
+        //     h3 {
+        //         font-size: 19px;
+        //         height: 55px;
+        //         line-height: 55px;
+        //         margin-left: 15px;
+        //         -webkit-margin-before: 10px;
+        //         -webkit-margin-after: -5px;
+        //     }
+        //     .list-ios {
+        //         margin: 0;
+        //     }
+        //     .list-ios>.item-block:first-child {
+        //         border-top: 0.55px solid #f0f0f0;
+        //     }
+        //     .list-ios>.item-block:last-child {
+        //         border-bottom: 0.55px solid #f0f0f0;
+        //     }
+        //     .radio-inner {
+        //         border-color: #fff;
+        //     }
+        //     .item-inner {
+        //         border-bottom: 0.55px solid #f0f0f0;
+        //     }
+        //     .radio-checked {
+        //         background-color: #ff5001;
+        //         border-color: #ff5001!important;
+        //     }
+        //     .radio-icon {
+        //         border-radius: 50%;
+        //         position: relative;
+        //         width: 21px;
+        //         height: 21px;
+        //         border-width: 1px;
+        //         border-style: solid;
+        //         border-color: #c8c7cc;
+        //     }
+        // }
+        .payway{
+            margin-top: 10px;
+            display: block;
+            .title{
+                font-size: 20px;
+                font-weight: 500;
+                padding-left: 10px;
+            }
+            ion-list{
+                margin-bottom: 0 !important;
+                &>div:last-child{
+                    .item-inner{
+                        border-bottom: 0;
+                    }
+                }
+            }
+        }
+        .tot-b {
+            background-color: #fff;
+            margin-top: 10px;
+            clear: both;
+            p {
+                margin-right: 15px;
+                font-size: 20px;
+                font-weight: 500;
+            }
+            input {
+                width: 70%;
+                height: 35px;
+            }
+        }
+        .meg {
+            background-color: #fff;
+            margin-top: 10px;
+            h3 {
+                font-size: 19px;
+                height: 55px;
+                line-height: 55px;
+                margin-left: 15px;
+                -webkit-margin-before: 10px;
+                -webkit-margin-after: -5px;
+            }
+            .meg-btn {
+                padding: 5px;
+                display: flex;
+                width: 100%;
+                justify-content: space-around;
+                button {
+                    width: 40%;
+                    background-color: #f0f0f0;
+                    color: #333333;
+                    font-weight: bolder;
+                }
+                .btnActive{
+                    background: #ffb413;
+                    color: #fff;
+                }
+                .nobtnActive{
+                    background: #f0f0f0;
+                    color: #000;
+                }
+            }
+            .notice{
+                padding-bottom: 5px;
+                display: flex;
+                justify-content: center;
+                input{
+                    text-indent: 5px;
+                }
+            }
+        }
+        .bz {
+            background-color: #fff;
+            margin-top: 10px;
+            h3 {
+                font-size: 19px;
+                height: 55px;
+                line-height: 55px;
+                margin-left: 15px;
+                -webkit-margin-before: 10px;
+                -webkit-margin-after: -5px;
+            }
+            .meg-btn {
+                display: flex;
+                justify-content: space-around;
+                textarea {
+                    height: 70px;
+                    width: 90%;
+                    margin: 10px;
+                    resize: none;
+                }
+            }
+        }
+    }
+    .footer {
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    ion-footer {
+        .btmo {
+            background-color: #f6f6f6;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            height: 60px;
+            text-align: center;
+            line-height: 53px;
+            button {
+                width: 100px;
+                height: 40px;
+                margin: 0;
+            }
+        }
+    }
+}

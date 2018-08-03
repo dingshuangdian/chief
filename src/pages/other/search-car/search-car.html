@@ -1,0 +1,49 @@
+<!--
+  Generated template for the SearchCarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="closeModule()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      搜索
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col no-padding>
+        <ion-searchbar [(ngModel)]="queryText" placeholder="请输入车牌模糊搜索" (ngModelChange)="searchCar($event)">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="resultCon" [hidden]="!items">
+    <ion-list>
+      <div *ngFor="let item of items" (click)="gotoDetail(item.orderId)">
+        <span>{{item.plateNumber}}</span>
+        <span [hidden]="!item.memberName">({{item.memberName}})</span>
+        <div>
+          <span>{{item.orderStateName}}</span>
+          <span>{{item.fillDate}}</span>
+        </div>
+      </div>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData"> 
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="加载中..."> 
+        </ion-infinite-scroll-content> 
+    </ion-infinite-scroll>
+  </div>
+  <div class="noResultCon" [hidden]="items">
+    <span>--暂无记录--</span>
+  </div>
+</ion-content>

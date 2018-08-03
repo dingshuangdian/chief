@@ -1,0 +1,217 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      接车
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="outer-content">
+  <div class="titp" *ngIf="amountUnpaid&&amountUnpaid!=0">
+    <div class="tt">
+      <img src="assets/imgs/777_03.gif">
+      <span>该客户还有挂账订单
+        <span>{{amountUnpaid}}</span>元未销</span>
+      <img src="assets/imgs/777_06.gif" (click)='close()'>
+    </div>
+  </div>
+  <div class="carInfo row-distance">
+
+    <ion-grid no-padding>
+      <ion-row *ngIf="!isNewCustomer">
+        <div class="colName">
+          车 辆：
+        </div>
+        <ion-col class="colSelect">
+          <ion-select [(ngModel)]="selectCar" interface="action-sheet" okText="确定" cancelText="取消" (ngModelChange)="changeCarID(selectCar)">
+            <ion-option *ngFor="let auto of customer.autos;" [value]="auto">{{auto.plateNumber}}</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isNewCustomer || isNewCar">
+        <div class="colName">
+          车 牌：
+        </div>
+        <ion-col class="carNum">
+          <button ion-button icon-right color="dark" clear (click)="showProvince()">
+            {{carInfo.provinces}}
+            <ion-icon name="ios-arrow-down"></ion-icon>
+          </button>
+          <input type="text" placeholder="请输入车牌号码" [(ngModel)]="carInfo.plateNB" (ngModelChange)="changePlateNumber(carInfo.plateNB)"
+            [disabled]="carInfo.plateNB=='无牌'">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="colName">
+          车 型：
+        </div>
+        <ion-col class="colEdit">
+          <ion-row>
+            <ion-col text-left no-padding [ngClass]="{true: 'autoType', false: ''}[true]" (click)="selectCarType()">
+              {{carInfo.autoType}}
+            </ion-col>
+            <button ion-button color="secondary" (click)="toCarEdit()" [disabled]="isNewCustomer || isNewCar">
+              编辑
+            </button>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="colName">
+          公里数：
+        </div>
+        <ion-col>
+          <ion-input placeholder="请输入当前行驶公里数" type="number" [(ngModel)]="pickupMileage"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="colName">
+          手 机：
+        </div>
+        <ion-col>
+          <ion-input placeholder="请输入正确的手机号码" type="phone" (ionBlur)="mobileNumberBlurInput()" [(ngModel)]="customer.mobileNumber"
+            [disabled]="!isNullmobileNumber" (ngModelChange)="changeMobileNumber(customer.mobileNumber)"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="colName">
+          姓 名：
+        </div>
+        <ion-col>
+          <ion-input placeholder="请输入客户姓名" [(ngModel)]="customer.memberName" [disabled]="!isNewCustomer"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <button ion-button color="secondary" (click)="presentPrompt()">
+
+      添加送修人信息
+    </button>
+  </div>
+  <div class="row-distance insuranceRow" *ngIf="qryInfo">
+    <ion-item class="">
+      <div class="title">车险信息</div>
+      <div item-end>
+        <button ion-button color="secondary" (click)="onCX()">立即报价</button>
+      </div>
+    </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-row>
+          <div>车主：</div>
+          <ion-col no-padding>
+            {{qryInfo.carownerN}}
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <div>交强险到期时间：</div>
+          <ion-col no-padding>
+            {{qryInfo.forceExpireDate}}
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <div>商业险到期时间：</div>
+          <ion-col no-padding>
+            {{qryInfo.businessExpireDate}}
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <div>社保公司：</div>
+          <ion-col no-padding>
+            {{qryInfo.companyName}}
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <div>报价时间段：</div>
+          <ion-col no-padding>
+            在车险到期3个月可报价
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+
+  <ion-list no-lines class="row-distance">
+    <button ion-item class="row-distance commonRow" (click)="toPayRecord()">
+      <span *ngIf="hasNum==0"> 暂无消费记录</span>
+      <span *ngIf="hasNum>0">该车消费{{hasNum}}次</span>
+      <span *ngIf="lastNum">，上次是{{lastNum}}</span>
+    </button>
+    <button ion-item class="commonRow" (click)="toMemoRecord()">
+      查看跟进记录
+    </button>
+  </ion-list>
+
+  <mcard-grid *ngIf="customer.memberId" [memberId]="customer.memberId"></mcard-grid>
+
+  <div class="row-distance mcardSCss">
+    <ion-list class="lis-distance" *ngFor="let mcardP of mcardServices">
+      <button ion-item class="itemRow" (click)="mcardP.show = !mcardP.show">
+        {{mcardP.typName}}
+        <span *ngIf="mcardP.platNum">[{{mcardP.platNum}}]</span>
+        <div class="mcardNo">[卡号：{{mcardP.typNo}}]&nbsp;&nbsp;余额：{{mcardP.mcardBalance}}&nbsp;&nbsp;有效时间：{{mcardP.stopDate}}</div>
+      </button>
+      <div class="itemGrid" *ngIf="mcardP.show">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 *ngFor="let s of mcardP.childtypeList">
+              <div class="bdg">
+                <button ion-button full color="selectItem" [ngClass]="{'isSelect': s.select}" (click)="selectItem(s)">{{s.serviceName}}</button>
+                <span class="red-point" *ngIf="s.svcNum<=5">{{s.svcNum}}</span>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-list>
+  </div>
+  <ion-list class="lis-distance" *ngFor="let servicesP of servicesList">
+    <button ion-item class="itemRow" (click)="servicesP.show = !servicesP.show">
+      {{servicesP.typName}}
+    </button>
+    <div class="itemGrid" *ngIf="servicesP.show">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4 *ngFor="let s of servicesP.childtypeList">
+            <button ion-button full color="selectItem" [ngClass]="{'isSelect': s.select}" (click)="selectItem(s)">{{s.serviceName}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <div float-left class="priceInfo">
+    <div class="totalClass">
+      共{{priceInfo.totalNum}}项
+      <span class="dangerInfo" style="font-weight: bold;font-size: 18px;">￥{{priceInfo.totalPrice}}</span>
+    </div>
+    <div class="detailClass">
+      <span *ngIf="priceInfo.projePrice">
+        项目：
+        <span class="dangerInfo">￥{{priceInfo.projePrice}}</span>
+      </span>
+      <span *ngIf="priceInfo.servicePrice">
+        工时费：
+        <span class="dangerInfo">￥{{priceInfo.servicePrice}}</span>
+      </span>
+    </div>
+  </div>
+  <div float-right>
+    <button ion-button color="secondary" (click)="onConfirm()">下一步</button>
+  </div>
+</ion-footer>

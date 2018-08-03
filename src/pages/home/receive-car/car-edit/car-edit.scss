@@ -1,0 +1,112 @@
+page-car-edit {
+    .list {
+        .item {
+            font-size: 1.4rem;
+            padding-right: 16px;
+            min-height: 3.8rem;
+            .item-inner {
+                background-image: initial !important;
+                padding-right: initial !important;
+                .label-ios {
+                    margin: 5px 0 !important;
+                }
+            }
+        }
+    }
+    .carNum {
+        button {
+            height: initial;
+            margin: initial;
+            vertical-align: initial;
+            padding: 0;
+        }
+        input {
+            border: initial;
+            width: 70px;
+            background-color: #fff;
+            text-transform: uppercase;
+        }
+        .scanner {
+            height: 20px;
+            vertical-align: bottom;
+            .icon {
+                padding: 0;
+                margin: 0 0 0 8px;
+                font-size: 25px;
+            }
+        }
+    }
+    .selectType {
+        button {
+            height: initial;
+            margin: initial;
+            padding: 0;
+            vertical-align: middle;
+            font-size: 1.4rem;
+            .icon {
+                margin-left: 10px;
+            }
+        }
+    }
+    .detailTitle {
+        font-size: 15px;
+        color: #888;
+        img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        div {
+            line-height: 30px;
+        }
+    }
+    .inputType {
+        input {
+            border: initial;
+        }
+    }
+    .cameraType {
+        button {
+            margin: initial;
+            height: 20px;
+            vertical-align: bottom;
+            .icon {
+                padding: 0;
+                margin: 0 0 0 8px;
+                font-size: 25px;
+            }
+        }
+    }
+    .footBT {
+        background-color: #fff;
+        padding: 10px;
+        button {
+            width: 100%;
+            margin: initial;
+            height: 35px;
+        }
+    }
+    .selectTimeBT {
+        padding: 0 5px 0 0 !important;
+        margin: 0 !important;
+    }
+    .selectP {
+        display: flex;
+        align-items: center;
+        min-height: 70px;
+        p {
+            padding: 5px;
+            color: #000;
+        }
+        .red-point {
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            top: 0px;
+            right: 4px;
+        }
+    }
+    img.auto-image {
+        width: 100%;
+    }
+}

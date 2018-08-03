@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      选择品牌
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar color="light">
+    <ion-searchbar #searchBox placeholder="请输入品牌名称查找" (keyup)="search(searchBox.value)">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div id="indexs-bar" #IndexedMenu>
+    <div class="index-bar" *ngFor="let item of indexes;let i = firstLetter">{{item}}</div>
+  </div>
+  <ion-list>
+
+    <!-- <ion-item-sliding *ngFor="let c of filterCars">
+      <ion-item (click)="typeSelect(c)">{{c.name}}</ion-item>
+    </ion-item-sliding> -->
+
+    <ion-item-sliding *ngFor="let car of filterCars$ | async">
+      <ion-item (click)="typeSelect(car)">
+        <ion-avatar item-start>
+          <img-lazy-load src="{{img_path}}{{car?.automakeLogo}}"></img-lazy-load>
+        </ion-avatar>
+        {{car.automakeName}}
+      </ion-item>
+    </ion-item-sliding>
+
+    <ion-item-group *ngFor="let item of cars" #carGroup>
+
+      <ion-item-divider>
+        <ion-label>{{item.firstLetter}}</ion-label>
+      </ion-item-divider>
+
+
+      <ion-item *ngFor="let c of item.cars" (click)="typeSelect(c)">
+        <ion-avatar item-start>
+          <img-lazy-load src="{{img_path}}{{c?.automakeLogo}}"></img-lazy-load>
+        </ion-avatar>
+        {{c.automakeName}}
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+  <div id="indexs-title">
+  </div>
+
+</ion-content>

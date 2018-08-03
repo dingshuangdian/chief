@@ -1,0 +1,128 @@
+page-member-open {
+  .mamberInfo {
+    .item {
+      font-size: 1.4rem;
+      padding-right: 16px;
+      min-height: 3.8rem;
+      .item-inner {
+        background-image: initial !important;
+        padding-right: initial !important;
+        .label-ios {
+          margin: 5px 0 !important;
+        }
+      }
+    }
+  }
+  .inputType {
+    input {
+      border: initial;
+      background-color: #fff !important;
+    }
+  }
+  .colSelect {
+    font-size: 1.4rem;
+    background-color: white;
+    padding: 0 16px;
+    .colName {
+      padding-left: 5px;
+      line-height: 46px;
+    }
+    ion-select {
+      text-align: right;
+      max-width: initial;
+      height: 36px;
+      padding: 8px;
+      .select-icon-inner {
+        left: 0;
+      }
+    }
+  }
+  .carNum {
+    button {
+      height: initial;
+      margin: initial;
+      vertical-align: initial;
+      padding: 0;
+    }
+    input {
+      border: initial;
+      width: 70px;
+      background-color: #fff;
+      text-transform: uppercase;
+    }
+    .scanner {
+      height: 20px;
+      vertical-align: bottom;
+      .icon {
+        padding: 0;
+        margin: 0 0 0 8px;
+        font-size: 25px;
+      }
+    }
+  }
+  .selectType {
+    button {
+      height: initial;
+      margin: initial;
+      padding: 0;
+      vertical-align: middle;
+      font-size: 1.4rem;
+      .icon {
+        margin-left: 10px;
+      }
+    }
+  }
+  .salecardList {
+    .mcardImg {
+      height: 56px;
+    }
+    ion-label{
+      margin: 8px 0 !important;
+    }
+    ion-col {
+      padding: 0 0 0 15px;
+      .mcardName {
+        font-size: 15px;
+      }
+      .mcardBalance {
+        font-size: 12px;
+        color: #888;
+      }
+      .mcardPrice {
+        font-size: 13px;
+      }
+    }
+  }
+  .certain {
+    text-align: center;
+    background-color: #fff;
+    /*border-top: 1px solid #888;*/
+    border-top: 0.55px solid #c8c7cc;
+    button {
+      margin: 8px 1rem !important;
+      height: 43px !important;
+      width: 90px;
+    }
+  }
+  .radio-icon {
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 12.5px;
+    border: 1px solid #aaa;
+  }
+  .radio-checked {
+    background-color: color($colors, secondary);
+    border: initial;
+    .radio-inner {
+      border-color: white !important;
+      left: 10px !important;
+      top: 6px !important;
+    }
+  }
+  .item-radio-checked.item-ios ion-label {
+    color: #000 !important
+  }
+  .text-input[disabled] {
+    opacity: initial;
+  }
+}

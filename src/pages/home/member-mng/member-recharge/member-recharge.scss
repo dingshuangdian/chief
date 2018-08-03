@@ -1,0 +1,222 @@
+page-member-recharge {
+    .top {
+        .list-ios {
+            margin: 0;
+        }
+        .list-ios>.item-block:last-child,
+        .list-ios>.item-wrapper:last-child .item-block {
+            border-bottom: none;
+        }
+        span {
+            margin-left: 25px;
+        }
+    }
+    .con {
+        margin-top: 10px;
+        .item-ios {
+            font-size: 14px;
+        }
+        .selectItem {
+            padding-left: 16px;
+            margin-bottom: 12px;
+            div {
+                font-size: 14px;
+                background-color: initial;
+                font-weight: bold;
+                line-height: 30px;
+            }
+            .col {
+                padding: 0 20px 0 15px !important;
+            }
+            .input {
+                height: 30px;
+                line-height: 30px;
+                padding: 0 20px 0 10px;
+                background-color: #fff;
+                border: 1px solid #888;
+                border-radius: 2px;
+                -webkit-box-flex: initial;
+                -webkit-flex: initial;
+                -ms-flex: initial;
+                flex: initial;
+                .text-input {
+                    margin: initial;
+                }
+            }
+        }
+        .projectTitle {
+            padding-left: 16px;
+            div {
+                font-size: 14px;
+                background-color: initial;
+                font-weight: bold;
+                line-height: 30px;
+            }
+            .col {
+                margin-left: 15px;
+            }
+        }
+    }
+    .certain {
+        text-align: center;
+        background-color: #f2f4f8;
+        button {
+            margin: 8px 1rem !important;
+            height: 43px !important;
+            width: 90px;
+        }
+    }
+    .con-a {
+        margin-bottom: 10px;
+        .list-ios {
+            margin: 0;
+        }
+        .selectItem {
+            background-color: #fff;
+            border-bottom: 0.55px solid#c8c7cc;
+            padding: 12px;
+            div {
+                font-size: 14px;
+                margin-left: 4px;
+                color: #8e9093;
+                line-height: 30px;
+            }
+            .col {
+                padding: 0 20px 0 15px !important;
+            }
+            .input {
+                height: 30px;
+                line-height: 30px;
+                padding: 0 20px 0 10px;
+                background-color: #fff;
+                border: 1px solid #888;
+                border-radius: 2px;
+                -webkit-box-flex: initial;
+                -webkit-flex: initial;
+                -ms-flex: initial;
+                flex: initial;
+                .text-input {
+                    margin: initial;
+                }
+            }
+        }
+    }
+    .con-btn {
+        margin-top: 10px;
+        background-color: #fff;
+        .selectItem {
+            padding: 14px;
+            div {
+                font-size: 14px;
+                background-color: initial;
+                font-weight: bold;
+                line-height: 41px;
+            }
+            .col {
+                padding: 0 20px 0 15px !important;
+            }
+            .input {
+                height: 41px;
+                line-height: 41px;
+                padding: 0 20px 0 10px;
+                background-color: #fff;
+                border: 1px solid #888;
+                border-radius: 2px;
+                -webkit-box-flex: initial;
+                -webkit-flex: initial;
+                -ms-flex: initial;
+                flex: initial;
+                .text-input {
+                    margin: initial;
+                }
+            }
+        }
+    }
+    .addPro {
+        .btm-btn {
+            border-bottom: 0.55px solid#c8c7cc;
+            height: 45px;
+            display: flex;
+            width: 100%;
+            background-color: #fff;
+            align-items: center;
+            button {
+                margin-left: 15px;
+                font-size: 12px;
+                height: 25px;
+                width: 75px;
+                background-color: #fff;
+                border: 0.55px solid #ff5a10;
+                color: #ff5a10;
+            }
+        }
+        .addProCon {
+            .addList {
+                border-bottom: 0.55px solid#c8c7cc;
+                display: flex;
+                justify-content: space-around;
+                flex-direction: column;
+                align-items: center;
+                .input {
+                    height: 28px;
+                    line-height: 28px;
+                    padding: 0 20px 0 10px;
+                    background-color: #fff;
+                    border: 0.55px solid #c8c7cc;
+                    border-radius: 4px;
+                    -webkit-box-flex: initial;
+                    -webkit-flex: initial;
+                    -ms-flex: initial;
+                    flex: initial;
+                    width: 85.1px;
+                    margin-left: 10px;
+                    .text-input {
+                        margin: initial;
+                    }
+                }
+                .button-ios {
+                    margin-left: 10px;
+                    border-radius: 4px;
+                    height: 28px;
+                    font-size: 12px;
+                    color: rgb(43, 37, 37);
+                    background-color: #fff;
+                    border: 0.55px solid#c8c7cc;
+                    padding: 0 1em;
+                }
+                .aflex {
+                    display: inline-flex;
+                    align-items: center;
+                    margin-top: -20px;
+                    img {
+                        width: 20px;
+                        height: 20px;
+                        margin-left: 50px;
+                    }
+                }
+            }
+        }
+    }
+    .btn {
+        margin-top: 10px;
+        align-items: center;
+        display: flex;
+        .btn-flex {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 15px;
+            .button {
+                border-radius: 6px;
+                border: 0.55px solid #ccc;
+                width: 100%;
+                color: #000;
+                font-size: 10px;
+                height: 25px;
+            }
+            .isSelect {
+                background-color: color($colors, assist, base);
+                color: color($colors, assist, contrast);
+            }
+        }
+    }
+}

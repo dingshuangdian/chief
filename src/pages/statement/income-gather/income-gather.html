@@ -1,0 +1,203 @@
+<!--
+  Generated template for the IncomeGatherPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>报表统计</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="outer-content">
+  <div class="dateSegment row-distance">
+    <ion-segment [(ngModel)]="segmentType" (ionChange)="segmentChanged()">
+      <ion-segment-button value="daily">
+        日报
+      </ion-segment-button>
+      <ion-segment-button value="monthly">
+        月报
+      </ion-segment-button>
+      <ion-segment-button value="annual">
+        年报
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+
+  <div [ngSwitch]="segmentType">
+    <div *ngSwitchCase="'daily'">
+      <div class="generalInfo">
+        <ion-row class="dateInfo fineThread">
+          <ion-col no-padding>
+            <ion-datetime displayFormat="YYYY/MM/DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="beginDate" (ngModelChange)="dateChange()">
+            </ion-datetime>
+            <ion-icon name="ios-arrow-down"></ion-icon>
+          </ion-col>
+          <div text-center style="width: 30px;">
+            至
+          </div>
+          <ion-col no-padding>
+            <ion-datetime displayFormat="YYYY/MM/DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="endDate" (ngModelChange)="dateChange()">
+            </ion-datetime>
+            <ion-icon name="ios-arrow-down"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="moneyInfo fineThread">
+          <ion-col no-padding>
+            实收金额
+          </ion-col>
+          <ion-col text-right no-padding *ngIf="dailyInfo.incomeAmount">
+            ￥{{dailyInfo.incomeAmount | number:'1.2-2'}}
+          </ion-col>
+          <ion-col text-right no-padding *ngIf="!dailyInfo.incomeAmount">
+            ￥{{0 | number:'1.2-2'}}
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="generalCount">
+          <ion-col text-center no-padding>
+            结算订单数
+            <div>{{dailyInfo.orderCompletedNum}}</div>
+          </ion-col>
+          <ion-col text-center no-padding>
+            挂账订单数
+            <div>{{dailyInfo.orderArapNum}}</div>
+          </ion-col>
+          <ion-col text-center no-padding>
+            未结算订单数
+            <div>{{dailyInfo.orderNum}}</div>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="titleRow">
+        实收项目
+      </div>
+      <div class="projectInfo">
+        <div class="pt fineThread" *ngFor="let i of dailyInfo.incomes">
+          <div>{{i.typeName}}</div>￥{{i.amount | number:'1.2-2'}}
+        </div>
+      </div>
+      <div class="titleRow">
+        结算方式
+      </div>
+      <div class="accountInfo">
+        <div class="typeT">
+          <span class="redTag">|</span>实收结算
+        </div>
+        <ion-row class="fineThread">
+          <ion-col col-3 *ngFor="let p of dailyInfo.payments">
+            <div>{{p.paymentName}}</div>
+            ￥{{p.amount | number:'1.2-2'}}
+          </ion-col>
+        </ion-row>
+        <ion-row class="secondR">
+          <ion-col>
+            <div class="typeT">
+              <span class="buldGreenTag">|</span>扣卡结算
+            </div>
+            <div class="padding-tb">
+              <div>会员卡扣款</div>
+              ￥{{dailyInfo.consumeAmount | number:'1.2-2'}}
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="typeT">
+              <span class="buldGreenTag">|</span>订单挂账
+            </div>
+            <div class="padding-tb">
+              <div>挂账金额</div>
+              ￥{{dailyInfo.orderArapAmount | number:'1.2-2'}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="titleRow">
+        结算业务量
+      </div>
+      <div class="accountVolume">
+        <div class="tgrid" text-center>
+          <ion-row class="formHead">
+            <ion-col>结算项目</ion-col>
+            <ion-col>结算台数</ion-col>
+            <ion-col>结算金额</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let s of dailyInfo.services">
+            <ion-col>{{s.svctypeName}}</ion-col>
+            <ion-col>{{s.num}}</ion-col>
+            <ion-col>￥{{s.amount | number:'1.2-2'}}</ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'monthly'">
+      <div class="selecDateInfo">
+        <ion-item>
+          <ion-label style="padding-left:5px;">查询月份</ion-label>
+          <ion-datetime displayFormat="YYYY/MM" pickerFormat="YYYY/MM" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="month"
+            (ngModelChange)="monthChange()">
+          </ion-datetime>
+          <button class="selectTimeBT" ion-button clear item-end>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-item>
+        <div class="tgrid intervalRow" text-center>
+          <ion-row class="formHead">
+            <ion-col>日期</ion-col>
+            <ion-col>收入</ion-col>
+            <ion-col>支出</ion-col>
+            <ion-col>盈亏</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let m of monthlyInfo">
+            <ion-col>{{m.settleDate}}</ion-col>
+            <ion-col>￥{{m.incomeAmount | number:'1.2-2'}}</ion-col>
+            <ion-col>￥{{m.costAmount | number:'1.2-2'}}</ion-col>
+            <ion-col>￥{{m.profitAmount | number:'1.2-2'}}</ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'annual'">
+      <div class="selecDateInfo">
+        <ion-item>
+          <ion-label style="padding-left:5px;">查询年份</ion-label>
+          <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="year"
+            (ngModelChange)="yeasChange()">
+          </ion-datetime>
+          <button class="selectTimeBT" ion-button clear item-end>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-item>
+        <div class="tgrid intervalRow" text-center>
+          <ion-row class="formHead">
+            <ion-col>日期</ion-col>
+            <ion-col>收入</ion-col>
+            <ion-col>支出</ion-col>
+            <ion-col>盈亏</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let y of annualInfo">
+            <ion-col>{{y.settleDate}}</ion-col>
+            <ion-col>￥{{y.incomeAmount | number:'1.2-2'}}</ion-col>
+            <ion-col>￥{{y.costAmount | number:'1.2-2'}}</ion-col>
+            <ion-col>￥{{y.profitAmount | number:'1.2-2'}}</ion-col>
+          </ion-row>
+        </div>
+      </div>
+
+
+      <div class="incomeChart">
+        <div class="pt fineThread">
+          <ion-row>
+            <ion-col col-4>年度收支统计</ion-col>
+          </ion-row>
+        </div>
+        <div #main1 id="main1" style="width: 100%;height: 280px"></div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

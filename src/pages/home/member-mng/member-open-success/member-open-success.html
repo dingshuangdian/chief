@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      开卡成功
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="outer-content">
+  <div class="successInfo">
+    恭喜您！开卡成功，卡号是
+    <div>{{mcardNo}}</div>
+  </div>
+  <div class="otherInfo">您还可以</div>
+
+  <div class="btn">
+
+    <div class="bt">
+
+      <button ion-button (click)="editMamberInfo()">编辑会员信息</button>
+
+
+      <button ion-button (click)="openAgain()">再开会员卡</button>
+
+    </div>
+  </div>
+</ion-content>
+

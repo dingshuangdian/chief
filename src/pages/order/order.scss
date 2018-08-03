@@ -1,0 +1,172 @@
+page-order {
+    .fixedTab{
+        position: relative;
+        .toolbar-background {
+            background-color: #fff;
+        }
+        .course_tabBox {
+            display: inline-block;
+            width: 20%;
+            position: relative;
+            line-height: 42px;
+            background: #f7f7f7;
+            text-align: center;
+            .course_tab {
+                padding: 5px 0;
+                color: rgb(184, 187, 189);
+                font-size: 17px;
+            }
+        }
+    }
+    .tabActive {
+        color: #ff4f02!important;
+        border-bottom: 1px solid #fb4f29;
+    }
+    .searchStyle {
+        .toolbar-background {
+            background-color: #fff;
+        }
+        .button {
+            height: initial;
+        }
+    }
+    .ordertime {
+        text-align: center;
+        color: #ff4f02;
+        height: 30px;
+        background-color: #fff;
+        line-height: 30px;
+        border-top: 1px solid#ececec;
+
+        img {
+            width: 16px;
+            height: 10px;
+        }
+        :last-child{
+            transform: rotate(180deg);
+        }
+    }
+    .content {
+        background-color: #f2f3f7;
+        // position: relative;
+        // top: 44px;
+        // .scroll-content{
+        //     margin-top: 0 !important;
+        // }
+        .list-ios {
+            margin: 0 0 10px;
+        }
+        .lstop {
+            width: 100%; 
+         
+            .item-ios {
+                padding-left: 0px;
+            }
+            .tit {
+                display: flex;
+                align-items: center;
+                padding-left: 16px; 
+              
+                button {
+                    width: 28px;
+                    height: 24px;
+                    border-radius: 5px;
+                    margin-right: 10px;
+                    background-color: #a6a6a6;
+                    color: #fff;
+                }
+                div{
+                    span {
+                        font-size: 15px;
+                        line-height: 26px;
+       
+                    }
+                    :last-child{
+                        color: #888;
+                    } 
+                }
+            }
+            .item-block {
+                min-height: 3.5rem;
+            }
+            .label-ios {
+                margin: 0px;
+            }
+        }
+        .con {
+            width: 100%;
+            background-color: #f9f9f9;
+            font-size: 14px;
+            color: #969696;
+            padding: 5px 10px 0 16px;
+            border-bottom: 1px solid#ccc;
+            padding-bottom: 20px;
+            & > span{
+                display: block;
+            }
+            img {
+                width: 10px;
+                height: 10px;
+                margin-right: 10px;
+            }
+            span{
+                i{
+                    font-style: normal;
+                }
+            }
+        }
+        .bot {
+            margin-right: 10px;
+            padding-left: 16px;
+            width: 100%;
+            height: 50px;
+         
+            background-color: #fff;
+            .spn {
+                line-height: 50px;
+                font-size: 1.8rem;
+                color: #ff5a10;
+                float: left;
+                
+
+                
+            }
+            .btn {
+                height: 50px;
+                display: flex;
+                margin-right: 10px;
+                justify-content: flex-end;
+                align-items: center;
+                button {
+                    height: 30px;
+                    width: 55px;
+                    background-color: #fff;
+                    border: 0.55px solid #ccc;
+                    color: #787878;
+                }
+                 :last-child {
+                    border: 0.55px solid #ff5a10 !important;
+                    color: #ff5a10 !important;
+                }
+            }
+        }
+    }
+    .label-md {
+        margin: 5px 0px;
+    }
+    .noResultCon{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        img{
+            width: 30px;
+            height: 30px;
+            display: block;
+        }
+        span{
+            font-size: 18px;
+            color: #d2d2d2;
+        }
+    }
+}

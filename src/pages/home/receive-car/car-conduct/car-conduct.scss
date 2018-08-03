@@ -1,0 +1,220 @@
+page-car-conduct {
+    .bg {
+        background-color: #f0f0f0;
+        .top {
+            margin-top: 5px;
+            background-color: #fff;
+            .titp {
+                background-color: #fbfcdd;
+                .tt {
+                    width: 100%;
+                    justify-content: space-around;
+                    display: flex;
+                    height: 30px;
+                    align-items: center;
+                    img {
+                        width: 17px;
+                        height: 17px;
+                    }
+                }
+            }
+            .lstop {
+                width: 100%;
+                .item-ios {
+                    padding-left: 0px;
+                }
+                .tit {
+                    display: flex;
+                    align-items: center; // padding-left: 16px;
+                    span {
+                        font-size: 15px;
+                        line-height: 26px;
+                    }
+                    .tit-a {
+                        width: 100%;
+                        display: inline-flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .tit-img {
+                            display: inline-flex;
+                            :first-child {
+                                margin-right: 10px;
+                            }
+                            img {
+                                width: 23px;
+                                height: 18px;
+                            }
+                        }
+                    }
+                }
+                .item-block {
+                    min-height: 4rem;
+                }
+                .label-ios {
+                    margin: 0px;
+                }
+                .item-inner {
+                    border-bottom: 0.55px solid #eaeaea;
+                    margin: 0 10px;
+                }
+            }
+            .gl {
+                display: flex;
+                justify-content: space-between;
+                margin: 0 10px;
+                border-bottom: 0.55px solid #eaeaea;
+                input {
+                    border-width: 0;
+                }
+            }
+        }
+        .more {
+            .item-ios {
+                font-size: 13px !important;
+                P {
+                    color: #000;
+                }
+            }
+            .item-inner {
+                border-bottom: 0.55px solid #eaeaea;
+                margin-right: 10px;
+            }
+            .inputType {
+                input {
+                    border: initial;
+                }
+            }
+        }
+        .cen {
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p {
+                margin: 0 10px;
+                font-weight: bolder;
+            }
+            img {
+                width: auto;
+                height: 1px;
+                position: absolute;
+            }
+        }
+        .con-a {
+            background-color: #fff;
+            margin-bottom: 10px;
+            .course_tabBox {
+                display: inline-block;
+                width: 50%;
+                position: relative;
+                line-height: 42px;
+                background: #fff;
+                text-align: center;
+                .course_tab {
+                    padding: 5px 0;
+                    color: #4e4e4e;
+                    font-size: 15px;
+                    font-weight: bolder;
+                }
+            }
+            .tabActive {
+                color: #ff4f02 !important;
+                border-bottom: 1px solid #fb4f29;
+            }
+            .con-btn {
+                .label-ios {
+                    margin: 0px 5px 5px 0;
+                }
+                padding: 30px 0;
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                background-color: #fff;
+                .bt {
+                    display: inline-flex;
+                    justify-content: center;
+                    button {
+                        height: 40px;
+                        width: 130px;
+                        background-color: #fff;
+                        border: 0.55px solid #ff5a10;
+                        color: #ff5a10;
+                    }
+                    :first-child {
+                        margin-right: 20px;
+                    }
+                    :last-child {
+                        margin-left: 20px;
+                    }
+                }
+                .con-se {
+                    height: 85px;
+                    background-color: #f0f0f0;
+                    display: flex;
+                    padding: 10px;
+                    flex-direction: column;
+                    p {
+                        -webkit-margin-before: 1px;
+                        font-size: 13px;
+                    }
+                    .f {
+                        display: inline-flex;
+                        justify-content: space-between;
+                        :first-child {
+                            font-size: 15px;
+                        }
+                        :last-child {
+                            font-size: 15px;
+                            color: #ff5a10;
+                        }
+                    }
+                    .g {
+                        display: inline-flex;
+                    }
+                    .h {
+                        display: inline-flex;
+                    }
+                }
+            }
+        }
+    }
+    .footer {
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    ion-footer {
+        .btm {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column-reverse;
+            .btm-a {
+                padding: 10px;
+                width: 100%;
+                justify-content: space-between;
+                display: flex;
+                align-items: center;
+                .tex {
+                    display: inline-flex;
+                    flex-direction: column;
+                    p {
+                        -webkit-margin-before: 0;
+                        -webkit-margin-after: 0;
+                    }
+                    span {
+                        color: #ff0f0f;
+                    }
+                }
+                button {
+                    border-radius: 5px;
+                    width: 140px;
+                    height: 3.1rem;
+                    background-color: #fc5f3c;
+                }
+            }
+        }
+    }
+    .scroll-content {
+        margin-top: 46px;
+        margin-bottom: 67px;
+    }
+}

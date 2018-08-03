@@ -1,0 +1,217 @@
+page-order-edit {
+  .title {
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+  .selectProject {
+    button {
+      padding: 0 17.2px !important;
+      height: 34px !important;
+      font-size: 1.4rem !important;
+    }
+  }
+  .projectItem {
+    padding: 20px 0 10px;
+    .selectItem {
+      padding-left: 16px;
+      margin-bottom: 12px;
+      div {
+        font-size: 14px;
+        background-color: initial;
+        font-weight: bold;
+        line-height: 41px;
+      }
+      .col {
+        padding: 0 20px 0 15px !important;
+      }
+      .select {
+        width: 100%;
+        max-width: initial;
+        height: 41px;
+        line-height: 41px;
+        padding: 0 10px 0 10px;
+        background-color: #fff;
+        border: 1px solid #888;
+        border-radius: 2px;
+        .select-icon {
+          visibility: hidden;
+        }
+      }
+      .input {
+        height: 41px;
+        line-height: 41px;
+        padding: 0 20px 0 10px;
+        background-color: #fff;
+        border: 1px solid #888;
+        border-radius: 2px;
+        -webkit-box-flex: initial;
+        -webkit-flex: initial;
+        -ms-flex: initial;
+        flex: initial;
+        .text-input {
+          margin: initial;
+        }
+      }
+    }
+    .button-input {
+      padding-left: 16px;
+      margin-bottom: 12px;
+      div {
+        font-size: 14px;
+        background-color: initial;
+        font-weight: bold;
+        line-height: 41px;
+      }
+      .add-pop {
+        padding: 0 20px 0 15px !important;
+        .row {
+          border: 1px solid #888;
+          border-radius: 2px;
+          background-color: #fff;
+          .col {
+            border-left: 1px solid #888;
+            border-right: 1px solid #888;
+          }
+          .text-input {
+            margin: initial;
+            height: 31px;
+          }
+          .button {
+            height: initial;
+            margin: 0;
+            border-radius: initial;
+            width: 30px;
+            ion-icon {
+              padding: initial;
+            }
+          }
+        }
+      }
+    }
+    .select-input {
+      padding-left: 16px;
+      margin-bottom: 12px;
+      div {
+        font-size: 14px;
+        background-color: initial;
+        font-weight: bold;
+        line-height: 41px;
+      }
+      .down {
+        padding: 0 20px 0 15px !important;
+        .row {
+          border: 1px solid #888;
+          border-radius: 2px;
+          background-color: #fff;
+          .col {
+            border-right: 1px solid #888;
+            padding: 5px 10px 5px 10px;
+          }
+          .text-input {
+            margin: initial;
+            height: 31px;
+          }
+          .button {
+            height: initial;
+            margin: 0;
+            border-radius: initial;
+            width: 30px;
+          }
+        }
+      }
+    }
+    .right {
+      text-align: right;
+      img {
+        height: 25px;
+        width: 25px;
+        margin-right: 20px;
+      }
+      .personnel {
+        padding: 30px 16px 10px 0;
+        .price {
+          font-size: 18px;
+        }
+        .button {
+          height: 2em;
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+  .isSelectP {
+    background-color: #fff;
+    .projectTitle {
+      padding-left: 16px;
+      margin-bottom: 12px;
+      div {
+        font-size: 14px;
+        background-color: initial;
+        font-weight: bold;
+        line-height: 41px;
+      }
+      .col {
+        padding: 0 0 0 15px !important;
+        padding-top: 12px !important; // line-height: 41px;
+      }
+    }
+  }
+  .otherInfo {
+    padding: 10px 16px;
+    background-color: #fff;
+    margin-top: 5px;
+    div {
+      font-size: 14px;
+      background-color: initial;
+      font-weight: bold;
+    }
+    ion-input {
+      border: 1px solid #888;
+      border-radius: 2px;
+      margin: 5px 0;
+    }
+    ion-textarea {
+      border: 1px solid #888;
+      border-radius: 2px;
+      margin: 5px 0;
+    }
+  }
+  .msg {
+    padding: 10px 16px;
+    background-color: #fff;
+    margin-bottom: 5px;
+    .name {
+      margin-top: 10px;
+      span {
+        margin-right: 20px;
+      }
+    }
+  }
+  .footer {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  ion-footer {
+    background-color: #fff;
+    /*border-top: 1px solid #888;*/
+    border-top: 0.55px solid #c8c7cc;
+    button {
+      margin: 8px 1rem !important;
+      height: 43px !important;
+      width: 90px;
+    }
+    .priceInfo {
+      padding: 8px 0;
+      margin-left: 1rem; // line-height: calc(14px + 3.2rem);
+      .totalClass {
+        font-size: 14px;
+      }
+      .detailClass {
+        font-size: 13px;
+      }
+    }
+  }
+  .dangerInfo {
+    color: #f53d3d;
+  }
+}

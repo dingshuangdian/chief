@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      订单提交成功
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content class="bg">
+  <div class="tit">
+    <div class="ti">
+      <span>
+        <img src="assets/imgs/pot_03.gif" />
+        <h3>保存订单成功!</h3>
+      </span>
+    </div>
+
+  </div>
+  <div>
+    <div class="carmsg">您还可以登记车辆信息</div>
+    <div class="cams">
+      <ion-grid no-padding>
+        <ion-row>
+          <div class="colName">
+            &nbsp;&nbsp;&nbsp;&nbsp;车牌号：
+          </div>
+          <ion-col>
+            <ion-input [(ngModel)]="auto.plateNumber"></ion-input>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <div class="colName">
+            &nbsp;&nbsp;&nbsp;&nbsp;公里数：
+          </div>
+          <ion-col>
+            <ion-input placeholder="当前公里数" [(ngModel)]="pickupMileage"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="colName">
+            保险日期：
+          </div>
+          <ion-col class="biEdate">
+            <ion-datetime cancelText="取消" doneText="完成" displayFormat="YYYY-MM-DD" max="2030-12-31" [(ngModel)]="auto.biEdate"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="colName">
+            &nbsp;&nbsp;&nbsp;&nbsp;车架号：
+          </div>
+          <ion-col>
+            <ion-input placeholder="车架号" [(ngModel)]="auto.vinCode"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="colName">
+            发动机号：
+          </div>
+          <ion-col>
+            <ion-input placeholder="发动机号" [(ngModel)]="auto.engineNo"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="colName">
+            跟进信息：
+          </div>
+          <ion-col>
+            <ion-input placeholder="跟进信息" [(ngModel)]="auto.autoMemo"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="colName">
+            年审年月：
+          </div>
+          <ion-col class="biEdate">
+            <ion-datetime cancelText="取消" doneText="完成" displayFormat="YYYY-MM-DD" max="2030-12-31" [(ngModel)]="auto.auditDate"></ion-datetime>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div class="btn">
+
+    <div class="bt">
+
+      <button ion-button (click)="saveCarInfo()">保存车辆信息</button>
+
+
+      <button ion-button (click)="goInsurance()">车险报价</button>
+
+
+      <button ion-button (click)="goOrderList()">查看订单列表</button>
+
+
+      <button ion-button (click)="goBack()">继续接车</button>
+
+
+
+    </div>
+  </div>
+
+
+
+</ion-content>

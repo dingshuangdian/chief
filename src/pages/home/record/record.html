@@ -1,0 +1,39 @@
+<!--
+  Generated template for the RecordPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title>
+      记一笔明细
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background-color: #eff0f8;">
+  <ion-list no-lines>
+    <ion-item style="background-color: #fff;margin-top: 10px" *ngFor="let item of record">
+      <div class="a">
+        <p>{{item.settleDate}}</p>
+        <p style="font-size: 15px;color: #ff5a10" *ngIf="item.isIncome==1">+￥{{item.journalAmount}}</p>
+        <p style="font-size: 15px;color: #68d7d7" *ngIf="item.isIncome==0">-￥{{item.journalAmount}}</p>
+      </div>
+      <div class="b">
+        <p>支付方式:&nbsp;&nbsp;&nbsp;&nbsp;{{item.paymentName}}</p>
+        <p>收支类型:&nbsp;&nbsp;&nbsp;&nbsp;{{item.journalTypeName}}</p>
+        <p>收支备注:&nbsp;&nbsp;&nbsp;&nbsp;{{item.memo}}</p>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-fab style="bottom: 0px;right: 0;margin: 0 10px 10px 0;z-index: 10;padding-bottom: constant(safe-area-inset-bottom);
+padding-bottom: env(safe-area-inset-bottom);">
+  <button role="img" ion-fab style="background-color:#eff0f8" (click)="toRecordEdit()">
+    <img src="assets/imgs/add_03.gif">
+  </button>
+</ion-fab>

@@ -1,0 +1,161 @@
+<!--
+  Generated template for the AccountOrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>结算单</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="bg">
+  <div class="or-top">
+    <div class="or-top-a">
+      <p>{{plateNumber}}</p>
+      <p>{{orderStateName}}</p>
+    </div>
+    <div class="or-top-b">
+      <div style="border-bottom:0.55px solid #f0f0f0;">
+        <p>下单日期
+          <input type="date" name='fillDate' [(ngModel)]="fillDate" />
+        </p>
+      </div>
+      <div>
+        <p>结算日期
+          <input type="date" name="settlementTime" [(ngModel)]="settlementTime" />
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="or-center">
+    <!-- 消费项目 -->
+    <div [hidden]='!services'>
+      <h3>消费项目</h3>
+      <div style="border-top: 0.55px solid#f0f0f0; border-bottom: 0.55px solid #f0f0f0;position: relative;" *ngFor="let service of services;">
+        <div class="pr-t">
+          <div>{{service.serviceName}}
+            <span *ngIf="service.mcardName">({{service.mcardName}})</span>
+            <div style="display: inline;font-weight: normal" *ngIf="service.mcardId">卡号:{{service.mcardNo}}
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;剩余{{service.svcNum}}次</span>
+            </div>
+            <i [hidden]='!service.staff_isSalesman0 && !service.staff_isSalesman1'>(</i>
+            <span>
+              <span [hidden]="!service.staff_isSalesman0" [ngClass]="{'br_1':service.staff_isSalesman0 || service.staff_isSalesman1}">施工:
+                <span *ngFor="let staff of service.staff_isSalesman0" class="spml">{{staff}}&nbsp;</span>
+              </span>
+              <span [hidden]="!service.staff_isSalesman1">销售:
+                <span *ngFor="let staff of service.staff_isSalesman1" class="spml" style='white-space: normal'>{{staff}}&nbsp;</span>
+              </span>
+              <!-- <i *ngFor="let staff of service.staffs;">{{isSalesman==0?'施工':'销售'}}:{{staff.userName}}&nbsp;</i> -->
+            </span>
+            <i [hidden]='!service.staff_isSalesman0 && !service.staff_isSalesman1'>)</i>
+          </div>
+        </div>
+        <div class="pr">
+          <p>价&nbsp;&nbsp;&nbsp;&nbsp;格:
+            <span>￥{{service.goodsPrice}}*{{service.goodsNum}}*{{service.goodsCoefficient}}%</span>
+          </p>
+          <p [hidden]="!service.serviceNum || service.mcardId">工时费:
+            <span>￥{{service.servicePrice}}*{{service.serviceNum}}*{{service.serviceCoefficient}}%</span>
+          </p>
+        </div>
+        <p class="totalAmount">￥{{service.totalAmount}}</p>
+      </div>
+    </div>
+
+
+
+    <!-- 配件项目 -->
+    <div [hidden]='!goods' style="border-top: 10px solid #f0f0f0;">
+      <h3>配件项目</h3>
+      <div style="border-top: 0.55px solid#f0f0f0; border-bottom: 0.55px solid#f0f0f0;" *ngFor="let good of goods;">
+        <div class="pr-t">
+          <div>{{good.goodsName}}
+            <span [hidden]="!good.sellUname">(销售:{{good.sellUname}})</span>
+          </div>
+        </div>
+
+        <div class="pr">
+          <p [hidden]="!good.goodsNum">价&nbsp;&nbsp;格:
+            <span>￥{{good.goodsPrice}}*{{good.goodsNum}}</span>
+          </p>
+          <p>￥{{good.totalAmount}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tot" style="border-top: 10px solid #f0f0f0;">
+      <span style="font-size: 15px;">总价:
+        <span style="color:#ff5001;font-size: 25px;">￥{{orderAmount}}</span>
+      </span>
+    </div>
+  </div>
+  <div class="tot-a">
+    <div style="padding:0px 10px; display: flex;align-items: center;">
+      <p>实收金额</p>
+      <input type="number" name="number" id="" [(ngModel)]="paiclUpMoney" (ngModelChange)='changeMoney($event)'>
+    </div>
+  </div>
+  <div class="payState" *ngIf="paymentRecords">
+    <div>
+      <p>支付情况</p>
+    </div>
+    <div>
+      <div *ngFor="let paymentRecord of paymentRecords;">
+        <span>{{paymentRecord.paymentName}}</span>
+        <span [hidden]="!paymentRecord.mcardId">({{paymentRecord.mcardName}}{{paymentRecord.mcardNo}})</span>
+        <span>支付{{paymentRecord.mcardId?paymentRecord.consumeAmount:paymentRecord.incomeAmount}}</span>
+        <button (click)='trunBack(paymentRecord)'>撤销</button>
+      </div>
+    </div>
+  </div>
+  <div class="noPayState" [hidden]="!paymentRecords">
+    <p>未支金额</p>
+    <p>￥{{noPayMoney}}</p>
+  </div>
+  <pay-type class="payway" *ngIf="memberId" [memberId]="memberId" (selectEvent)="selectPay($event)"></pay-type>
+  <div class="tot-b">
+    <div style="padding:0px 10px; display: flex;align-items: center;">
+      <p>支付金额</p>
+      <input type="number" name="number" id="" [(ngModel)]="paidMoney">
+    </div>
+  </div>
+  <div class="meg" [hidden]="!notifys">
+    <h3>通知方式</h3>
+    <div class="meg-btn" style="border-top: 0.55px solid #f0f0f0;">
+      <button ion-button *ngFor="let notify of notifys;let i = index;" [ngClass]="notify.flag?'btnActive':'nobtnActive'" (click)='noticeWay(notify.notifyTag,i)'>{{notify.notifyTypeName}}</button>
+    </div>
+    <div class="notice" [hidden]="noticeFlag">
+      <span style="color:red;">注意：</span>
+      <input type="tel" placeholder="请输入手机号码才能使用短信通知" [(ngModel)]="mobileNumber" (ngModelChange)="btnActive($event)">
+    </div>
+  </div>
+  <div class="bz">
+    <h3>备注</h3>
+    <div class="meg-btn" style="border-top: 0.55px solid #f0f0f0;">
+      <textarea name="memo" id="" [(ngModel)]="memo"></textarea>
+    </div>
+  </div>
+  <div class="bz">
+    <h3>温馨提示</h3>
+    <div class="meg-btn" style="border-top: 0.55px solid #f0f0f0;margin-bottom: 60px;">
+      <textarea name="warmTips" id="" [(ngModel)]="warmTips"></textarea>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="btmo">
+    <button ion-button color="secondary" (click)="hangUp()">挂账</button>
+    <button ion-button color="secondary" (click)="goPay()">结算</button>
+  </div>
+</ion-footer>

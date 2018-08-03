@@ -1,0 +1,185 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      新客户
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="outer-content">
+  <ion-list class="row-distance" no-line>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          手机号
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="number" text-right placeholder="请输入手机号码" [(ngModel)]="postCar.mobileNumber" (ngModelChange)="changeMobileNumber()">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          姓名
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="text" text-right placeholder="请输入姓名" [(ngModel)]="postCar.memberName">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          车牌
+        </ion-col>
+        <ion-col text-right class="carNum">
+          <button ion-button icon-right color="dark" clear (click)="showProvince()">
+            {{carInfo.provinces}}
+            <ion-icon name="ios-arrow-down"></ion-icon>
+          </button>
+          <input type="text" placeholder="请输入车牌号码" [(ngModel)]="carInfo.plateNumber" [disabled]="carInfo.plateNumber=='无牌'" (ngModelChange)="changePlateNumber(carInfo.plateNumber)">
+          <button ion-button icon-only color="dark" clear class="scanner" (click)="scanner()">
+            <ion-icon name="qr-scanner"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <div style="padding: 5px;">
+          车型
+        </div>
+        <ion-col text-right class="selectType">
+          <button ion-button color="dark" clear (click)="selectCarType()">
+            {{carInfo.autoType}}
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <div class="cen" (click)="moreEdit()">
+    <img style=" left: 12%;
+    " src="assets/imgs/line_04_07.gif">
+    <p>{{title}}</p>
+    <img style="right: 12%;" src="assets/imgs/line_04_07.gif">
+  </div>
+  <div class="more" *ngIf="flag">
+    <ion-list no-line>
+      <ion-item>
+        <ion-row>
+          <ion-col class="row detailTitle">
+            <img src="assets/imgs/ico-cheliangxinxi.png">
+            <div>客户信息</div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-label>性别</ion-label>
+        <ion-select [(ngModel)]="gender" okText="确定" cancelText="取消" (ngModelChange)="changeSex()">
+          <ion-option value="f" selected="">男</ion-option>
+          <ion-option value="m">女</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            客户备注
+          </ion-col>
+          <ion-col text-right class="inputType">
+            <input type="text" text-right placeholder="备注" [(ngModel)]="postCar.memo">
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+    <ion-list no-line>
+      <ion-item>
+        <ion-row>
+          <ion-col class="row detailTitle">
+            <img src="assets/imgs/ico-cheliangxinxi.png">
+            <div>车辆信息</div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            车 架 号
+          </ion-col>
+          <ion-col text-right class="inputType">
+            <input type="text" text-right placeholder="请输入车架号" [(ngModel)]="postCar.auto.vinCode">
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            发动机号
+          </ion-col>
+          <ion-col text-right class="inputType">
+            <input type="text" text-right placeholder="请输入发动机号" [(ngModel)]="postCar.auto.engineNo">
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-label style="padding-left:5px;">保险日期</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="postCar.auto.biEdate">
+        </ion-datetime>
+        <button class="selectTimeBT" ion-button clear item-end>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <ion-label style="padding-left:5px;">年审日期</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="postCar.auto.auditDate">
+        </ion-datetime>
+        <button class="selectTimeBT" ion-button clear item-end>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            首次里程
+          </ion-col>
+          <ion-col text-right class="inputType">
+            <input type="text" text-right placeholder="请输入里程数" [(ngModel)]="postCar.auto.createMileage">
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            最近里程
+          </ion-col>
+          <ion-col text-right class="inputType">
+            <input type="text" text-right placeholder="请输入里程数" [(ngModel)]="postCar.auto.currentMileage">
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <div class="selectP">
+          <p>
+            选择图片
+          </p>
+          <ion-row align-items-center>
+              <ion-col col-3 align-self-center *ngFor="let item of imageUrl;let i=index" (press)="pressEvent($event)">
+                <ion-thumbnail tappable>
+                  <img *ngIf="imageUrl.length>0" src={{item.url}} (tap)="tapEvent($event)" class="auto-image" [style.height]="width" />
+                </ion-thumbnail>
+                <img class="red-point" *ngIf="imageUrl.length>0&&press" src="assets/imgs/delete.png" (click)="delectP(item,i)">
+              </ion-col>
+              <ion-col col-3 align-self-center>
+                <ion-thumbnail tappable (click)="getPicture()">
+                  <img src="assets/imgs/padd.png" class="auto-image" />
+                </ion-thumbnail>
+              </ion-col>
+            </ion-row>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="footBT">
+    <button ion-button color="secondary" (click)="postEdit()">保存</button>
+  </div>
+</ion-content>

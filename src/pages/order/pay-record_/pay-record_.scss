@@ -1,0 +1,71 @@
+page-pay-record_ {
+    .scroll-content, // .fixed-content {
+    //     margin-top: 99px !important;
+    // }
+    .list-ios {
+        margin: -1px 0 0 0;
+    }
+    .list-ios>.item-block:last-child,
+    .list-ios>.item-wrapper:last-child .item-block {
+        border-bottom: 0.55px solid #f0f1f4;
+    }
+    .top-ls {
+        .item-ios {
+            background-color: #fff;
+        }
+    }
+    .bg {
+        background-color: #eff0f8;
+        .item-ios {
+            padding-left: 0;
+            background-color: #efefef;
+        }
+        .item-inner {
+            padding-right: 0 !important; //border-bottom: 5.55px solid #f3f5f7 !important;
+        }
+        .label-ios {
+            margin: 0;
+        }
+        .a {
+            display: flex;
+            height: 45px;
+            padding: 15px;
+            justify-content: space-between;
+            border-bottom: 0.55px solid#f0f1f4;
+            p:first-child {
+                font-size: 17px;
+                font-weight: 500;
+                color: #000;
+            }
+        }
+        .b {
+            padding: 5px 15px;
+            display: flex;
+            flex-direction: column;
+            .c {
+                display: inline-flex;
+                justify-content: space-between;
+            }
+        }
+    }
+    .t {
+        .course_tabBox {
+            display: inline-block;
+            width: 50%;
+            position: relative;
+            line-height: 42px;
+            background: #fff;
+            text-align: center;
+            .course_tab {
+                padding: 5px 0;
+                color: #4e4e4e;
+                font-size: 15px;
+                font-weight: bolder;
+            }
+        }
+        .tabActive {
+            color: #ff4f02 !important;
+            border-bottom: 1px solid #fb4f29;
+        }
+    }
+}

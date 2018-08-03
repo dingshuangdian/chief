@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-segment color="secondary" [(ngModel)]="segmentType" (ngModelChange)="segmentChange()">
+      <ion-segment-button value="topUp">
+        公众号
+      </ion-segment-button>
+      <ion-segment-button value="open">
+        小程序
+      </ion-segment-button>
+    </ion-segment> -->
+    <ion-title>
+      公众号
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar class="dateBarStyle">
+    <ion-row>
+      <button ion-button clear small (click)="before()">前一天</button>
+      <ion-col text-center>
+        <ion-datetime displayFormat="YYYY/MM/DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="selectDate" (ngModelChange)="dateChange()">
+        </ion-datetime>
+        <ion-icon name="ios-arrow-down"></ion-icon>
+      </ion-col>
+      <button ion-button clear small (click)="after()">后一天</button>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="outer-content">
+  <ion-list>
+    <div class="publicItem" *ngFor="let c of contentList">
+      <div class="itemT">
+        <div class="pNumber">
+          {{c.plateNumber}}
+        </div>
+        <div class="state" [ngClass]="{'otherState': c.orderStateId == 14001 || c.orderStateId == 14002}">{{c.orderStateName}}</div>
+        <div class="detail">
+          <ion-row>
+            <img src="assets/icon/lable_icon01.svg">
+            <ion-col>{{c.bookingTime}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <img src="assets/icon/lable_icon02.svg">
+            <ion-col>
+              <span *ngFor="let s of c.services,let i = index">
+                <span class="vertical" *ngIf="i !== 0">|</span>{{s.serviceName}}</span>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+      <div class="itemB" text-right *ngIf="c.orderStateId == 14001">
+        <button ion-button color="assist" (click)="onConfirm(c)">接车</button>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      客户
+    </ion-title>
+    <ion-buttons end>
+      <button style='font-size: 14px' ion-button (click)="addNewCustom()">
+        新客户
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar class="searchStyle">
+    <ion-row>
+      <ion-col no-padding>
+        <ion-searchbar [(ngModel)]="seachInfo.keyWords" placeholder="填写手机、客户名或车牌模糊搜索" (ngModelChange)="searchCar($event)">
+        </ion-searchbar>
+      </ion-col>
+      <button ion-button icon-only color="light" (click)="scanner()">
+        <ion-icon name="qr-scanner"></ion-icon>
+      </button>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="outer-content">
+  <div>
+    <ion-list no-border-top>
+      <button ion-item *ngFor="let c of customers" (click)="selectItem(c)">
+        <ion-row>
+          <ion-col>
+            {{c.plateNumber}}
+          </ion-col>
+          <ion-col>
+            {{c.mobileNumber}}
+          </ion-col>
+          <ion-col>
+            {{c.memberName}}
+          </ion-col>
+        </ion-row>
+      </button>
+      <button style="font-size: 1.3rem" ion-item clear small (click)="openSpeakerShare(speaker)" *ngIf="!moreFlag">
+        查看更多..
+      </button>
+    </ion-list>
+  </div>
+  <ion-item class="newBanner" text-center no-lines *ngIf="(flag || customers.length>=0) && !first_flag">
+    <div *ngIf="customers.length==0 && !flag">
+      <p>暂无符合数据，您可以新增客户..</p>
+    </div>
+    <button ion-button small color="secondary" icon-start (click)="selectItem(2)">
+      新增客户
+    </button>
+    <div>若无您所要的客户信息，请新增客户
+    </div>
+  </ion-item>
+  <div class="search-car" *ngIf="first_flag && !flag">
+    <img src="assets/imgs/search_03.gif">
+    <p>请填写手机、客户名或车牌模糊搜索</p>
+  </div>
+</ion-content>

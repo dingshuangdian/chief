@@ -1,0 +1,314 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      订单编辑
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="outer-content">
+  <div class="msg">
+    <div class="title">客户信息:</div>
+    <div class="name">
+      <span>{{member.memberName}}</span>
+      <span>{{member.mobileNumber}}</span>
+      <span>{{auto.plateNumber}}</span>
+    </div>
+  </div>
+  <ion-item no-lines class="selectProject fineThread">
+    <div class="title">已选项目:</div>
+    <div item-end>
+      <button ion-button color="assist" (click)="zdyEdit()">自定义</button>
+      <button ion-button color="assist" (click)="addPresentProject()">增加项目</button>
+    </div>
+  </ion-item>
+  <div class="projectItem fineThread" *ngFor="let s of addServices;let n = index">
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-7>
+          <ion-row class="selectItem">
+            <div>
+              类&nbsp;&nbsp;&nbsp;&nbsp;型
+            </div>
+            <ion-col>
+              <ion-select [(ngModel)]="s.svctype" okText="确定" cancelText="取消" (ngModelChange)="changeSvctype(s)">
+                <ion-option *ngFor="let service of svctypeList;let i = index" [value]="service" [selected]="i == 2">{{service.svctypeName}}</ion-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+          <ion-row class="selectItem">
+            <div>
+              项&nbsp;&nbsp;&nbsp;&nbsp;目
+            </div>
+            <ion-col>
+              <ion-input placeholder="" [(ngModel)]="s.serviceName"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row class="selectItem" *ngIf="s.projectItem">
+            <div>
+              单&nbsp;&nbsp;&nbsp;&nbsp;价
+            </div>
+            <ion-col class="">
+              <ion-input placeholder="0" type="number" [(ngModel)]="s.goodsPrice" (ngModelChange)="inputPrice(s,s.goodsPrice)"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row class="select-input" *ngIf="s.projectItem">
+            <div>
+              折&nbsp;&nbsp;&nbsp;&nbsp;扣
+            </div>
+            <ion-col class="down">
+              <ion-row>
+                <ion-col>
+                  <ion-input placeholder="0" [(ngModel)]="s.goodsCoefficient" type="number" (ngModelChange)="inputPrice(s,s.goodsCoefficient)"></ion-input>
+                </ion-col>
+                <button ion-button icon-only color="selectItem" (click)="discountSelect(1,s)">
+                  <ion-icon name="arrow-down"></ion-icon>
+                </button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="button-input" *ngIf="s.projectItem">
+            <div>
+              数&nbsp;&nbsp;&nbsp;&nbsp;量
+            </div>
+            <ion-col class="add-pop">
+              <ion-row>
+                <button ion-button icon-only color="selectItem" (click)="methodNum(0,s)">
+                  <ion-icon name="remove"></ion-icon>
+                </button>
+                <ion-col>
+                  <ion-input text-center type="number" [(ngModel)]="s.goodsNum" (ngModelChange)="inputPrice(s,s.goodsNum)"></ion-input>
+                </ion-col>
+                <button ion-button icon-only color="selectItem" (click)="methodNum(1,s)">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="selectItem" *ngIf="s.serviceItem">
+            <div>
+              工时费
+            </div>
+            <ion-col class="">
+              <ion-input placeholder="0" [(ngModel)]="s.servicePrice" type="number" (ngModelChange)="inputPrice(s,s.servicePrice)"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row class="select-input" *ngIf="s.serviceItem">
+            <div>
+              工折扣
+            </div>
+            <ion-col class="down">
+              <ion-row>
+                <ion-col>
+                  <ion-input placeholder="0" [(ngModel)]="s.serviceCoefficient" type="number" (ngModelChange)="inputPrice(s,s.serviceCoefficient)"></ion-input>
+                </ion-col>
+                <button ion-button icon-only color="selectItem" (click)="discountSelect(2,s)">
+                  <ion-icon name="arrow-down"></ion-icon>
+                </button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col class="right">
+          <img src="assets/imgs/brash_03.gif" (click)="delect(s,n)" />
+          <div class="personnel">
+            <div>小计:
+              <span class="price dangerInfo">￥{{s.totalAmount}}</span>
+            </div>
+            <div>
+              <button ion-button color="selectPo" (click)="goOrderSelect(1,s)">技师</button>
+              <button ion-button color="selectPo" (click)="goOrderSelect(2,s)">销售</button>
+            </div>
+            <div *ngIf="s.technicianList">
+              <span *ngIf="s.technicianList.length > 0">技师：</span>
+              <span *ngFor="let sta of s.technicianList;let i = index">
+                {{sta.userName}}
+                <span *ngIf="i != s.technicianList.length - 1">,</span>
+              </span>
+            </div>
+            <div *ngIf="s.salesmanList">
+              <span *ngIf="s.salesmanList.length > 0">销售：</span>
+              <span *ngFor="let sta of s.salesmanList;let i = index">
+                {{sta.userName}}
+                <span *ngIf="i != s.salesmanList.length - 1">,</span>
+              </span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="projectItem fineThread isSelectP" *ngFor="let s of services;let n = index">
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-7>
+          <ion-row class="projectTitle">
+            <div>
+              项&nbsp;&nbsp;&nbsp;&nbsp;目
+            </div>
+            <ion-col>
+              {{s.serviceName}}
+              <span *ngIf="s.mcardId">（会员卡）
+                <span *ngIf="s.mcardNo">卡号：{{s.mcardNo}}</span>
+                <span *ngIf="s.svcNum">
+                  <span style="font-weight:bold">剩余</span>{{s.svcNum}}次</span>
+              </span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="selectItem">
+            <div>
+              单&nbsp;&nbsp;&nbsp;&nbsp;价
+            </div>
+            <ion-col class="">
+              <ion-input [(ngModel)]="s.goodsPrice" placeholder="0" [disabled]="s.mcardId" type="number" (ngModelChange)="inputPrice(s,s.goodsPrice)"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row class="select-input" *ngIf="!s.mcardId">
+            <div>
+              折&nbsp;&nbsp;&nbsp;&nbsp;扣
+            </div>
+            <ion-col class="down">
+              <ion-row>
+                <ion-col>
+                  <ion-input placeholder="0" [(ngModel)]="s.goodsCoefficient" type="number" (ngModelChange)="inputPrice(s,s.goodsCoefficient)"></ion-input>
+                </ion-col>
+                <button ion-button icon-only color="selectItem" (click)="discountSelect(1,s)">
+                  <ion-icon name="arrow-down"></ion-icon>
+                </button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="button-input" *ngIf="!s.mcardId">
+            <div>
+              数&nbsp;&nbsp;&nbsp;&nbsp;量
+            </div>
+            <ion-col class="add-pop">
+              <ion-row>
+                <button ion-button icon-only color="selectItem" (click)="methodNum(0,s)">
+                  <ion-icon name="remove"></ion-icon>
+                </button>
+                <ion-col>
+                  <ion-input text-center type="number" [(ngModel)]="s.goodsNum" (ngModelChange)="inputPrice(s,s.goodsNum)"></ion-input>
+                </ion-col>
+                <button ion-button icon-only color="selectItem" (click)="methodNum(1,s)">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="button-input" *ngIf="s.mcardId">
+            <div>
+              数&nbsp;&nbsp;&nbsp;&nbsp;量
+            </div>
+            <ion-col class="add-pop">
+              <ion-row>
+                <button ion-button icon-only color="selectItem" (click)="methodServiceNum(0,s)">
+                  <ion-icon name="remove"></ion-icon>
+                </button>
+                <ion-col>
+                  <ion-input text-center [(ngModel)]="s.serviceNum" type="number" (ngModelChange)="inputPrice(s,s.serviceNum)"></ion-input>
+                </ion-col>
+                <button ion-button icon-only color="selectItem" (click)="methodServiceNum(1,s)">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="selectItem" *ngIf="!s.mcardId">
+            <div>
+              工时费
+            </div>
+            <ion-col class="">
+              <ion-input placeholder="0" [(ngModel)]="s.servicePrice" type="number" (ngModelChange)="inputPrice(s,s.servicePrice)"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row class="select-input" *ngIf="!s.mcardId">
+            <div>
+              工折扣
+            </div>
+            <ion-col class="down">
+              <ion-row>
+                <ion-col>
+                  <ion-input placeholder="0" [(ngModel)]="s.serviceCoefficient" type="number" (ngModelChange)="inputPrice(s,s.serviceCoefficient)"></ion-input>
+                </ion-col>
+                <button ion-button icon-only color="selectItem" (click)="discountSelect(2,s)">
+                  <ion-icon name="arrow-down"></ion-icon>
+                </button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col class="right">
+          <img src="assets/imgs/brash_03.gif" (click)="delect(s,n)" />
+          <div class="personnel">
+            <div>小计:
+              <span class="price dangerInfo">￥{{s.totalAmount}}</span>
+            </div>
+            <div>
+              <button ion-button color="selectPo" (click)="goOrderSelect(1,s)">技师</button>
+              <button ion-button color="selectPo" (click)="goOrderSelect(2,s)">销售</button>
+            </div>
+            <div *ngIf="s.technicianList">
+              <span *ngIf="s.technicianList.length > 0">技师：</span>
+              <span *ngFor="let sta of s.technicianList;let i = index">
+                {{sta.userName}}
+                <span *ngIf="i != s.technicianList.length - 1">,</span>
+              </span>
+            </div>
+            <div *ngIf="s.salesmanList">
+              <span *ngIf="s.salesmanList.length > 0">销售：</span>
+              <span *ngFor="let sta of s.salesmanList;let i = index">
+                {{sta.userName}}
+                <span *ngIf="i != s.salesmanList.length - 1">,</span>
+              </span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="otherInfo">
+    <div>
+      钥匙号:
+      <ion-input [(ngModel)]="otherInfo.pickupCode"></ion-input>
+    </div>
+    <div>
+      工单自编号:
+      <ion-input [(ngModel)]="otherInfo.originalNo"></ion-input>
+    </div>
+    <div>
+      备注:
+      <ion-textarea [(ngModel)]="otherInfo.memo"></ion-textarea>
+    </div>
+    <div>
+      温馨提示:
+      <ion-textarea [(ngModel)]="otherInfo.warmTips"></ion-textarea>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <div float-left class="priceInfo">
+    <div class="totalClass">
+      总价
+      <span class="dangerInfo" style="font-weight: bold;font-size: 18px;">￥{{priceInfo.totalPrice}}</span>
+    </div>
+
+    <div class="detailClass">
+      <span *ngIf="priceInfo.projePrice">
+        项目：
+        <span class="dangerInfo">￥{{priceInfo.projePrice}}</span>
+      </span>
+      <span *ngIf="priceInfo.servicePrice">
+        工时费：
+        <span class="dangerInfo">￥{{priceInfo.servicePrice}}</span>
+      </span>
+    </div>
+  </div>
+  <div float-right>
+    <button ion-button color="secondary" (click)="onConfirm()">下一步</button>
+  </div>
+</ion-footer>

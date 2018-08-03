@@ -1,0 +1,184 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      会员卡充值
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background-color: #f2f4f8">
+  <div class="top">
+    <ion-list>
+      <ion-item>
+        <p>卡&nbsp;&nbsp;名&nbsp;&nbsp;称
+          <span>{{carInfo.mcard.mcardName}}</span>
+        </p>
+      </ion-item>
+      <ion-item>
+        <p>卡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号
+          <span>{{carInfo.mcard.mcardNo}}</span>
+        </p>
+      </ion-item>
+      <!-- <ion-item>
+        <p>实物卡号
+          <span>--</span>
+        </p>
+      </ion-item> -->
+    </ion-list>
+  </div>
+  <div class="con" *ngIf="carInfo.mcard.svcList!=''">
+    <ion-item>套餐项目:</ion-item>
+    <ion-grid no-padding>
+      <ion-row style="border-bottom: 0.55px solid#eaeaea;background-color: #fff" *ngFor="let carInfos of carInfo.mcard.svcList">
+        <ion-col col-7>
+          <ion-row class="projectTitle">
+            <div>
+              大类
+            </div>
+            <ion-col>
+              {{carInfos.svctypePName}}
+            </ion-col>
+          </ion-row>
+          <ion-row class="projectTitle">
+            <div>
+              小类
+            </div>
+            <ion-col>
+              {{carInfos.svctypeName}}
+            </ion-col>
+          </ion-row>
+          <ion-row class="projectTitle">
+            <div>
+              项目名称
+            </div>
+            <ion-col>
+              {{carInfos.svcName}}
+            </ion-col>
+          </ion-row>
+          <ion-row class="projectTitle">
+            <div>
+              项目价格
+            </div>
+            <ion-col>
+              {{carInfos.svcPrice}}
+            </ion-col>
+          </ion-row>
+          <ion-row class="projectTitle">
+            <div>
+              剩余数量
+            </div>
+            <ion-col>
+              {{carInfos.svcNum}}
+            </ion-col>
+          </ion-row>
+          <ion-row class="selectItem">
+            <div>
+              充值次数
+            </div>
+            <ion-col>
+              <ion-input placeholder="0" type="number" [(ngModel)]="carInfos.rechargeSvcNum" (ngModelChange)="inputChange()"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row class="projectTitle">
+            <div>
+              备注
+            </div>
+            <ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- <div class="addPro">
+    <div class="btm-btn">
+      <button ion-button>添加新项目</button>
+    </div>
+    <div class="addProCon">
+      <ion-list>
+        <div class="addList">
+          <div style='display: inline-flex;'>
+            <div style="display: inline-flex;align-items: center">
+              <p>大类</p>
+              <button ion-button>请选择类别</button>
+            </div>
+            <div style="display: inline-flex;align-items: center;margin-left: 10px;">
+              <p>小类</p>
+              <button ion-button>请选择类别</button>
+            </div>
+          </div>
+          <div style='display: inline-flex;'>
+            <div class="aflex">
+              <p style="width: 28px;">项目名称</p>
+              <ion-input type="number" placeholder="0"></ion-input>
+            </div>
+            <div class="aflex" style="margin-left: 10px;">
+              <p>价格</p>
+              <ion-input type="number" placeholder="0"></ion-input>
+            </div>
+          </div>
+          <div class="aflex" style="margin-left: -135px;">
+            <p>次数</p>
+            <ion-input type="number" placeholder="0"></ion-input>
+          </div>
+          <div class="aflex" style="margin-left: -65px;margin-top: -10px;">
+            <p>备注</p>
+            <ion-input type="text" placeholder="备注"></ion-input>
+            <img src="assets/imgs/brash_03.gif">
+          </div>
+        </div>
+      </ion-list>
+    </div>
+  </div> -->
+  <div class="con-a">
+    <ion-list no-lines>
+      <ion-item style="border-bottom: 0.55px solid#c8c7cc">
+        <p>剩余金额
+          <span style="margin-left: 20px;color: #fb4f29">￥{{carInfo.mcard.mcardBalance}}</span>
+        </p>
+      </ion-item>
+
+      <ion-row class="selectItem">
+        <div>
+          充值金额
+        </div>
+        <ion-col>
+          <ion-input placeholder="0" type="number" [(ngModel)]="postCar.rechargeAmount" (ngModelChange)="inputChange()"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <p>截止时间
+          <span style="margin-left: 20px" *ngIf="carInfo.mcard.isForever==1">长期</span>
+          <span style="margin-left: 20px" *ngIf="carInfo.mcard.isForever==0">{{carInfo.mcard.stopDate}}</span>
+        </p>
+        <div class="btn" *ngIf="carInfo.mcard.isForever==0">
+          <p>有效期方式</p>
+          <div class="btn-flex" *ngFor="let item of items">
+            <button ion-button full color="selectItem" [ngClass]="{'isSelect': item.select}" (click)="selectName(item)">{{item.name}}</button>
+          </div>
+        </div>
+      </ion-item>
+      <ion-row class="selectItem" *ngIf="showInput">
+        <div>
+          叠加月数
+        </div>
+        <ion-col>
+          <ion-input placeholder="0" type="number" [(ngModel)]="postCar.validityMonth"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </div>
+  <pay-type (selectEvent)="selectPay($event)"></pay-type>
+  <div class='con-btn'>
+    <ion-row class="selectItem">
+      <div>
+        实收金额
+      </div>
+      <ion-col>
+        <ion-input placeholder="0" type="number" [(ngModel)]='postCar.orderAmount'></ion-input>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+<ion-footer class="certain">
+  <button ion-button color="secondary" (click)="postRecharge()">立即充值</button>
+</ion-footer>

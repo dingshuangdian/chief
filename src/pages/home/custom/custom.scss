@@ -1,0 +1,61 @@
+page-custom {
+    .searchStyle {
+        .toolbar-background {
+            background-color: #fff;
+        }
+        .button {
+            height: initial;
+        }
+        input {
+            text-transform: uppercase;
+        }
+    }
+    .list {
+        margin: 0;
+        .item {
+            font-size: 1.4rem;
+            padding-right: 16px;
+            text-align: center;
+            min-height: 3.8rem;
+            .item-inner {
+                background-image: initial !important;
+                padding-right: initial !important;
+                .label-ios {
+                    margin: 5px 0 !important;
+                }
+            }
+        }
+    }
+    .newBanner {
+        font-size: 1.6rem;
+        color: #666;
+        button {
+            margin: 15px 0;
+        }
+    }
+    .searchPrompt {
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+        margin-top: 180px;
+        img {
+            width: 10%;
+            margin-bottom: 20px;
+        }
+    }
+    .search-car {
+        img {
+            width: 30px;
+            height: 30px;
+        }
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        p {
+            color: #d2d2d2;
+            font-size: 18px;
+        }
+    }
+}

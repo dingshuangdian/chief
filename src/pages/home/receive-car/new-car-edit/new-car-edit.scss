@@ -1,0 +1,154 @@
+page-new-car-edit {
+    .list-ios>.item-block:last-child,
+    .list-ios>.item-wrapper:last-child .item-block {
+        border-bottom: none;
+    }
+    .list {
+        .item {
+            font-size: 1.4rem;
+            padding-right: 16px;
+            min-height: 3.8rem;
+            .item-inner {
+                background-image: initial !important;
+                padding-right: initial !important;
+                .label-ios {
+                    margin: 5px 0 !important;
+                }
+            }
+        }
+    }
+    .list-ios {
+        margin: 0;
+    }
+    .carNum {
+        button {
+            height: initial;
+            margin: initial;
+            vertical-align: initial;
+            padding: 0;
+        }
+        input {
+            border: initial;
+            width: 70px;
+            background-color: #fff;
+            text-transform: uppercase;
+        }
+        .scanner {
+            height: 20px;
+            vertical-align: bottom;
+            .icon {
+                padding: 0;
+                margin: 0 0 0 8px;
+                font-size: 25px;
+            }
+        }
+    }
+    .selectType {
+        button {
+            height: initial;
+            margin: initial;
+            padding: 0;
+            vertical-align: middle;
+            font-size: 1.4rem;
+            .icon {
+                margin-left: 10px;
+            }
+        }
+    }
+    .detailTitle {
+        font-size: 15px;
+        color: #888;
+        img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        div {
+            line-height: 30px;
+        }
+    }
+    .inputType {
+        input {
+            border: initial;
+        }
+    }
+    .cameraType {
+        button {
+            margin: initial;
+            height: 20px;
+            vertical-align: bottom;
+            .icon {
+                padding: 0;
+                margin: 0 0 0 8px;
+                font-size: 25px;
+            }
+        }
+    }
+    .footBT {
+        background-color: #fff;
+        padding: 10px;
+        button {
+            width: 100%;
+            margin: initial;
+            height: 35px;
+        }
+    }
+    .selectTimeBT {
+        padding: 0 5px 0 0 !important;
+        margin: 0 !important;
+    }
+    .more {
+        .item-ios {
+            font-size: 13px !important;
+            P {
+                color: #000;
+            }
+        }
+        .item-inner {
+            //border-bottom: 0.55px solid #eaeaea;
+            margin-right: 10px;
+        }
+        .inputType {
+            input {
+                border: initial;
+            }
+        }
+        .list-ios>.item-block:first-child {
+            border-top: none;
+        }
+    }
+    .cen {
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p {
+            margin: 0 10px;
+            font-weight: bolder;
+        }
+        img {
+            width: auto;
+            height: 1px;
+            position: absolute;
+        }
+    }
+    .selectP {
+        display: flex;
+        align-items: center;
+        min-height: 70px;
+        p {
+            padding: 5px;
+            color: #000;
+        }
+        .red-point {
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            top: 0px;
+            right: 4px;
+        }
+    }
+    img.auto-image {
+        width: 100%;
+    }
+}

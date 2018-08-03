@@ -1,0 +1,59 @@
+merge-popover {
+  .grid {
+    // padding: 15px 15px 0px;
+  }
+  .titleCss {
+    padding: 10px;
+  }
+  .inputRow {
+    padding: 15px 20px 0;
+    div {
+      line-height: 40px;
+    }
+  }
+  .input {
+    border: 1px solid #888;
+    padding-left: 7px;
+  }
+  .fineThread {
+    margin-top: 15px;
+  }
+  .colSelect {
+    padding: 0;
+    ion-select {
+      text-align: left;
+      border: 1px solid #888;
+      border-radius: 2px;
+      max-width: initial;
+      padding: 0;
+      .select-icon {
+        height: initial;
+        width: 20px;
+        .select-icon-inner {
+          left: 0 !important;
+        }
+      }
+      .select-text {
+        padding-left: 7px;
+        height: 40px;
+      }
+    }
+  }
+
+  .itemGrid {
+    background-color: #fff;
+    button {
+      margin: 0;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 5px;
+      font-size: 1.4rem;
+      white-space: initial;
+      height: 3.3em;
+    }
+    .isSelect {
+      background-color: color($colors, assist, base);
+      color: color($colors, assist, contrast);
+    }
+  }
+}

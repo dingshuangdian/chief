@@ -1,0 +1,17 @@
+page-statement {
+  .tabbar {
+    background-color: white !important;
+    .tab-button[aria-selected=true] {
+      color: color($colors, primary) !important;
+    }
+    .tab-button[aria-selected=true]:after {
+      content: '';
+      position: absolute;
+      left: 25%;
+      bottom: 0;
+      background: color($colors, primary) !important;
+      width: 50%;
+      height: 3px;
+    }
+  }
+}

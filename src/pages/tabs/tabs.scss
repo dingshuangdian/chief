@@ -1,0 +1,47 @@
+page-tabs {
+    .ion-tab-icon-base {
+        width: 32px !important;
+        height: 32px !important;
+        padding: 4px 4px 2px;
+    }
+    .ion-tab-icon-md-base {
+        min-width: 0 !important;
+        height: 32px;
+    }
+    $tabImageName: 'home' 'order' 'report' 'my';
+    @for $i from 1 to 5 {
+        //for ios
+        .tab-button[aria-selected=true] {
+            color: color($colors, selectItem, contrast) !important;
+            .ion-ios-tab-#{nth($tabImageName, $i)} {
+                @extend .ion-tab-icon-base;
+                content: url("../assets/imgs/foot_#{nth($tabImageName, $i)}_s.svg");
+                color: color($colors, assist, base) !important;
+            }
+        }
+        .tab-button[aria-selected=false] {
+            .ion-ios-tab-#{nth($tabImageName, $i)}-outline {
+                @extend .ion-tab-icon-base;
+                content: url("../assets/imgs/foot_#{nth($tabImageName, $i)}.svg");
+            }
+        } // for android
+        // .tabs-md .tab-button[aria-selected=true].tab-button-icon {
+        //     .ion-md-tab-#{nth($tabImageName, $i)} {
+        //         @extend .ion-tab-icon-md-base;
+        //         content: url("assets/imgs/ion_#{nth($tabImageName, $i)}_on.gif");
+        //     }
+        // }
+        // .tabs-md .tab-button[aria-selected=false].tab-button-icon {
+        //     .ion-md-tab-#{nth($tabImageName, $i)} {
+        //         @extend .ion-tab-icon-md-base;
+        //         content: url("assets/imgs/ion_#{nth($tabImageName, $i)}_off.gif");
+        //     }
+    }
+    .ion-ios-tab-task,
+    .ion-ios-tab-task-outline,
+    .ion-ios-tab-master,
+    .ion-ios-tab-master-outline {
+        width: 30px !important;
+        height: 32px !important;
+    }
+}

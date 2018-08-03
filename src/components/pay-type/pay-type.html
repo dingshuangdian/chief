@@ -1,0 +1,25 @@
+<!-- Generated template for the PayTypeComponent component -->
+
+<div class="title">支付方式</div>
+<ion-list class="salecardList" radio-group [(ngModel)]="selectSalecard" (ngModelChange)="changeType(selectSalecard)">
+  <div *ngFor="let p of payList">
+    <ion-item>
+      <ion-label>
+        {{p.paymentName}}
+      </ion-label>
+      <ion-radio [value]="p"></ion-radio>
+    </ion-item>
+    <div class="itemGrid" *ngIf="selectSalecard.paymentId == 11 && p.paymentId == 11">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4 *ngFor="let c of cardsList">
+            <button ion-button full color="selectItem" [ngClass]="{'isSelect': c.select}" (click)="changeType(c)">
+              <span>{{c.mcardName}}</span>
+              <span>{{c.mcardBalance}}</span>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-list>

@@ -1,0 +1,38 @@
+page-memo-record {
+  .title {
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+  .selectProject {
+    button {
+      padding: 0 17.2px !important;
+      height: 34px !important;
+      font-size: 1.4rem !important;
+    }
+  }
+  .carInfo {
+    background-color: #fff;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  .inputRow {
+    padding: 8px 20px;
+    div {
+      line-height: 40px;
+    }
+    .input {
+      border: 1px solid #888;
+      padding-left: 7px;
+    }
+  }
+  .noRes {
+    padding: 10px;
+    text-align: center;
+  }
+  .memoInfo {
+    font-size: 13px;
+  }
+  .intervalLeft {
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,17 @@
+<!-- 
+<ion-menu [content]="mycontent">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="outer-content">
+    <ion-list>
+        <button ion-item menuClose (click)="logout()">
+          退出登录
+        </button>
+      </ion-list>
+  </ion-content>
+</ion-menu> -->
+
+<ion-nav #mycontent [root]="rootPage" swipeBackEnabled="false" main [ngClass]="{'isIos': isIos}"></ion-nav>

@@ -1,0 +1,33 @@
+<!-- Generated template for the AgentPopoverComponent component -->
+
+<ion-grid>
+  <div text-center class="titleCss">
+    填写送修人信息
+  </div>
+  <ion-row class="inputRow">
+    <div>
+      送修人姓名：
+    </div>
+    <ion-col no-padding>
+      <ion-input placeholder="请输入" [(ngModel)]='sendInfor.sendUname'></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row class="inputRow">
+    <div>
+      送修人手机：
+    </div>
+    <ion-col no-padding>
+      <ion-input placeholder="请输入" [(ngModel)]='sendInfor.sendMobile'></ion-input>
+    </ion-col>
+  </ion-row>
+  <div class="fineThread"></div>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="cancelBT" (click)="close(false)">取消</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button block color="secondary" (click)="close(true)">确定</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

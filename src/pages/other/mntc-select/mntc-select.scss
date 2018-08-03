@@ -1,0 +1,43 @@
+page-mntc-select {
+    background-color: #fff;
+    .pay {
+      background-color: #fff;
+      margin-top: 10px;
+      h3 {
+          font-size: 19px;
+          height: 55px;
+          line-height: 55px;
+          margin-left: 15px;
+          -webkit-margin-before: 10px;
+          -webkit-margin-after: -5px;
+      }
+      .list-ios {
+          margin: 0;
+      }
+      .list-ios>.item-block:first-child {
+          border-top: 0.55px solid #f0f0f0;
+      }
+      .list-ios>.item-block:last-child {
+          border-bottom: 0.55px solid #f0f0f0;
+      }
+      .radio-inner {
+          border-color: #fff;
+      }
+      .item-inner {
+          border-bottom: 0.55px solid #f0f0f0;
+      }
+      .radio-checked {
+          background-color: #ff5001;
+          border-color: #ff5001!important;
+      }
+      .radio-icon {
+          border-radius: 50%;
+          position: relative;
+          width: 21px;
+          height: 21px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: #c8c7cc;
+      }
+  }
+}

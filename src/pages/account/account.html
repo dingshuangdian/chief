@@ -1,0 +1,98 @@
+<!--
+  Generated template for the AccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar no-border>
+    <ion-title>个人中心</ion-title>
+    <ion-buttons end>
+      <button style='font-size: 14px' ion-button (click)="logout()">
+        退出登陆
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bccolor">
+  <div class="bc">
+    <div class="userimg">
+      <p>
+        <img src="{{userInfo.headImg}}" />
+      </p>
+      <p>{{userInfo[0].userName}}</p>
+      <p>{{userInfo[0].userMobile}}</p>
+    </div>
+  </div>
+  <div class="shop">
+    <div class="content">
+      <div class="content1_title">
+        <img src="assets/imgs/my_shopinfo.svg" />
+        <h4>店铺信息</h4>
+      </div>
+      <div class="content1_con">
+        <div>
+          <p>店铺名称</p>
+          <p>{{storeMsg.company_name}}</p>
+        </div>
+        <div>
+          <p>店铺地址</p>
+          <p>{{storeMsg.store_address}}</p>
+        </div>
+        <div>
+          <p>店铺电话</p>
+          <p>{{storeMsg.office_tel}}</p>
+        </div>
+        <div>
+          <p>营业时间</p>
+          <p>{{storeMsg.business_time}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="content" style='margin-top: 10px;'>
+      <ion-list class="content2_con">
+        <ion-item ion-item (click)="gotoQuestion()">
+          <p>
+            <img src="assets/imgs/my_qa.svg" alt="">
+          </p>
+          <p>疑问解答</p>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item (click)="gotoChief()">
+          <p>
+            <img src="assets/imgs/my_about.svg" alt="">
+          </p>
+          <p>关于车仆</p>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item (click)="callPhone()">
+          <p>
+            <img src="assets/imgs/my_kefu.svg" alt="">
+          </p>
+          <p>客服热线</p>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item (click)="checkVersion()">
+          <p>
+            <img src="assets/imgs/my_update.svg" alt="">
+          </p>
+          <p>检测更新</p>
+          <p style="float: right;">
+            <span style='margin-right: 8px;'>V{{versionName}}</span>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        
+        <!-- <ion-item (click)="testCz()">
+          <p>
+            <img src="assets/imgs/my_kefu.svg" alt="">
+          </p>
+          <p>test</p>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-item> -->
+      </ion-list>
+    </div>
+  </div>
+
+
+</ion-content>

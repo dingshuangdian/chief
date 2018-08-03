@@ -1,0 +1,98 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>消费记录</ion-title>
+  </ion-navbar>
+  <ion-list class="top-ls">
+    <ion-item>
+      <ion-label>{{plateNumber}}</ion-label>
+      <ion-select [(ngModel)]='selectOption' interface="popover" (ngModelChange)="switchType()">
+        <ion-option value="all" selected="">全部</ion-option>
+        <ion-option value="mr">美容</ion-option>
+        <ion-option value="by">保养</ion-option>
+        <ion-option value="wx">维修</ion-option>
+        <ion-option value="gz">改装&用品</ion-option>
+        <ion-option value="lt">轮胎</ion-option>
+        <ion-option value="bp">钣喷</ion-option>
+        <ion-option value="other">其它</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div class="t" *ngIf="hasB=='1'">
+    <div class="course_tabBox" *ngFor="let tab of courseTab">
+      <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name        
+                    ,courseTab)">{{tab.name}}
+      </span>
+    </div>
+  </div>
+</ion-header>
+<ion-content class="bg">
+  <div [hidden]='!courseTab[0].bol'>
+    <ion-list no-lines>
+      <ion-item style="background-color: #fff;margin-top: 10px" *ngFor="let item of payRecordA">
+        <div class="a">
+          <p>{{item.settlementTime}}</p>
+          <p style="font-size: 15px;color: #ff5a10">￥{{item.orderAmount}}</p>
+        </div>
+        <ion-list>
+          <div class="b" *ngFor="let service of item.services">
+            <div class="c">
+              <p style="color: rgb(29, 28, 28)">{{service.serviceName}}</p>
+              <p>￥{{service.totalAmount}}</p>
+            </div>
+            <div>
+              <p>价格:￥{{service.goodsPrice}}*{{service.goodsNum}}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>工时:￥{{service.servicePrice}}*{{service.serviceNum}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="b" *ngFor="let good of item.goods">
+            <div class="c">
+              <p style="color: rgb(29, 28, 28)">{{good.goodsName}}</p>
+              <p>￥{{good.totalAmount}}</p>
+            </div>
+            <div>
+              <p>价格:￥{{good.goodsPrice}}*{{good.goodsNum}}
+              </p>
+            </div>
+          </div>
+        </ion-list>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doLoadMoreA($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div [hidden]='!courseTab[1].bol'>
+    <ion-list no-lines>
+      <ion-item style="background-color: #fff;margin-top: 10px" *ngFor="let item of payRecordB">
+        <div class="a">
+          <p>{{item.settlementTime}}</p>
+          <p style="font-size: 15px;color: #ff5a10">￥{{item.orderAmount}}</p>
+        </div>
+        <ion-list>
+          <div class="b" *ngFor="let service of item.services">
+            <div class="c">
+              <p style="color: rgb(29, 28, 28)">{{service.serviceName}}</p>
+              <p>￥{{service.totalAmount}}</p>
+            </div>
+            <div>
+              <p>价格:￥{{service.goodsPrice}}*{{service.goodsNum}}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>工时:￥{{service.servicePrice}}*{{service.serviceNum}}</span>
+              </p>
+            </div>
+          </div>
+        </ion-list>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doLoadMoreB($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

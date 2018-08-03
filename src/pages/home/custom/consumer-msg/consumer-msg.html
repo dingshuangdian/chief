@@ -1,0 +1,257 @@
+<!--
+  Generated template for the ConsumerMsgPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>客户信息</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bg">
+  <div class="msg-top">
+    <div class="msg-topp">
+      <img *ngIf='!conacar.headImg' src="assets/imgs/6667_03.png">
+      <img *ngIf='conacar.headImg' src="{{conacar.headImg}}">
+      <div class="top-right">
+        <button ion-item style="align-items: center" (click)="goEditCustom()">
+          <span>{{conacar.memberName}}
+            <span>({{conacar.mobileNumber}})</span>
+          </span>
+          <img *ngIf="!bindUid" src="assets/imgs/msg_06.gif">
+          <img *ngIf="bindUid" src="assets/imgs/ico-wechat1.png">
+        </button>
+
+        <!-- <p style="padding-bottom: 14px">
+          <span style="border-bottom: none">消费:￥0</span>
+        </p> -->
+      </div>
+    </div>
+    <!-- <div class="bj">
+      <img src="assets/imgs/img_03.gif">
+      <span>暂无标记！</span>
+    </div> -->
+    <div class="bj" style=" border-bottom:none">
+      <img src="assets/imgs/6667_06.gif">
+      <span>最后到店:
+        <span *ngIf="!conacar.recentConsumption">暂无记录</span>
+        <span *ngIf="conacar.recentConsumption">{{conacar.recentConsumption}}</span>
+      </span>
+    </div>
+  </div>
+  <div class="msg-btn">
+    <div class="course_tabBox" *ngFor="let tab of courseTab">
+      <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name,courseTab)">{{tab.name}}
+        <span class="red-point" *ngIf="tab.num!=''">{{tab.num}}</span>
+      </span>
+    </div>
+    <div class="btm-content" [hidden]='!courseTab[0].bol'>
+      <ion-list>
+        <ion-item *ngFor="let msg of carMsg">
+          <button ion-item (click)="goEditCar(msg)">
+            <div class="tit">
+              <img *ngIf="msg.autoImg" src={{imgUrl}}{{msg.autoImg[0].imgUrl}}>
+              <img *ngIf="!msg.autoImg" src="assets/imgs/msg_14.gif">
+              <span>
+                {{msg.plateNumber}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <span>{{msg.automakeName}}</span>
+              </span>
+            </div>
+          </button>
+          <div class="con">
+
+            <img *ngIf="msg.autoImg" src={{imgUrl}}{{msg.autoImg[0].imgUrl}}>
+            <img *ngIf="!msg.autoImg" src="assets/imgs/msg_17.gif">
+            <div class="btn-right">
+              <p>车架编号:
+                <span>{{msg.vinCode}}</span>
+              </p>
+              <p>发动机号:
+                <span>{{msg.engineNo}}</span>
+              </p>
+              <p>年审到期:
+                <span>{{msg.auditDate}}</span>
+              </p>
+              <p>保险到期:
+                <span>{{msg.biEdate}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="btm-btn">
+            <button ion-button (click)="goPayRecord(msg)">消费记录</button>
+            <button ion-button (click)="goRecivedCar(msg)">接车</button>
+          </div>
+        </ion-item>
+      </ion-list>
+      <div style="text-align: center;align-items: center">
+        <button ion-button class="bbtn" (click)="goNewCar()">新增车辆</button>
+      </div>
+    </div>
+    <div class="hycard" [hidden]='!courseTab[1].bol'>
+      <div class="hycard" *ngIf="!mcard">
+        <img src="assets/imgs/car_03.gif">
+        <p>暂无会员卡</p>
+      </div>
+      <div class="hasCar">
+        <ion-list>
+          <ion-item *ngFor="let card of mcard">
+            <div class="carTop">
+              <div *ngIf="!card.imageUrl">
+                <img src="assets/imgs/999_03.gif" />
+              </div>
+              <div *ngIf="card.imageUrl">
+                <img src="{{imgUrl}}{{card.imageUrl}}" />
+              </div>
+              <div class="carCon">
+                <p>{{card.mcardMame}}</p>
+                <span>卡号:
+                  <span>{{card.mcardNo}}</span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;截止:{{card.stopDate}}</span>
+              </div>
+              <div class="carNo">
+                <p style="color:#ff5a10 ">￥{{card.mcardBalance}}</p>
+                <p style="color: #578cef">正常</p>
+              </div>
+            </div>
+            <div class="grid-i" *ngIf="card.svcs">
+              <ion-grid>
+                <ion-row style="background-color: #f2f3f8;">
+                  <ion-col col-5>
+                    <div style="border: 0.55px solid #e6e9ee;">服务项目</div>
+                  </ion-col>
+                  <ion-col>
+                    <div class='b'>单价</div>
+                  </ion-col>
+                  <!-- <ion-col>
+                    <div class='b'>总数</div>
+                  </ion-col> -->
+                  <ion-col>
+                    <div class='b'>剩余</div>
+                  </ion-col>
+                </ion-row>
+                <ion-list>
+
+                  <ion-row *ngFor="let item of card.svcs">
+                    <ion-col col-5>
+                      <div class="c">{{item.svcName}}</div>
+                    </ion-col>
+                    <ion-col>
+                      <div class='d'>￥{{item.svcPrice}}</div>
+                    </ion-col>
+                    <ion-col>
+                      <div class='d'>{{item.svcNum}}</div>
+                    </ion-col>
+                    <!-- <ion-col>
+                        <div class='d'></div>
+                      </ion-col> -->
+                  </ion-row>
+
+                </ion-list>
+              </ion-grid>
+            </div>
+            <div class="tip">
+              <img src="assets/imgs/tip_03.gif">
+              <span>折扣描述:
+                <span *ngIf="!card.mcardDesc">暂无描述</span>
+                <span *ngIf="card.mcardDesc" style="overflow: hidden;">{{card.mcardDesc}}</span>
+              </span>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+      <button ion-button class="bbtn" (click)="openCard()">新开会员卡</button>
+
+    </div>
+    <div class="hycard" [hidden]='!courseTab[2].bol'>
+      <div class="hycard" *ngIf="recordCar.length==0">
+        <img src="assets/imgs/record_03.gif">
+        <p>暂无消费记录</p>
+      </div>
+      <div class="hasCar">
+        <ion-list>
+          <ion-item *ngFor="let item of recordCar">
+            <div class="carRecordTop">
+              <div class="carRecordCon">
+                <div style="display:inline-flex">
+                  <img src="assets/imgs/qqqq_03.gif" />
+                  <p style="font-size: 14px;color: #434a56">{{item.plateNumber}}</p>
+                </div>
+                <div>
+                  <p style="padding-right: 20px">接车人:{{item.pickupUname}}
+                  </p>
+                </div>
+              </div>
+              <div class="carRecordNo">
+                <p style="font-size: 12px">公里数(KM):{{item.pickupMileage}}</p>
+                <p style="font-size: 12px">{{item.settlementTime}}</p>
+              </div>
+            </div>
+            <div class="grid-i">
+              <ion-grid>
+                <ion-row style="background-color: #f2f3f8;">
+                  <ion-col col-4>
+                    <div style="border: 0.55px solid #e6e9ee;">服务项目</div>
+                  </ion-col>
+                  <ion-col col-4>
+                    <div class='b'>价格</div>
+                  </ion-col>
+                  <ion-col col-2>
+                    <div class='b'>工时费</div>
+                  </ion-col>
+                  <ion-col col-2>
+                    <div class='b'>总价</div>
+                  </ion-col>
+                </ion-row>
+                <ion-list>
+                  <ion-row *ngFor="let service of item.services">
+                    <ion-col col-4>
+                      <div class="c">{{service.serviceName}}</div>
+                    </ion-col>
+                    <ion-col col-4>
+                      <div class='d'>￥{{service.goodsPrice}}*{{service.goodsNum}}*{{service.serviceCoefficient}}%</div>
+                    </ion-col>
+                    <ion-col col-2>
+                      <div class='d'>￥{{service.servicePrice}}*{{service.serviceNum}}</div>
+                    </ion-col>
+
+                    <ion-col col-2>
+                      <div class='d'>￥{{service.totalAmount}}</div>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let good of item.goods">
+                    <ion-col col-4>
+                      <div class="c">{{good.goodsName}}</div>
+                    </ion-col>
+                    <ion-col col-4>
+                      <div class='d'>￥{{good.goodsPrice}}*{{good.goodsNum}}*{{good.discountCoefficient}}%</div>
+                    </ion-col>
+                    <ion-col col-2>
+                      <div class='d'>--</div>
+                    </ion-col>
+                    <ion-col col-2>
+                      <div class='d'>￥{{good.totalAmount}}</div>
+                    </ion-col>
+                  </ion-row>
+                </ion-list>
+              </ion-grid>
+            </div>
+            <div class="tipRecord">
+              <span>总价:
+                <span style="color:#ff5a10 ">￥{{item.orderTotalAmount}}</span>&nbsp;&nbsp;&nbsp;&nbsp;实收:
+                <span style="color:#ff5a10 ">￥{{item.orderAmount}}</span>
+              </span>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+</ion-content>

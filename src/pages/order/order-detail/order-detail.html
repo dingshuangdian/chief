@@ -1,0 +1,142 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>订单详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content class="bg">
+  <div class="con">
+    <div class="cp">
+      <span>
+        <h5>车牌号码</h5>
+        <p>{{plateNumber}}</p>
+      </span>
+      <img class="src_a" src="assets/imgs/line_03.gif" alt="">
+      <span>
+        <h5>下单时间</h5>
+        <p>{{fillDate}}</p>
+      </span>
+      <img class="src_a" src="assets/imgs/line_03.gif" alt="" [hidden]="settleTimeFlag">
+      <span [hidden]="settleTimeFlag">
+        <h5>{{overTime}}时间</h5>
+        <p>{{settlementTime}}</p>
+      </span>
+    </div>
+    <img class="src_b" src="assets/imgs/line_07.gif" alt="">
+    <div class="msg">
+      <div class="rd">
+        <button ion-button>{{orderStateName}}</button>
+      </div>
+
+      <div [hidden]='!services'>
+        <p>产品信息:</p>
+        <ion-list *ngFor="let service of services">
+          <div style="border-bottom:1px solid #ccc;">
+            <ion-item>
+              <div class="hed">
+                <span>{{service.serviceName}}</span>
+              </div>
+              <div class="item_msg">
+                <div class="maz">
+                  <div>
+                    <span>
+                      价&nbsp;&nbsp;&nbsp;&nbsp;格:
+                      <span class="spml">￥{{service.goodsPrice}}&nbsp;*&nbsp;{{service.goodsNum}}&nbsp;*&nbsp;{{service.goodsCoefficient}}%</span>
+                    </span>
+                  </div>
+                  <div>
+                    <span [hidden]="!service.serviceNum || service.mcardId">
+                      工时费:
+                      <span class="spml">￥{{service.servicePrice}}&nbsp;*&nbsp;{{service.serviceNum}}&nbsp;*&nbsp;{{service.serviceCoefficient}}%</span>
+                    </span>
+                  </div>
+                  <div>
+                    <span [hidden]="!service.staff_isSalesman0" [ngClass]="{'br_1':service.staff_isSalesman0 || service.staff_isSalesman1}">
+                      技&nbsp;&nbsp;&nbsp;&nbsp;工:
+                      <span *ngFor="let staff of service.staff_isSalesman0" class="spml">{{staff}}&nbsp;</span>
+                    </span>
+                    <!-- <i style="border-left: 1px solid #727272;width: 0%;height: 14px;display: inline-block;" [hidden]="!service.staff_isSalesman0 || !service.staff_isSalesman1"></i> -->
+                    <span [hidden]="!service.staff_isSalesman1">
+                      销&nbsp;&nbsp;&nbsp;&nbsp;售:
+                      <span *ngFor="let staff of service.staff_isSalesman1" class="spml" style='white-space: normal'>{{staff}}&nbsp;</span>
+                    </span>
+                  </div>
+                </div>
+                <p>￥{{service.totalAmount}}</p>
+              </div>
+            </ion-item>
+          </div>
+        </ion-list>
+      </div>
+
+
+      <div [hidden]='!goods'>
+        <p>配件信息:</p>
+        <ion-list *ngFor="let good of goods">
+          <div style="border-bottom:1px solid #ccc;">
+            <ion-item>
+              <div class="hed">
+                {{good.goodsName}}
+                <span [hidden]="!good.sellUname">({{good.sellUname}})</span>
+              </div>
+              <div class="item_msg">
+                <div class="maz">
+                  <div>
+                    <span>
+                      价&nbsp;&nbsp;&nbsp;&nbsp;格:
+                      <span class="spml">￥{{good.goodsPrice}}&nbsp;*&nbsp;{{good.goodsNum}}</span>
+                    </span>
+                  </div>
+                  <!-- <div>
+                    <span>
+                      工时费:
+                      <span class="spml">￥{{item.ser}}</span>
+                    </span>
+                  </div> -->
+                </div>
+                <p>￥{{good.totalAmount}}</p>
+              </div>
+            </ion-item>
+
+          </div>
+        </ion-list>
+      </div>
+    </div>
+    <div class="bz">
+      <p>备注</p>
+      <p class="pz">{{memo}}</p>
+      <p>温馨提示</p>
+      <p class="pz">{{warmTips}}</p>
+      <div class="total">
+        <span>总价:
+          <span style="color:#FFB606">￥{{orderTotalAmount}}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="editOrderFlag" class="edit">
+    <button (click)='goOrderEdit()'>修改</button>
+  </div>
+  <!-- <div class="fj">
+    <p>附件</p>
+    <button ion-button>添加附件</button>
+  </div>
+  <div class="btoo">
+    <span><button ion-button>发送订单给车主</button></span>
+  </div> -->
+
+
+
+</ion-content>

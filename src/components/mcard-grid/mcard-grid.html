@@ -1,0 +1,21 @@
+
+
+<div class="row-distance">
+  <ion-list class="lis-distance">
+    <button ion-item class="itemRow" (click)="memberCard.show = !memberCard.show">
+      会员卡
+    </button>
+    <div class="mcardGrid" *ngIf="memberCard.show">
+      <ion-row *ngFor="let c of memberCard.card">
+        <img class="mcardImg" src="{{img_path}}{{c?.imageUrl}}">
+        <ion-col>
+          <div class="mcardName">{{c.mcardMame}}</div>
+          <div>开卡日期：{{c.startDate}}</div>
+          <div [ngClass]="{'dangerInfo': c.cardStateId == 4}">截止日期：{{c.stopDate}}</div>
+          <div>{{c.mcardDesc}}</div>
+        </ion-col>
+        <div class="mcardBalance dangerInfo">￥{{c.mcardBalance}}</div>
+      </ion-row>
+    </div>
+  </ion-list>
+</div>

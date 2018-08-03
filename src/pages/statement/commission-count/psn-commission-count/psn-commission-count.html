@@ -1,0 +1,42 @@
+<!--
+  Generated template for the PsnCommissionCountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>员工提成统计</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #eff0f8;">
+  <div class="more">
+    <ion-item>
+      <ion-label style="padding-left:5px;">开始日期</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" placeholder="选择开始日期" [(ngModel)]="beginDate"
+        (ngModelChange)="changeCheckTC($event)">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label style="padding-left:5px;">截止日期</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" placeholder="选择截止日期" [(ngModel)]="endDate"
+        (ngModelChange)="changeCheckTC($event)">
+      </ion-datetime>
+    </ion-item>
+    <div class="head-c-e">
+      <ion-item>
+        <ion-label style="padding-left:5px;">提成类别</ion-label>
+        <ion-select [(ngModel)]="classic" okText="确定" cancelText="取消" (ngModelChange)="changeClassic()">
+          <ion-option value="x" selected=" ">销售</ion-option>
+          <ion-option value="s">施工</ion-option>
+          <ion-option value="h">会员卡</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+  </div>
+
+</ion-content>

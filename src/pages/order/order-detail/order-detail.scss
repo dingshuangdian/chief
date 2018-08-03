@@ -1,0 +1,162 @@
+page-order-detail {
+    .bg {
+        background-color: #f0f0f0;
+        .con {
+            width: 93%;
+            margin: 13px;
+            background-color: #fff;
+            .cp {
+                display: flex;
+                height: 75px;
+                span {
+                    text-align: center;
+                    width: 45%;
+                    h5 {
+                        color: black;
+                    }
+                    p {
+                        color: black;
+                        margin-left: 0 !important;
+                        font-size: 12px;
+                    }
+                }
+                .src_a {
+                    height: 62px;
+                    margin-top: 15px;
+                }
+            }
+            .src_b {
+                width: auto;
+            }
+            .rd {
+                overflow: hidden;
+                button {
+                    background-color: #6cace9;
+                    width: 35%;
+                    border-top-left-radius: 35px;
+                    border-bottom-left-radius: 35px;
+                    float: right;
+                    margin: 10px 0px;
+                }
+            }
+            p {
+                margin-left: 10px;
+                font-weight: bold;
+            }
+            .list-ios {
+                margin: 0px;
+                .item-block:first-child {
+                    border-top: none;
+                }
+                .hed {
+                    font-weight: bold;
+                }
+                .list-header-ios {
+                    .label-ios {
+                        font-weight: bold;
+                        font-size: 15px;
+                        margin-bottom: -15px;
+                    }
+                }
+                .checkbox {
+                    margin: -50px 30px;
+                    float: right;
+                    .checkbox-checked {
+                        border-color: #FFB606;
+                        background-color: #FFB606;
+                    }
+                }
+                .item-inner {
+                    border-bottom: none;
+                }
+                .item-ios {
+                }
+                .item_msg {
+                    .br_1{
+                        border-right: 1px solid #727272;
+                        margin-right: 6px;
+                    }
+                    span {
+                        color: #727272;
+                        font-size: 14px;
+                    }
+                    .spml {
+                    }
+                    .maz {
+                        // max-width: 60%;
+                        // position: fixed;
+                    }
+                    p {
+                        // position: relative;
+                        // left: 15rem;
+                        top: 10px;
+                        // height: 37px;
+                        position: fixed;
+                        top: 10px;
+                        line-height: 37px;
+                        right: 10px;
+                    }
+                }
+            }
+        }
+        .bz {
+            overflow: hidden;
+            p {
+                font-weight: bold;
+            }
+            .pz {
+                color: #727272;
+            }
+            .total {
+                float: right;
+                margin: 0px 20px 10px;
+                span {
+                    font-size: 18px;
+                }
+            }
+        }
+        .edit{
+            position: fixed;
+            bottom: 5px;
+            text-align: center;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            button{
+                height: 35px;
+                line-height: 35px;
+                font-size: 18px;
+                background-color: #FFB606;
+                color: #fff;
+                border-radius: 5px;
+            }
+        }
+        .fj {
+            background-color: #f9f9f9;
+            overflow: hidden;
+            p {
+                float: left;
+                font-weight: bold;
+                margin: 10px 10px;
+                font-size: 18px;
+            }
+            button {
+                float: right;
+                background-color: color($colors, assist, base);
+                margin-right: 15px;
+                height: 35px;
+            }
+        }
+        .btoo {
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            margin-top: 10px;
+            background-color: #f9f9f9;
+            button {
+                background-color: color($colors, assist, base);
+                height: 35px;
+            }
+        }
+    }
+}

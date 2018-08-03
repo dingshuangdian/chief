@@ -1,0 +1,138 @@
+page-account {
+    .header-ios .toolbar-ios:last-child .toolbar-background-ios {
+        border-width: 0;
+    }
+    .bccolor {
+        background-color: #f2f3f7;
+    }
+    .bc {
+        background-color: #2A398E;
+        width: 100%;
+        height: 150px;
+        .userimg {
+            text-align: center;
+            p {
+                margin: 0;
+                color: #B1D7F2;
+            }
+            p:nth-child(1) {
+                padding-top: 11px;
+                height: 66px;
+                box-sizing: content-box;
+                img {
+                    display: inline-block;
+                    width: 66px;
+                    height: 66px;
+                    background-size: contain;
+                    border-radius: 50%;
+                }
+            }
+            p:nth-child(2) {
+                line-height: 18px;
+                font-size: 18px;
+                margin-top: 10px;
+            }
+            p:nth-child(3) {
+                line-height: 12px;
+                font-size: 12px;
+                margin-top: 10px;
+            }
+        }
+    }
+    .shop {
+        background-color: #fff;
+        border-bottom: 1px solid #f2f3f7;
+        width: 100%;
+        .content {
+            margin-top: 15px;
+            padding-bottom: 5px;
+           // box-shadow: 2px 0px 8px rgba(25, 25, 25, 0.1);
+            .content1_title {
+                border-bottom: 1px solid #f2f3f7;
+                height: 50px;
+                margin-left: 10px;
+                margin-right: 10px;
+                img {
+                    margin-top: 15px;
+                    float: left;
+                    width: 19px;
+                    height: 19px;
+                }
+                h4 {
+                    float: left;
+                    font-size: 14px;
+                    margin-top: 18px;
+                    margin-left: 10px;
+                    color: #252D3B;
+                }
+            }
+            .content1_con {
+                padding-left: 15px;
+                div {
+                    height: 25px;
+                    line-height: 25px;
+                    font-size: 14px;
+                    p {
+                        display: inline-block;
+                        float: left;
+                        color: #252D3B;
+                        margin: 0;
+                    }
+                    p:first-child {
+                        margin-right: 15px;
+                        color: #818998;
+                    }
+                }
+                div:after {
+                    display: block;
+                    content: '.';
+                    clear: both;
+                    line-height: 0;
+                    visibility: hidden;
+                }
+            }
+            ion-list {
+                margin: 0 !important;
+            }
+            .content2_con {
+                ion-item {
+                    padding-right: 16px;
+                    height: 44px !important;
+                    line-height: 44px !important;
+                    min-height: 0%;
+                    .item-inner {
+                        padding-right: 0 !important;
+                        ion-label {
+                            margin-right: 0 !important;
+                        }
+                    }
+                    p {
+                        display: inline-block;
+                        float: left;
+                        margin: 0 !important;
+                        position: relative;
+                    }
+                    p:first-child {
+                        width: 14px;
+                        height: 100%;
+                        margin-right: 8px !important;
+                        img {
+                            width: 100%;
+                            margin-top: 3px;
+                        }
+                    }
+                    ion-icon {
+                        float: right;
+                        color: #B4BBC6;
+                    }
+                }
+                ion-item:first-child {
+                    border-top: none;
+                }
+                ion-item:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}

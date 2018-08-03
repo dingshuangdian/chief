@@ -1,0 +1,250 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start *ngIf="isNave">
+      <button ion-button icon-only (click)="closewin()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      维修接车
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bg">
+  <div class="top">
+    <div class="titp" *ngIf="amountUnpaid&&amountUnpaid!=0">
+      <div class="tt">
+        <img src="assets/imgs/777_03.gif">
+        <span>该客户还有挂账订单
+          <span>{{amountUnpaid}}</span>元未销</span>
+        <img src="assets/imgs/777_06.gif" (click)='close()'>
+      </div>
+    </div>
+    <div class="lstop">
+      <button ion-item (click)="goCardEdit()">
+        <div class="tit">
+          <span>
+            {{customer.plateNumber}}
+          </span>
+        </div>
+      </button>
+    </div>
+    <div class="lstop">
+      <button ion-item (click)="goCustomMsg()">
+        <div class="tit">
+          <div class="tit-a">
+            <span>
+              {{customer.memberName}}
+            </span>
+            <div class="tit-img">
+              <img id='wechat'>
+              <img id='card'>
+            </div>
+          </div>
+        </div>
+      </button>
+    </div>
+    <div class="gl">
+      <p>进厂公里数</p>
+      <input type="text" text-right placeholder="公里数" [(ngModel)]="saveAll.pickupMileage">
+    </div>
+    <div class="gl" style="border-bottom:none;">
+      <p>钥匙号</p>
+      <input type="text" text-right placeholder="钥匙号" [(ngModel)]="saveAll.pickupCode">
+    </div>
+  </div>
+  <div class="cen" (click)="moreEdit()">
+    <img style=" left: 12%;
+    " src="assets/imgs/line_04_07.gif">
+    <p>{{title}}</p>
+    <img style="right: 12%;" src="assets/imgs/line_04_07.gif">
+  </div>
+  <div class="more" *ngIf="flag">
+    <ion-item>
+      <ion-label style="padding-left:5px;">进厂日期</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="saveAll.pickupTime"
+        placeholder="进厂日期">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label style="padding-left:5px;">预计完工</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="saveAll.estimatedTime"
+        placeholder="预计完工">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          维修类别
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <p (click)="showProvince()">{{selectCla.mntc_class_name}}</p>
+          <p (click)="showProvince()" *ngIf='!selectCla.mntc_class_name' style="color:#757575">选择维修类型</p>
+
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          服务代表
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <p (click)="showSelect(2)">{{selectUser.servuce_name}}</p>
+          <p (click)="showSelect(2)" *ngIf='!selectUser.servuce_name||selectUser.servuce_name==""' style="color:#757575">选择服务代表</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          故障描述
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="text" text-right placeholder="故障描述" [(ngModel)]="saveAll.faultDesc">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          维修建议
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="text" text-right placeholder="维修建议" [(ngModel)]="saveAll.mntcAdvice">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          送修人
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="text" text-right placeholder="送修人" [(ngModel)]="saveAll.sendUname">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          送修手机
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="text" text-right placeholder="送修手机" [(ngModel)]="saveAll.sendMobile">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          备注
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="text" text-right placeholder="备注" [(ngModel)]="saveAll.memo">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </div>
+  <div class="con-a">
+    <div class="course_tabBox" *ngFor="let tab of courseTab">
+      <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name 
+              
+              ,courseTab)">{{tab.name}}
+      </span>
+    </div>
+    <div class="con-btn" [hidden]='!courseTab[0].bol'>
+      <div>
+        <ion-list [hidden]="!flag_" no-lines>
+          <ion-item *ngFor="let item of saveAll.services; let i=index" (click)="toEdit(item,i)">
+
+            <div class="con-se">
+              <div class="f">
+                <p>{{item.serviceName}}</p>
+                <p>￥{{item.totalAmount}}</p>
+              </div>
+              <div class="g">
+                <p>工时费:
+                  <span style="margin-left:5px;" *ngIf="item.showServicePrice">￥{{item.showServicePrice}}</span>
+                  <!-- <span style="margin-left:5px;" *ngIf="orderId">￥{{item.servicePrice}}</span> -->
+                  <span style="margin-left:5px;" *ngIf="!item.showServicePrice">￥0</span>
+                </p>
+                <p style="margin-left:50px;">数量:
+                  <span style="margin-left:5px;">{{item.serviceNum}}</span>
+                </p>
+              </div>
+              <div class="h">
+                <p style="width:50%;overflow: hidden;">
+                  <span>技师:</span>
+                  <span *ngFor="let sta of item.staff;let i = index">
+                    <span *ngIf="sta.isSalesman==0"> {{sta.userName}},</span>
+
+                  </span>
+                </p>
+                <p style="margin-left:10px;width:50%;overflow:hidden;">销售:
+                  <span *ngFor="let sta of item.staff;let i = index">
+                    <span *ngIf="sta.isSalesman==1"> {{sta.userName}},</span>
+
+                  </span>
+                </p>
+              </div>
+            </div>
+          </ion-item>
+
+        </ion-list>
+      </div>
+      <div class="bt">
+        <button ion-button (click)="addProjuct('新增项目')">新增项目</button>
+        <button ion-button (click)="selectProject(customer.memberId)">选择项目</button>
+      </div>
+    </div>
+    <div class="con-btn" [hidden]='!courseTab[1].bol'>
+      <div>
+        <ion-list [hidden]="!flag_" no-lines>
+          <ion-item *ngFor="let item of goods;let i = index" (click)="toEditPj(item,i)">
+            <div class="con-se">
+              <div class="f">
+                <p>{{item.goodsName}}</p>
+                <p>￥{{item.totalAmount}}</p>
+              </div>
+              <div class="g">
+                <p>价格
+                  <span style="margin-left:5px;">￥{{item.showGoodsPrice}}</span>
+                </p>
+                <p style="margin-left:50px;">数量
+                  <span style="margin-left:5px;">{{item.goodsNum}}</span>
+                </p>
+              </div>
+              <div class="h">
+                <p>销售
+                  <span style="margin-left:5px;">{{item.sellUname}}</span>
+                </p>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="bt">
+        <button ion-button (click)="selectPj(2)">选择配件</button>
+      </div>
+    </div>
+  </div>
+
+
+  <mcard-grid *ngIf="customer.memberId" [memberId]="customer.memberId"></mcard-grid>
+
+</ion-content>
+<ion-footer>
+  <div class="btm">
+    <div class="btm-a">
+      <div class="tex">
+        <p style="color: #ff0f0f;
+            font-size: 18px;">￥{{makeAllPrice}}</p>
+        <p>(项目
+          <span>￥{{poAllPrice}}</span>,配件
+          <span>￥{{pjAllPrice}}</span>)</p>
+      </div>
+      <button ion-button (click)="save_()">保存</button>
+    </div>
+  </div>
+</ion-footer>

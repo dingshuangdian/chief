@@ -1,0 +1,108 @@
+<!--
+  Generated template for the IncomeCountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>报表统计</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="outer-content">
+  <div class="dateSegment row-distance">
+    <ion-segment [(ngModel)]="segmentType" (ionChange)="segmentChanged()">
+      <ion-segment-button value="单日">
+        单日
+      </ion-segment-button>
+      <ion-segment-button value="近30日">
+        近30日
+      </ion-segment-button>
+      <ion-segment-button value="近半年">
+        近半年
+      </ion-segment-button>
+    </ion-segment>
+    <ion-row class="dateInfo" *ngIf="segmentType == '单日'">
+      <ion-col></ion-col>
+      <div class="fineThread">
+        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="beginDate"
+          (ngModelChange)="dateChange()">
+        </ion-datetime>
+        <ion-icon name="ios-arrow-down"></ion-icon>
+      </div>
+      <div text-center style="width: 50px;padding:2px;">
+        至
+      </div>
+      <div class="fineThread">
+        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="endDate"
+          (ngModelChange)="dateChange()">
+        </ion-datetime>
+        <ion-icon name="ios-arrow-down"></ion-icon>
+      </div>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <div class="financialInfo" text-center>
+      <span class="redTag bigNum">{{incomeInfo.profitAmount | number:'1.2-2'}}</span>
+      <div>
+        {{segmentType}}收支(元)
+      </div>
+      <ion-row>
+        <ion-col>
+          <div>总收入(元)</div>
+          <div class="smallNum">{{incomeInfo.incomeAmount | number:'1.2-2'}}</div>
+        </ion-col>
+        <ion-col>
+          <div>总支出(元)</div>
+          <div class="smallNum">{{incomeInfo.costAmount | number:'1.2-2'}}</div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <div class="accountInfo row-distance">
+    <div class="typeT">
+      <span class="redTag">|</span>收入明细
+    </div>
+    <ion-row>
+      <ion-col col-4 *ngFor="let p of incomeInfo.incomeArry">
+        <div>{{p.paymentName}}</div>
+        ￥{{p.amount | number:'1.2-2'}}
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="accountInfo row-distance">
+    <div class="typeT">
+      <span class="buldGreenTag">|</span>支出明细
+    </div>
+    <ion-row>
+      <ion-col col-4 *ngFor="let p of incomeInfo.costArry">
+        <div>{{p.paymentName}}</div>
+        ￥{{p.amount | number:'1.2-2'}}
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="charts row-distance" *ngIf="segmentType == '单日'">
+    <div #cake style="width: 100%;height: 200px;"></div>
+  </div>
+  <div class="charts row-distance" *ngIf="segmentType !== '单日'">
+    <div>{{segmentType}}收入统计</div>
+    <div #profit style="width: 100%;height: 280px;"></div>
+  </div>
+  <div class="charts row-distance" *ngIf="segmentType !== '单日'">
+    <div>{{segmentType}}支出统计</div>
+    <div #cost style="width: 100%;height: 280px"></div>
+  </div>
+  <div class="charts row-distance" *ngIf="segmentType !== '单日'">
+    <div>{{segmentType}}盈亏统计</div>
+    <div #income style="width: 100%;height: 280px"></div>
+  </div>
+
+
+
+</ion-content>

@@ -1,0 +1,149 @@
+page-income-gather {
+  .scroll-content {
+    // margin-top: 85px !important;
+    margin-bottom: 53px;
+  }
+  .dateSegment {
+    padding: 10px 16px;
+    background-color: white;
+    .segment {
+      background-color: color($colors, light);
+      border-radius: 19px;
+      .segment-button {
+        color: #8c8c8c;
+        border: initial;
+      }
+      .segment-button[aria-pressed=true] {
+        color: color($colors, primary) !important;
+        background-color: white;
+        border: 1px solid color($colors, light);
+        border-radius: 19px;
+      }
+    }
+  }
+  .generalInfo {
+    color: #555;
+    padding: 16px;
+    background-color: white;
+    .dateInfo {
+      padding: 0 0 16px;
+      .col {
+        border: 1px solid #ccc;
+      }
+      ion-datetime {
+        padding: 5px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      ion-icon {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        color: #ccc
+      }
+    }
+    .moneyInfo {
+      padding: 10px 0;
+      font-size: 16px;
+      color: color($colors, secondary);
+    }
+    .generalCount {
+      padding: 10px 0 0;
+      .col div {
+        margin-top: 8px;
+      }
+    }
+  }
+  .titleRow {
+    color: #555;
+    padding: 5px 16px;
+  }
+  .projectInfo {
+    color: #555;
+    background-color: white;
+    .pt {
+      padding: 8px 0;
+      margin: 0 16px;
+      div {
+        display: inline-block;
+        width: 95px;
+      }
+    }
+  }
+  .accountInfo {
+    color: #555;
+    background-color: white;
+    padding: 0 16px;
+    .typeT {
+      padding: 8px 0;
+      span {
+        font-weight: bold;
+        margin-right: 10px;
+        vertical-align: top;
+      }
+    }
+    .col[col-3] {
+      padding: 5px 0;
+    }
+    .secondR {
+      .col {
+        padding: 0;
+      }
+      .padding-tb {
+        padding: 5px 0;
+      }
+    }
+  }
+  .redTag {
+    color: color($colors, danger);
+  }
+  .buldGreenTag {
+    color: #3AE7C8;
+  }
+  .purpleTag {
+      color: #DA71D6;
+  }
+  .accountVolume {
+    background-color: white;
+    padding: 10px 16px;
+    color: #555;
+  }
+  .selecDateInfo {
+    background-color: white;
+    padding: 10px 16px;
+    margin-bottom: 10px;
+    .item {
+      padding-left: initial;
+      min-height: initial;
+      font-size: 1.4rem;
+      color: #555;
+      .item-inner {
+        padding-right: initial;
+      }
+    }
+  }
+  .intervalRow {
+    margin-top: 10px;
+  }
+  .tgrid {
+    color: #555;
+    border-top: solid 1px #D1D3D6;
+    border-left: solid 1px #D1D3D6;
+    .formHead {
+      background-color: #efeff4;
+    }
+    .col {
+      border-bottom: solid 1px #D1D3D6;
+      border-right: solid 1px #D1D3D6;
+    }
+  }
+  .incomeChart {
+    color: #555;
+    background-color: white;
+    .pt {
+      padding: 8px 0;
+      margin: 0 16px;
+
+    }
+  }
+}

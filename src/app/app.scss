@@ -1,0 +1,75 @@
+// .tab-button[aria-selected=true] {
+//   color: color($colors, selectItem, contrast) !important;
+//   .tab-button-icon {
+//     color: color($colors, assist, base) !important;
+//   }
+// }
+.row-distance {
+  margin-bottom: 8px;
+}
+
+.fineThread {
+  position: relative;
+}
+
+.fineThread:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #ccc;
+  width: 100%;
+  height: 1px;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+.fineThread:last-child:after {
+  display: none;
+}
+
+.provincesModal {
+  ion-backdrop {
+    visibility: initial;
+  }
+  .modal-wrapper {
+    position: absolute;
+    bottom: 0;
+    height: 272px;
+    width: inherit;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+.agentPopover {
+  .popover-content {
+    width: 300px;
+    border-radius: initial;
+  }
+}
+
+.mergePopover {
+  .popover-content {
+    width: 85%;
+    border-radius: initial;
+  }
+}
+
+.addProjectPopover {
+  .popover-content {
+    width: 300px;
+    border-radius: initial;
+  }
+}
+
+.isIos {
+  ion-header {
+    top: 20px;
+  }
+  ion-content {
+    top: 20px;
+  }
+}

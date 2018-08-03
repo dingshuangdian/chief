@@ -1,0 +1,99 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>消费记录</ion-title>
+  </ion-navbar>
+  <ion-list no-lines class="top-ls">
+    <ion-item>
+      <ion-label>{{plateNumber}}</ion-label>
+      <ion-select [(ngModel)]='selectOption' interface="popover" (ngModelChange)="switchType()">
+        <ion-option value="all" selected="">全部</ion-option>
+        <ion-option value="mr">美容</ion-option>
+        <ion-option value="by">保养</ion-option>
+        <ion-option value="wx">维修</ion-option>
+        <ion-option value="gz">改装&用品</ion-option>
+        <ion-option value="lt">轮胎</ion-option>
+        <ion-option value="bp">钣喷</ion-option>
+        <ion-option value="other">其它</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-header>
+<ion-content class="bg">
+  <ion-list no-lines>
+    <ion-item *ngFor="let item of payRecord" class="item item-block item-ios" style="border-bottom: 8px solid #dfdfdf;">
+      <div class="top">
+        <div class="top1">
+          <div>
+            <span>公里数(km)：
+              <span>{{item.pickupMileage}}</span>
+            </span>
+          </div>
+          <div>
+            <span>时&nbsp;&nbsp;&nbsp;&nbsp;间：
+              <span>{{item.settlementTime}}</span>
+            </span>
+          </div>
+        </div>
+        <div class="top2">
+          <div>
+            <span>接车人：
+              <span>{{item.pickupUname}}</span>
+            </span>
+          </div>
+          <div>
+            <span>订单号：
+              <span style="color:#000089">{{item.orderNo}}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <ion-list class="bbg">
+        <ion-item *ngFor="let itemm of item.services">
+          <div class="topp">
+            <div class="ls-1">
+              <span>{{itemm.serviceName}}</span>
+              <span> ￥{{itemm.goodsPrice}}*{{itemm.goodsNum}}*{{itemm.serviceCoefficient}}%
+              </span>
+              <span>￥{{itemm.servicePrice}}*{{itemm.serviceNum}}(工时)
+              </span>
+              <span>￥{{itemm.totalAmount}}</span>
+            </div>
+            <div class="ls-2">
+              <span>技师:
+                <span *ngFor="let itemmm of itemm.staff" style="overflow: hidden;">
+                  <span *ngIf="itemmm.isSalesman==0">{{itemmm.staffUname}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </span>
+              </span>
+            </div>
+            <img src="assets/imgs/line_07.gif">
+          </div>
+        </ion-item>
+        <div class="topp">
+          <div class="ls-1" *ngFor="let good of item.goods">
+            <span>{{good.goodsName}}</span>
+            <span>￥{{good.goodsPrice}}*{{good.goodsNum}}*{{good.discountCoefficient}}%
+            </span>
+            <span>￥{{good.totalAmount}}</span>
+          </div>
+        </div>
+        <div class="totalPrice">
+          <span>总价:
+            <span style="color:#ff5a10 ">￥{{item.orderTotalAmount}}</span>&nbsp;&nbsp;&nbsp;&nbsp;实收:
+            <span style="color:#ff5a10 ">￥{{item.orderAmount}}</span>
+          </span>
+        </div>
+      </ion-list>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

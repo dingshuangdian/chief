@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="pass()">
+        跳过
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <ion-list>
+    <ion-item-group *ngFor="let type of typeList">
+
+      <ion-item-divider>
+        <ion-label>{{type.typName}}</ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let c of type.childtypeList" (click)="typeSelect(c)">
+        <span>{{c.automodelName}} </span>
+        <span>{{c.autotypeName}}&nbsp;&nbsp;{{c.emissions}} </span>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+
+</ion-content>

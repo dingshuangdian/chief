@@ -1,0 +1,29 @@
+page-business-remind {
+    .list-ios{
+        margin: 0 !important;
+    }
+    .itemList{
+        .singleitem{
+            border-bottom: 0.55px solid #c8c7cc;
+            .item-inner{
+                border-bottom: 0 !important;
+            }
+            span{
+                float: left;
+            }
+            span:first-child{
+                margin-right: 10px;
+                height: 100%;
+                display: inline-block;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    background-size: contain;
+                }
+            }
+            span:last-child{
+                float: right;
+            }
+        }
+    }
+}

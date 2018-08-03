@@ -1,0 +1,14 @@
+<ion-tabs #myTabs (ionChange)="changeTabs()">
+  <ion-tab [root]="homeRoot" tabTitle="首页" tabIcon="tab-home"></ion-tab>
+  <ion-tab [root]="orderRoot" tabTitle="订单管理" tabIcon="tab-order"></ion-tab>
+  <ion-tab [root]="idOrcRoot" tabTitle="扫车牌" tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="statementRoot" tabTitle="报表统计" tabIcon="tab-report"></ion-tab>
+  <ion-tab [root]="accountRoot" tabTitle="个人中心" tabIcon="tab-my"></ion-tab>
+
+  <ion-fab style="bottom: 19px;left: 50%;margin-left: -22.5px; z-index: 10;padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);">
+    <button ion-fab style="width:45px;height:45px;padding: 8px;" color="assist" (click)="onScanCarId()">
+      <img role="img" src="assets/imgs/scanCarId.png">
+    </button>
+  </ion-fab>
+</ion-tabs>

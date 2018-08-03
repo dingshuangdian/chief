@@ -1,0 +1,77 @@
+page-car-add-pro {
+    img {
+        width: 25px;
+    }
+    .bg {
+        background-color: #f0f0f0;
+        .more {
+            .label-ios {
+                margin: 0px;
+            }
+            .item-ios {
+                font-size: 13px !important;
+                P {
+                    color: #000;
+                }
+            }
+            .item-inner {
+                border-bottom: 0.55px solid #eaeaea;
+                margin-right: 10px;
+            }
+            .inputType {
+                input {
+                    border: initial;
+                    background-color: #fff
+                }
+            }
+            .cart_number {
+                width: 107px;
+                display: inline-flex;
+                .input_left {
+                    width: 38px;
+                    height: 30px;
+                    line-height: 30px;
+                    text-align: center;
+                    background: #f0f0f0;
+                    border-radius: 3px;
+                }
+                .input_right {
+                    width: 38px;
+                    height: 30px;
+                    line-height: 30px;
+                    text-align: center;
+                    background: #f0f0f0;
+                    border-radius: 3px;
+                }
+                .input_center {
+                    background: #fff;
+                    flex: 1;
+                    height: 30px;
+                    line-height: 30px;
+                    input {
+                        height: 30px;
+                        line-height: 30px;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+    .footer {
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    ion-footer {
+        background-color: #fff;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 5rem;
+        button {
+            width: 140px;
+            height: 3rem !important;
+            background-color: #fc5f3c !important;
+        }
+    }
+}

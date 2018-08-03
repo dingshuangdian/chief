@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      客户信息合拼
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="inputRow">
+      <div>
+        手机号码：
+      </div>
+      <ion-col class="colSelect">
+        <ion-select [(ngModel)]="selectNumber" interface="action-sheet" okText="确定" cancelText="取消" (ngModelChange)="changeMoble()">
+          <ion-option *ngFor="let member of memberList;" [value]="member">{{member.mobileNumber}}</ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row class="inputRow">
+      <div>
+        客户姓名：
+      </div>
+      <ion-col class="colSelect">
+        <ion-select [(ngModel)]="selectName" interface="action-sheet" okText="确定" cancelText="取消" (ngModelChange)="changeMoble()">
+          <ion-option *ngFor="let member of memberList;" [value]="member">{{member.memberName}}</ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row class="inputRow">
+      <div>
+        订单数据：
+      </div>
+      <ion-col no-padding>
+        <ion-input placeholder="请输入" [disabled]="true" [(ngModel)]="asorder.count"></ion-input>
+      </ion-col>
+    </ion-row>
+    <div text-center class="titleCss">
+      车辆信息
+    </div>
+    <ion-row class="itemGrid">
+      <ion-col col-6 *ngFor="let s of autoList">
+        <button ion-button full color="selectItem" [ngClass]="{'isSelect': s.select}">{{s.plateNumber}}</button>
+      </ion-col>
+    </ion-row>
+    <div class="fineThread"></div>
+    <ion-row>
+      <ion-col>
+        <button ion-button block color="cancelBT" (click)="close(false)">取消</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block color="secondary" (click)="close(true)">确定</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

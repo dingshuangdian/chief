@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      选择人员
+    </ion-title>
+    <ion-buttons end *ngIf="!singleType">
+      <button ion-button (click)="finish()">
+        完成
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <!-- <ion-toolbar class="searchStyle">
+    <ion-row>
+      <ion-col no-padding>
+        <ion-searchbar [(ngModel)]="queryText" placeholder="请输入名称模糊搜索">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar> -->
+
+</ion-header>
+<ion-content overflow-scroll="true" scroll="false">
+  <div class="cate_content">
+    <ion-scroll scrollY="true" style="width: 15%;">
+      <div class="cate_left">
+        <ion-list>
+          <ion-item *ngFor="let items of leftCate" color="selectItem" [ngClass]="{'isSelect':items.select}" (click)="selectPo(items)">
+            {{items.leftTitle}}
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-scroll>
+    <ion-scroll scrollY="true" style="width: 85%;background-color: #f0f0f0;">
+      <div class="cate_right">
+        <!-- <ion-list [hidden]="!flag">
+            <ion-item *ngFor="let items of rightCateMsg ">
+              <div style="background-color:#cccccc;height:20px;">
+                <p>{{items[0].mcardName}}
+                  <span>({{items[0].mcardNo}})</span>
+                </p>
+              </div>
+              <ion-list>
+                <ion-item>
+                  <ion-row>
+                    <ion-col col-6 *ngFor="let item of items">
+                      <button ion-button full color="selectItem" (click)="hyselectItem(item)">{{item.serviceName}}</button>
+                    </ion-col>
+                  </ion-row>
+                </ion-item>
+              </ion-list>
+
+            </ion-item>
+          </ion-list> -->
+        <div class="staffList">
+          <div style="background-color:#cccccc;height:20px;">
+            <p style="-webkit-margin-before:0">
+              全部
+            </p>
+          </div>
+          <ion-list>
+            <ion-item>
+              <ion-row>
+                <ion-col col-6 *ngFor="let item of rightName">
+                  <button ion-button full color="selectItem" [ngClass]="{'isSelect': item.select}" (click)="selectName(item)">{{item.userName}}</button>       
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-list>
+        </div>
+
+      </div>
+    </ion-scroll>
+
+
+
+  </div>
+
+
+</ion-content>

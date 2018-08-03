@@ -1,0 +1,55 @@
+page-visited-msg {
+    .list-ios{
+        margin: 0 !important;
+        .item-ios{
+            padding: 0 8px;
+            border-bottom: 0 !important;
+        }
+        .item-ios:last-child{
+            .item-inner{
+                border-bottom: 0.55px solid #c8c7cc;
+            }
+        }
+        .singleItem{
+            display: flex;
+            flex-direction: row;
+            p{
+                display: inline-block;
+                float: left;
+                font-size: 16px;
+                color: #000;
+                line-height: 30px;
+            }
+            p:first-child{
+                margin: 0;
+                margin-right: 30px !important;
+            }
+            input{
+                flex-grow: 1;
+                border-radius: 5px;
+                border: 0.55px solid #ccc;
+                height: 30px;
+            }
+            input[type='date']{
+                background: #ccc;
+            }
+        }
+    }
+    .btn{
+        display: block;
+        padding: 8px 10px;
+        button{
+            height: 32px;
+            border-radius: 5px;
+            background: transparent;
+            border: 1px solid #ccc;
+            width: 45%;
+            color: #ccc;
+        }
+        button:last-child{
+            border: 1px solid #ef5112;
+            color: #ef5112;
+            float: right;
+        }
+    }
+}

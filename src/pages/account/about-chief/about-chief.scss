@@ -1,0 +1,44 @@
+page-about-chief {
+    .content{
+        padding:  8px;
+        padding-bottom: 0;
+        ul{
+            padding: 0 !important;
+            margin: 0 !important;
+            li{
+                list-style-type: none;
+                &>span{
+                    line-height: 26px;
+                }
+                &>div{
+                    padding: 0 20px;
+                    display: flex;
+                    justify-content: center;
+                    div{
+                        img{
+                            display: block;
+                            height: 150px;
+                            background: #ccc;
+                        }
+                        span{
+                            display: block;
+                            text-align: center;
+                        }
+                    }
+                    div:last-child{
+                        float: right;
+                    }
+                    
+                }
+            }
+            li:after{
+                display: block;
+                content: '.';
+                clear: both;
+                line-height: 0;
+                visibility: hidden;
+            }
+        }
+    }
+    
+}

@@ -1,0 +1,21 @@
+{
+  "android":
+  {
+    "release":
+    {
+      "keystore": "./chiefStore_android.jks",
+      "storePassword": ".luochen",
+      "alias": "chepu",
+      "password": ".luochen",
+      "keystoreType": "jks"
+    },
+    "debug":
+    {
+      "keystore": "./chiefStore_android.jks",
+      "storePassword": ".luochen",
+      "alias": "chepu",
+      "password": ".luochen",
+      "keystoreType": "jks"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+mcard-grid {
+  .mcardGrid {
+    background-color: #fff;
+    color: #555;
+    .mcardImg {
+      height: 64px;
+    }
+    ion-row {
+      padding: 5px 16px;
+      .mcardBalance {
+        font-size: 16px;
+        color: color($colors, danger);
+      }
+    }
+    ion-col {
+      padding: 0 0 0 10px;
+      .mcardName {
+        color: #000;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      div {
+        font-size: 13px;
+        line-height: 16px;
+      }
+    }
+  }
+}

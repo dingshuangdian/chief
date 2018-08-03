@@ -1,0 +1,25 @@
+<ion-grid>
+  <ion-row class="">
+    <ion-col no-padding>
+      <ion-item no-lines>
+        <ion-label>含有产品</ion-label>
+        <ion-checkbox color="secondary"  [(ngModel)]="addProject.project"></ion-checkbox>
+      </ion-item>
+    </ion-col>
+    <ion-col no-padding>
+      <ion-item no-lines>
+        <ion-label>含有工时费</ion-label>
+        <ion-checkbox color="secondary" [(ngModel)]="addProject.service"></ion-checkbox>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <div class="fineThread"></div>
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="cancelBT" (click)="close(false)">取消</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button block color="secondary" (click)="close(true)">确定</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

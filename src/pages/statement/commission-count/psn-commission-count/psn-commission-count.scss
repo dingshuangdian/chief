@@ -1,0 +1,22 @@
+page-psn-commission-count {
+    .item-ios.item-block .item-inner {
+        border-bottom: 0.55px solid #f0f1f4;
+    }
+    .label-ios {
+        margin: 0;
+    }
+    .more {
+        background-color: #fff;
+        .item-ios {
+            font-size: 13px !important;
+            P {
+                color: #000;
+            }
+        }
+    }
+    .head-c-e {
+        .item-ios.item-block .item-inner {
+            border-bottom: none;
+        }
+    }
+}

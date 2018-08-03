@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      开立会员卡
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="outer-content">
+  <div class="msg fineThread row-distance">
+    <div class="name">
+      <span>{{memberInfo.memberName}}</span>
+      <span>{{memberInfo.mobileNumber}}</span>
+      <span>{{carInfo.plateNumber}}</span>
+    </div>
+  </div>
+
+  <ion-row class="salecard fineThread row-distance">
+    <img class="mcardImg" src="{{img_path}}{{salecard?.imageUrl}}">
+    <ion-col>
+      <div class="mcardName">{{salecard.mcardName}}</div>
+      <div class="mcardBalance">卡内金额{{salecard.mcardBalance}} (有效期:
+        <span *ngIf="salecard.validityMonth == 0">长期</span>
+        <span *ngIf="salecard.validityMonth > 0">{{salecard.validityMonth}}个月</span>)</div>
+    </ion-col>
+  </ion-row>
+
+  <ion-list class="projectD fineThread row-distance">
+    <div class="itemRow fineThread">
+      项目详情
+    </div>
+    <div class="projectItem fineThread" *ngFor="let s of salecardDetail.mcard2svc">
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col col-7 style="border-right: 1px solid #ccc;">
+            <ion-row class="projectTitle">
+              <div>
+                大类
+              </div>
+              <ion-col>
+                {{s.svctypePName}}
+              </ion-col>
+            </ion-row>
+            <ion-row class="projectTitle">
+              <div>
+                小类
+              </div>
+              <ion-col>
+                {{s.svctypeName}}
+              </ion-col>
+            </ion-row>
+            <ion-row class="projectTitle">
+              <div>
+                产品
+              </div>
+              <ion-col>
+                {{s.svcName}}
+              </ion-col>
+            </ion-row>
+            <ion-row class="selectItem">
+              <div>
+                单价
+              </div>
+              <ion-col>
+                <ion-input placeholder="0" type="number" [(ngModel)]="s.svcPrice" (ngModelChange)="inputChange()"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="selectItem" *ngIf="!s.isInfinite">
+              <div>
+                数量
+              </div>
+              <ion-col>
+                <ion-input placeholder="0" type="number" [(ngModel)]="s.svcNum" (ngModelChange)="inputChange()"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="projectTitle" *ngIf="s.isInfinite">
+              <div>
+                数量
+              </div>
+              <ion-col>
+                无限次
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col class="right">
+            <div class="personnel">
+              <div>小计:
+                <span class="price dangerInfo">￥{{s.totalAmount}}</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="totalClass">
+      总价:
+      <span class="price dangerInfo">￥{{otherInfor.totalPrice}}</span>
+    </div>
+  </ion-list>
+
+  <ion-row class="inputItem fineThread row-distance">
+    <div class="titleColor">折扣描述</div>
+    <ion-col>
+      <ion-input type="text" placeholder="如：买1000会员卡，洗车30元/次" [(ngModel)]="salecardDetail.mcardDesc"></ion-input>
+    </ion-col>
+  </ion-row>
+
+  <div class="row-distance fineThread">
+    <ion-row class="inputItem fineThread">
+      <div class="titleColor">卡有效期</div>
+      <ion-col>
+        <ion-input type="number" placeholder="请输入有效期，0为永久" [(ngModel)]="salecardDetail.validityMonth" (ngModelChange)="validityMonthChange()"></ion-input>
+      </ion-col>
+      <div>
+        个月
+      </div>
+    </ion-row>
+    <ion-row class="inputItem fineThread">
+      <div class="titleColor">卡内金额</div>
+      <ion-col>
+        <ion-input type="text" [(ngModel)]="salecardDetail.mcardBalance"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row class="inputItem dangerInfo">
+      <div>卡售价</div>
+      <ion-col>
+        <ion-input type="text" [(ngModel)]="salecardDetail.mcardPrice"></ion-input>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-row class="inputItem fineThread row-distance">
+    <div class="titleColor">实物卡号</div>
+    <ion-col>
+      <ion-input type="text" placeholder="请输入实物卡号" [(ngModel)]="otherInfor.mcardNo"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row class="otherSelect fineThread row-distance" *ngIf="otherInfor.stopDate">
+    <div class="titleColor">截止日期</div>
+    <ion-col>
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="otherInfor.stopDate"
+        (ngModelChange)="dateChange()">
+      </ion-datetime>
+    </ion-col>
+    <ion-icon name="ios-arrow-forward"></ion-icon>
+  </ion-row>
+  <ion-row class="otherSelect fineThread row-distance">
+    <div class="titleColor">售卡人员</div>
+    <ion-col class="saleU" (click)="selectSaleU()">
+      <span *ngIf="!saleInfo.userName">
+        请选择售卡人员
+      </span>
+      <span class="isSale" *ngIf="saleInfo.userName">
+        {{saleInfo.userName}}
+      </span>
+
+    </ion-col>
+    <ion-icon name="ios-arrow-forward"></ion-icon>
+  </ion-row>
+
+  <pay-type (selectEvent)="selectPay($event)"></pay-type>
+</ion-content>
+<ion-footer class="certain">
+  <button ion-button color="secondary" (click)="certain()">开卡</button>
+</ion-footer>

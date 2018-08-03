@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{addpro}}
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only *ngIf="addpro == '配件修改'" (click)="removePro()">
+          <ion-icon>
+            <img src="assets/imgs/brash_03.gif" alt="">
+          </ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bg">
+
+  <div class="more">
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          配件
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <p>{{goods.goodsName}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          售价
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="text" text-right [(ngModel)]="goods.goodsPrice">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <ion-row>
+        <ion-col style=" display: flex;
+        align-items: center;">
+          数量
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <div class="cart_number">
+            <div class="input_left" (tap)="decNum()">-</div>
+            <div class="input_center">
+              <input type="text" readonly="readonly" [(ngModel)]='goods.goodsNum' name="num" id="num" />
+            </div>
+            <div class="input_right" (tap)="incNum()">+</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          折扣
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="number" text-right placeholder="折扣" [(ngModel)]='goods.discountCoefficient'>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          销售
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <p (click)="showSelect_(11)">{{goods.sellUname}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          备注
+        </ion-col>
+        <ion-col text-right class="inputType">
+          <input type="text" text-right placeholder="备注" [(ngModel)]='goods.memo'>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </div>
+
+
+
+</ion-content>
+<ion-footer>
+  <button ion-button (click)="dojx()" [hidden]='!flagXz'>确定继续</button>
+  <button ion-button (click)="doSubmit()">确定</button>
+
+</ion-footer>

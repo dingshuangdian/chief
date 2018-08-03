@@ -1,0 +1,66 @@
+pay-type {
+  .list-ios {
+    margin: initial;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 1.7rem;
+    line-height: 50px;
+    background-color: white;
+    padding-left: 16px;
+    border-bottom: 0.55px solid #c8c7cc;
+  }
+  .radio-icon {
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 12.5px;
+    border: 1px solid #aaa;
+  }
+  .radio-checked {
+    background-color: color($colors, secondary);
+    border: initial;
+    .radio-inner {
+      border-color: white !important;
+      left: 10px !important;
+      top: 6px !important;
+    }
+  }
+  .item-radio-checked.item-ios ion-label {
+    color: #000 !important
+  }
+  .itemGrid {
+    background-color: #fff;
+    border-bottom: 0.55px solid #c8c7cc;
+    button {
+      margin: 0;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 5px;
+      font-size: 1.4rem;
+      white-space: initial;
+      height: 3.3em;
+      .button-inner{
+        flex-direction: column;
+      }
+    }
+    .isSelect {
+      background-color: color($colors, assist, base);
+      color: color($colors, assist, contrast);
+    }
+    .bdg {
+      position: relative;
+      .red-point {
+        position: absolute;
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        background-color: red;
+        top: -7px;
+        right: -7px;
+        font-size: 5px;
+        color: #fff;
+        text-align: center;
+      }
+    }
+  }
+}

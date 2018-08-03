@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title>
+      {{consumerT}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background-color: #f2f2f8">
+  <ion-list>
+    <div class='head'>
+      <ion-item>
+        <span style="padding-left: 5px"> 头&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像</span>
+        <ion-avatar item-end>
+          <img *ngIf='!consumerr.headImg' src="assets/imgs/headimg_03.gif">
+          <img *ngIf='consumerr.headImg' src="{{consumerr.headImg}}">
+        </ion-avatar>
+      </ion-item>
+    </div>
+    <div class="head-c">
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            客户姓名
+          </ion-col>
+          <ion-col text-right class="inputType ">
+            <input type="text " text-left placeholder="请填写客户姓名" [(ngModel)]="consumerr.memberName">
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            手&nbsp;&nbsp;机&nbsp;&nbsp;号
+          </ion-col>
+          <ion-col text-right class="inputType ">
+            <input type="number " text-left placeholder="请填写客户手机号码" [(ngModel)]="mobilePhone" (ngModelChange)="changeMobileNumber()">
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-label style="padding-left:5px;">客户性别</ion-label>
+        <ion-select [(ngModel)]="gender" okText="确定" cancelText="取消" (ngModelChange)="changeSex()">
+          <ion-option value="f" selected=" ">男</ion-option>
+          <ion-option value="m">女</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="head-c-e">
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注
+            </ion-col>
+            <ion-col text-right class="inputType ">
+              <input type="text " text-left placeholder="请填写备注信息" [(ngModel)]="consumerr.memo">
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+      <!-- <div class="head-c-e">
+        <ion-item>
+          <ion-label style="padding-left:5px; ">出生日期</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DD " cancelText="取消 " doneText="确定 " [(ngModel)]="data">
+          </ion-datetime>
+          <button class="selectTimeBT " ion-button clear item-end>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-item>
+      </div> -->
+    </div>
+    <div class="head-c-e">
+      <ion-item>
+        <ion-label style="padding-left:5px;">客户类别</ion-label>
+        <ion-select [(ngModel)]="classic" okText="确定" cancelText="取消" (ngModelChange)="changeClassic()">
+          <ion-option value="g" selected=" ">个人</ion-option>
+          <ion-option value="d">单位</ion-option>
+        </ion-select>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-row>
+          <ion-col>
+            客户标记
+          </ion-col>
+          <ion-col text-right class="inputType ">
+            <input type="text " text-left placeholder="请选择客户标记">
+          </ion-col>
+        </ion-row>
+      </ion-item> -->
+    </div>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <button ion-button style="background-color: #ffb606;width: 45%;" (click)="toMsg()">提交</button>
+</ion-footer>
