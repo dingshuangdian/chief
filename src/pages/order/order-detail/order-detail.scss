@@ -69,10 +69,9 @@ page-order-detail {
                 .item-inner {
                     border-bottom: none;
                 }
-                .item-ios {
-                }
+                .item-ios {}
                 .item_msg {
-                    .br_1{
+                    .br_1 {
                         border-right: 1px solid #727272;
                         margin-right: 6px;
                     }
@@ -80,8 +79,7 @@ page-order-detail {
                         color: #727272;
                         font-size: 14px;
                     }
-                    .spml {
-                    }
+                    .spml {}
                     .maz {
                         // max-width: 60%;
                         // position: fixed;
@@ -89,8 +87,7 @@ page-order-detail {
                     p {
                         // position: relative;
                         // left: 15rem;
-                        top: 10px;
-                        // height: 37px;
+                        top: 10px; // height: 37px;
                         position: fixed;
                         top: 10px;
                         line-height: 37px;
@@ -115,14 +112,14 @@ page-order-detail {
                 }
             }
         }
-        .edit{
+        .edit {
             position: fixed;
             bottom: 5px;
             text-align: center;
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
-            button{
+            button {
                 height: 35px;
                 line-height: 35px;
                 font-size: 18px;
