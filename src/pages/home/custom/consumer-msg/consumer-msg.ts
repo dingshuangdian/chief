@@ -45,6 +45,7 @@ export class ConsumerMsgPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave) {
     if (this.navParams.get('consumer')) {
       this.consumer = this.navParams.get('consumer');
+      console.log(this.consumer);
     }
     if (this.navParams.get('res')) {
       this.consumer = this.navParams.get('res');
@@ -179,6 +180,6 @@ export class ConsumerMsgPage {
   }
   openCard() {
 
-    this.navCtrl.push(memberOpenPage, { memberInfo: this.consumer });
+    this.navCtrl.push(memberOpenPage, { memberInfo: this.consumer});
   }
 }
