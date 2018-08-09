@@ -62,7 +62,9 @@ export class memberOpenPage {
   findmember(member) {
     let params = { memberId: member.memberId, auto: true }
     this.websites.httpPost('findmember', params).subscribe(res => {
+      console.log(res);
       res.autoId = member.autoId;
+
       if (res.hasOwnProperty('autos') && res.autos.length >= 0) {
         res.autos.forEach(a => {
           if (a.autoId == member.autoId) {
@@ -70,13 +72,11 @@ export class memberOpenPage {
             res.plateNumber = a.plateNumber;
           }
         });
-        if (!this.selectCar) {
-          this.selectCar = res.autos[0]
-        }
         res.autos.push({ plateNumber: '新车' });
       }
 
       this.memberInfo = res;
+      console.log(this.memberInfo);
     })
   }
 

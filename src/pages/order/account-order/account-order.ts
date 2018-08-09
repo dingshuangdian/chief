@@ -170,10 +170,10 @@ export class AccountOrderPage {
         this.alertbox(1, '注意', '请选择会员卡', '确定', '', function () { return; }, function () { });
         return;
       }
-      if (this.payments.mcardBalance < this.paidMoney) {
-        this.alertbox(1, '注意', '会员卡余额不足', '确定', '', function () { return; }, function () { });
-        return;
-      }
+      // if (this.payments.mcardBalance < this.paidMoney) {
+      //   this.alertbox(1, '注意', '会员卡余额不足', '确定', '', function () { return; }, function () { });
+      //   return;
+      // }
     }
     let self = this;
     self.alertbox(2, '消息', '确认结算订单吗？', '取消', '确定', function () { return; }, function () {
