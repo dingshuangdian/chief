@@ -80,18 +80,11 @@
                 "COMPANY_NAME": "西藏车仆汽车服务有限公司",
                 "DEVCODE_KEY": "6KWA6JEP6L2M5LU"
             },
-            "cordova-plugin-IBS": {},
-<<<<<<< HEAD
-            "cordova-plugin-camera": {},
-            "cordova-plugin-iov-cminfo": {},
-            "cordova-plugin-ibs": {},
-            "cordova-plugin-chiefdownload": {}
-=======
+            
             "cordova-plugin-ibs": {},
             "cordova-plugin-chiefdownload": {},
             "cordova-plugin-camera": {},
             "cordova-plugin-iov-cminfo": {}
->>>>>>> 1ec7671f5956fc4a0a3727bcfac387577dfde15b
         },
         "dependencies": {
             "@angular/common": "5.0.3",
@@ -111,10 +104,7 @@
             "@types/echarts": "0.0.12",
             "android": "0.0.8",
             "cordova": "^8.0.0",
-<<<<<<< HEAD
-=======
             "cordova-android": "7.0.0",
->>>>>>> 1ec7671f5956fc4a0a3727bcfac387577dfde15b
             "cordova-ios": "^4.5.4",
             "cordova-plugin-compat": "^1.2.0",
             "cordova-plugin-device": "^2.0.2",
