@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ENV } from '@env/environment';
+
+
 
 @Injectable()
 export class WebConfig {
-        static img_path = ENV.img_path;
-        static server_ = ENV.server_url;
-        static qiniuServe = ENV.qiniuServe_url;
+        static img_path = "http://cxc.chiefchain.cn/";
+        static server_ = "https://ndmapp.chiefchain.cn/mnt";
+        static qiniuServe = "https://upload-z2.qbox.me";
 
         static API: any = {
                 login: '/CRUD/CRUD-CQ-user-login.do',
