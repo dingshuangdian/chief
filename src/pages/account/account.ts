@@ -6,7 +6,6 @@ import { AboutChiefPage } from './about-chief/about-chief';
 import { WebSites } from '../../providers/web-sites';
 import { CsbzNave } from '../../providers/csbz-nave';
 import { WebConfig } from '../../providers/web-config';
-import { CzTestPage } from '../cz-test/cz-test';
 
 declare let CMInfo: any;
 
@@ -122,9 +121,5 @@ export class AccountPage {
     });
     alertLogout.present();
 
-  }
-
-  testCz() {
-    this.navCtrl.push(CzTestPage);
   }
 }

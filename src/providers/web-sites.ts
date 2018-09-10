@@ -161,8 +161,15 @@ export class WebSites {
             console.log('请检查请求参数或url是否匹配');
             return;
         }
+        if (error.status == 401) {
+            this.events.publish('user:logout');
+            return;
+        }
+        if (error.status == 405) {
+            msg = '没有权限(code：405)';
+        }
         if (error.status == 400) {
-            msg = '请求无效(code：404)';
+            msg = '请求无效(code：400)';
             console.log('请检查参数类型是否匹配');
         }
         if (error.status == 404) {

@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
-
-
-
+import { ENV } from '@env/environment';
 @Injectable()
 export class WebConfig {
-        static img_path = "http://cxc.chiefchain.cn/";
-        static server_ = "https://ndmapp.chiefchain.cn/mnt";
-        static qiniuServe = "https://upload-z2.qbox.me";
-
+        /**
+         * test
+         */
+        // static img_path = "http://cxc.chiefchain.cn/";
+        // static server_ = "https://cptt.chiefchain.cn/mnt";
+        // static qiniuServe = "https://upload-z2.qbox.me";
+        /**
+         * prod
+         */
+        // static img_path = "http://cxc.chiefchain.cn/";
+        // static server_ = "https://ndmapp.chiefchain.cn/mnt";
+        // static qiniuServe = "https://upload-z2.qbox.me";
+        static img_path = ENV.img_path;
+        static server_ = ENV.server_url;
+        static qiniuServe = ENV.qiniuServe_url;
         static API: any = {
                 login: '/CRUD/CRUD-CQ-user-login.do',
                 getUserInfo: '/CRUD/CRUD-Q-user-getCurrentUser.do',
@@ -20,7 +29,7 @@ export class WebConfig {
                 findWashCarService4Order: '/CRUD/CRUD-Q-service-findWashCarService4Order.do',
                 findAllStoreUser: '/CRUD/CRUD-Q-user-findAllStoreUser.do', //查询该公司所有商家用户
                 findStoreExt: '/CRUD/CRUD-Q-common-findStoreExt.do',
-                findProductByName: '/CRUD/CRUD-Q-goods-findProductByName.do',
+                findProductByName: '/CRUD/CRUD-Q-goods-findProductByName.do', 
                 findGoodsByCategoryId: '/CRUD/CRUD-Q-goods-findGoodsByCategoryId.do',
                 findCategoryList: '/CRUD/CRUD-Q-goods-findCategoryList.do ',
                 findmcardDiscount: '/CRUD/CRUD-Q-card-findmcardDiscount.do',
@@ -77,7 +86,8 @@ export class WebConfig {
                 getTodayIncrement: '/CRUD/CRUD-Q-storeInfo-getTodayIncrement.do',
                 getStoreInfo: '/CRUD/CRUD-Q-storeInfo-getStoreInfo.do',
                 getBookOrdersCount: '/CRUD/CRUD-Q-bookorder-getBookOrdersCount.do',
-                findPermissionCode: "/CRUD/CRUD-Q-common-findPermissionCode.do",
+                //findPermissionCode: "/CRUD/CRUD-Q-common-findPermissionCode.do",
+                findPermissionCode: "/CRUD/CRUD-Q-Auth-qryMenuFuncTags.do",
                 loginOut: "/CRUD/CRUD-CQ-user-loginOut.do",
                 getIOSVersion: "/CRUD/CRUD-Q-system-getIOSVersion.do",
                 getAndroidVersion: '/CRUD//CRUD-Q-system-getAndroidVersion.do',
@@ -92,6 +102,8 @@ export class WebConfig {
                 findautomodels: "/CRUD/CRUD-Q-auto-findautomodels.do",
                 findautotypes: "/CRUD/CRUD-Q-auto-findautotypes.do",
                 findautotypeKeyword: "/CRUD/CRUD-Q-auto-findautotypeKeyword.do"
+
+
         };
         static phone = "4008313400";
 }

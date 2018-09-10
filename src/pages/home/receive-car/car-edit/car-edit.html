@@ -111,7 +111,7 @@
         </p>
         <ion-row align-items-center>
           <ion-col col-3 align-self-center *ngFor="let item of imageUrl;let i=index" (press)="pressEvent($event)">
-            <ion-thumbnail tappable (click)="selectPicture()">
+            <ion-thumbnail tappable (click)="selectPicture(i)">
               <img *ngIf="imageUrl.length>0" src={{item.url}} (tap)="tapEvent($event)" class="auto-image" [style.height]="width" />
             </ion-thumbnail>
             <img class="red-point" *ngIf="imageUrl.length>0&&press" src="assets/imgs/delete.png" (click)="delectP(item,i)">

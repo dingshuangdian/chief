@@ -35,14 +35,10 @@ import { CsModal } from '../providers/cs-modal';
 
 import { ProvincesSelectPage } from '../pages/other/provinces-select/provinces-select';
 import { MntcSelectPage } from '../pages/other/mntc-select/mntc-select';
-
 import { CsbzNave } from '../providers/csbz-nave';
-
 import { DatePipe } from '@angular/common';
-
 import { SlidesPage } from '../pages/slides/slides';
 import { Keyboard } from '@ionic-native/keyboard';
-import { CzTestPage } from '../pages/cz-test/cz-test';
 
 @NgModule({
   declarations: [
@@ -55,7 +51,7 @@ import { CzTestPage } from '../pages/cz-test/cz-test';
     ProvincesSelectPage,
     MntcSelectPage,
     SlidesPage,
-    CzTestPage
+
 
   ],
   imports: [
@@ -89,7 +85,7 @@ import { CzTestPage } from '../pages/cz-test/cz-test';
     ProvincesSelectPage,
     MntcSelectPage,
     SlidesPage,
-    CzTestPage
+
 
   ],
   providers: [

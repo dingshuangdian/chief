@@ -5,22 +5,30 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons> -->
-  
-      <ion-segment color="secondary" [(ngModel)]="pet" >
-        <ion-segment-button value="common">
-          普通
-        </ion-segment-button>
-        <ion-segment-button value="clean">
-          洗车
-        </ion-segment-button>
+
+    <ion-segment color="secondary" [(ngModel)]="pet">
+      <ion-segment-button *ngIf="showRecieveCar" value="common">
+        普通
+      </ion-segment-button>
+      <ion-segment-button *ngIf="showRecieveCar" value="clean">
+        洗车
+      </ion-segment-button>
+      <ion-segment-button *ngIf="showRepareCar&&showRecieveCar" value="conduct">
+        维修
+      </ion-segment-button>
+    </ion-segment>
+    <div class="setype">
+      <ion-segment *ngIf="showRepareCar&&!showRecieveCar" color="secondary" [(ngModel)]="pet">
         <ion-segment-button value="conduct">
           维修
         </ion-segment-button>
       </ion-segment>
+    </div>
     <ion-buttons end>
       <button ion-button (click)="selectItem(1)">
         无牌
       </button>
+      
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar class="searchStyle">

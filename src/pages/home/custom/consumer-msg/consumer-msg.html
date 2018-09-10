@@ -85,7 +85,7 @@
           </div>
           <div class="btm-btn">
             <button ion-button (click)="goPayRecord(msg)">消费记录</button>
-            <button ion-button (click)="goRecivedCar(msg)">接车</button>
+            <button ion-button *ngIf="isRecieveCar==1" (click)="goRecivedCar(msg)">接车</button>
           </div>
         </ion-item>
       </ion-list>

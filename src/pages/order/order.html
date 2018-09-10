@@ -13,7 +13,8 @@
     <ion-title>订单管理</ion-title>
   </ion-navbar>
 
-  <ion-toolbar class="fixedTab">
+
+  <ion-toolbar class="fixedTab" *ngIf="showOrder">
     <div class="course_tabBox" *ngFor="let tab of courseTab; let i = index">
       <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(courseTab,i)">{{tab.name }}
       </span>
@@ -64,23 +65,26 @@
   </div>
 </div> -->
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="加载中...">
-    </ion-refresher-content>
-  </ion-refresher>
-  <div style='padding-bottom: 181px;'>
-    <ion-list no-lines *ngFor="let item of items;let num = index">
+  <div *ngIf="!showOrder">
+    <h4 style="text-align: center">您没有权限查看当前数据</h4>
+  </div>
+  <div *ngIf="showOrder">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="加载中...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <div style='padding-bottom: 181px;'>
+      <ion-list no-lines *ngFor="let item of items;let num = index">
         <div class="lstop">
-  
+
           <button ion-item (click)="itemSelected(item)">
             <div class="tit">
               <button disabled="disabled">{{num + 1}}</button>
               <div>
-                <div> <span>{{item.plateNumber}}</span> <span> &nbsp;&nbsp;| {{item.automakeName}}</span></div>
+                <div>
+                  <span>{{item.plateNumber}}</span>
+                  <span> &nbsp;&nbsp;| {{item.automakeName}}</span>
+                </div>
                 <span>{{item.memberName}}({{item.mobileNumber}})</span>
               </div>
             </div>
@@ -111,26 +115,27 @@
             <span class="fr" [hidden]='courseTab[0].bol||courseTab[1].bol||courseTab[2].bol||courseTab[4].bol'>{{item.settlementTime}}</span>
           </span>
         </div>
-  
+
         <div class="bot">
-  
+
           <span class="spn">￥{{item.orderAmount}}</span>
           <div class="btn" [hidden]='courseTab[2].bol||courseTab[3].bol||courseTab[4].bol'>
             <button ion-button (click)="cansolOrderConfirm(item.plateNumber,item.fillDate,item.orderId)">取消</button>
             <button ion-button (click)="goOrderEdit(item.orderId,item.orderTypeId)">修改</button>
             <button ion-button (click)="susupendOrderConfirm(item.orderId)" [hidden]='courseTab[1].bol'>挂起</button>
-            <button ion-button (click)="goAccountOrder(item.orderId)">结算</button>
+            <button ion-button [hidden]="!showPay" (click)="goAccountOrder(item.orderId)">结算</button>
           </div>
         </div>
-    </ion-list>
-  </div>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData"> 
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="加载中..."> 
-      </ion-infinite-scroll-content> 
-  </ion-infinite-scroll>
-  <div class="noResultCon" [hidden]="items">
-    <span>--暂无记录--</span>
+
+
+      </ion-list>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div class="noResultCon" [hidden]="items">
+      <span>--暂无记录--</span>
+    </div>
   </div>
 </ion-content>

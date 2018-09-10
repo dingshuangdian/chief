@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 import { carTypePage } from '../car-type/car-type';
 import { ProvincesPage } from '../../../other/provinces/provinces';
 import { CsModal } from '../../../../providers/cs-modal';
@@ -19,7 +19,7 @@ export class carEditPage {
   imageData = [];
   imageResult = [];
   urlString = [];
-  press = false;
+  press = false; 
 
   selectCar: any = {};
   selectCarNum = {
@@ -41,7 +41,12 @@ export class carEditPage {
 
 
   callback: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public csModal: CsModal, public websites: WebSites, public toastCtrl: ToastController, public csbzNave: CsbzNave, public changeDetectorRef: ChangeDetectorRef) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public csModal: CsModal, public websites: WebSites,
+    public toastCtrl: ToastController, public csbzNave: CsbzNave,
+    public changeDetectorRef: ChangeDetectorRef,
+    public platform: Platform) {
     this.callback = this.navParams.get('callback');
   }
   ngAfterViewChecked() {
@@ -75,7 +80,6 @@ export class carEditPage {
           this.selectCarNum.memberId = this.selectCar.memberId;
         });
       } else {
-
         this.carInfo.provinces = this.selectCar.plateNumber.substr(0, 1);
         this.carInfo.plateNumber = this.selectCar.plateNumber.substr(1);
         this.combinationCarType(this.selectCar);
@@ -89,10 +93,8 @@ export class carEditPage {
         this.selectCarNum.currentMileage = this.selectCar.currentMileage || 0;
         this.selectCarNum.engineNo = this.selectCar.engineNo || '';
         this.selectCarNum.plateNumber = this.selectCar.plateNumber || '';
-
         this.selectCar.autoImg && this.selectCar.autoImg.forEach(element => {
           this.imageUrl.push({ url: WebConfig.img_path.concat(element.imgUrl), imgId: element.imgId })
-
         });
 
         this.selectCarNum.vinCode = this.selectCar.vinCode || '';
@@ -195,7 +197,7 @@ export class carEditPage {
         } else {
           this.navCtrl.pop();
         }
-
+ 
       })
     }
   }
@@ -233,22 +235,25 @@ export class carEditPage {
     }
     this.changeDetectorRef.detectChanges();
   }
-  selectPicture() {
-    // this.urlString = [];
-    // this.imageUrl.forEach(element => {
-    //   if (element.imgId) {
-    //     this.urlString.push({ "url": element.url });
-    //   }
-    // });
-    // if (this.urlString.length == 0) {
-    //   return;
-    // }
+  selectPicture(index) {
+    this.urlString = [];
+    this.imageUrl.forEach(element => {
+      if (element.imgId) {
+        this.urlString.push({ "url": element.url });
+      } else {
+        let baseSrc = element.url.split(",")[1];
+        this.urlString.push({ "src": baseSrc });
+      }
+    });
+    if (this.urlString.length == 0) {
+      return;
+    }
 
-    // cordova.plugins.PhotoView.pushUrl({ "url": this.urlString }, (res) => {
-    //   console.log(res);
-    // }, (error) => {
-    //   console.log(error);
-    // })
+    cordova.plugins.PhotoView.show({ imageArr: this.urlString, index: index }, (res) => {
+      console.log(res);
+    }, (error) => {
+      console.log(error);
+    })
   }
   pressEvent(e) {
     this.press = true;

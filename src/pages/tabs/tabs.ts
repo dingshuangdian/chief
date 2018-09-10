@@ -13,7 +13,6 @@ import { CsbzNave } from '../../providers/csbz-nave';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { resourcesStaticProvider } from '../../providers/resources-static';
 import { timeout } from 'rxjs/operators';
-
 /**
  * Generated class for the TabsPage tabs.
  *
@@ -63,25 +62,27 @@ export class TabsPage {
 
 
   onScanCarId() {
-    this.tabRef.select(0);
-    this.navCtrl.push(receiveCarPage, { "home": true });
+    this.RSData.JdPCode("202003", "2", "202004").then((msg) => {
+      this.tabRef.select(0);
+      this.navCtrl.push(receiveCarPage, { "home": true });
+    }, (msg) => { })
   }
 
   changeTabs() {
     if (this.tabRef.getIndex(this.tabRef.getSelected()) == 0) {
       return;
     } else if (this.tabRef.getIndex(this.tabRef.getSelected()) == 1) {
-      this.RSData.JdPCode("orderListMenu").then((msg) => {
-        this.oldSelect = this.tabRef.getIndex(this.tabRef.getSelected());
-      }, (msg) => {
-        this.tabRef.select(this.oldSelect);
-      })
+      // this.RSData.JdPCode("orderListMenu").then((msg) => {
+      //   this.oldSelect = this.tabRef.getIndex(this.tabRef.getSelected());
+      // }, (msg) => {
+      //   this.tabRef.select(this.oldSelect);
+      // })
     } else if (this.tabRef.getIndex(this.tabRef.getSelected()) == 3) {
-      this.RSData.JdPCode("statTradeReportListMenu").then((msg) => {
-        this.oldSelect = this.tabRef.getIndex(this.tabRef.getSelected());
-      }, (msg) => {
-        this.tabRef.select(this.oldSelect);
-      })
+      // this.RSData.JdPCode("statTradeReportListMenu").then((msg) => {
+      //   this.oldSelect = this.tabRef.getIndex(this.tabRef.getSelected());
+      // }, (msg) => {
+      //   this.tabRef.select(this.oldSelect);
+      // })
     }
 
     // this.tabRef.select(this.oldSelect);

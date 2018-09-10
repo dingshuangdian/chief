@@ -5,6 +5,7 @@ import { WebSites } from '../../../providers/web-sites';
 import { CsbzNave } from '../../../providers/csbz-nave';
 import { memberOpenPage } from './member-open/member-open';
 import { memberRechargePage } from './member-recharge/member-recharge';
+import { Storage } from '@ionic/storage';
 
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
@@ -14,15 +15,27 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 })
 export class memberMngPage {
   isNave: boolean = false;
-
+  openCard: boolean = false;
+  permissionData;
   searchPlaceholder: string = "请输入手机、车牌号或卡号进行模糊搜索";
   url: string = "findMcard4keywords";
   segmentType: string = "topUp";
   keyWords: string = "";
   memberList: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave, public storage: Storage) {
     this.isNave = this.csbzNave.isNave(this.navCtrl.getViews().length);
+    this.permissionData = JSON.parse(window.localStorage.getItem('permissionData'));
+    this.permissionData.forEach(element => {
+      if (element.menuId == "203002") {
+        if (1 == (element.funcTags & 1)) {
+          this.openCard = true;
+        } else {
+          this.openCard = false;
+        }
+      }
+    })
+
 
     if (this.navParams.get('keyWords')) {
       let keyWord = this.navParams.get('keyWords');

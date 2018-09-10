@@ -5,6 +5,7 @@ import { IncomeGatherPage } from './income-gather/income-gather';
 import { IncomeCountPage } from './income-count/income-count';
 import { CommissionCountPage } from './commission-count/commission-count';
 import { PsnCommissionCountPage } from './commission-count/psn-commission-count/psn-commission-count';
+import { NopromittPage } from './nopromitt/nopromitt';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,10 @@ import { PsnCommissionCountPage } from './commission-count/psn-commission-count/
     IncomeGatherPage,
     IncomeCountPage,
     CommissionCountPage,
-    PsnCommissionCountPage
+    PsnCommissionCountPage,
+    NopromittPage
+    
+
   ],
   imports: [
     IonicPageModule.forChild(StatementPage),
@@ -22,7 +26,8 @@ import { PsnCommissionCountPage } from './commission-count/psn-commission-count/
     IncomeGatherPage,
     IncomeCountPage,
     CommissionCountPage,
-    PsnCommissionCountPage
+    PsnCommissionCountPage,
+    NopromittPage
   ]
 })
 export class StatementPageModule { }

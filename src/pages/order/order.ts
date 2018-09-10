@@ -8,8 +8,8 @@ import { AccountOrderPage } from './account-order/account-order';
 import { WebSites } from '../../providers/web-sites';
 import { CsModal } from '../../providers/cs-modal';
 import { CsbzNave } from '../../providers/csbz-nave';
-import { catchError, tap, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the OrderPage page.
@@ -29,7 +29,9 @@ export class OrderPage {
 
   testRadioOpen: boolean;
   testRadioResult;
-
+  permissionData;
+  showOrder: boolean = false;
+  showPay: boolean = false;
   public items = [];
   public flag_sord = true;//订单时间  true--升序 false--降序
   public moreData = true;
@@ -53,6 +55,7 @@ export class OrderPage {
     keyWords: ''
   }
   constructor(
+    public storage: Storage,
     public navCtrl: NavController,
     public navParams: NavParams,
     public alerCtrl: AlertController,
@@ -60,6 +63,22 @@ export class OrderPage {
     public modalCtrl: ModalController,
     public csModal: CsModal,
     private csbzNave: CsbzNave) {
+    this.permissionData = JSON.parse(window.localStorage.getItem('permissionData'));
+
+    this.permissionData.forEach(element => {
+      if (element.menuId == "202005") {
+        if (8 == (element.funcTags & 8)) {
+          this.showOrder = true;
+        } else {
+          this.showOrder = false;
+        }
+        if (1 == (element.funcTags & 1)) {
+          this.showPay = true;
+        } else {
+          this.showPay = false;
+        }
+      }
+    })
 
   }
   ngOnInit() {
@@ -305,14 +324,14 @@ export class OrderPage {
           resolve();
           return
         }
-          for (let i = 0; i < res.length; i++) {
-            self.items.push(res[i]);
-          }
-          if (res.length < params.row) {
-            self.moreData = false;
-          } else {
-            self.moreData = true;
-          }
+        for (let i = 0; i < res.length; i++) {
+          self.items.push(res[i]);
+        }
+        if (res.length < params.row) {
+          self.moreData = false;
+        } else {
+          self.moreData = true;
+        }
         resolve();
       });
     })

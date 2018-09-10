@@ -8,6 +8,7 @@ import 'rxjs/add/observable/of';
 import { CsModal } from './cs-modal';
 
 
+
 /*
   Generated class for the CartypeDataProvider provider.
 
@@ -21,61 +22,70 @@ export class resourcesStaticProvider {
   serviceData: any;
   carTypeData: any;
 
-  permissionData: any;
+  permissionData = [];
+  openInsur;
+  flag = 1;
 
   constructor(
     public webSites: WebSites,
     public storage: Storage,
-    private csModal: CsModal,
+    private csModal: CsModal
   ) { }
 
   //加载权限数据
   loadPermissionCode(callback?: Function): any {
     this.webSites.httpPost('findPermissionCode', {}).subscribe(res => {
-      if (Object.prototype.toString.call(res) == '[object Array]') {
-        this.permissionData = {};
-        res.map(p => {
-          if (p.permissionCode == "receiveCarMenu" || p.permissionCode == "orderListMenu" || p.permissionCode == "statTradeReportListMenu" || p.permissionCode == "storeMemberMenu" || p.permissionCode == "reservationMenu" || p.permissionCode == "hasInsur")
-            this.permissionData[p.permissionCode] = true;
+      console.log(res);
+      let ures = res.funcTags;
+      this.openInsur = res.storesExt.openInsur;
+      if (Object.prototype.toString.call(ures) == '[object Array]') {
+        ures.forEach(element => {
+          this.permissionData.push({ funcTags: element.funcTags, menuId: element.menuId });
         });
-        callback();
       }
+      window.localStorage.setItem('permissionData', JSON.stringify(this.permissionData));
+      callback();
     });
   }
-
-  JdPCode(code, isShowError: boolean = true) {
-    return new Promise((resolve, reject) => {
-      if (this.permissionData) {
-        if (this.permissionData[code]) {
-          resolve("有权限");
+  JdPCode(menuId, childMenuId, menuId2?) {
+    this.permissionData.forEach((element) => {
+      if (menuId == element.menuId || menuId2 == element.menuId) {
+        let show = element.funcTags & childMenuId;
+        if (show == childMenuId) {
+          this.flag = 0;
         } else {
-          reject("没权限");
-          if (isShowError) {
-            this.csModal.showAlert("没有权限访问！");
-          }
+          this.flag = 1;
         }
-      } else {
-        reject("没数据，请初始化权限数据");
-        if (isShowError) {
-          this.csModal.showAlert("没权限数据");
-        }
-
       }
     })
-
+    return new Promise((resolve, reject) => {
+      if (this.flag == 0) {
+        resolve();
+        this.flag = 1;
+      } else if (this.flag == 1) {
+        reject();
+        this.csModal.showAlert("没有权限的数据,请联系管理员");
+      }
+    })
   }
-
-
+  cxCode() {
+    return new Promise((resolve, reject) => {
+      if (this.openInsur == 1) {
+        resolve();
+      } else {
+        reject();
+      }
+    })
+  }
   //加载项目数据
-  loadService(memberId?,updata:boolean=false) {
+  loadService(memberId?, updata: boolean = false) {
     let $this = this;
     return new Promise((resolve, reject) => {
       $this.storage.get('CZBSService').then((serviceData) => {
-        if (serviceData&&!updata) {
+        if (serviceData && !updata) {
           $this.serviceData = serviceData;
           if (memberId) {
             $this.webSites.httpPost('findService4Order', { memberId: memberId, service: false }).map($this.mcardServices, $this).subscribe(res => {
-              
               resolve(res);
             });
           } else {
@@ -100,7 +110,6 @@ export class resourcesStaticProvider {
   mcardServices(data) {
     let mcardServices;
     let services = this.serviceData;
-
     if (!data) {
       let res = { mcardServices: mcardServices, services: services }
       return res
@@ -153,7 +162,7 @@ export class resourcesStaticProvider {
             newS['typNo'] = element['mcardNo'] || "";
             newS['stopDate'] = element['stopDate'] || "";
             newS['platNum'] = element['plateNumber'] || "";
-            
+
             newS['mcardBalance'] = element['mcardBalance'] || "";
             newS['childtypeList'] = childtype;
             newS['show'] = true;

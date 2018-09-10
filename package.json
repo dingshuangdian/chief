@@ -4,12 +4,17 @@
     "author": "Ionic Framework",
     "homepage": "http://ionicframework.com/",
     "private": true,
+    "config": {
+        "ionic_webpack": "./config/webpack.config.js"
+    },
     "scripts": {
-        "start": "ionic-app-scripts serve",
-        "clean": "ionic-app-scripts clean",
-        "build": "ionic-app-scripts build",
-        "lint": "ionic-app-scripts lint",
-        "build_prod": "ionic build --prod --aot --minifyjs --minifycss --optimizejs && cordova-hcp build"
+        "ionic_build_prod": "ionic build --prod --aot --minifyjs --minifycss --optimizejs && cordova-hcp build",
+        "ionic_build_dev": "ionic build",
+        "i_s_p": "cross-env NODE_ENV=prod ionic serve",
+        "build": "node ./config/build_script.js"
+    },
+    "bin": {
+        "build": "./config/build_script.js"
     },
     "dependencies": {
         "@angular/common": "5.0.3",
@@ -32,25 +37,23 @@
         "cordova": "^8.0.0",
         "cordova-android": "7.0.0",
         "cordova-hot-code-push-plugin": "^1.5.3",
-        "cordova-ios": "^4.5.4",
         "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-inappbrowser": "^3.0.0",
-        "cordova-plugin-ionic-webview": "^2.0.2",
+        "cordova-plugin-ionic-webview": "^1.2.1",
         "cordova-plugin-splashscreen": "^5.0.2",
         "cordova-plugin-statusbar": "^2.4.2",
         "cordova-plugin-whitelist": "^1.3.3",
         "easton-plugin-device": "^1.0.0",
         "easton-plugin-insurance": "^1.0.0",
         "easton-plugin-nativedownload": "^1.0.0",
-        "easton-plugin-ocrplateid": "^1.0.2",
-        "easton-plugin-photoview": "^1.0.0",
+        "easton-plugin-ocrplateid": "^1.0.3",
+        "easton-plugin-photoview": "^1.0.5",
         "echarts": "^4.1.0",
         "ionic-angular": "3.9.2",
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
         "rxjs": "5.5.2",
-        "node-sass": "4.9.0",
         "sw-toolbox": "3.6.0",
         "ts-md5": "^1.2.4",
         "zone.js": "0.8.18"
@@ -64,23 +67,23 @@
     "description": "An Ionic project",
     "cordova": {
         "plugins": {
-            "cordova-hot-code-push-plugin": {},
-            "cordova-plugin-camera": {},
+            "cordova-plugin-whitelist": {},
             "cordova-plugin-device": {},
-            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-splashscreen": {},
             "cordova-plugin-ionic-webview": {},
+            "cordova-plugin-statusbar": {},
+            "cordova-hot-code-push-plugin": {},
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-camera": {},
+            "easton-plugin-photoview": {},
             "easton-plugin-ocrplateid": {
                 "COMPANY_NAME": "西藏车仆汽车服务有限公司",
                 "DEVCODE_KEY": "6KWA6JEP6L2M5LU"
             },
             "easton-plugin-device": {},
             "easton-plugin-nativedownload": {},
-            "easton-plugin-photoview": {},
-            "easton-plugin-insurance": {},
-            "cordova-plugin-splashscreen": {},
-            "cordova-plugin-statusbar": {},
-            "cordova-plugin-whitelist": {},
-            "ionic-plugin-keyboard": {}
+            "easton-plugin-insurance": {}
         },
         "dependencies": {
             "@angular/common": "5.0.3",
@@ -100,10 +103,17 @@
             "@types/echarts": "0.0.12",
             "android": "0.0.8",
             "cordova": "^8.0.0",
-            "cordova-android": "7.0.0",
-            "cordova-ios": "^4.5.4",
+            "cordova-plugin-compat": "^1.2.0",
+            "cordova-plugin-device": "^2.0.2",
+            "cordova-plugin-inappbrowser": "^3.0.0",
+            "cordova-plugin-ionic-keyboard": "^2.0.5",
+            "cordova-plugin-ionic-webview": "^1.2.1",
+            "cordova-plugin-splashscreen": "^5.0.2",
+            "cordova-plugin-statusbar": "^2.4.2",
+            "cordova-plugin-whitelist": "^1.3.3",
             "echarts": "^4.1.0",
             "ionic-angular": "3.9.2",
+            "ionic-plugin-keyboard": "^2.2.1",
             "ionicons": "3.0.0",
             "rxjs": "5.5.2",
             "sw-toolbox": "3.6.0",
@@ -116,14 +126,21 @@
         },
         "description": "An Ionic project",
         "cordova": {
-            "plugins": {},
+            "plugins": {
+                "cordova-plugin-whitelist": {},
+                "cordova-plugin-device": {},
+                "cordova-plugin-splashscreen": {},
+                "cordova-plugin-ionic-webview": {},
+                "cordova-plugin-ionic-keyboard": {},
+                "cordova-plugin-inappbrowser": {},
+                "cordova-plugin-statusbar": {}
+            },
             "platforms": [
                 "android",
                 "ios"
             ]
         },
         "platforms": [
-            "ios",
             "android"
         ]
     }

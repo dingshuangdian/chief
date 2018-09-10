@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="com.chief.store" android-versionCode="113" ios-CFBundleIdentifier="com.chief.storeI" ios-CFBundleVersion="61" version="3.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>CZBS</name>
+<widget android-packageName="${android_packageName}" android-versionCode="${android_versionCode}" ios-CFBundleIdentifier="${ios_packageName}" ios-CFBundleVersion="${ios_versionCode}" version="${version}" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>${project_name}</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -21,12 +21,12 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <chcp>
-        <config-file url="https://ndmapp.chiefchain.cn/app/www/chcp.json" />
+        <config-file url="${chcp_url}" />
     </chcp>
     <hook src="config/cordovaHooks/before_prepare.js" type="before_prepare" />
     <hook src="config/cordovaHooks/after_platform_add.js" type="after_platform_add" />
     <platform name="android">
-        <name>车仆之家</name>
+        <name>${app_name}</name>
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -83,26 +83,26 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
         <edit-config file="*-Info.plist" mode="merge" target="CFBundleDevelopmentRegion">
-            <string>zh_CN</string>
+          <string>zh_CN</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-            <string>应用需要您的同意,才能访问相机。</string>
+          <string>应用需要您的同意,才能访问相机。</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
-            <string>应用需要您的同意,才能访问相册。</string>
+          <string>应用需要您的同意,才能访问相册。</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-            <string>应用需要您的同意,才能访问位置。</string>
+          <string>应用需要您的同意,才能访问位置。</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
-            <string>应用需要您的同意,才能允许存储相片。</string>
+          <string>应用需要您的同意,才能允许存储相片。</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="CFBundleDisplayName">
-            <string>车仆之家</string>
+          <string>${app_name}</string>
         </edit-config>
     </platform>
-    <plugin name="easton-plugin-photoview" />
-    <plugin name="easton-plugin-ocrplateid">
+    <plugin name="easton-plugin-photoview"/>
+	   <plugin name="easton-plugin-ocrplateid">
         <variable name="COMPANY_NAME" value="西藏车仆汽车服务有限公司" />
         <variable name="DEVCODE_KEY" value="6KWA6JEP6L2M5LU" />
     </plugin>
@@ -110,5 +110,5 @@
     <plugin name="easton-plugin-nativedownload" />
     <plugin name="easton-plugin-photoview" />
     <plugin name="easton-plugin-insurance" />
-    <engine name="android" spec="~7.0.0" />
+    
 </widget>

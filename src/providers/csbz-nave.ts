@@ -16,7 +16,6 @@ export class CsbzNave {
         private csModal: CsModal,
         public loadingCtrl: LoadingController,
         public actionSheetCtrl: ActionSheetController, ) {
-
     }
 
     pushInit() {
@@ -134,18 +133,12 @@ export class CsbzNave {
         var newVersionInfo = data;
 
         this.csModal.showAlert(newVersionInfo.releaseNote, () => {
-            if (this.platform.is("android")) {
-                //this.downloadAPK(newVersionInfo.url);
-                cordova.download.downloadStart({ "path": newVersionInfo.url }, (res) => {
-                    console.log(res);
-                }, (error) => {
-                    console.log(error);
-                })
+            cordova.download.downloadStart({ "path": newVersionInfo.url, isClos: true }, (res) => {
+                console.log(res);
+            }, (error) => {
+                console.log(error);
+            })
 
-            } else {
-                cordova.InAppBrowser.open(newVersionInfo.url, '_system', 'location=no');
-                CMInfo.exitApp();
-            }
         }, (newVersionInfo.versionTags & 1) <= 0, false, false, '版本更新')
     }
     downloadAPK(path) {
@@ -361,7 +354,7 @@ export class CsbzNave {
 
     checkTelephone(v) {
         //XXX 前端138****8888 也认为正确，后端再对个别处理
-        var regphone = /^1[3|4|5|6|7|8][0-9]\d{8}$|^1[3|4|5|6|7|8][0-9][*]{4}\d{4}$/;
+        var regphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
         return regphone.test(v);
     };
 
