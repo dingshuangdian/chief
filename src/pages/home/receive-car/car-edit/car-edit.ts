@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Events } from 'ionic-angular';
 import { carTypePage } from '../car-type/car-type';
 import { ProvincesPage } from '../../../other/provinces/provinces';
 import { CsModal } from '../../../../providers/cs-modal';
@@ -41,7 +41,7 @@ export class carEditPage {
 
 
   callback: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public csModal: CsModal, public websites: WebSites, public toastCtrl: ToastController, public csbzNave: CsbzNave, public changeDetectorRef: ChangeDetectorRef) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public csModal: CsModal, public websites: WebSites, public toastCtrl: ToastController, public csbzNave: CsbzNave, public changeDetectorRef: ChangeDetectorRef, public events: Events) {
     this.callback = this.navParams.get('callback');
   }
   ngAfterViewChecked() {
@@ -213,14 +213,27 @@ export class carEditPage {
       this.carInfo.plateNumber = id.substr(1);
     })
   }
+  // getPicture() {
+  //   this.csbzNave.selecPicture((data) => {
+  //     if (!data.msg) {
+  //       this.imageUrl.unshift({ url: data.imageSrc, imgId: "" });
+  //       this.imageData.push(data.imageBlob);
+  //       this.changeDetectorRef.detectChanges();
+  //     }
+  //   })
+  // }
   getPicture() {
-    this.csbzNave.selecPicture((data) => {
-      if (!data.msg) {
-        this.imageUrl.unshift({ url: data.imageSrc, imgId: "" });
-        this.imageData.push(data.imageBlob);
-        this.changeDetectorRef.detectChanges();
-      }
-    })
+    this.csbzNave.selecPicture()
+    {
+      this.events.subscribe('picture', data => {
+        console.log(data);
+        if (!data.msg) {
+          this.imageUrl.unshift({ url: data.imageSrc, imgId: "" });
+          this.imageData.push(data.imageBlob);
+          this.changeDetectorRef.detectChanges();
+        }
+      })
+    }
   }
   delectP(item, i) {
     if (item.imgId) {
@@ -234,21 +247,21 @@ export class carEditPage {
     this.changeDetectorRef.detectChanges();
   }
   selectPicture() {
-    // this.urlString = [];
-    // this.imageUrl.forEach(element => {
-    //   if (element.imgId) {
-    //     this.urlString.push({ "url": element.url });
-    //   }
-    // });
-    // if (this.urlString.length == 0) {
-    //   return;
-    // }
+    this.urlString = [];
+    this.imageUrl.forEach(element => {
+      if (element.imgId) {
+        this.urlString.push({ "url": element.url });
+      }
+    });
+    if (this.urlString.length == 0) {
+      return;
+    }
 
-    // cordova.plugins.PhotoView.pushUrl({ "url": this.urlString }, (res) => {
-    //   console.log(res);
-    // }, (error) => {
-    //   console.log(error);
-    // })
+    cordova.plugins.PhotoView.pushUrl({ "url": this.urlString }, (res) => {
+      console.log(res);
+    }, (error) => {
+      console.log(error);
+    })
   }
   pressEvent(e) {
     this.press = true;

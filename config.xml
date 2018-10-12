@@ -118,5 +118,5 @@
     <plugin name="cordova-plugin-whitelist" />
     <plugin name="ionic-plugin-keyboard" />
     <engine name="ios" spec="^4.5.4" />
-    <engine name="android" spec="7.0.0" />
+    <engine name="android" spec="^7.0.0" />
 </widget>

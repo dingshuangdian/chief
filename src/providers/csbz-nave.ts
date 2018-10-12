@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { Injectable } from '@angular/core';
-import { Platform, LoadingController, ActionSheetController } from 'ionic-angular';
+import { Platform, LoadingController, ActionSheetController, Events } from 'ionic-angular';
 import { WebSites } from './web-sites';
 import { CsModal } from './cs-modal';
 import { Md5 } from 'ts-md5';
@@ -14,6 +14,7 @@ export class CsbzNave {
     constructor(public platform: Platform,
         public websites: WebSites,
         private csModal: CsModal,
+        public events: Events,
         public loadingCtrl: LoadingController,
         public actionSheetCtrl: ActionSheetController, ) {
 
@@ -189,7 +190,7 @@ export class CsbzNave {
     }
 
 
-    cameraPicture(callback, srcType?, allowEdit?) {
+    cameraPicture(callback?, srcType?, allowEdit?) {
 
         var options = {
             quality: 50,
@@ -218,10 +219,11 @@ export class CsbzNave {
             imageInfo.imageSrc = "data:image/jpeg;base64," + imageData;
 
             imageInfo.imageBlob = convertBase64UrlToBlob(imageInfo.imageSrc);
+            this.events.public('picture', imageInfo);
 
-            if (callback) {
-                callback(imageInfo);
-            }
+            // if (callback) {
+            //     callback(imageInfo);
+            // }
         }
 
         function onFail(message) {
@@ -251,7 +253,7 @@ export class CsbzNave {
         }
     }
 
-    selecPicture(callback, allowEdit?) {
+    selecPicture(callback?, allowEdit?) {
         let actionSheet = this.actionSheetCtrl.create({
             title: '选择来源',
             buttons: [
@@ -280,6 +282,7 @@ export class CsbzNave {
 
     carIdSacn(callBack) {
         cordova.ocrplateidsmart.ocrplateidSmartOpen((res) => {
+
             callBack(res)
         }, (error) => {
             console.log(error);
