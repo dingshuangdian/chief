@@ -1,5 +1,5 @@
 
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef} from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { WebSites } from '../../../../providers/web-sites';
 import { CsbzNave } from '../../../../providers/csbz-nave';

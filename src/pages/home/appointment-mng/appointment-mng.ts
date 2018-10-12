@@ -5,6 +5,7 @@ import { WebSites } from '../../../providers/web-sites';
 import { CsbzNave } from '../../../providers/csbz-nave';
 import { DatePipe } from '@angular/common';
 import { orderItemPage } from '../receive-car/order-item/order-item';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-appointment-mng',
@@ -15,12 +16,12 @@ export class appointmentMngPage {
   isNave: boolean = false;
 
   contentList: any;
-
+  isRecieveCar;
   selectDate: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave, private datePipe: DatePipe, public events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave, private datePipe: DatePipe, public events: Events,public storage: Storage) {
     this.isNave = this.csbzNave.isNave(this.navCtrl.getViews().length);
-
+    this.isRecieveCar= window.localStorage.getItem("showRecieveCar");
     this.events.subscribe('appointment:refresh', () => {
       this.findBookOrders();
     });

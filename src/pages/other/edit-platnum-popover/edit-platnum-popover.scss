@@ -1,0 +1,51 @@
+page-edit-platnum-popover {
+    ion-grid{
+        align-items: center;
+    }
+    .titleCss{
+        line-height: 68px;
+        color: #252D3B;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    ion-input{
+        width: 89.3%;
+        border: 0.55px solid #C3C8D0;
+        border-radius: 5px;
+        color: #C3C8D0;
+        font-size: 26px;
+        text-align: center;
+        line-height: 60px;
+        height: 60px;
+        position: relative;  
+        .text-input-ios{
+            margin: 0;
+        }
+    }
+    ion-row{
+        width: 100%;
+        padding: 11px 0;
+        border-top: 0.55px solid #DFE3E9;
+        margin-top: 26px;
+        ion-col{
+            button{
+                line-height: 30px;
+                width: 100%; 
+                background: transparent;
+                font-size: 16px;
+            }
+            
+        }
+        ion-col:first-child{
+            border-right: 0.55px solid #DFE3E9;
+            button{
+                color: #A4A9B2;
+            }
+        }
+        ion-col:last-child{
+            button{
+                color: #FFB606;
+            }
+        }
+    }
+}

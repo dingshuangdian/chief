@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { WebSites } from '../../../providers/web-sites';
+import { Storage } from '@ionic/storage';
+
 
 /**
  * Generated class for the OrderPage page.
@@ -15,6 +17,8 @@ import { WebSites } from '../../../providers/web-sites';
   templateUrl: 'pay-record_.html',
 })
 export class PayRecordlPage_ {
+  permissionData;
+  showB: boolean = false;
   membrId;
   autoId;
   selectOption = 'all';
@@ -41,10 +45,20 @@ export class PayRecordlPage_ {
   otherPayRecordB = [];
   infiniteScrollA;
   infiniteScrollB;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public Websites: WebSites) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public Websites: WebSites, public storage: Storage) {
     this.membrId = this.navParams.get('memberId');
     this.autoId = this.navParams.get('autoId');
     this.plateNumber = this.navParams.get('plateNumber');
+    this.permissionData = JSON.parse(window.localStorage.getItem('permissionData'));
+    this.permissionData.forEach(element => {
+      if (element.menuId == "202005") {
+        if (4 == (element.funcTags & 4)) {
+          this.showB = true;
+        } else {
+          this.showB = false;
+        }
+      }
+    })
   }
   public courseTab = [
     { "name": "A单消费", "bol": true },
@@ -55,7 +69,7 @@ export class PayRecordlPage_ {
 
     this.Websites.httpPost('findStoreExt', this.membrId).subscribe(res => {
       this.hasB = res.border;
-      if (this.hasB == '1') {
+      if (this.hasB == '1' && this.showB) {
         this.switchTypeB();
       }
     })

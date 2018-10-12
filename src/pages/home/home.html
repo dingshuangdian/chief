@@ -51,6 +51,9 @@
         <div>{{item.name}}</div>
       </ion-col>
     </ion-row>
+    <!-- <ion-row>
+      <ion-col (click)="pickupCar()">接车</ion-col>
+    </ion-row> -->
     <div class="coverLine"></div>
   </div>
   <ion-list class="serveBanner" no-lines>
@@ -81,4 +84,6 @@
       </div>
     </button>
   </ion-list>
+  <button (click)="pickupCar()">接车</button>
+
 </ion-content>

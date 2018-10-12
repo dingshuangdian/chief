@@ -1,0 +1,38 @@
+<style>
+    .popup {
+        border-radius: 5px !important;
+        width: 75% !important;
+        background-color: #fff !important;
+        overflow: hidden;
+    }
+    
+    .popup-head {
+        padding: initial;
+        border-bottom: initial;
+    }
+    
+    .popup-body {
+        padding: initial;
+    }
+</style>
+
+<div style="padding:10px;border-bottom:1px solid #d7d7d7;">
+    <div class="tc titleTextColor titleText" style="padding:5px;">
+        选择支付费用
+    </div>
+    <div class="row" style="padding:10px 0">
+        <span class="changeRadioCss oneRadioCss" style="margin:0 auto;">
+            <ion-radio name="payRadio" value='1' ng-click="payCheckRadio(1)" ng-model="payFee" >
+                 保单全费<span>( <span class="remindColor">￥{{fullPremium}}</span> )</ion-radio>
+        </span>
+    </div>
+    <div class="row" style="padding:10px 0">
+        <span class="changeRadioCss oneRadioCss" style="margin:0 auto;">
+            <ion-radio name="payRadio" value="2" ng-click="payCheckRadio(2)" ng-model="payFee">
+                 保单净费<span>( <span class="remindColor">￥{{netPremium}}</span> )</ion-radio>
+        </span>
+    </div>
+    <div class="item no-border tc imporBTColor titleText" style="margin-top:1px;" ng-click="confirmPayOrder();">
+        确定
+    </div>
+</div>

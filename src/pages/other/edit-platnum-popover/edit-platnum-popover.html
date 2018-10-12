@@ -1,0 +1,17 @@
+<!-- Generated template for the AgentPopoverComponent component -->
+
+<ion-grid no-padding no-margin>
+  <div text-center class="titleCss">
+    修改车牌
+  </div>
+  <ion-input placeholder="请输入车牌" [(ngModel)]="plateNumber">{{plateNumber}}</ion-input>
+  <ion-row>
+    <ion-col>
+      <button block (click)="close(false)">取消</button>
+    </ion-col>
+    <ion-col>
+      <button block (click)="close(true)">确定</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  

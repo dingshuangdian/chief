@@ -1,0 +1,342 @@
+<ion-view>
+    <ion-nav-title>
+        <h4 class="title stable">{{detailsTitle}}</h4>
+    </ion-nav-title>
+    <ion-content class="overallColor" ng-show='isContentShow'>
+        <div class="item item-avatar" style="padding:10px 15px;min-height:initial;text-align: right;">
+            <img src="img/InsuranceLOGO_{{qryOrderInfo.companyId}}.png" style="border-radius:0;max-width:initial;width:initial;top: 6px;max-height: 35px;">
+            <div class="isr-stateTags">
+                {{qryOrderInfo.stateFlag}}
+            </div>
+        </div>
+        <div class="light-bg mainText isr-detailConten">
+            <div class="row">
+                <span class="col col-33">被保人</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.insuredName"></span>
+            </div>
+            <div class="row">
+                <span class="col col-33">车牌号</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.licenseNo"></span>
+            </div>
+            <div class="row">
+                <span class="col col-33">快递单号</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.shippingCode||'无'"></span>
+            </div>
+            <div class="row">
+                <span class="col col-33">手机号码</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.insuredMobile"></span>
+            </div>
+            <div class="row">
+                <span class="col col-33">订单号</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.orderNo"></span>
+            </div>
+            <div class="row">
+                <span class="col col-33">交强险保单号</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.businessOrderNo"></span>
+            </div>
+            <div class="row">
+                <span class="col col-33">商业险保单号</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.forceOrderNo"></span>
+            </div>
+            <!--<div class="row">
+                <span class="col col-33">投保时间</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.lossTime"></span>
+            </div>-->
+            <div class="row">
+                <span class="col col-33">保单总额</span>
+                <span class="col tr remindColor">￥{{qryOrderInfo.totalAmount || 0}}</span>
+            </div>
+            <div class="row">
+                <span class="col col-33">创建时间</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.forceStartDate"></span>
+            </div>
+            <div class="row" style="margin-bottom:0px;">
+                <span class="col col-33">保险代理专员</span>
+                <span class="col tr mainTextColor" ng-bind="qryOrderInfo.insureAgentUname"></span>
+            </div>
+        </div>
+
+        <ion-item class="overallColor no-border" style="padding: 10px 50px;">
+            <button class="button button-stable button-clear titleText" style="width:100%;line-height: normal;min-height: initial;" ng-click="showDetail();">{{showDetailBT}}</button>
+        </ion-item>
+
+        <div class="mainText" ng-if="isShowDetail">
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">投保期限</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+
+            <div class="light-bg isr-morDetail">
+                <div class="row ibsRow">
+                    <span class="col col-33">交强险期</span>
+                    <span class="col tr mainTextColor">{{qryOrderInfo.forceStartDate||'0000-00-00'}}~{{qryOrderInfo.forceExpireDate||'0000-00-00'}}</span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">商业险期限</span>
+                    <span class="col tr mainTextColor">{{qryOrderInfo.businessStartDate||'0000-00-00'}}~{{qryOrderInfo.businessExpireDate||'0000-00-00'}}</span>
+                </div>
+            </div>
+
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">交强险信息</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+            <div class="light-bg isr-morDetail">
+                <div class="row ibsRow">
+                    <span class="col">交强险</span>
+                    <span class="col tr remindColor">￥{{qryOrderInfo.forceTotal||0}}</span>
+                </div>
+                <div class="row">
+                    <span class="col">车船税</span>
+                    <span class="col tr remindColor">￥{{qryOrderInfo.taxTotal||0}}</span>
+                </div>
+            </div>
+
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">商业险信息</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+
+            <div class="light-bg isr-morDetail">
+                <div class="row">
+                    <span class="col">商业险</span>
+                    <span class="col tr remindColor">￥{{qryOrderInfo.businessTotal||0}}</span>&nbsp;&nbsp;
+                    <span ng-click="showBusinessStartDate();"><i ng-if="!isBusinessStartDate" class="ion-ios-arrow-down" style="color: #7b7b7b;font-size: 24px;"></i><i  ng-if="isBusinessStartDate" class="ion-ios-arrow-up" style="color: #7b7b7b;font-size: 24px;"></i></span>
+                </div>
+                <div class="row">
+                    <span class="col explainTextColor explain">车辆损失险({{qryOrderInfo.cheSun||0}})、第三者险({{qryOrderInfo.sanZhe||0}})、全车盗抢险({{qryOrderInfo.daoQiang||0}})、乘客座位险({{qryOrderInfo.chengKe||0}})、司机座位险({{qryOrderInfo.siJi||0}})、划痕险({{qryOrderInfo.huaHen||0}})、玻璃破碎险({{qryOrderInfo.boLi||0}})、涉水险({{qryOrderInfo.sheShui||0}})、自燃险({{qryOrderInfo.ziRan||0}})、指定修理厂险({{qryOrderInfo.hcXiulichang||0}})、机动车无法找到三方特约险({{qryOrderInfo.hcSanfangteyue||0}})</span>
+                </div>
+            </div>
+
+            <div class="mainText overallColor isr-detailConten" ng-if="isBusinessStartDate" style="padding: 10px 10px 0;">
+                <div class="row">
+                    <span class="col col-33">车辆损失险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.cheSun"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.cheSunFee || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">第三者险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.sanZhe"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.sanZheFee || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">全车盗抢险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.daoQiang"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.daoQiangFee  || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">乘客座位险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.chengKe"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.chengKeFee  || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">司机座位险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.siJi"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.siJiFee  || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">划痕险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.huaHen"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.huaHenFee  || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">玻璃破碎险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.boLi"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.boLiFee  || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">涉水险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.sheShui"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.sheShuiFee  || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">指定修理厂险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.hcXiulichang"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.hcXiulichangFee  || 0"></span></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">机动车无法找到三方特约险</span>
+                    <span class="col mainTextColor" ng-bind="qryOrderInfo.hcSanfangteyue"></span>
+                    <span class="col tr mainTextColor">￥<span ng-bind="qryOrderInfo.hcSanfangteyueFee  || 0"></span></span>
+                </div>
+                <div class="row" style="margin-bottom:0px;">
+                    <span class="col explainTextColor explain">不计免赔车辆损失险({{qryOrderInfo.bujimianChesunFee||0}})、不计免赔第三者险({{qryOrderInfo.bujimianSanzheFee||0}})、不计免赔全车盗抢险({{qryOrderInfo.bujimianDaoqiangFee||0}})、不计免赔乘客座位险({{qryOrderInfo.bujimianChengkeFee||0}})、不计免赔司机座位险({{qryOrderInfo.bujimianSijiFee||0}})、不计免赔涉水险({{qryOrderInfo.bujimianSheshuiFee||0}})、不计免赔自燃险({{qryOrderInfo.bujimianZiranFee||0}})</span>
+                </div>
+
+            </div>
+            <div ng-show='qryOrderInfo.epolicy != null'>
+                <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                    <div class="col">
+                        <hr width=100% size=1 color=#9e9fa3>
+                    </div>
+                    <div class="col titleText tc">保险公司保单</div>
+                    <div class="col">
+                        <hr width=100% size=1 color=#9e9fa3>
+                    </div>
+                </ion-item>
+                <div class="light-bg isr-morDetail">
+                    <div style="text-align: center;padding:8px 0">
+                        <img style="max-width: 50%;" ng-src='{{epolicy}}' />
+                    </div>
+                </div>
+            </div>
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;" ng-if="qryOrderInfo.quoteTypeId !=3">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">证件照片</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+
+            <div class="light-bg isr-morDetail" ng-if="qryOrderInfo.quoteTypeId !=3">
+                <div class="row ibsRow">
+                    <span class="col">车辆行驶证</span>
+                    <a class="col tr" ng-click="showPic(0)" ng-if="qryOrderInfo.drivingLicense">查看</a>
+                    <a class="col tr" style="color: #ccc;" ng-if="!qryOrderInfo.drivingLicense">查看</a>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col">身份证</span>
+                    <a class="col tr" ng-click="showPic(1)" ng-if="qryOrderInfo.insuredIdCardPhoto">查看</a>
+                    <a class="col tr" style="color: #ccc;" ng-if="!qryOrderInfo.insuredIdCardPhoto">查看</a>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col">购车发票照片</span>
+                    <a class="col tr" ng-click="showPic(2)" ng-if="qryOrderInfo.carInvoicePhoto">查看</a>
+                    <a class="col tr" style="color: #ccc;" ng-if="!qryOrderInfo.carInvoicePhoto">查看</a>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col">车架号照片</span>
+                    <a class="col tr" ng-click="showPic(3)" ng-if="qryOrderInfo.carvinPhoto">查看</a>
+                    <a class="col tr" style="color: #ccc;" ng-if="!qryOrderInfo.carvinPhoto">查看</a>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col">车身照片</span>
+                    <a class="col tr" ng-click="showPic(4)" ng-if="qryOrderInfo.carbodyPhoto1">查看</a>
+                    <a class="col tr" style="color: #ccc;" ng-if="!qryOrderInfo.carbodyPhoto1">查看</a>
+                </div>
+                <div class="row">
+                    <span class="col">其他照片</span>
+                    <a class="col tr" ng-click="showPic(5)" ng-if="qryOrderInfo.otherPhoto">查看</a>
+                    <a class="col tr" style="color: #ccc;" ng-if="!qryOrderInfo.otherPhoto">查看</a>
+                </div>
+            </div>
+
+
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">车辆信息</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+            <div class="light-bg isr-morDetail">
+                <div class="row ibsRow">
+                    <span class="col col-33">车牌号码</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.licenseNo"></span>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col col-33">车主姓名</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.carownerName"></span>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col col-33">车架编号</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.carVin"></span>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col col-33">发动机型号</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.engineNo"></span>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col col-33">品牌型号</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.modleName"></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">注册日期</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.registerDate"></span>
+                </div>
+            </div>
+
+
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">投保人信息</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+            <div class="light-bg isr-morDetail">
+                <div class="row ibsRow">
+                    <span class="col col-33">投保人姓名</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.holderName"></span>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col col-33">身份证号码</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.holderIdCardNumber"></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">手机号码</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.holderMobile"></span>
+                </div>
+            </div>
+
+
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">被投保人信息</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+            <div class="light-bg isr-morDetail">
+                <div class="row ibsRow">
+                    <span class="col col-33">被保人姓名</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.insuredName"></span>
+                </div>
+                <div class="row ibsRow">
+                    <span class="col col-33">身份证号码</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.insuredIdCardNumber"></span>
+                </div>
+                <div class="row">
+                    <span class="col col-33">手机号码</span>
+                    <span class="col tr mainTextColor" ng-bind="qryOrderInfo.insuredMobile"></span>
+                </div>
+            </div>
+
+
+        </div>
+
+        <ion-item class="overallColor no-border" style="padding: 25px 35px 20px 35px;" ng-show="(isShowOrHide == 1)">
+            <button class="button button-energized titleText" style="line-height: normal;min-height: initial;height:40px;width:100%;" ng-click="confirmOrder(qryOrderInfo.orderId)">确定收单</button>
+        </ion-item>
+
+    </ion-content>
+    <ion-content class="overallColor" ng-show='!isContentShow'>
+        <div class="nullResult">
+            <div><img src="img/null.png"></div>
+            <p class="mainTextColor">暂无订单数据</p>
+        </div>
+    </ion-content>
+</ion-view>

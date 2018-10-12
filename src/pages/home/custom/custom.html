@@ -42,9 +42,10 @@
           </ion-col>
         </ion-row>
       </button>
-      <button style="font-size: 1.3rem" ion-item clear small (click)="openSpeakerShare(speaker)" *ngIf="!moreFlag">
-        查看更多..
-      </button>
+      <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
     </ion-list>
   </div>
   <ion-item class="newBanner" text-center no-lines *ngIf="(flag || customers.length>=0) && !first_flag">

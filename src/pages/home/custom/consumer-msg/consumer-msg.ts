@@ -9,6 +9,7 @@ import { orderItemPage } from '../../receive-car/order-item/order-item';
 import { PayRecordlPage_ } from '../../../order/pay-record_/pay-record_';
 import { CsbzNave } from '../../../../providers/csbz-nave';
 import { memberOpenPage } from '../../member-mng/member-open/member-open';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -26,6 +27,7 @@ import { memberOpenPage } from '../../member-mng/member-open/member-open';
 })
 export class ConsumerMsgPage {
   isNave: boolean;
+
   public courseTab = [
     { "name": "车辆", "bol": true, 'num': '' },
     { "name": "会员卡", "bol": false, 'num': '' },
@@ -33,6 +35,7 @@ export class ConsumerMsgPage {
   ];
   consumer = { memberId: '', autoId: '' };
   bindUid;
+  isRecieveCar;
   carMsg;
   lastNum = '';
   hasMemberId = false;
@@ -42,10 +45,10 @@ export class ConsumerMsgPage {
   infiniteScroll;
   conacar = { headImg: '' };
   recordCar = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave,public storage: Storage) {
     if (this.navParams.get('consumer')) {
       this.consumer = this.navParams.get('consumer');
-      console.log(this.consumer);
+      this.isRecieveCar= window.localStorage.getItem("showRecieveCar");
     }
     if (this.navParams.get('res')) {
       this.consumer = this.navParams.get('res');
@@ -53,6 +56,14 @@ export class ConsumerMsgPage {
     if (this.navParams.get('memberId')) {
       this.hasMemberId = true;
       this.consumer.memberId = this.navParams.get('memberId');
+    }
+    if (this.navParams.get('mId')) {//从扫牌接车的最近消费的查看详情跳转过来的
+      this.hasMemberId = true;
+      this.consumer.memberId = this.navParams.get('mId');
+      for(var i=0;i<this.courseTab.length;i++){
+        this.courseTab[i].bol = false;
+      }
+      this.courseTab[this.courseTab.length-1].bol = true;
     }
     this.isNave = this.csbzNave.isNave(this.navCtrl.getViews().length);
   }

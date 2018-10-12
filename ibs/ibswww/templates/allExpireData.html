@@ -1,0 +1,74 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="item-input-inset" style="padding: 5.5px 0px;">
+            <div class="item-input-wrapper" style="-webkit-box-flex:1;height:32px;margin:0px auto; -webkit-flex: 0.6 0;-moz-box-flex: 1;-moz-flex: 0.6 0;-ms-flex: 0.6 0;flex: 0.6 0;">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="search" input-uppercase ng-model="search.licenseNo" ng-change="research(search.licenseNo)" placeholder="输入车牌号进行查询" style="width:100%">
+                <i class="icon  ion-ios-close-outline placeholder-icon" style="right:0px;" ng-if="search.licenseNo " ng-click="search.licenseNo  = ''"></i>
+            </div>
+        </div>
+    </ion-nav-title>
+
+    <ion-content class="overallColor">
+        <div class="selectWrap">
+            <div class="row">
+                <div class="col col-50">
+                    <div class="selectBox">
+                        <select name="" id="" ng-model="search.sort" ng-init='search.sort="0"' ng-change="changeOrder(search.sort)">
+                            <option value="0">按到期时间升序</option>
+                            <option value="1">按到期时间降序</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col col-50">
+                    <div class="selectBox">
+                        <select ng-model="search.companyName" ng-change='changeCompany(search.companyName)' ng-options="x.insuranceComId as x.companyName for x in comList "></select>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+        <ion-list>
+            <div class="nullResult" ng-if="!insuranceList" style="margin-top:20%">
+                <div><img src="img/01.png"></div>
+                <p class="mainTextColor changeColor">暂无车险到期数据</p>
+            </div>
+            <div ng-repeat="x in insuranceList" style="margin-top: 1rem;">
+                <div class="item no-border no-padding">
+                    <div class="titleText" style="padding:10px 0px; position:relative;border-bottom:1px solid;border-color: #ddd;">
+                        <span ng-class="x.isNewEnergy ? 'newCarNum' : 'ordinaryCarNum' ">{{x.licenseNo}}</span>
+                        <div class="stateTags">
+                            <span>期</span> {{x.expireDate}}
+                        </div>
+                    </div>
+                    <div class="item item-icon-right mainText runOutItem" style="padding:5px;" ng-click="goSelectSurrence(x.cityCode,x.licenseNo)">
+                        <div class="row">
+                            <div class="col">
+                                <img src="img/recognizee.png" style="vertical-align: text-top;width: 15px;"></i> 被保人姓名： <span class="mainTextColor"> {{x.insuredName}} </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <img src="img/phone.png" style="vertical-align: text-top;width: 15px;"> 手机号码： <span ng-show='x.insuredMobile' class="mainTextColor">{{x.insuredMobile}} </span>
+                                <span ng-show='!x.insuredMobile' class="mainTextColor">无 </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <img src="img/company.png" style="vertical-align: text-top;width: 15px;"> 投险公司：<span class="mainTextColor"> {{x.companyName}}</span>
+                            </div>
+                        </div>
+                        <i class="icon ion-ios-arrow-right"></i>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div style="height:20px;"></div>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

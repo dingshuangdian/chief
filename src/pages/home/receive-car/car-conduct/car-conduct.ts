@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams, ModalController, PopoverController, ToastController, App } from 'ionic-angular';
 import { OrderEditSelectPage } from '../order-edit/order-edit-select/order-edit-select';
 import { carEditPage } from '../car-edit/car-edit';
@@ -78,7 +78,7 @@ export class carConductPage {
       mobileNumber: ''
     },
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public csModal: CsModal, public websites: WebSites, public popoverCtrl: PopoverController, public toastCtrl: ToastController, public csbzNave: CsbzNave, public app: App) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public csModal: CsModal, public websites: WebSites, public popoverCtrl: PopoverController, public toastCtrl: ToastController, public csbzNave: CsbzNave, public app: App, public changeDetectorRef: ChangeDetectorRef) {
     this.isNave = this.csbzNave.isNave(this.navCtrl.getViews().length);
   }
   ionViewDidLoad() {
@@ -236,6 +236,7 @@ export class carConductPage {
         list[i].bol = true;
       }
     }
+    this.changeDetectorRef.detectChanges();
 
   }
   showSelect(type) {
@@ -270,6 +271,7 @@ export class carConductPage {
       this.flag = true;
       this.title = "点击收起";
     }
+    this.changeDetectorRef.detectChanges();
   }
   goCardEdit() {
     let $this = this;

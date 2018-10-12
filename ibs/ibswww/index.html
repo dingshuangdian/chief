@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html style="font-size: 62.5%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!--ionic/datepicker js-->
+    <script src="lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- photoswipe -->
+    <link rel="stylesheet" href="css/photoswipe.css">
+    <link rel="stylesheet" href="css/default-skin/default-skin.css">
+    <script src="js/photoswipe.js"></script>
+    <script src="js/photoswipe-ui-default.min.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/iov-svc-regions.js"></script>
+    <script src="js/iov-webui-select.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/controllers/BSAppCtrl.js"></script>
+    <script src="js/controllers/AllExpireDataCtrl.js"></script>
+    <script src="js/controllers/PersonalCenterCtrl.js"></script>
+    <script src="js/controllers/InsureProgressCtrl.js"></script>
+    <script src="js/controllers/selectInsuranceCtrl.js"></script>
+    <script src="js/controllers/InsuranceDetailCtrl.js"></script>
+    <script src="js/library.js"></script>
+</head>
+
+<body ng-app="starter">
+    <ion-nav-bar class="bar-positive" align-title="center">
+        <ion-nav-back-button style="width: 50px; text-align: left;">
+            {{}}
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="BSApp"></ion-nav-view>
+</body>
+
+</html>

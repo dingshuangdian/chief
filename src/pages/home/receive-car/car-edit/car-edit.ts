@@ -1,5 +1,9 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
+<<<<<<< HEAD
 import { NavController, NavParams, ToastController, Events } from 'ionic-angular';
+=======
+import { NavController, NavParams, ToastController, Platform, Events } from 'ionic-angular';
+>>>>>>> ed7c74793070e7cf352bd8473a401b7e1c0f9001
 import { carTypePage } from '../car-type/car-type';
 import { ProvincesPage } from '../../../other/provinces/provinces';
 import { CsModal } from '../../../../providers/cs-modal';
@@ -41,7 +45,17 @@ export class carEditPage {
 
 
   callback: any;
+<<<<<<< HEAD
   constructor(public navCtrl: NavController, public navParams: NavParams, public csModal: CsModal, public websites: WebSites, public toastCtrl: ToastController, public csbzNave: CsbzNave, public changeDetectorRef: ChangeDetectorRef, public events: Events) {
+=======
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public events: Events,
+    public csModal: CsModal, public websites: WebSites,
+    public toastCtrl: ToastController, public csbzNave: CsbzNave,
+    public changeDetectorRef: ChangeDetectorRef,
+    public platform: Platform) {
+>>>>>>> ed7c74793070e7cf352bd8473a401b7e1c0f9001
     this.callback = this.navParams.get('callback');
   }
   ngAfterViewChecked() {
@@ -75,7 +89,6 @@ export class carEditPage {
           this.selectCarNum.memberId = this.selectCar.memberId;
         });
       } else {
-
         this.carInfo.provinces = this.selectCar.plateNumber.substr(0, 1);
         this.carInfo.plateNumber = this.selectCar.plateNumber.substr(1);
         this.combinationCarType(this.selectCar);
@@ -89,10 +102,8 @@ export class carEditPage {
         this.selectCarNum.currentMileage = this.selectCar.currentMileage || 0;
         this.selectCarNum.engineNo = this.selectCar.engineNo || '';
         this.selectCarNum.plateNumber = this.selectCar.plateNumber || '';
-
         this.selectCar.autoImg && this.selectCar.autoImg.forEach(element => {
           this.imageUrl.push({ url: WebConfig.img_path.concat(element.imgUrl), imgId: element.imgId })
-
         });
 
         this.selectCarNum.vinCode = this.selectCar.vinCode || '';
@@ -235,6 +246,9 @@ export class carEditPage {
       })
     }
   }
+
+
+
   delectP(item, i) {
     if (item.imgId) {
       this.websites.httpPost("deleteAutoImage", { imgId: item.imgId }).subscribe(res => {
@@ -246,18 +260,21 @@ export class carEditPage {
     }
     this.changeDetectorRef.detectChanges();
   }
-  selectPicture() {
+  selectPicture(index) {
     this.urlString = [];
     this.imageUrl.forEach(element => {
       if (element.imgId) {
         this.urlString.push({ "url": element.url });
+      } else {
+        let baseSrc = element.url.split(",")[1];
+        this.urlString.push({ "src": baseSrc });
       }
     });
     if (this.urlString.length == 0) {
       return;
     }
 
-    cordova.plugins.PhotoView.pushUrl({ "url": this.urlString }, (res) => {
+    cordova.plugins.PhotoView.show({ imageArr: this.urlString, index: index }, (res) => {
       console.log(res);
     }, (error) => {
       console.log(error);

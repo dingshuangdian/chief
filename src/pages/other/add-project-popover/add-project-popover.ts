@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ViewController, ToastController } from 'ionic-angular';
 
 
@@ -10,7 +10,7 @@ export class addProjectPopoverComponent {
 
   addProject: any = { project: true, service: true };
 
-  constructor(public viewCtrl: ViewController, public toastCtrl: ToastController) {
+  constructor(public viewCtrl: ViewController, public toastCtrl: ToastController,private changeDetectorRef:ChangeDetectorRef) {
 
   }
 
@@ -24,7 +24,10 @@ export class addProjectPopoverComponent {
       this.viewCtrl.dismiss();
   }
 
+  tapChange() {
+    this.changeDetectorRef.detectChanges();
 
+  }
   presentToast() {
     let toast = this.toastCtrl.create({
       message: '产品和工时必须选择一个',

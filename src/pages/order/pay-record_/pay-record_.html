@@ -24,7 +24,7 @@
       </ion-select>
     </ion-item>
   </ion-list>
-  <div class="t" *ngIf="hasB=='1'">
+  <div class="t" *ngIf="hasB=='1'&&showB">
     <div class="course_tabBox" *ngFor="let tab of courseTab">
       <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name        
                     ,courseTab)">{{tab.name}}

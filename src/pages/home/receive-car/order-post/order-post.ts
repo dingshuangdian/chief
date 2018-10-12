@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Navbar, Events, ViewController, Tabs, App} from 'ionic-angular';
 import { WebSites } from '../../../../providers/web-sites';
-import { WebConfig } from '../../../../providers/web-config';
 import { CsbzNave } from '../../../../providers/csbz-nave';
-import { OrderPage } from '../../../order/order';
 import { receiveCarPage } from '../receive-car';
+import { UserData } from '../../../../providers/user-data';
+
 
 
 
@@ -35,7 +35,7 @@ export class orderPostPage {
 
   auto: any = { plateNumber: "", biEdate: "", currentMileage: "", vinCode: "", engineNo: "", autoMemo: "", auditDate: "" }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public webSites: WebSites, public csbzNave: CsbzNave, public events: Events,private app:App) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public webSites: WebSites, public csbzNave: CsbzNave, public userData: UserData,public events: Events,private app:App) {
     this.orderId = this.navParams.get("orderId");
     this.autoId = this.navParams.get("autoId");
     this.pickupMileage = this.navParams.get('pickupMileage');
@@ -89,13 +89,13 @@ export class orderPostPage {
       this.goOrderList();
     });
   }
-
   goInsurance() {
-    cordova.BSTool.pushBSView({ "lgiName": "chepu123", "lgiPwd": "chepu123", "firstType": 1, "carNum": this.auto.plateNumber }, (res) => {
-      console.log(res);
+    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1, "carNum": this.auto.plateNumber }, (res) => {
+
     }, (error) => {
       console.log(error);
     })
+
   }
   goBack() {
     if (this.sourceView &&  this.sourceView.component == receiveCarPage) {

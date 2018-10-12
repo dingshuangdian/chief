@@ -19,7 +19,7 @@ export interface customer {
 })
 export class customPage {
   isNave: boolean = false;
-
+  public moreData = true;
   flag: boolean = false;
   moreFlag: boolean = true;
   first_flag: boolean = true;
@@ -54,31 +54,119 @@ export class customPage {
     }
 
   }
-  searchCar(carNo) {
+//   getCarInfo(params) {
+//     let self = this;
+//     return new Promise(function (resolve, reject) {
+//         if (!params.keyWords) {
+//             self.websites.httpPost('findMemberAuto', params, false).subscribe(res => {
+//                 if (!res) {
+//                     self.moreData = false;
+//                     self.customers = [];
+//                     self.flag = false;
+//                     self.first_flag = false;
+//                     resolve();
+//                     return
+//                 }
+//                 for (let i = 0; i < res.length; i++) {
+//                     self.customers.push(res[i]);
+//                 }
+//                 if (res.length < self.seachInfo.pageSize) {
+//                     self.moreData = false;
+//                 } else {
+//                     self.moreData = true;
+
+//                 }
+//                 self.flag = true;
+//                 self.first_flag = false;
+//                 resolve();
+//                 // self.changeDetectorRef.detectChanges();
+//             })
+//         } else {
+//             self.searchCar(params.keyWords);
+//         }
+//     })
+// }
+// addInput(carNo) {
+//   this.seachInfo.pageNo = 1;
+//   this.customers = [];
+//   this.searchCar(carNo.value);
+// }
+// searchCar(carNo) {
+//   if (carNo) {
+//       this.seachInfo.keyWords = carNo;
+//   }
+//   let self = this;
+//   return new Promise(function (resolve, reject) {
+//       self.websites.httpPost('findMemberAuto', self.seachInfo, false).subscribe(res => {
+//           if (!res) {
+//               self.moreData = false;
+//               self.customers = [];
+//               self.flag = false;
+//               self.first_flag = false;
+//               resolve();
+//               return
+//           }
+//           for (let i = 0; i < res.length; i++) {
+//               self.customers.push(res[i]);
+//           }
+//           if (res.length < self.seachInfo.pageSize) {
+//               self.moreData = false;
+//           } else {
+//               self.moreData = true;
+
+//           }
+//           self.flag = true;
+//           self.first_flag = false;
+//           resolve();
+
+//           //self.changeDetectorRef.detectChanges();
+//       })
+//   })
+// }
+searchCar(carNo) {
     if (carNo) {
-      this.seachInfo.keyWords = carNo;
+        this.seachInfo.keyWords = carNo;
     }
     let seachInfo = {
-      keyWords: this.seachInfo.keyWords,
-      // pageSize: 10,
-      // pageNo: this.seachInfo.pageNo
+        keyWords: this.seachInfo.keyWords,
+        pageSize: 20,
+        pageNo: this.seachInfo.pageNo
     }
     this.websites.httpPost('findMemberAuto', seachInfo, false).subscribe(res => {
-      if (res != null) {
-        this.customers = res;
-        this.flag = true;
-        this.first_flag = false;
-      } else {
-        this.customers = [];
-        this.flag = false;
-        this.first_flag = false;
+        if (res != null) {
+            this.customers = res;
+            this.flag = true;
+            this.first_flag = false;
+        } else {
+            this.customers = [];
+            this.flag = false;
+            this.first_flag = false;
 
-      }
-
-      this.changeDetectorRef.detectChanges();
+        }
+        this.changeDetectorRef.detectChanges();
     })
-
-  }
+}
+//    //上拉刷新
+//    doInfinite(infiniteScroll) {
+//     this.seachInfo.pageNo++;
+//     if (!this.seachInfo.keyWords) {
+//         this.getCarInfo(this.seachInfo)
+//             .then(() => {
+//                 infiniteScroll.complete();
+//                 if (!this.moreData) {
+//                     infiniteScroll.enable(false);
+//                 }
+//             });
+//     } else {
+//         this.searchCar(this.seachInfo.keyWords)
+//             .then(() => {
+//                 infiniteScroll.complete();
+//                 if (!this.moreData) {
+//                     infiniteScroll.enable(false);
+//                 }
+//             });
+//     }
+// }
   closewin() {
     this.csbzNave.closewin();
   }

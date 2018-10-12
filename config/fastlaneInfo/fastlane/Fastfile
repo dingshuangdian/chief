@@ -1,0 +1,85 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+IPA_SCHEME = "CZBS"
+
+IPA_BUNDLEID = "com.chief.storeI"
+
+IPA_PROVISION = "storeI-PF"
+
+# 蒲公英api_key和user_key
+pgyer_apiKey  = "1ca3faca7f08da22cd759caa8552eca8"
+pgyer_userkey = "4f106e4b89ad8d189ef3a9b9e3c0ed9e"
+
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :custom_lane do
+    # add actions here: https://docs.fastlane.tools/actions
+  end
+
+  lane :release do
+    increment_build_number_in_plist(target: IPA_SCHEME)
+    outputDir = "~/Desktop/payer/#{IPA_SCHEME}"
+    outputName = "#{IPA_SCHEME}-#{Time.now.strftime("%y%m%d %H:%M:%S")}"
+    gym(
+      export_method: "enterprise",
+      clean: true,
+      scheme:"#{IPA_SCHEME}",
+      configuration:"Release",
+      output_directory:outputDir,
+      output_name: outputName,
+      include_bitcode: false,
+      include_symbols: true,
+      export_xcargs: "-allowProvisioningUpdates",
+      silent:true,
+      export_options: {
+          provisioningProfiles: { 
+            "#{IPA_BUNDLEID}" => "#{IPA_PROVISION}"
+          }
+        }
+      )
+  end
+
+  lane :beta do 
+    increment_build_number_in_plist(target: IPA_SCHEME)
+    outputDir = "~/Desktop/payer/#{IPA_SCHEME}"
+    outputName = "#{IPA_SCHEME}-#{Time.now.strftime("%y%m%d %H:%M:%S")}"
+    gym(
+      export_method: "enterprise",
+      clean: true,
+      scheme:"#{IPA_SCHEME}",
+      configuration:"Release",
+      output_directory:outputDir,
+      output_name: outputName,
+      include_bitcode: false,
+      include_symbols: true,
+      export_xcargs: "-allowProvisioningUpdates",
+      silent:true,
+      export_options: {
+          provisioningProfiles: { 
+            "#{IPA_BUNDLEID}" => "#{IPA_PROVISION}"
+          }
+        }
+      )
+      pgyer(
+      api_key: pgyer_apiKey, 
+      user_key: pgyer_userkey,
+      update_description: "update by fastlane")
+  end
+
+end

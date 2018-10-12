@@ -1,0 +1,376 @@
+<!--
+  Generated template for the PickupCarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>扫牌接车</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="light" (click)="scanner()">
+        <img src="assets/imgs/icon-scan.png" alt="">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg">
+  <div *ngIf='!noResultFlag'>
+    <!-- 车牌 -->
+    <ion-list class="plateNum" no-margin>
+      <div text-center (click)="EditPlatnum()">
+        <img src="assets/imgs/platenum-bg.png" alt="">
+        <p>{{plateNumber}}</p>
+      </div>
+      <p text-center [hidden]="isFlag">
+        <span>
+          {{olduserInfos.automakeName==null?'':olduserInfos.automakeName}}
+          {{olduserInfos.automodelName==null?'':olduserInfos.automodelName}}
+          {{olduserInfos.autotypeName==null?'':olduserInfos.autotypeName}}
+        </span>
+        <!-- <button (click)="toCarEdit()">[&nbsp;编辑&nbsp;]</button> -->
+      </p>
+    </ion-list>
+    <!-- 新用户 -->
+    <ion-list class="newCar" no-margin *ngIf="isFlag">
+      <ion-grid no-padding padding-horizontal class="bg-white row-distance">
+        <ion-row>
+          <div class="colName">
+            车 牌 号 码
+          </div>
+          <ion-col class="carNum">
+            <ion-input [(ngModel)]="plateNumber" disabled></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="carType">
+          <div>
+            车 辆 型 号
+          </div>
+          <ion-col class="colEdit">
+            <button no-padding no-margin ion-button clear (click)="toCarEdit()" text-nowrap>{{newuserInfos.autotypeName}}</button>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="colName">
+            联 系 电 话
+          </div>
+          <ion-col>
+            <ion-input placeholder="请填写车主联系电话" 
+            type="phone" 
+            [(ngModel)]="newuserInfos.mobileNumber"
+            (ngModelChange)="changeMobileNumber()"
+          ></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="colName">
+            车 主 姓 名
+          </div>
+          <ion-col>
+            <ion-input placeholder="请填写车主姓名" [(ngModel)]="newuserInfos.memberName"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div [hidden]='lmoreFlag'>
+        <ion-grid no-padding padding-horizontal class="bg-white row-distance">
+            <ion-row class="sex" (tap)="tapChange($event)">
+              <div>
+                车 主 性 别
+              </div>
+              <ion-col>
+                <ion-list radio-group no-margin no-padding [(ngModel)]="newuserInfos.memberSex">
+                  <ion-item no-padding no-margin no-border>
+                    <ion-radio value="1"></ion-radio>
+                    <ion-label>男</ion-label>
+                  </ion-item>
+                  <ion-item no-padding no-margin no-border>
+                    <ion-radio value="0"></ion-radio>
+                    <ion-label>女</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+            <ion-item no-padding no-margin no-border class="memo">
+                <ion-label stacked>备 注</ion-label>
+              <ion-textarea no-margin placeholder="请填写备注信息" [(ngModel)]="newuserInfos.memo" ></ion-textarea>
+            </ion-item>
+        </ion-grid>
+        <ion-grid no-padding padding-horizontal class="bg-white row-distance">
+          <ion-row>
+            <div class="colName">
+              车 架 号
+            </div>
+            <ion-col class="carNum">
+              <ion-input placeholder="请填写车架号" [(ngModel)]="newuserInfos.vinCode"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <div class="colName">
+              发 动 机 号
+            </div>
+            <ion-col class="colEdit">
+              <ion-input placeholder="请填写发动机号" text-nowrap [(ngModel)]="newuserInfos.engineNo"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <div class="colName">
+              首 次 里 程
+            </div>
+            <ion-col>
+              <ion-input placeholder="请填写首次入场里程数" [(ngModel)]="newuserInfos.createMileage"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <div class="colName">
+              保 养 里 程
+            </div>
+            <ion-col>
+              <ion-input placeholder="请填写最近保养里程数" [(ngModel)]="newuserInfos.currentMileage"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <div class="colName">
+              保 险 日 期
+            </div>
+            <ion-col>
+              <ion-datetime no-padding no-margin
+                displayFormat="YYYY-MM-DD" 
+                cancelText="取消" 
+                doneText="确定" 
+                max="2030-12-31" 
+                [(ngModel)]="newuserInfos.biEdate"
+              >
+              </ion-datetime>
+              <ion-icon name="arrow-forward"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <div class="colName">
+              年 审 月 份
+            </div>
+            <ion-col>
+                <ion-datetime no-padding no-margin
+                  displayFormat="YYYY-MM-DD" 
+                  cancelText="取消" 
+                  doneText="确定" 
+                  max="2030-12-31" 
+                  [(ngModel)]="newuserInfos.auditDate"
+                >
+                </ion-datetime>
+                <ion-icon name="arrow-forward"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-item no-padding no-margin no-border class="uploadPic">
+            <ion-row>
+              <ion-col no-padding>车 辆 图 片</ion-col>
+              <ion-col no-padding text-right>{{imageUrl.length}}<i>/5</i></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col align-self-center *ngFor="let item of imageUrl;let i=index" (press)="pressEvent($event)">
+                <ion-thumbnail tappable (click)="selectPicture(i)">
+                  <img *ngIf="imageUrl.length>0" src={{item.url}} (tap)="tapEvent($event)" class="auto-image" [style.height]="width" />
+                </ion-thumbnail>
+                <img class="red-point" *ngIf="imageUrl.length>0 && press" src="assets/imgs/delete.png" (click)="delectP(item,i)">
+              </ion-col>
+              <ion-col align-self-center [hidden]='imageUrl.length >= 5'>
+                <ion-thumbnail tappable (click)="getPicture()">
+                  <img src="assets/imgs/padd.png" class="auto-image" />
+                </ion-thumbnail>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-grid>
+      </div>
+      <div class="operate">
+        <button [hidden]="!lmoreFlag" (click)="lMoreFlag()">
+          <img src="assets/imgs/icon-edit.png" alt="">
+          <span>完善更多信息</span>
+        </button>
+        <button [hidden]="lmoreFlag" (click)="lMoreFlag()">
+          <span>收起更多信息</span>
+          <img src="assets/imgs/icon-more.png" alt="">
+        </button>
+        <button ion-button class="saveBtn" (click)="saveBtn()">保存</button>
+      </div>
+    </ion-list>
+    <!-- 老用户 -->
+    <ion-list no-margin class="recordCar" *ngIf="!isFlag">
+      <ion-grid no-padding class="bg-white row-distance">
+        <!-- 车主信息 -->
+        <ion-list no-margin class="carOwner">
+          <div padding-horizontal class="title hasBB">
+            <span>车主信息</span>
+            <button float-right (click)="carOwnerMsgPop()">[编辑]</button>
+          </div>
+          <ion-grid padding-horizontal>
+            <ion-row>
+              <div>车主姓名：</div>
+              <ion-col>{{olduserInfos.memberName}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <div>联系电话：</div>
+              <ion-col>{{olduserInfos.mobileNumber}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-list>
+        <!-- 最近消费 -->
+        <ion-list no-margin padding-horizontal class="recentConsum" *ngIf="olduserInfos && olduserInfos.order">
+          <ion-row text-justify (click)="recentConsum()">
+            <ion-col>
+              <span>最近消费：</span>
+              <span>{{olduserInfos.order.settlementTime}}</span>
+              <span>，消费</span>
+              <span style="color: #FF6600;">{{olduserInfos.order.orderAmount}}</span>
+              <span>元</span>
+            </ion-col>
+            <img src="assets/imgs/icon-part.png" alt="">
+          </ion-row>
+          <div [hidden]='!orderFlag'>
+            <ion-grid no-padding text-center>
+              <ion-row style="background-color: #f2f3f8; color: #485265;">
+                <ion-col col-5>
+                  <div>服务项目</div>
+                </ion-col>
+                <ion-col>
+                  <div class='b'>价格</div>
+                </ion-col>
+                <ion-col>
+                  <div class='b'>工时费</div>
+                </ion-col>
+                <ion-col>
+                  <div class='b'>总价</div>
+                </ion-col>
+              </ion-row>
+              <ion-list no-margin style="color: #818998;">
+                <ion-row *ngFor="let ser of olduserInfos.order.services">
+                  <ion-col col-5>
+                    <div class="c">{{ser.serviceName}}</div>
+                  </ion-col>
+                  <ion-col>
+                    <div class='d'>¥{{ser.goodsPrice}}*{{ser.goodsNum}}</div>
+                  </ion-col>
+                  <ion-col>
+                    <div class='d'>¥{{ser.servicePrice}}*{{ser.serviceNum}}</div>
+                  </ion-col>
+                  <ion-col>
+                    <div class='d'>¥{{ser.totalAmount}}</div>
+                  </ion-col>
+                </ion-row>
+              </ion-list>
+            </ion-grid>
+            <div text-right>
+              <span>接车人员：{{olduserInfos.order.pickupUname}}</span>
+              <span>，总价:¥{{olduserInfos.order.orderTotalAmount}}</span>
+              <button (click)="goConsumerMsg(olduserInfos.order.orderId)">[查看详情]</button>
+            </div>
+          </div>
+        </ion-list>
+        <!-- 会员卡 -->
+        <ion-list no-margin padding-horizontal class="mCard" *ngIf="olduserInfos && olduserInfos.mcard && olduserInfos.mcard.mcardNum">
+          <ion-row (click)='mCard()'>
+            <ion-col>
+              <span>会员卡:</span>
+              <span style="color: #FF6600;">{{olduserInfos.mcard.mcardNum}}</span>
+              <span>张，余额合计</span>
+              <span style="color: #FF6600;">{{olduserInfos.mcard.totalbalance}}</span>
+              <span>元</span>
+            </ion-col>
+            <img src="assets/imgs/icon-part.png" alt="">
+          </ion-row>
+          <!-- 简介状态 -->
+          <div class="simple" [hidden]="mCardFlag">
+            <ion-list no-margin>
+              <ion-item no-margin no-padding *ngFor="let mct of olduserInfos.mcard.tips">
+                <ion-row>
+                  <span>卡号</span>
+                  <span style="color: #F60;">{{mct.mcardNo}}</span>
+                  <span>{{mct.text}}</span>
+                </ion-row>
+              </ion-item>
+            </ion-list>
+          </div>
+          <!-- 详情状态 -->
+          <div class="detail" [hidden]="!mCardFlag">
+            <ion-list no-margin>
+              <ion-item no-margin no-padding *ngFor="let mc of olduserInfos.mcard.mcards">
+                <ion-row>
+                  <img class="mcardImg" src="{{img_path}}{{mc?.imageUrl}}">
+                  <ion-col no-padding>
+                    <div class="mcardName">{{mc.mcardName}}({{mc.mcardNo}})</div>
+                    <div class="mcardDate">
+                      <span>有效期:{{mc.stopDate}}</span>
+                      <span>(<i style="color: #F60;font-style: normal;">{{mc.cardStateName}}</i>)</span>
+                    </div>
+                    <div class="mcardBalance">¥{{mc.mcardBalance}}</div>
+                  </ion-col>
+                  <button ion-button *ngIf="mc.cardStateId != 5" (click)="topUp(mc)">充值</button>
+                </ion-row>
+              </ion-item>
+            </ion-list>
+          </div>
+        </ion-list>
+      </ion-grid>
+      <ion-grid no-padding padding-horizontal class="bg-white row-distance insuranceInfo" *ngIf="insuranceInfo">
+        <div class="title">
+          <span>保险信息</span>
+          <img src="" alt="">
+        </div>
+        <ion-grid no-padding>
+          <ion-row>
+            <div>交强险到期：</div>
+            <ion-col>{{insuranceInfo.forceExpireDate}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <div>商业险到期：</div>
+            <ion-col>{{insuranceInfo.businessExpireDate}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-grid>
+      <ion-grid no-padding class="bg-white row-distance carMsg">
+        <div padding-horizontal class="title hasBB">
+          <span>车辆信息</span>
+          <button float-right (click)="goEditCar()">[编辑]</button>
+        </div>
+        <ion-grid no-padding padding-horizontal>
+          <ion-row>
+            <div>当前公里数：</div>
+            <ion-col>{{olduserInfos.currentMileage / 1000}}KM</ion-col>
+          </ion-row>
+          <ion-row>
+            <div>车 架 号：</div>
+            <ion-col>{{olduserInfos.vinCode}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <div>发动机号：</div>
+            <ion-col>{{olduserInfos.engineNo}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <div>年审到期：</div>
+            <ion-col>{{olduserInfos.auditDate}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-grid>
+      <ion-grid no-padding class="bg-white">
+        <ion-row text-center>
+          <ion-col (click)="goWashCar()">
+            <img src="assets/imgs/icon-fastWash.png" alt="">
+            <span>快洗</span>
+          </ion-col>
+          <ion-col (click)="goRecivedCar()">
+            <img src="assets/imgs/icon-pickupCar.png" alt="">
+            <span>接车</span>
+          </ion-col>
+          <ion-col (click)="goCarConduct()">
+            <img src="assets/imgs/icon-repair.png" alt="">
+            <span>维修</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </div>
+  <div class="noResult" *ngIf='noResultFlag'>
+    暂无符合数据
+  </div>
+</ion-content>

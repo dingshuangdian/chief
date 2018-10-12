@@ -1,0 +1,18 @@
+<ion-view>
+    <ion-content style="background: #f8f9fb;">
+        <ion-list>
+            <a class="item" ng-click="showCamera()" style="border: none;height:90px;line-height: 60px;">
+                用户头像：
+                <span class="item-note"><img ng-src="{{headImg}}" ng-style="headImgH"></span>
+            </a>
+            <a class="item" ng-click="changeUserName()" style="margin-top:5px;border: none;line-height:40px;">
+                用户名称：
+                <span class="item-note">{{userName}}</span>
+            </a>
+            <a class="item" ng-click="changeUserMobile()" style="margin-top:5px;border: none;line-height:40px;">
+                手机号码：
+                <span class="item-note">{{userMobile}}</span>
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>

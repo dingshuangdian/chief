@@ -14,7 +14,7 @@ import { resourcesStaticProvider } from '../../providers/resources-static';
 import { CsbzNave } from '../../providers/csbz-nave';
 import { CheckHelpPage } from './check-help/check-help';
 
-
+import { pickupCarPage } from './receive-car/pickup-car/pickup-car';
 
 
 /**
@@ -48,18 +48,17 @@ export class HomePage {
     public RSData: resourcesStaticProvider,
     private csbzNave: CsbzNave) {
     let $this = this;
+    $this.itemList = [
+      { name: "接车", img: "home_03.png", tag: 0 },
+      { name: "预约管理", img: "home_05.png", tag: 1 },
+      { name: "会员管理", img: "home_07.png", tag: 2 },
+      { name: "业务提醒", img: "home_16.png", tag: 3 },
+      { name: "记一笔", img: "home_19.png", tag: 4 },
+      { name: "客户查询", img: "home_22.png", tag: 5 },
+      { name: "查询助手", img: "home_24.png", tag: 6 }
+    ];
     this.RSData.loadPermissionCode(() => {
-      $this.itemList = [
-        { name: "接车", img: "home_03.png", tag: 0 },
-        { name: "预约管理", img: "home_05.png", tag: 1 },
-        { name: "会员管理", img: "home_07.png", tag: 2 },
-        { name: "业务提醒", img: "home_16.png", tag: 3 },
-        { name: "记一笔", img: "home_19.png", tag: 4 },
-        { name: "客户查询", img: "home_22.png", tag: 5 },
-        { name: "查询助手", img: "home_24.png", tag: 6 }
-      ];
-
-      $this.RSData.JdPCode("hasInsur", false).then((msg) => {
+      this.RSData.cxCode().then((msg) => {
         $this.itemList.splice(3, 0, { name: "车险业务", img: "home_09.png", tag: 7 });
         $this.websize.httpPost('getExpireInsuranceList', {}, false).subscribe(res => {
           if (res) {
@@ -73,9 +72,11 @@ export class HomePage {
           if (res) {
             this.unreadMsg = res.unreadMsg;
           }
-        })
-      }, (msg) => { })
+        });
+      }, (msg) => { });
     });
+  }
+  ionViewDidEnter() {
     this.csbzNave.appUpdate();
   }
 
@@ -96,6 +97,7 @@ export class HomePage {
     })
 
   }
+
 
   itemClick(tag) {
     switch (tag) {
@@ -125,29 +127,38 @@ export class HomePage {
         break;
     }
   }
+  pickupCar() {
+    this.navCtrl.push(pickupCarPage, { flag: 1 });
+  }
 
 
   onSignup() {
-    this.RSData.JdPCode("receiveCarMenu").then((msg) => {
+    this.RSData.JdPCode("202003", "2", "202004").then((msg) => {
       this.navCtrl.push(receiveCarPage);
     }, (msg) => { })
   }
   onMemberMng() {
-    this.navCtrl.push(memberMngPage);
+    this.RSData.JdPCode('203001', "1").then((msg) => {
+      this.navCtrl.push(memberMngPage);
+    }, (msg) => { })
+
   }
   onCustom() {
-    this.RSData.JdPCode("storeMemberMenu").then((msg) => {
+    this.RSData.JdPCode("204001", "1").then((msg) => {
       this.navCtrl.push(customPage);
     }, (msg) => { })
   }
   onAppointmentMng() {
-    this.RSData.JdPCode("reservationMenu").then((msg) => {
+    this.RSData.JdPCode("202001", "1").then((msg) => {
       this.navCtrl.push(appointmentMngPage);
     }, (msg) => { });
-
   }
   onRecord() {
-    this.navCtrl.push(RecordPage);
+    this.RSData.JdPCode("208001", "3").then((msg) => {
+      this.navCtrl.push(RecordPage);
+    }, (msg) => {
+
+    });
   }
   onBusinessRemind() {
     this.navCtrl.push(BusinessRemindPage);
@@ -156,23 +167,15 @@ export class HomePage {
     this.navCtrl.push(CheckHelpPage);
   }
   toReceiveCar() {
-    this.navCtrl.push(receiveCarPage);
+    this.RSData.JdPCode("202003", "2", "202004").then((msg) => {
+      this.navCtrl.push(receiveCarPage);
+    }, (msg) => { })
   }
   onCX() {
-    // cordova.BSTool.pushBSView({ "lgiName": this.userData.getLgiName(), "lgiPwd": this.userData.getLgiPwd(), "firstType": 1 }, (res) => {
-    //   console.log(res);
-    // }, (error) => {
-    //   console.log(error);
-    // })
-
-    this.RSData.JdPCode("hasInsur").then((msg) => {
-      cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
-        console.log(res);
-      }, (error) => {
-        console.log(error);
-      })
-    }, (msg) => { });
-
-
+    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
+      console.log(res);
+    }, (error) => {
+      console.log(error);
+    })
   }
 }

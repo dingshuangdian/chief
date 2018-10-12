@@ -168,6 +168,16 @@
     </ion-list>
   </div>
   <pay-type (selectEvent)="selectPay($event)"></pay-type>
+  <div class="meg" [hidden]="!notifys">
+    <h3>通知方式</h3>
+    <div class="meg-btn" style="border-top: 0.55px solid #f0f0f0;">
+      <button ion-button *ngFor="let notify of notifys;let i = index;" [ngClass]="notify.flag?'btnActive':'nobtnActive'" (click)='noticeWay(notify.notifyTag,i)'>{{notify.notifyTypeName}}</button>
+    </div>
+    <div class="notice" [hidden]="noticeFlag">
+      <span style="color:red;">注意：</span>
+      <input type="tel" placeholder="请输入手机号码才能使用短信通知" [(ngModel)]="mobileNumber" (ngModelChange)="btnActive($event)">
+    </div>
+  </div>
   <div class='con-btn'>
     <ion-row class="selectItem">
       <div>

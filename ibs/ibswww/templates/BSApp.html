@@ -1,0 +1,118 @@
+<ion-view view-title="车仆车险" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <div class="buttons">
+            <button ng-if="IBSpj" class="button button-clear" ng-click="toPersonalCenter()">
+                <img src="img/leftbar.png" style="vertical-align: middle;width: 60%;">
+            </button>
+            <button ng-if="!IBSpj" ng-click="backNavi()" class="button back-button button-clear" style="width: 50px; text-align: left;">
+                <i class="icon ion-ios-arrow-back"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <div class="buttons">
+            <button class="button button-clear" ui-sref="newsCentre">
+                <img src="img/message.png" style="vertical-align: middle;width: 60%;" news-red-point="unreadMsg">
+            </button>
+        </div>
+    </ion-nav-buttons>
+    <ion-content class="overallColor">
+        <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+        <div class="explain tr" ng-if="testTag" style="padding: 5px 15px; color: red;">开发：{{testTag}}
+        </div>
+        <div class="item item-button-right mainTextColor explain overallColor no-border" style="padding: 15px 15px">
+            日期：{{currentDate}}
+            <button class="button button-positive button-outline titleText" style="top: 11px; right: 11px; line-height: normal;min-height: initial;padding: 2px 5px;" ng-click="toInsureProgress()">
+            车险进度
+          </button>
+        </div>
+        <div class="tc" style="padding: 20px;">
+            <img src="img/logo1.png" width="50%">
+        </div>
+
+        <div class="row selectItem">
+            <span class="Ititle">车牌号码：</span>
+            <button class="button button-dark button-outline explain icon-right ion-arrow-down-b downBT" style="line-height: normal;min-height: initial;padding:2px;border-color: #9e9fa3;" ng-click="chooseCarRegion()"><span ng-bind="selectedLicense">
+                
+            </span></button>
+            <div class="col no-padding item no-border item-icon-right" style="margin-left: 25px;">
+                <input type="text" autocapitalize="on" ng-model='data.licenseNo' id='licenseNoId' placeholder="请输入车牌号" style="display: inline-block;text-transform: uppercase;height: 24px;width: 100%" />
+                <i class="icon" style="right:0px;" ng-if="data.licenseNo">
+                    <a class="button button-icon ion-ios-close-outline" style="font-size: 15px;" ng-click="data.licenseNo = ''"></a>
+                </i>
+            </div>
+        </div>
+        <div class="row selectItem" style="margin-top: 0;">
+            <span class="Ititle">投保地区：</span>
+            <div>
+                <!-- <select ng-model="data.cityCode">
+                  <option ng-repeat="x in citys" value="{{x.cityCode}}">{{x.cityName}}</option>  
+                </select> -->
+                <select ng-model="data.cityCode" ng-options="x.cityCode as x.cityName for x in citys"></select>
+            </div>
+            <!-- <button class="button button-stable explain" style="line-height: normal;min-height: initial;padding: 2px;" ng-repeat="x in citys">{{x.cityName}}</button> -->
+        </div>
+
+        <ion-item class="overallColor no-border" style="padding: 25px 35px 20px 35px;">
+            <button class="button button-energized titleText" style="line-height: normal;min-height: initial;height:40px;width:100%;" ng-click="nextOperation(licenseNo,cityCode,userId)" ng-disabled="!data.licenseNo">下一步</button>
+        </ion-item>
+        <ion-item class="overallColor no-border" style="padding: 0px 50px;">
+            <button class="button button-positive button-clear titleText" style="width:100%;line-height: normal;min-height: initial;" ng-click="toQuotedPrice()">新车、过户车等转人工报价>></button>
+        </ion-item>
+        <ion-item class="overallColor no-border textCheckboxChange">
+            <ion-checkbox class="no-border " ng-model="textCheckbox" ng-change='change1(textCheckbox)' style="display: inline-block;vertical-align: middle;"></ion-checkbox>
+            <span class="mainTextColor mainText" style="vertical-align: middle;">已认真阅读并同意相关</span>
+            <div style="display:inline-block;vertical-align: middle;">
+                <button class="button button-positive button-clear mainText" style="line-height: normal;min-height: initial;padding: 0px;" ng-click="toExceptionCause()">《免责条款》</button>
+            </div>
+        </ion-item>
+        <ion-item class="overallColor no-border row" style="padding: 0px 45px 15px;">
+            <div class="col">
+                <hr width=100% size=1>
+            </div>
+            <div class="col titleText">车险到期提醒</div>
+            <div class="col">
+                <hr width=100% size=1>
+            </div>
+        </ion-item>
+        <ion-list>
+            <div class="nullResult" ng-if="!insuranceList" style="margin-top: 0px">
+                <div><img src="img/01.png"></div>
+                <p class="mainTextColor changeColor">暂无车险到期数据</p>
+            </div>
+            <div ng-repeat="x in insuranceList">
+                <div class="item no-border no-padding">
+                    <div class="titleText" style="padding:10px 0px; position:relative;border-bottom:1px solid;border-color: #ddd;">
+                        <span ng-class="x.isNewEnergy ? 'newCarNum' : 'ordinaryCarNum' ">{{x.licenseNo}}</span>
+                        <div class="stateTags">
+                            <span>期</span> {{x.expireDate}}
+                        </div>
+                    </div>
+                    <div class="item item-icon-right mainText runOutItem" style="padding:5px;" ng-click="goSelectSurrence(x.cityCode,x.licenseNo)">
+                        <div class="row">
+                            <div class="col">
+                                <img src="img/recognizee.png" style="vertical-align: text-top;width: 15px;"></i> 被保人姓名： <span class="mainTextColor"> {{x.insuredName}} </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <img src="img/phone.png" style="vertical-align: text-top;width: 15px;"> 手机号码： <span ng-show='x.insuredMobile' class="mainTextColor">{{x.insuredMobile}} </span>
+                                <span ng-show='!x.insuredMobile' class="mainTextColor">无 </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <img src="img/company.png" style="vertical-align: text-top;width: 15px;"> 投险公司：<span class="mainTextColor"> {{x.companyName}}</span>
+                            </div>
+                        </div>
+                        <i class="icon ion-ios-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div style="height:20px;"></div>
+            </div>
+            <a ng-if="insuranceList" class="button buttonCss button-energized" ui-sref='allExpireData' style="width: 55%;margin: 0px auto;display: block;">查看全部到期车辆</a>
+            <div style="height:20px;"></div>
+        </ion-list>
+    </ion-content>
+</ion-view>

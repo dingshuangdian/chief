@@ -133,7 +133,7 @@ export class orderItemPage {
   }
 
   getRecord(autoId) {
-    this.Websites.httpPost('findOrderInfoByAutoId', { autoId: autoId },false).subscribe(res => {
+    this.Websites.httpPost('findOrderInfoByAutoId', { autoId: autoId }, false).subscribe(res => {
       if (res) {
         if (res.count4Completed) {
           if (res.count4Completed.length > 0) {
@@ -153,10 +153,10 @@ export class orderItemPage {
         }
       }
     })
-  }true
+  } true
   //获取接车信息
   findService(memberId?, callback?) {
-    this.servicsData.loadService(memberId,true).then(res => {
+    this.servicsData.loadService(memberId, true).then(res => {
 
       if (res['mcardServices']) this.mcardServices = res['mcardServices'];
       if (res['services']) this.servicesList = res['services'];
@@ -167,7 +167,7 @@ export class orderItemPage {
   //获取客户信息
   findmember(memberId, callback?) {
     let params = { memberId: memberId, auto: true }
-    this.Websites.httpPost('findmember', params,false).subscribe(res => {
+    this.Websites.httpPost('findmember', params, false).subscribe(res => {
       res.autoId = this.customer.autoId;
       this.amountUnpaid = res.suspendedMoney.amountUnpaid;
       if (res.hasOwnProperty('autos') && res.autos.length >= 0) {
@@ -195,13 +195,13 @@ export class orderItemPage {
 
   //获取默认省份
   findStoreExt() {
-    this.Websites.httpPost('findStoreExt', {},false).subscribe(res => {
+    this.Websites.httpPost('findStoreExt', {}, false).subscribe(res => {
       this.carInfo.provinces = res.defCtiyPrefix;
     })
   }
 
   getBookOrder() {
-    this.Websites.httpPost('getBookOrder', { orderId: this.navParams.get("orderId") },false).subscribe(res => {
+    this.Websites.httpPost('getBookOrder', { orderId: this.navParams.get("orderId") }, false).subscribe(res => {
       this.findService(this.customer.memberId, () => {
 
         var allServices = this.mcardServices.concat(this.servicesList)
@@ -236,9 +236,9 @@ export class orderItemPage {
   }
 
   InsuranceQryInfo(licenseNo) {
-    this.RSData.JdPCode("hasInsur", false).then((msg) => {
+    this.RSData.cxCode().then((msg) => {
       if (licenseNo) {
-        this.Websites.httpPost('InsuranceQryInfo', { licenseNo: licenseNo },false).subscribe(res => {
+        this.Websites.httpPost('InsuranceQryInfo', { licenseNo: licenseNo }, false).subscribe(res => {
           this.qryInfo = res;
         })
       } else {

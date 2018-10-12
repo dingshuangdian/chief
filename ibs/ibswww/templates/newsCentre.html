@@ -1,0 +1,33 @@
+<ion-view view-title="消息中心">
+    <ion-content class="overallColor" ng-show='mesShow'>
+        <ion-list>
+            <div class="card titleTextColor" style="margin: 10px 10px 15px;" ng-repeat="news in newsList">
+                <div class="row">
+                    <div class="col titleText">
+                        保险订单通知<span ng-show="news.readStatus==0" style="color:#FC5F3C;" class="readtect">未读</span><span ng-show="news.readStatus==1" style="color:#6b6c70;" class="readtect">已读</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col explain mainTextColor">
+                        {{news.msgTime}}
+                    </div>
+                </div>
+                <div class="row ibsRow">
+                    <div class="col mainText" ng-if="1" ng-bind-html="news.msgText">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="mainText button button-block button-positive button-small button-clear ion-chevron-right icon-right" style="text-align: left;margin: 0"  ng-click="goInsureProgress(news)">查看详情</button>
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+    <ion-content class="overallColor" ng-show='!mesShow'>
+        <div class="nullResult">
+            <div><img src="img/03.png"></div>
+            <p class="mainTextColor">暂无推送消息</p>
+        </div>
+    </ion-content>
+</ion-view>

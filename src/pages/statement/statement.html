@@ -6,7 +6,8 @@
 -->
 
 <ion-tabs #stateTabs tabsPlacement="top" tabsHighlight="true">
-  <ion-tab [root]="tab1Root" tabTitle="营收汇总" (ionSelect)="tabSelect()"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="收支统计" (ionSelect)="tabSelect()"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="提成统计" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab *ngIf="showYs" [root]="tab1Root" tabTitle="营收汇总" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab *ngIf="showSz" [root]="tab2Root" tabTitle="收支统计" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab *ngIf="showTc" [root]="tab3Root" tabTitle="提成统计" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab *ngIf="!showYs&&!showSz&&!showTc" [root]="tab4Root" tabTitle="禁止访问" (ionSelect)="tabSelect()"></ion-tab>
 </ion-tabs>
