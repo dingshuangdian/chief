@@ -1,0 +1,41 @@
+{
+  "name": "ionic-citypicker",
+  "authors": [
+    "Minh"
+  ],
+  "description": "Ionic CityPicker",
+  "main": [
+    "./dist/ionic-citypicker.min.js"
+  ],
+  "keywords": [
+    "ionic-citypicker",
+    "ionic",
+    "citypicker"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/minh8023/",
+  "ignore": [
+    "node_modules",
+    "demo.gif",
+    "src",
+    ".gitignore",
+    "bower.json",
+    "gulpfile.js",
+    "licence.txt",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "ionic": ">=1.0.0"
+  },
+  "_release": "da60b52636",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "da60b52636a2258786160c2aa33c3002f211d1f3"
+  },
+  "_source": "https://github.com/minh8023/ionic-citypicker.git",
+  "_target": "*",
+  "_originalSource": "ionic-citypicker",
+  "_direct": true
+}

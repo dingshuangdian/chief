@@ -180,6 +180,8 @@ export class WebSites {
         if (msg != '') {
             console.error(msg);
             this.toast("网络异常，请稍后重试");
+            this.events.publish('user:logout');
+            return;
         }
 
 

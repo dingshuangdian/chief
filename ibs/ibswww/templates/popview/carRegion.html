@@ -1,0 +1,22 @@
+<style>
+    .popup-container {
+        top: initial;
+    }
+    
+    .popup-container .popup {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 1);
+    }
+    
+    .row-wrap .col {
+        margin: 5px 0 0px;
+        font-size: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="row row-wrap">
+    <div class="col col-20" ng-class='{isActive:selectedLicense==car.aliasName}' ng-repeat="car in license" ng-click="selectRegion(car);">
+        {{car.aliasName}}
+    </div>
+</div>

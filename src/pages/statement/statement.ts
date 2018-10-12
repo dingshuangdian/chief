@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Tabs, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tabs, Events, ViewController } from 'ionic-angular';
 import { CommissionCountPage } from './commission-count/commission-count';
 import { IncomeCountPage } from './income-count/income-count';
 import { NopromittPage } from './nopromitt/nopromitt';
@@ -14,7 +14,6 @@ import { Storage } from '@ionic/storage';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
 @IonicPage()
 @Component({
   selector: 'page-statement',
@@ -24,13 +23,13 @@ export class StatementPage {
   showYs: boolean = false;
   showSz: boolean = false;
   showTc: boolean = false;
-  permissionData;
+  permissionData = [];
   @ViewChild('stateTabs') tabRef: Tabs;
   tab1Root = IncomeGatherPage;
   tab2Root = IncomeCountPage;
   tab3Root = CommissionCountPage;
   tab4Root = NopromittPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public storage: Storage,public ViewController:ViewController) {
     this.permissionData = JSON.parse(window.localStorage.getItem('permissionData'));
     this.permissionData.forEach(element => {
       if (element.menuId == "202006") {
@@ -56,11 +55,11 @@ export class StatementPage {
       }
     })
   }
-
   ionViewDidLoad() {
+
   }
   ionViewWillEnter() {
-    this.tabSelect()
+    this.tabSelect();
   }
   tabSelect() {
     let tab = this.tabRef.getSelected() || { tabTitle: "" }
@@ -79,5 +78,4 @@ export class StatementPage {
         break;
     }
   }
-
 }

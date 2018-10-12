@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform, Events } from 'ionic-angular';
 import { carTypePage } from '../car-type/car-type';
 import { ProvincesPage } from '../../../other/provinces/provinces';
 import { CsModal } from '../../../../providers/cs-modal';
@@ -19,7 +19,7 @@ export class carEditPage {
   imageData = [];
   imageResult = [];
   urlString = [];
-  press = false; 
+  press = false;
 
   selectCar: any = {};
   selectCarNum = {
@@ -43,6 +43,7 @@ export class carEditPage {
   callback: any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public events: Events,
     public csModal: CsModal, public websites: WebSites,
     public toastCtrl: ToastController, public csbzNave: CsbzNave,
     public changeDetectorRef: ChangeDetectorRef,
@@ -197,7 +198,7 @@ export class carEditPage {
         } else {
           this.navCtrl.pop();
         }
- 
+
       })
     }
   }
@@ -224,6 +225,9 @@ export class carEditPage {
       }
     })
   }
+
+
+
   delectP(item, i) {
     if (item.imgId) {
       this.websites.httpPost("deleteAutoImage", { imgId: item.imgId }).subscribe(res => {

@@ -1,5 +1,5 @@
 import { Component, ElementRef, Renderer, ViewChild } from '@angular/core';
-import { NavController, Events, Tabs } from 'ionic-angular';
+import { NavController, Events, Tabs, App } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { AccountPage } from '../account/account';
@@ -9,10 +9,12 @@ import { StatementPage } from '../statement/statement';
 
 import { WebSites } from '../../providers/web-sites'
 import { receiveCarPage } from '../home/receive-car/receive-car';
+import { pickupCarPage } from '../home/receive-car/pickup-car/pickup-car'; 
 import { CsbzNave } from '../../providers/csbz-nave';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { resourcesStaticProvider } from '../../providers/resources-static';
 import { timeout } from 'rxjs/operators';
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the TabsPage tabs.
  *
@@ -37,10 +39,13 @@ export class TabsPage {
   constructor(public navCtrl: NavController, public Websites: WebSites, private elementRef: ElementRef,
     private renderer: Renderer, private event: Events,
     private csNave: CsbzNave,
+    public appCtrl:App,
     public RSData: resourcesStaticProvider) {
 
   }
   ionViewDidLoad() {
+
+    //this.appCtrl.getRootNav().setRoot(LoginPage);
     // let tabs = this.queryElement(this.elementRef.nativeElement, '.tabbar');
     // this.event.subscribe('hideTabs', () => {
     //   this.renderer.setElementStyle(tabs, 'display', 'none');
@@ -59,15 +64,17 @@ export class TabsPage {
   // queryElement(elem: HTMLElement, q: string): HTMLElement {
   //   return <HTMLElement>elem.querySelector(q);
   // }
-
-
   onScanCarId() {
     this.RSData.JdPCode("202003", "2", "202004").then((msg) => {
       this.tabRef.select(0);
-      this.navCtrl.push(receiveCarPage, { "home": true });
+      // this.navCtrl.push(receiveCarPage, { "home": true });
+      // this.navCtrl.push(pickupCarPage);
+      this.csNave.carIdSacn((id) => {
+        this.navCtrl.push(pickupCarPage, { "id": id });
+      })
+      
     }, (msg) => { })
   }
-
   changeTabs() {
     if (this.tabRef.getIndex(this.tabRef.getSelected()) == 0) {
       return;
@@ -84,7 +91,6 @@ export class TabsPage {
       //   this.tabRef.select(this.oldSelect);
       // })
     }
-
     // this.tabRef.select(this.oldSelect);
     // this.oldSelect = this.tabRef.getIndex(this.tabRef.getSelected());
   }

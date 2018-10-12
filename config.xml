@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="com.chief.store" android-versionCode="113" ios-CFBundleIdentifier="com.chief.storeI" ios-CFBundleVersion="61" version="3.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-packageName="com.chief.store" android-versionCode="111" ios-CFBundleIdentifier="com.chief.storeI" ios-CFBundleVersion="59" version="3.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>CZBS</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -21,7 +21,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <chcp>
-        <config-file url="https://ndmapp.chiefchain.cn/app/www/chcp.json" />
+        <config-file url="https://cptt.chiefchain.cn/www/chcp.json" />
     </chcp>
     <hook src="config/cordovaHooks/before_prepare.js" type="before_prepare" />
     <hook src="config/cordovaHooks/after_platform_add.js" type="after_platform_add" />
@@ -110,5 +110,5 @@
     <plugin name="easton-plugin-nativedownload" />
     <plugin name="easton-plugin-photoview" />
     <plugin name="easton-plugin-insurance" />
-    <engine name="android" spec="~7.0.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>

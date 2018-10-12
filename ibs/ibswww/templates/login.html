@@ -1,0 +1,77 @@
+<ion-view hide-nav-bar='true'>
+    <ion-content scroll="false" class="logoContent">
+       <!--  <div style="height:100%;display: flex;
+    justify-content:center;
+    align-items:Center;">
+            <form ng-submit="doLogin(dataForm)" name="dataForm" novalidate="novalidate" style="margin-top: -20%;">
+                <div class="item no-border" style="text-align: center;background: transparent;margin-bottom: 10%;">
+                    <img src="img/login.png" style=" width: 222px;">
+                </div>
+                <div class="item no-border" style="background: transparent;">
+                    <div class="item-input loginInput" style="border: 1px solid rgb(222, 222, 222);
+        background: rgba(230, 230, 230, 0.55);
+        width: 250px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 25px;position: relative;">
+                        <i class="icon ion-ios-person placeholder-icon userIcon light"></i>
+                        <input type="text" ng-model="loginData.username" autocapitalize="off" placeholder="请输入登录账号" required>
+
+                        <a ng-if='loginData.username' ng-click="loginData.username = ''"> <i class="icon  ion-ios-close-outline placeholder-icon" style="right:0px;color:#fff;"> </i></a>
+                    </div>
+                </div>
+
+                <div class="item no-border" style="background: transparent;">
+                    <div class="item-input loginInput" style="border: 1px solid rgb(222, 222, 222);
+        background: rgba(230, 230, 230, 0.55);
+        width: 250px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 25px;">
+                        <i class="icon ion-ios-unlocked-outline placeholder-icon userIcon light"></i>
+                        <input type="password" ng-model="loginData.password" placeholder="请输入登录密码" required>
+                        <a ng-if='loginData.password' ng-click="loginData.password = ''"> <i class="icon  ion-ios-close-outline placeholder-icon" style="right:0px;color:#fff;"> </i></a>
+                    </div>
+                </div>
+
+
+                <div class="item no-border" style="text-align: center;background: transparent">
+                    <button class="button button-energized btnSubmit" style="line-height: normal;min-height: initial;height:40px;width: 100%; border-radius: 25px;" type="submit" ng-disabled="dataForm.$invalid" ng-model="loginBtn" ng-bind="loginBtn">登录</button>
+                </div>
+            </form>
+        </div> -->
+
+        <ion-scroll style="height:100%">
+            <div style="position: relative;">
+                <div class="itemLogo">
+                    <img src="img/logo.png" alt="">
+                </div>
+                <form ng-submit="doLogin(dataForm)" name="dataForm" novalidate="novalidate">
+                    <div class="item">
+                        <label class="item-input userInput userName">
+                            <i class="icon ion-ios-person placeholder-icon userIcon"></i>
+                            <input type="text" ng-model="loginData.username" placeholder="请输入登录账号" required autocapitalize="off">
+                        </label>
+                    </div>
+                    <div class="item">
+                        <label class="item-input userInput userPW">
+                            <i class="icon ion-ios-unlocked-outline placeholder-icon userIcon"></i>
+                            <input type="password" ng-model="loginData.password" placeholder="请输入登录密码" required>
+                        </label>
+                    </div>
+
+
+                    <div class="itemBtn">
+                        <button class="button allBtnShow btnSubmit" type="submit" ng-disabled="dataForm.$invalid" ng-model="loginBtn" ng-bind="loginBtn"></button>
+                    </div>
+                </form>
+                <!-- <div class="contact">
+                    <a class="telphone-a"><i class="ion-ios-telephone"></i></a>
+                    <div>
+                        联系客服
+                    </div>
+                </div> -->
+            </div>
+        </ion-scroll> 
+    </ion-content>
+</ion-view>

@@ -57,6 +57,14 @@ export class ConsumerMsgPage {
       this.hasMemberId = true;
       this.consumer.memberId = this.navParams.get('memberId');
     }
+    if (this.navParams.get('mId')) {//从扫牌接车的最近消费的查看详情跳转过来的
+      this.hasMemberId = true;
+      this.consumer.memberId = this.navParams.get('mId');
+      for(var i=0;i<this.courseTab.length;i++){
+        this.courseTab[i].bol = false;
+      }
+      this.courseTab[this.courseTab.length-1].bol = true;
+    }
     this.isNave = this.csbzNave.isNave(this.navCtrl.getViews().length);
   }
   ionViewDidLoad() {

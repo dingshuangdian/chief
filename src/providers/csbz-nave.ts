@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { Injectable } from '@angular/core';
-import { Platform, LoadingController, ActionSheetController } from 'ionic-angular';
+import { Platform, LoadingController, ActionSheetController, Events } from 'ionic-angular';
 import { WebSites } from './web-sites';
 import { CsModal } from './cs-modal';
 import { Md5 } from 'ts-md5';
@@ -13,6 +13,7 @@ export class CsbzNave {
 
     constructor(public platform: Platform,
         public websites: WebSites,
+        public events: Events,
         private csModal: CsModal,
         public loadingCtrl: LoadingController,
         public actionSheetCtrl: ActionSheetController, ) {
@@ -203,15 +204,10 @@ export class CsbzNave {
         }
 
         navigator.camera.getPicture(onSuccess, onFail, options);
-
         function onSuccess(imageData) {
-
             var imageInfo: any = {};
-
             imageInfo.imageSrc = "data:image/jpeg;base64," + imageData;
-
             imageInfo.imageBlob = convertBase64UrlToBlob(imageInfo.imageSrc);
-
             if (callback) {
                 callback(imageInfo);
             }
@@ -354,7 +350,7 @@ export class CsbzNave {
 
     checkTelephone(v) {
         //XXX 前端138****8888 也认为正确，后端再对个别处理
-        var regphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        var regphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])(\*|\d){4}\d{4}$/;
         return regphone.test(v);
     };
 

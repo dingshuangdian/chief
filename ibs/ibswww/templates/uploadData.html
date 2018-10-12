@@ -1,0 +1,76 @@
+<ion-view view-title="上传资料">
+    <ion-content class="overallColor mainText titleTextColor">
+
+
+
+        <form ng-submit="uploadOperation()" name="dataForm" novalidate="novalidate">
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">证件上传</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+
+            <div class="light-bg isr-morDetail">
+                <div class="row">
+                    <span class="col">营业执照/身份证正面照</span>
+                </div>
+
+
+                <div class="row">
+                    <div class="col col-33">
+                        <div class="imagFrame" ng-style="IMGH">
+                            <img src="img/id.png" />
+                        </div>
+                    </div>
+                    <div class="col col-33" ng-repeat="item in identityCarId">
+                        <div class="imagFrame" ng-style="IMGH" ng-click="showCamera(item,identityCarId)">
+                            <img ng-src="{{item.imageSrc}}" class="imagFrame1" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col  explainTextColor explain">
+                        企业请上传营业执照/个人请上传身份证正面照，图片要求在手机拍照框内，不反光，并清晰易辨认。
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="height:15px;"></div>
+
+
+
+            <div class="light-bg isr-morDetail">
+                <div class="row">
+                    <span class="col">机动驾驶证上传</span>
+                </div>
+                <div class="row">
+                    <div class="col col-33">
+                        <div class="imagFrame" ng-style="IMGH">
+                            <img src="img/driver.png" />
+                        </div>
+                    </div>
+
+                    <div class="col col-33" ng-repeat="item in vehicleOrCar">
+                        <div class="imagFrame" ng-style="IMGH" ng-click="showCamera(item,vehicleOrCar)">
+                            <img ng-src="{{item.imageSrc}}" />
+                        </div>
+                    </div>
+                    <div class="col col-33 explainTextColor explain">
+                        请上传证件照片，图片要求在手机拍照框内，不反光，并清晰易辨认。
+                    </div>
+                </div>
+            </div>
+
+            <ion-item class="overallColor no-border" style="padding: 25px 35px 20px 35px;">
+                <button class="button button-energized titleText" style="line-height: normal;min-height: initial;height:40px;width:100%;" type="submit" ng-disabled="dataForm.$invalid">提交资料</button>
+            </ion-item>
+
+        </form>
+    </ion-content>
+</ion-view>

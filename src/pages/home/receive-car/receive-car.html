@@ -28,7 +28,7 @@
       <button ion-button (click)="selectItem(1)">
         无牌
       </button>
-      
+
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar class="searchStyle">
@@ -59,9 +59,10 @@
           </ion-col>
         </ion-row>
       </button>
-      <button style="font-size: 1.3rem" ion-item clear small (click)="openSpeakerShare(speaker)" *ngIf="!moreFlag">
-        查看更多..
-      </button>
+      <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
     </ion-list>
     <ion-list no-border-top *ngSwitchCase="'clean'">
       <button ion-item *ngFor="let c of customers" (click)="selectItem(3,c)">
@@ -77,6 +78,10 @@
           </ion-col>
         </ion-row>
       </button>
+      <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
       <button style="font-size: 1.3rem" ion-item clear small (click)="openSpeakerShare(speaker)" *ngIf="!moreFlag">
         暂无符合数据，您可以新增客户..
       </button>
@@ -95,9 +100,13 @@
           </ion-col>
         </ion-row>
       </button>
-      <button style="font-size: 1.3rem" ion-item clear small (click)="openSpeakerShare(speaker)" *ngIf="!moreFlag">
+      <!-- <button style="font-size: 1.3rem" ion-item clear small (click)="openSpeakerShare(speaker)" *ngIf="!moreFlag">
         查看更多..
-      </button>
+      </button> -->
+      <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
     </ion-list>
   </div>
 

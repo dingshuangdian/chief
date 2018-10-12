@@ -1,0 +1,60 @@
+<ion-view view-title="预计收益" hide-back-button="!IBSpj">
+    <ion-nav-buttons side="left">
+        <div class="buttons">
+            <button ng-if="!IBSpj" ng-click="backNavi()" class="button back-button button-clear" style="width: 50px; text-align: left;">
+                <i class="icon ion-ios-arrow-back"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
+    <div class="bar bar-header item-input-inset change" style="position: absolute;top:44px;padding-top: 26px;
+    padding-bottom: 26px;">
+        <div class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" input-uppercase ng-model="search.carNum" placeholder="输入车牌号进行查询">
+            <i class="icon  ion-ios-close-outline placeholder-icon" style="right:0px;" ng-if="search.carNum" ng-click="search.carNum = ''"></i>
+        </div>
+        <button class="button searchButton" ng-click="searchOrder()">查询</button>
+    </div>
+    <ion-content class="grayWbg profitContent">
+        <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+        <ion-list ng-show='!isShow'>
+            <div class="nullResult">
+                <div><img src="img/02.png"></div>
+                <p class="mainTextColor">暂无订单数据</p>
+            </div>
+        </ion-list>
+        <ion-list ng-show='isShow'>
+            <ion-item class="listItem" ng-repeat="item in anticipateProfitDate">
+                <div class="itemWrap">
+                    <a class="topWrap" ng-click="toDetails(item.orderId)">
+                        <div class="flexWrap">
+                            <p class="flexl"><span class="carTitle" ng-class="{greenWbg:item.isNewEnergy==1,blueWbg:item.isNewEnergy==0,grayWbgColor:item.isNewEnergy==-1}">{{item.licenseNo}}</span></p>
+                        </div>
+                        <div class="flexWrap">
+                            <p class="flexl"><i class="ion-imgperson"></i>&nbsp;被保人：<span class="text-gray">{{item.insuredName}} </span></p>
+                            <p class="flexr tr text-gray"><i class="ion-imgclock"></i>&nbsp;{{item.createTime}}</p>
+                        </div>
+                        <div class="flexWrap">
+                            <p class="flexl"><i class="ion-imgagent"></i>&nbsp;跟进人员：<span class="text-gray">{{item.insureAgentUname}} </span></p>
+                        </div>
+                        <div class="flexWrap">
+                            <p class="flexl"><i class="ion-imgcompany"></i>&nbsp;投保公司：<span class="text-gray">{{item.insuranceCompanyName}} </span></p>
+                            <p class="flexr tr text-red">&nbsp;￥{{item.totalAmount||0}}</p>
+                        </div>
+                        <div class="flexWrap">
+                            <p class="flexl"><i class="ion-money"></i>&nbsp;预计收益：
+                                <!--<span class="text-gray">￥{{item.forceTotal}}*{{item.forceCommissionRate}}+￥{{item.businessTotal}}*{{item.businessCommissionRate}}</span>-->
+                            </p>
+                            <p class="flexr tr text-red">&nbsp;￥{{item.netPremium}}</p>
+                        </div>
+                    </a>
+                    <div class="buttonWrap">
+                        <div class="row tc">
+                            <a style="width:100%;" ng-click="toDetails(item.orderId)">查看保单详情</a>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

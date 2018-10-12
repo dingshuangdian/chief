@@ -1,0 +1,51 @@
+<form name="dataForm" novalidate="novalidate">
+    <ion-view view-title="{{whichName}}">
+        <style>
+            .checkbox input:after,
+            .checkbox-icon:after {
+                top: 20%;
+                left: 22%;
+                width: 10px;
+            }
+        </style>
+
+        <ion-nav-buttons side="right">
+            <div class="buttons">
+                <button class="button button-energized" ng-click="keepDeliveryAddress(dataForm);" ng-disabled="dataForm.$invalid">保存</button>
+            </div>
+        </ion-nav-buttons>
+        <ion-content class="grayWbg">
+            <ion-list>
+                <label class="item item-input" style="padding:5px 10px;">
+                    <span class="input-label mainText" style="width:90px;text-align:center;">收件人：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <input type="text" ng-model="data.contacts" required placeholder="请输入收件人姓名" style="padding-right: 0px;">
+                </label>
+                <label class="item item-input" style="padding:5px 10px;">
+                    <span class="input-label mainText" style="width:90px;text-align:center;">联系电话：</span>
+                    <input type="tel" minlength="11" ng-model="data.mobileNumber" required placeholder="请输入收件人电话" style="padding-right: 0px;">
+                </label>
+                <label class="item item-input" style="padding:5px 10px;">
+                    <span class="input-label mainText" style="width:90px;text-align:center;">所在区域：</span>
+                    <input style="text-overflow: ellipsis;padding-right: 0px;background: white;" 
+                    type="text" resultmap="data.addressHeader" readonly="readonly" required iov-select iov-select-regions title="所在区域" options='regionItem' placeholder="请选择" result="data.countyId" class="cityCss" />
+                    <i class="ion ion-chevron-right mainTextColor" style="position:relative;right:7px;"></i>
+                </label>
+                <label class="item item-input" style="padding:10px;">
+                    <span class="input-label mainText" style="width:90px;text-align:center;margin-top: -34px;">详细地址：</span>
+                    <textarea rows="3" class="col mainTextColor" style="border: 1px solid;border-color: #d7d7d7;border-radius: 5px;
+                    padding-left: 10px;resize: none;" ng-model="data.address" required placeholder="请输入收件地址"></textarea>
+                </label>
+                <div class="item item-checkbox mainText mainTextColor" style="padding:10px 5px 10px 35px;border-bottom:none;" ng-click="serDefaultAddress()">
+                    <label class="checkbox" style="padding: 12px 7px;left: 2px;">
+                    <input type="checkbox" ng-checked="data.isDefault" style="width: 18px;height: 18px;">
+                </label> 设置默认地址
+                </div>
+                <ion-item class="no-border" style="padding:5px 10px;margin:10px 0;" ng-show="data.addressId">
+                    <a class="button button-clear button-small mainText remindColor" ng-click="showConfirm()"><i class="ion ion-trash-a"></i> 删除地址</a>
+                </ion-item>
+            </ion-list>
+
+        </ion-content>
+
+    </ion-view>
+</form>

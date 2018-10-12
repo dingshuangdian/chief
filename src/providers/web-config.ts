@@ -101,8 +101,9 @@ export class WebConfig {
                 findautomakes: "/CRUD/CRUD-Q-auto-findautomakes.do",
                 findautomodels: "/CRUD/CRUD-Q-auto-findautomodels.do",
                 findautotypes: "/CRUD/CRUD-Q-auto-findautotypes.do",
-                findautotypeKeyword: "/CRUD/CRUD-Q-auto-findautotypeKeyword.do"
-
+               
+                findautotypeKeyword: "/CRUD/CRUD-Q-auto-findautotypeKeyword.do",
+                findMember4plateNumber: '/CRUD/CRUD-Q-member-findMember4plateNumber.do',
 
         };
         static phone = "4008313400";

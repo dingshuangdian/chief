@@ -1,154 +1,194 @@
 page-member-open-certain {
-  .msg {
-    padding: 10px 16px;
-    background-color: #fff;
-    .name {
-      span {
-        margin-right: 20px;
-      }
-    }
-  }
-  .certain {
-    text-align: center;
-    background-color: #fff;
-    /*border-top: 1px solid #888;*/
-    border-top: 0.55px solid #c8c7cc;
-    button {
-      margin: 8px 1rem !important;
-      height: 43px !important;
-      width: 90px;
-    }
-  }
-  .salecard {
-    background-color: white;
-    padding: 10px 16px;
-    .mcardImg {
-      height: 36px;
-    }
-    ion-label {
-      margin: 8px 0 !important;
-    }
-    ion-col {
-      padding: 0 0 0 15px;
-      .mcardName {
-        font-size: 15px;
-      }
-      .mcardBalance {
-        font-size: 12px;
-        color: #888;
-      }
-    }
-  }
-  .projectD {
-    background-color: #fff;
-    .itemRow {
-      font-weight: bold;
-      line-height: 50px;
-      font-size: 1.7rem;
-      padding-left: 16px;
-    }
-    .projectTitle {
-      padding-left: 16px;
-      div {
-        font-size: 14px;
-        background-color: initial;
-        font-weight: bold;
-        line-height: 30px;
-      }
-      .col {
-        padding: 0 0 0 15px !important;
-        padding-top: 6px !important;
-      }
-    }
-  }
-  .projectItem {
-    padding: 10px 0 10px;
-    .selectItem {
-      padding-left: 16px;
-      margin-bottom: 12px;
-      div {
-        font-size: 14px;
-        background-color: initial;
-        font-weight: bold;
-        line-height: 41px;
-      }
-      .col {
-        padding: 0 20px 0 15px !important;
-      }
-      .input {
-        height: 41px;
-        line-height: 41px;
-        padding: 0 20px 0 10px;
+    .msg {
+        padding: 10px 16px;
         background-color: #fff;
-        border: 1px solid #888;
-        border-radius: 2px;
-        -webkit-box-flex: initial;
-        -webkit-flex: initial;
-        -ms-flex: initial;
-        flex: initial;
-        .text-input {
-          margin: initial;
+        .name {
+            span {
+                margin-right: 20px;
+            }
         }
-      }
     }
-    .right {
-      text-align: right;
-      .personnel {
-        padding: 55px 16px 10px 0;
+    .certain {
+        text-align: center;
+        background-color: #fff;
+        /*border-top: 1px solid #888;*/
+        border-top: 0.55px solid #c8c7cc;
+        button {
+            margin: 8px 1rem !important;
+            height: 43px !important;
+            width: 90px;
+        }
+    }
+    .salecard {
+        background-color: white;
+        padding: 10px 16px;
+        .mcardImg {
+            height: 36px;
+        }
+        ion-label {
+            margin: 8px 0 !important;
+        }
+        ion-col {
+            padding: 0 0 0 15px;
+            .mcardName {
+                font-size: 15px;
+            }
+            .mcardBalance {
+                font-size: 12px;
+                color: #888;
+            }
+        }
+    }
+    .projectD {
+        background-color: #fff;
+        .itemRow {
+            font-weight: bold;
+            line-height: 50px;
+            font-size: 1.7rem;
+            padding-left: 16px;
+        }
+        .projectTitle {
+            padding-left: 16px;
+            div {
+                font-size: 14px;
+                background-color: initial;
+                font-weight: bold;
+                line-height: 30px;
+            }
+            .col {
+                padding: 0 0 0 15px !important;
+                padding-top: 6px !important;
+            }
+        }
+    }
+    .projectItem {
+        padding: 10px 0 10px;
+        .selectItem {
+            padding-left: 16px;
+            margin-bottom: 12px;
+            div {
+                font-size: 14px;
+                background-color: initial;
+                font-weight: bold;
+                line-height: 41px;
+            }
+            .col {
+                padding: 0 20px 0 15px !important;
+            }
+            .input {
+                height: 41px;
+                line-height: 41px;
+                padding: 0 20px 0 10px;
+                background-color: #fff;
+                border: 1px solid #888;
+                border-radius: 2px;
+                -webkit-box-flex: initial;
+                -webkit-flex: initial;
+                -ms-flex: initial;
+                flex: initial;
+                .text-input {
+                    margin: initial;
+                }
+            }
+        }
+        .right {
+            text-align: right;
+            .personnel {
+                padding: 55px 16px 10px 0;
+                .price {
+                    font-size: 16px;
+                }
+                .button {
+                    height: 2em;
+                    margin: 5px 0;
+                }
+            }
+        }
+    }
+    .dangerInfo {
+        color: #f53d3d !important;
+    }
+    .titleColor {
+        color: #888;
+    }
+    .totalClass {
         .price {
-          font-size: 16px;
+            font-size: 18px;
         }
-        .button {
-          height: 2em;
-          margin: 5px 0;
+        padding: 8px 16px;
+        text-align: right;
+    }
+    .inputItem {
+        background-color: #fff;
+        padding: 0px 16px;
+        div {
+            line-height: 46px;
+            width: 60px;
         }
-      }
     }
-  }
-  .dangerInfo {
-    color: #f53d3d !important;
-  }
-  .titleColor {
-    color: #888;
-  }
-  .totalClass {
-    .price {
-      font-size: 18px;
+    .otherSelect {
+        background-color: #fff;
+        padding: 0px 16px;
+        div {
+            line-height: 46px;
+            width: 60px;
+        }
+        .col {
+            padding: 0 5px;
+        }
+        .saleU {
+            line-height: 46px;
+            color: #888;
+        }
+        .isSale {
+            color: #000;
+        }
+        ion-datetime {
+            padding: initial;
+        }
+        ion-icon {
+            line-height: 46px;
+            color: #888;
+        }
     }
-    padding: 8px 16px;
-    text-align: right;
-  }
-  .inputItem {
-    background-color: #fff;
-    padding: 0px 16px;
-    div {
-      line-height: 46px;
-      width: 60px;
+    .meg {
+        background-color: #fff;
+        margin-top: 10px;
+        h3 {
+            font-size: 19px;
+            height: 55px;
+            line-height: 55px;
+            margin-left: 15px;
+            -webkit-margin-before: 10px;
+            -webkit-margin-after: -5px;
+        }
+        .meg-btn {
+            padding: 5px;
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            button {
+                width: 40%;
+                background-color: #f0f0f0;
+                color: #333333;
+                font-weight: bolder;
+            }
+            .btnActive {
+                background: #ffb413;
+                color: #fff;
+            }
+            .nobtnActive {
+                background: #f0f0f0;
+                color: #000;
+            }
+        }
+        .notice {
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            input {
+                text-indent: 5px;
+            }
+        }
     }
-  }
-  .otherSelect {
-    background-color: #fff;
-    padding: 0px 16px;
-    div {
-      line-height: 46px;
-      width: 60px;
-    }
-    .col {
-      padding: 0 5px;
-    }
-    .saleU {
-      line-height: 46px;
-      color: #888;
-    }
-    .isSale {
-      color: #000;
-    }
-    ion-datetime {
-      padding: initial;
-    }
-    ion-icon {
-      line-height: 46px;
-      color: #888;
-    }
-  }
 }

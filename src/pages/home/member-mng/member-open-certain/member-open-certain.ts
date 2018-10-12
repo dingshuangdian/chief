@@ -21,7 +21,10 @@ export class memberOpenCertainPage {
     plateNumber: '',
     memberId: ''
   }
-
+  notifys: any;//备注
+  noticeFlag: boolean = true;
+  notifyTags: number = 0;//短信通知方式结果参数
+  mobileNumber: any;//手机号码
   carInfo: any = { plateNB: '', provinces: '', autotypeName: "请选择车型" };
 
   salecard;
@@ -44,6 +47,7 @@ export class memberOpenCertainPage {
     private datePipe: DatePipe) {
     this.img_path = WebConfig.img_path;
     this.memberInfo = this.navParams.get("memberInfo");
+    this.mobileNumber = this.memberInfo.mobileNumber;
     this.salecard = this.navParams.get("salecard");
     this.carInfo = this.navParams.get("carInfo");
   }
@@ -53,16 +57,65 @@ export class memberOpenCertainPage {
   }
 
   findmcardtmpl() {
-    this.websites.httpPost('findmcardtmpl', { mcardtmplId: this.salecard.mcardtmplId }).subscribe(res => {
+    this.websites.httpPost('findmcardtmpl', { mcardtmplId: this.salecard.mcardtmplId, memberId: this.memberInfo.memberId }).subscribe(res => {
       if (res) {
         this.salecardDetail = res;
+        console.log(res);
         this.validityMonthChange();
         if (this.salecardDetail.mcard2svc) {
           this.methodSinglePrice();
         }
+        // notifys
+        this.notifys = res.notifys;
+        if (this.notifys) {
+          if (this.notifys.length == 2) {
+            this.notifys[0].flag = false;
+            this.notifys[1].flag = true;
+            this.notifyTags = this.notifyTags ^ this.notifys[1].notifyTag;
+          } else if (this.notifys.length == 1) {
+            if (this.notifys[0].notifyTag == 1 && !this.mobileNumber) {
+              this.notifys[0].flag = false;
+            } else {
+              this.notifys[0].flag = true;
+              this.notifyTags = this.notifyTags ^ this.notifys[0].notifyTag;
+            }
+          }
+
+        }
       }
 
     })
+  }
+  //选择通知方式
+  noticeWay(tag, index) {
+    if (tag == 1 && !this.mobileNumber) {
+      this.noticeFlag = false;
+    } else {
+      this.notifys[index].flag = !this.notifys[index].flag;
+      this.notifyTags = this.notifyTags ^ tag;
+    }
+  }
+  //监听手机号码
+  btnActive(e) {
+    if (!e) return;
+    for (let i = 0; i < this.notifys.length; i++) {
+      if (this.notifys[i].notifyTag == 1) {
+        if ((/^1(3|4|5|7|8|9)\d{9}$/.test(e))) {
+          this.mobileNumber = e;
+          this.notifys[i].flag = true;
+          if ((this.notifyTags & this.notifys[i].notifyTag) != this.notifys[i].notifyTag) {
+            this.notifyTags = this.notifyTags ^ this.notifys[i].notifyTag;
+          }
+        } else {
+          this.mobileNumber = '';
+          this.notifys[i].flag = false;
+          if ((this.notifyTags & this.notifys[i].notifyTag) == this.notifys[i].notifyTag) {
+            this.notifyTags = this.notifyTags ^ this.notifys[i].notifyTag;
+          }
+        }
+        break;
+      }
+    }
   }
 
   inputChange() {
@@ -157,6 +210,7 @@ export class memberOpenCertainPage {
         pamras.saleUid = this.saleInfo.userId;
         pamras.orderAmount = this.salecardDetail.mcardPrice;
         pamras.mcardDesc = this.salecardDetail.mcardDesc || '';
+        pamras.notifyTags = this.notifyTags;
         pamras.payments = [];
         pamras.payments.push(paytype);
 
@@ -168,6 +222,7 @@ export class memberOpenCertainPage {
         }
 
         // this.navCtrl.push(memberOpenSuccessPage, { memberInfo: this.memberInfo, mcardNo: "80061" });
+        console.log(pamras);
         this.websites.httpPost("addCard", pamras).subscribe(res => {
           if (res) {
             this.navCtrl.push(memberOpenSuccessPage, { memberInfo: res, mcardNo: res.mcardNo });

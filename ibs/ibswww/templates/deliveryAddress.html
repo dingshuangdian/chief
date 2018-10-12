@@ -1,0 +1,47 @@
+<ion-view view-title="保单地址">
+    <style>
+        .checkbox input:after,
+        .checkbox-icon:after {
+            top: 20%;
+            left: 22%;
+            width: 10px;
+        }
+    </style>
+    <ion-nav-buttons side="right">
+        <div class="buttons">
+            <button class="button button-energized" ng-click="toAddOrEditDeliveryAddress()">
+                新增
+            </button>
+        </div>
+    </ion-nav-buttons>
+    <ion-content class="grayWbg">
+        <ion-list>
+            <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+            <div class="nullResult" ng-if="!userAddress" style="margin-top: 20px">
+                <div><img src="img/01.png"></div>
+                <p class="mainTextColor changeColor">暂无数据</p>
+            </div>
+            <ion-item class="no-border" style="margin: 5px 0;padding:5px 10px;" ng-repeat="item in userAddress">
+                <div ng-click="toClickMsg(item)">
+                    <p style="overflow:hidden;">
+                        <span style="float:left;" ng-bind="item.contacts"></span>
+                        <span style="float:right;" ng-bind="item.mobileNumber"></span>
+                    </p>
+                    <p style="white-space: initial;">地址：{{item.fullAddress}}</p>
+                </div>
+                <hr width=105% size=1 color=#e5e5e5 style="margin-left:-8px;">
+                <div style="overflow:hidden;">
+                    <div class="item item-checkbox no-border mainText mainTextColor" style="float:left;padding:5px 5px 5px 25px;" ng-click="serDefaultAddress(item)">
+                        <label class="checkbox" style="padding: 12px 7px;left: -6px;">
+                            <input type="checkbox" ng-checked="item.isDefault" style="width: 18px;height: 18px;">
+                        </label> 设置默认
+                    </div>
+                    <div style="float:right;vertical-align:middle;">
+                        <a class="button button-clear button-small mainText mainTextColor" ng-click="toAddOrEditDeliveryAddress(item)"><i class="ion ion-compose"></i> 编辑</a>
+                        <a class="button button-clear button-small mainText mainTextColor" ng-click="showConfirm(item.addressId)"><i class="ion ion-trash-a"></i> 删除</a>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

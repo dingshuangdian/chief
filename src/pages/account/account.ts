@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events, App, ViewController } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 import { ProblemAnswerPage } from './problem-answer/problem-answer';
 import { AboutChiefPage } from './about-chief/about-chief';
 import { WebSites } from '../../providers/web-sites';
 import { CsbzNave } from '../../providers/csbz-nave';
 import { WebConfig } from '../../providers/web-config';
+import { Storage } from '@ionic/storage';
+import { LoginPage } from '../login/login';
+import { StatementPage } from '../statement/statement';
+
+
 
 declare let CMInfo: any;
 
@@ -39,6 +44,9 @@ export class AccountPage {
     public alertCtrl: AlertController,
     public websize: WebSites,
     public events: Events,
+    public storage: Storage,
+    public appCtrl: App,
+    public ViewController:ViewController,
     private csbzNave: CsbzNave) {
     this.userData.getUserInfo().subscribe(data => {
       this.userInfo = data;
@@ -52,13 +60,10 @@ export class AccountPage {
 
   }
   ionViewDidLoad() {
-    this.websize.httpPost('getStoreInfo', '').subscribe(res => {
+    this.websize.httpPost('getStoreInfo', '', false).subscribe(res => {
       if (res) {
         this.storeMsg = res;
-
-        console.log(this.storeMsg);
       }
-
     })
   }
   ngOnInit() {
@@ -112,6 +117,8 @@ export class AccountPage {
           text: '确认',
           handler: () => {
             this.websize.httpPost("loginOut", {}).subscribe(res => {
+              window.localStorage.setItem('permissionData', "");
+              //this.navCtrl.popAll();
               this.events.publish('user:logout');
             })
 
@@ -120,6 +127,5 @@ export class AccountPage {
       ]
     });
     alertLogout.present();
-
   }
 }

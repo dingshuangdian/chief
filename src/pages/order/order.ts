@@ -32,6 +32,8 @@ export class OrderPage {
   permissionData;
   showOrder: boolean = false;
   showPay: boolean = false;
+  showUpdata: boolean = false;
+  showCancel: boolean = false;
   public items = [];
   public flag_sord = true;//订单时间  true--升序 false--降序
   public moreData = true;
@@ -63,24 +65,19 @@ export class OrderPage {
     public modalCtrl: ModalController,
     public csModal: CsModal,
     private csbzNave: CsbzNave) {
+  }
+  ionViewWillEnter() {
     this.permissionData = JSON.parse(window.localStorage.getItem('permissionData'));
-
     this.permissionData.forEach(element => {
       if (element.menuId == "202005") {
-        if (8 == (element.funcTags & 8)) {
-          this.showOrder = true;
-        } else {
-          this.showOrder = false;
-        }
-        if (1 == (element.funcTags & 1)) {
-          this.showPay = true;
-        } else {
-          this.showPay = false;
-        }
+        this.showOrder = (8 == (element.funcTags & 8)) ? true : false;
+        this.showPay = (1 == (element.funcTags & 1)) ? true : false;
+        this.showUpdata = (32 == (element.funcTags & 32)) ? true : false;
+        this.showCancel = (64 == (element.funcTags & 64)) ? true : false;
       }
     })
-
   }
+
   ngOnInit() {
     this.getOrderList(this.orderListParam);
   }

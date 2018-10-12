@@ -24,16 +24,12 @@ export class LoginPage {
     public userData: UserData, 
     public event: Events) {
   }
-
   ionViewDidLoad() {
   }
-
-
   dismiss() {
     let data = { 'foo': 'bar' };
     this.viewCtrl.dismiss(data);
   }
-
   onLogin() {
     this.userData.onLogin(this.login.lgiName, this.login.lgiPwd, () => {
       let rootNav = this.appCtrl.getRootNav();

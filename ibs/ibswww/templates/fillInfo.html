@@ -1,0 +1,153 @@
+<ion-view view-title="填写资料">
+    <ion-content class="overallColor mainText titleTextColor">
+        <span class="col tc " style="color:red;display: none;">被保人/车主信息已改动，请重新上传车主身份证</span>
+
+        <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+            <div class="col">
+                <hr width=100% size=1 color=#9e9fa3>
+            </div>
+            <div class="col titleText tc">被保人信息</div>
+            <div class="col">
+                <hr width=100% size=1 color=#9e9fa3>
+            </div>
+        </ion-item>
+        <div class="light-bg isr-morDetail">
+            <div class="row ibsRow">
+                <span class="rowTitle">被保人姓名</span>
+                <span class="col mainTextColor">{{insuredName}}</span>
+            </div>
+            <div class="row ibsRow">
+                <span class="rowTitle">证件号码</span>
+                <span class="col mainTextColor">{{carownerCard}}</span>
+            </div>
+            <div class="row">
+                <span class="rowTitle">手机号码</span>
+                <span class="col mainTextColor" placeholder="请输入被保人手机号">{{insuredMobile==null?'无':insuredMobile}}</span>
+                <!--<input class="col mainTextColor no-border" ng-model="data.context" placeholder="被保人手机号"></input>-->
+            </div>
+        </div>
+        <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+            <div class="col">
+                <hr width=100% size=1 color=#9e9fa3>
+            </div>
+            <div class="col titleText tc">收件人信息</div>
+            <div class="col">
+                <hr width=100% size=1 color=#9e9fa3>
+            </div>
+        </ion-item>
+        <div class="light-bg isr-morDetail">
+            <!--<div class="row ibsRow">
+                <span class="rowTitle">发票抬头</span>
+                <span class="changeRadioCss">
+                    <ion-radio name="radio"  value='1' ng-model="isCheked1" ng-click="FapiaocheckRadio(1)">个人</ion-radio>
+                </span>
+                <div style="width: 30px"></div>
+                <span class="changeRadioCss">
+             <ion-radio name="radio" value="2" ng-click="FapiaocheckRadio(2)">单位</ion-radio>
+          </span>
+            </div>
+            <div class="row ibsRow">
+                <span class="rowTitle"><span style="color:red">*</span>抬头内容</span>
+                <input class="col mainTextColor no-border" ng-model="data.invPayee" placeholder="请输入发票抬头内容"></input>
+            </div>-->
+            <div class="row ibsRow">
+                <span class="rowTitle"><span style="color:red">*</span>收件人姓名</span>
+                <input class="col mainTextColor no-border" ng-model="data.consignee" placeholder="请输入收件人姓名"></input>
+            </div>
+            <div class="row ibsRow">
+                <span class="rowTitle"><span style="color:red">*</span>手机号码</span>
+                <input class="col mainTextColor no-border" type="tel" maxlength='11' ng-model="data.consigneeMobile" placeholder="请输入收件人手机号" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"></input>
+            </div>
+            <div class="row ibsRow ">
+                <span class="rowTitle">收件方式</span>
+                <span class="changeRadioCss oneRadioCss" ng-click="reNull()">
+                    <ion-radio name="radio"  ng-value='1' ng-model="data.consigneeType">门店</ion-radio>
+                </span>
+                <div style="width: 30px"></div>
+                <span class="changeRadioCss oneRadioCss" ng-click="reNull()">
+                    <ion-radio name="radio" ng-value='2' ng-model="data.consigneeType">自取</ion-radio>
+                </span>
+                <div style="width: 30px"></div>
+                <span class="changeRadioCss oneRadioCss" ng-click="reNull()">
+                    <ion-radio name="radio" ng-value='4' ng-model="data.consigneeType">邮寄</ion-radio>
+                </span>
+            </div>
+
+            <div class="row" ng-hide='data.consigneeType==2'>
+                <span class="rowTitle"><span style="color:red">*</span>收件地址</span>
+                <textarea rows="3" class="col mainTextColor" style="
+          border: 1px solid;
+          border-color: #d7d7d7;
+          border-radius: 5px;
+          padding-left: 10px;resize: none;" ng-model="data.consigneeAddress" placeholder="请输入收件地址"></textarea>
+                <!-- <input class="col mainTextColor" style="
+          border: 1px solid;
+          border-color: #d7d7d7;
+          border-radius: 5px;
+          padding-left: 10px;" ng-model="data.consigneeAddress" placeholder="请输入收件地址" /> -->
+                <!--<div class="col mainTextColor" style="
+          border: 1px solid;
+          border-color: #d7d7d7;
+          border-radius: 5px;
+          padding-left: 10px;">
+          {{companyN}}
+        </div>-->
+                <span style="padding: 2px 5px 2px 15px;" ng-show='data.consigneeType==4'>
+          <button class="button button-royal" style="border-color:#d7d7d7;line-height: normal;min-height: initial;padding:5px;" ng-click="sendChooce()">选择</button>
+        </span>
+                <span style="padding: 2px 5px 2px 15px;" ng-hide='data.consigneeType==4'>
+                <button class="button button-royal" style="border-color:#d7d7d7;line-height: normal;min-height: initial;padding:5px;" ng-click="selectShop()">门店</button>
+              </span>
+            </div>
+        </div>
+
+
+        <span class="col tc explainTextColor" style="display: none;" ng-click="showDetail()">{{showDetailBT}}</span>
+
+        <div ng-if="isShowDetail">
+
+            <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+                <div class="col titleText tc">证件上传</div>
+                <div class="col">
+                    <hr width=100% size=1 color=#9e9fa3>
+                </div>
+            </ion-item>
+
+            <div class="light-bg isr-morDetail">
+                <div class="row">
+                    <span class="col">身份证正面上传</span>
+                </div>
+
+
+                <div class="row">
+                    <div class="col col-33">
+                        <div class="imagFrame" ng-style="IMGH">
+                            <img src="img/id.png" />
+                        </div>
+                    </div>
+                    <div class="col col-33" ng-repeat="item in InputIDPhoto">
+                        <div class="imagFrame" ng-style="IMGH" ng-click="showCamera(item,InputIDPhoto)">
+                            <img ng-src="{{item.imageSrc}}" class="imagFrame1" />
+                        </div>
+                    </div>
+                    <div class="col explainTextColor explain">
+                        请上传证件照片，图片要求在手机拍照框内，不反光，并清晰易辨认。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <ion-item class="overallColor no-border" style="padding: 25px 35px 20px 35px;">
+            <button class="button button-energized titleText" style="line-height: normal;min-height: initial;height:40px;width:100%;" ng-click="payOrder()">提交信息</button>
+        </ion-item>
+
+
+
+    </ion-content>
+</ion-view>

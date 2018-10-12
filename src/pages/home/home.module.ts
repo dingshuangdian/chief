@@ -10,6 +10,8 @@ import { ComponentsModule } from '../../components/components.module';
 import { OrderEditSelectPage } from './receive-car/order-edit/order-edit-select/order-edit-select';
 import { orderPostPage } from './receive-car/order-post/order-post';
 import { AgentPopoverComponent } from '../other/agent-popover/agent-popover';
+import { EditPlatnumPopoverPage } from '../other/edit-platnum-popover/edit-platnum-popover';
+import { CarownerPopoverPage } from '../other/carowner-popover/carowner-popover';
 import { carConductPage } from './receive-car/car-conduct/car-conduct';
 import { carAddProPage } from './receive-car/car-add-pro/car-add-pro';
 import { carSelectProPage } from './receive-car/car-select-pro/car-select-pro';
@@ -42,6 +44,8 @@ import { RecordPageRegistere } from './record/record-registere/record-registere'
 import { BusinessRemindPage } from './business-remind/business-remind';
 import { VisitedMsgPage } from './business-remind/visited-msg/visited-msg';
 import { CheckHelpPage } from './check-help/check-help';
+import { hycountPopover } from '../other/hycount-popover/hycount-popover';
+import { pickupCarPage } from '../home/receive-car/pickup-car/pickup-car';
 @NgModule({
   declarations: [
     HomePage,
@@ -53,9 +57,12 @@ import { CheckHelpPage } from './check-help/check-help';
     OrderEditSelectPage,
     orderPostPage,
     AgentPopoverComponent,
+    EditPlatnumPopoverPage,
+    CarownerPopoverPage,
     MergePopoverComponent,
     addProjectPopoverComponent,
     discountPopover,
+    hycountPopover,
     carConductPage,
     carAddProPage,
     carSelectProPage,
@@ -85,8 +92,8 @@ import { CheckHelpPage } from './check-help/check-help';
     RecordPage,
     RecordPageEdit,
     RecordPageRegistere,
-    CheckHelpPage
-   
+    CheckHelpPage,
+    pickupCarPage
   ],
   imports: [
     ComponentsModule,
@@ -102,9 +109,12 @@ import { CheckHelpPage } from './check-help/check-help';
     OrderEditSelectPage,
     orderPostPage,
     AgentPopoverComponent,
+    EditPlatnumPopoverPage,
+    CarownerPopoverPage,
     MergePopoverComponent,
     addProjectPopoverComponent,
     discountPopover,
+    hycountPopover,
     carConductPage,
     carAddProPage,
     carSelectProPage,
@@ -134,8 +144,8 @@ import { CheckHelpPage } from './check-help/check-help';
     RecordPageRegistere,
     BusinessRemindPage,
     VisitedMsgPage,
-    CheckHelpPage
-    
+    CheckHelpPage,
+    pickupCarPage
   ]
 })
 export class HomeModule { }

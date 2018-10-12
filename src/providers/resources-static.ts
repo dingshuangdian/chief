@@ -34,8 +34,7 @@ export class resourcesStaticProvider {
 
   //加载权限数据
   loadPermissionCode(callback?: Function): any {
-    this.webSites.httpPost('findPermissionCode', {}).subscribe(res => {
-      console.log(res);
+    this.webSites.httpPost('findPermissionCode', {}, false).subscribe(res => {
       let ures = res.funcTags;
       this.openInsur = res.storesExt.openInsur;
       if (Object.prototype.toString.call(ures) == '[object Array]') {

@@ -14,7 +14,7 @@ import { resourcesStaticProvider } from '../../providers/resources-static';
 import { CsbzNave } from '../../providers/csbz-nave';
 import { CheckHelpPage } from './check-help/check-help';
 
-
+import { pickupCarPage } from './receive-car/pickup-car/pickup-car';
 
 
 /**
@@ -48,7 +48,6 @@ export class HomePage {
     public RSData: resourcesStaticProvider,
     private csbzNave: CsbzNave) {
     let $this = this;
-
     $this.itemList = [
       { name: "接车", img: "home_03.png", tag: 0 },
       { name: "预约管理", img: "home_05.png", tag: 1 },
@@ -128,7 +127,9 @@ export class HomePage {
         break;
     }
   }
-
+  pickupCar() {
+    this.navCtrl.push(pickupCarPage, { flag: 1 });
+  }
 
 
   onSignup() {
@@ -171,7 +172,7 @@ export class HomePage {
     }, (msg) => { })
   }
   onCX() {
-    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1}, (res) => {
+    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
       console.log(res);
     }, (error) => {
       console.log(error);

@@ -1,0 +1,91 @@
+<ion-view view-title="保单支付">
+    <ion-content class="overallColor titleTextColor">
+        <div class="item item-avatar no-border ibsRow" style="padding:10px 15px;min-height:initial;text-align: right;">
+            <img ng-src="img/InsuranceLOGO_{{qryPayCode.companyId}}.png" style="border-radius:0;max-width:initial;width:initial;top: 6px;max-height: 35px;">
+            <div class="isr-stateTags">
+                ￥{{qryPayCode.totalAmount}}
+            </div>
+        </div>
+        <div class="light-bg mainText isr-detailConten">
+            <div class="row">
+                <span class="col col-33">车牌号</span>
+                <span class="col tr mainTextColor">{{qryPayCode.licenseNo}}</span>
+            </div>
+            <div class="row">
+                <span class="col col-33">订单号</span>
+                <span class="col tr mainTextColor">{{qryPayCode.orderNo}}</span>
+            </div>
+            <div class="row">
+                <span class="col col-33">被保人</span>
+                <span class="col tr mainTextColor">{{qryPayCode.insuredName}}</span>
+            </div>
+            <div class="row">
+                <span class="col col-33">保险代理专员</span>
+                <span class="col tr mainTextColor">{{qryPayCode.insureAgentUname}}</span>
+            </div>
+        </div>
+        <ion-item class="overallColor no-border row" style="padding: 5px 45px;">
+            <div class="col">
+                <hr width=100% size=1 color=#9e9fa3>
+            </div>
+            <div class="col titleText tc">支付方式</div>
+            <div class="col">
+                <hr width=100% size=1 color=#9e9fa3>
+            </div>
+        </ion-item>
+
+
+        <div class="light-bg isr-morDetail">
+            <div class="row ibsRow">
+                <span style="padding:5px;">
+                <img src="img/wxpay.png" style="width:20px;height:20px;vertical-align: middle;">
+              </span>
+                <span class="col mainTextColor">
+                <ion-checkbox class="titleTextColor payCD mainText no-border"
+                        ng-model="wxPayCode.isSelect" 
+                        ng-checked="wxPayCode.isSelect"
+                        ng-change="payStyle(wxPayCode)">
+                        微信支付（生成支付二维码）
+                    </ion-checkbox>
+              </span>
+            </div>
+        </div>
+
+        <!-- <div class="light-bg isr-morDetail">
+            <div class="row ibsRow">
+                <span style="padding:5px;">
+                <img src="img/wxpay.png" style="width:20px;height:20px;vertical-align: middle;">
+              </span>
+                <span class="col mainTextColor">
+                <ion-checkbox class="titleTextColor payCD mainText no-border"
+                        ng-model="wxPayUrl.isSelect" 
+                        ng-checked="wxPayUrl.isSelect"
+                        ng-change="payStyle(wxPayUrl)">
+                        微信支付（生成支付链接）
+                    </ion-checkbox>
+              </span>
+            </div>
+        </div>
+        <div class="light-bg isr-morDetail" ng-if="!IBSpj">
+            <div class="row ibsRow">
+                <span style="padding:5px;">
+                <img src="img/wxpay.png" style="width:20px;height:20px;vertical-align: middle;">
+              </span>
+                <span class="col mainTextColor">
+                <ion-checkbox class="titleTextColor payCD mainText no-border"
+                        ng-model="wx.isSelect" 
+                        ng-checked="wx.isSelect"
+                        ng-change="payStyle(wx)">
+                        微信支付
+                    </ion-checkbox>
+              </span>
+            </div>
+        </div> -->
+        <!--   <ion-item class="overallColor no-border tc" style="padding:10px 100px;">
+            <img src="{{qryPayCode.codeUrl}}" style="width:100%;">
+        </ion-item> -->
+    </ion-content>
+    <div class="bar bar-footer" style="height: 52px;">
+        <button class="button button-energized titleText" ng-click="payCertain()" style="width: 100%;">确认</button>
+    </div>
+</ion-view>

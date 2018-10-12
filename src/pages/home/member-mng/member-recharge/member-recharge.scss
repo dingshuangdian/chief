@@ -204,11 +204,11 @@ page-member-recharge {
         .btn-flex {
             display: inline-flex;
             align-items: center;
-            margin-left: 15px;
+            margin-left: 10px;
             .button {
                 border-radius: 6px;
                 border: 0.55px solid #ccc;
-                width: 100%;
+                width: 75px;
                 color: #000;
                 font-size: 10px;
                 height: 25px;
@@ -216,6 +216,46 @@ page-member-recharge {
             .isSelect {
                 background-color: color($colors, assist, base);
                 color: color($colors, assist, contrast);
+            }
+        }
+    }
+    .meg {
+        background-color: #fff;
+        margin-top: 10px;
+        h3 {
+            font-size: 19px;
+            height: 55px;
+            line-height: 55px;
+            margin-left: 15px;
+            -webkit-margin-before: 10px;
+            -webkit-margin-after: -5px;
+        }
+        .meg-btn {
+            padding: 5px;
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            button {
+                width: 40%;
+                background-color: #f0f0f0;
+                color: #333333;
+                font-weight: bolder;
+            }
+            .btnActive {
+                background: #ffb413;
+                color: #fff;
+            }
+            .nobtnActive {
+                background: #f0f0f0;
+                color: #000;
+            }
+        }
+        .notice {
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            input {
+                text-indent: 5px;
             }
         }
     }

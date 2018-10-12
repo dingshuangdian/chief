@@ -1,0 +1,11 @@
+<ion-view view-title="{{cardTitle}}">
+    <ion-content class="overallColor mainText titleTextColor">
+        <div class="row row-wrap" ng-repeat="item in imgList">
+            <div class="col">
+                <div style="text-align: center;">
+                    <img class="full-image" ng-style="IMGH" ng-src='{{item.src}}' />
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

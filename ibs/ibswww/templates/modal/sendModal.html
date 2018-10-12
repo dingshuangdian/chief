@@ -1,0 +1,52 @@
+<!-- <style>
+    .transparent {
+        background: transparent !important;
+    }
+    
+    .sendInput {
+        padding-top: 0px;
+        border: 1px solid;
+        border-color: #444444;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+</style> -->
+
+<div class="modal" style="min-height: 226px;bottom: 0;top: inherit;">
+    <div class="light-bg" style="height:226px; width:100%; position: absolute; bottom: 0px;">
+
+        <div class="row" style="padding:5px 15px;">
+            <div class="titleText titleTextColor" style="width:80px;line-height: 34px;">短信内容</div>
+        </div>
+        <div class="row" style="padding:0px 15px;">
+            <div class="col item-input no-padding">
+                <textarea ng-model="data.postMsg" style="padding-top: 10px;border: 1px solid;border-color: #d7d7d7;border-radius: 5px;padding-left: 10px;padding-right: 10px;height: 80px;" required focus-input>
+                </textarea>
+            </div>
+        </div>
+
+        <div class="row" style="padding:15px;" >
+            <div class="titleText titleTextColor" style="width:90px;line-height: 34px;">手机号码：</div>
+            <div class="col item-input no-padding"><input ng-model="data.phoneNum" type="tel" style="
+          padding-top: 0px; 
+          border: 1px solid;
+          border-color: #d7d7d7;
+          border-radius: 5px;
+          padding-left: 10px;" required placeholder="请输入" focus-input /></div>
+        </div>
+
+
+        <div class="row no-padding">
+            <div class="col col-50 tc">
+                <div class="button titleText button-stable button-small" style="width:90%;line-height:35px;padding:0;color:#fff;" ng-click="backBSapp()">
+                    取消发送
+                </div>
+            </div>
+            <div class="col col-50 tc">
+                <div class="button titleText button-energized button-small" style="width:90%;line-height:35px;padding:0" ng-click="certainSend()">
+                    确定发送
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
