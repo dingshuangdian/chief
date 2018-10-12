@@ -1,9 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-<<<<<<< HEAD
-import { NavController, NavParams, ToastController, Events } from 'ionic-angular';
-=======
 import { NavController, NavParams, ToastController, Platform, Events } from 'ionic-angular';
->>>>>>> ed7c74793070e7cf352bd8473a401b7e1c0f9001
 import { carTypePage } from '../car-type/car-type';
 import { ProvincesPage } from '../../../other/provinces/provinces';
 import { CsModal } from '../../../../providers/cs-modal';
@@ -45,9 +41,6 @@ export class carEditPage {
 
 
   callback: any;
-<<<<<<< HEAD
-  constructor(public navCtrl: NavController, public navParams: NavParams, public csModal: CsModal, public websites: WebSites, public toastCtrl: ToastController, public csbzNave: CsbzNave, public changeDetectorRef: ChangeDetectorRef, public events: Events) {
-=======
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public events: Events,
@@ -55,7 +48,6 @@ export class carEditPage {
     public toastCtrl: ToastController, public csbzNave: CsbzNave,
     public changeDetectorRef: ChangeDetectorRef,
     public platform: Platform) {
->>>>>>> ed7c74793070e7cf352bd8473a401b7e1c0f9001
     this.callback = this.navParams.get('callback');
   }
   ngAfterViewChecked() {
