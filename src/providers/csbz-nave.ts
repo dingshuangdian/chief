@@ -13,8 +13,9 @@ export class CsbzNave {
 
     constructor(public platform: Platform,
         public websites: WebSites,
-        public events: Events,
+      
         private csModal: CsModal,
+        public events: Events,
         public loadingCtrl: LoadingController,
         public actionSheetCtrl: ActionSheetController, ) {
     }
@@ -183,7 +184,7 @@ export class CsbzNave {
     }
 
 
-    cameraPicture(callback, srcType?, allowEdit?) {
+    cameraPicture(callback?, srcType?, allowEdit?) {
 
         var options = {
             quality: 50,
@@ -240,7 +241,7 @@ export class CsbzNave {
         }
     }
 
-    selecPicture(callback, allowEdit?) {
+    selecPicture(callback?, allowEdit?) {
         let actionSheet = this.actionSheetCtrl.create({
             title: '选择来源',
             buttons: [
@@ -269,6 +270,7 @@ export class CsbzNave {
 
     carIdSacn(callBack) {
         cordova.ocrplateidsmart.ocrplateidSmartOpen((res) => {
+
             callBack(res)
         }, (error) => {
             console.log(error);

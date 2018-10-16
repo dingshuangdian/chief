@@ -35,7 +35,7 @@
         "co": "^4.6.0",
         "co-prompt": "^1.0.0",
         "cordova": "^8.0.0",
-        "cordova-android": "7.0.0",
+        "cordova-android": "^7.0.0",
         "cordova-hot-code-push-plugin": "^1.5.3",
         "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-device": "^2.0.2",
