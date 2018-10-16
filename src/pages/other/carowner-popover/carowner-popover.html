@@ -5,25 +5,11 @@
       车主信息
     </div>
     <p padding-horizontal class="explain">{{plateNumber}}已绑定多位用户，请选择正确客户;如要进行车辆合并、转移等操作，请在电脑端客户管理中操作</p>
-    <ion-list radio-group no-margin no-padding 
-      [(ngModel)]="val" 
-      (ngModelChange)="toggleCheckIn(val)"
-    >
-      <ion-item no-padding no-margin *ngFor="let owner of owners">
-        <ion-radio [value]="owner.val"></ion-radio>
-        <ion-label>
-          <span>{{owner.name}}</span>
-          <span>{{owner.phone}}</span>
-        </ion-label>
-      </ion-item>
+    <ion-list>
+      <button ion-item *ngFor="let o of owners" (click)="close(o)">
+        <span>{{o.name}}</span>
+        <span>{{o.mobileNumber}}</span>
+      </button>
     </ion-list>
-    <ion-row>
-      <ion-col>
-        <button block (click)="close(false)">取消</button>
-      </ion-col>
-      <ion-col>
-        <button block (click)="close(true)">确定</button>
-      </ion-col>
-    </ion-row>
   </ion-grid>
     

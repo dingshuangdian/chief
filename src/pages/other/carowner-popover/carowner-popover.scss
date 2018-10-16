@@ -16,44 +16,59 @@ page-carowner-popover {
     }
     ion-list{
         width: 250px;
-        ion-item,.item-inner{
-            border: 0 !important;
-        }
-        ion-item{
+        button{
+            border: none !important;
             background: #F2F4F8 !important;
             min-height: auto !important;
-            line-height: 36px;
-            height: 36px;
-            ion-label{
-                font-size: 14px;
-                color: #252D3B;
-                margin: 0;
-            }
-        }
-        ion-item:first-child{
-            margin-bottom: 5px;
-        }
-        ion-item.item-radio-checked{
-            ion-label{
-                color: #252D3B !important;
-            }
-        }
-        ion-radio{
-            .radio-icon{
-                background: #FFF;
-                border-radius: 50%;
-                border: 1px solid #DFE3E9;
-                width: 18px !important;
-                height: 18px !important;
-            }
-            .radio-icon.radio-checked{
-                background: #266DEC;
-                .radio-inner{
-                    border-color: #fff;
-                    top: 1px;
+            .item-inner{
+                border: none !important;
+                ion-label{
+                    font-size: 14px !important;
+                    color: #252D3B;
                 }
             }
         }
+        button:first-child{
+            margin-bottom: 5px;
+        }
+        // ion-item,.item-inner{
+        //     border: 0 !important;
+        // }
+        // ion-item{
+        //     background: #F2F4F8 !important;
+        //     min-height: auto !important;
+        //     line-height: 36px;
+        //     height: 36px;
+        //     ion-label{
+        //         font-size: 14px;
+        //         color: #252D3B;
+        //         margin: 0;
+        //     }
+        // }
+        // ion-item:first-child{
+        //     margin-bottom: 5px;
+        // }
+        // ion-item.item-radio-checked{
+        //     ion-label{
+        //         color: #252D3B !important;
+        //     }
+        // }
+        // ion-radio{
+        //     .radio-icon{
+        //         background: #FFF;
+        //         border-radius: 50%;
+        //         border: 1px solid #DFE3E9;
+        //         width: 18px !important;
+        //         height: 18px !important;
+        //     }
+        //     .radio-icon.radio-checked{
+        //         background: #266DEC;
+        //         .radio-inner{
+        //             border-color: #fff;
+        //             top: 1px;
+        //         }
+        //     }
+        // }
     }
     ion-row{    
         width: 100%;

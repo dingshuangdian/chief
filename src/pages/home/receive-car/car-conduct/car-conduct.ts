@@ -1,5 +1,5 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, ModalController, PopoverController, ToastController, App } from 'ionic-angular';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { NavController, NavParams, ModalController, PopoverController, ToastController, App, Content } from 'ionic-angular';
 import { OrderEditSelectPage } from '../order-edit/order-edit-select/order-edit-select';
 import { carEditPage } from '../car-edit/car-edit';
 import { carAddProPage } from '../car-add-pro/car-add-pro';
@@ -27,6 +27,9 @@ export interface member {
 
 
 export class carConductPage {
+
+  @ViewChild(Content) content: Content;
+
   isNave: boolean;
   public flag = false;
   public flag_ = false;
@@ -435,5 +438,14 @@ export class carConductPage {
   }
   goCustomMsg() {
     this.navCtrl.push(ConsumerMsgPage, { consumer: this.customer });
+  }
+
+  focusFun(){
+    this.scrollTokeyboardHeight();
+  }
+  scrollTokeyboardHeight() {//让content向上滚动 软键盘的高度
+    window.addEventListener('native.keyboardshow',(e:any) =>{
+    this.content.scrollTo(0,e.keyboardHeight);
+    });
   }
 }

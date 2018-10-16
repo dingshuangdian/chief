@@ -46,11 +46,17 @@
     </div>
     <div class="gl">
       <p>进厂公里数</p>
-      <input type="text" text-right placeholder="公里数" [(ngModel)]="saveAll.pickupMileage">
+      <input type="text" text-right placeholder="公里数"
+        [(ngModel)]="saveAll.pickupMileage"
+        (click)="focusFun()"
+      >
     </div>
     <div class="gl" style="border-bottom:none;">
       <p>钥匙号</p>
-      <input type="text" text-right placeholder="钥匙号" [(ngModel)]="saveAll.pickupCode">
+      <input type="text" text-right placeholder="钥匙号"
+        [(ngModel)]="saveAll.pickupCode"
+        (click)="focusFun()"
+      >
     </div>
   </div>
   <div class="cen" (click)="moreEdit()">
@@ -101,7 +107,10 @@
           故障描述
         </ion-col>
         <ion-col text-right class="inputType">
-          <input type="text" text-right placeholder="故障描述" [(ngModel)]="saveAll.faultDesc">
+          <input type="text" text-right placeholder="故障描述"
+            [(ngModel)]="saveAll.faultDesc"
+            (click)="focusFun()"
+          >
         </ion-col>
       </ion-row>
     </ion-item>
@@ -111,7 +120,10 @@
           维修建议
         </ion-col>
         <ion-col text-right class="inputType">
-          <input type="text" text-right placeholder="维修建议" [(ngModel)]="saveAll.mntcAdvice">
+          <input type="text" text-right placeholder="维修建议"
+            [(ngModel)]="saveAll.mntcAdvice"
+            (click)="focusFun()"
+          >
         </ion-col>
       </ion-row>
     </ion-item>
@@ -121,7 +133,10 @@
           送修人
         </ion-col>
         <ion-col text-right class="inputType">
-          <input type="text" text-right placeholder="送修人" [(ngModel)]="saveAll.sendUname">
+          <input type="text" text-right placeholder="送修人"
+            [(ngModel)]="saveAll.sendUname"
+            (click)="focusFun()"
+          >
         </ion-col>
       </ion-row>
     </ion-item>
@@ -131,7 +146,10 @@
           送修手机
         </ion-col>
         <ion-col text-right class="inputType">
-          <input type="text" text-right placeholder="送修手机" [(ngModel)]="saveAll.sendMobile">
+          <input type="text" text-right placeholder="送修手机"
+            [(ngModel)]="saveAll.sendMobile"
+            (click)="focusFun()"
+          >
         </ion-col>
       </ion-row>
     </ion-item>
@@ -141,16 +159,17 @@
           备注
         </ion-col>
         <ion-col text-right class="inputType">
-          <input type="text" text-right placeholder="备注" [(ngModel)]="saveAll.memo">
+          <input type="text" text-right placeholder="备注"
+            [(ngModel)]="saveAll.memo"
+            (click)="focusFun()"
+          >
         </ion-col>
       </ion-row>
     </ion-item>
   </div>
   <div class="con-a">
     <div class="course_tabBox" *ngFor="let tab of courseTab">
-      <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name 
-              
-              ,courseTab)">{{tab.name}}
+      <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name,courseTab)">{{tab.name}}
       </span>
     </div>
     <div class="con-btn" [hidden]='!courseTab[0].bol'>

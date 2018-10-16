@@ -216,27 +216,14 @@ export class carEditPage {
       this.carInfo.plateNumber = id.substr(1);
     })
   }
-  // getPicture() {
-  //   this.csbzNave.selecPicture((data) => {
-  //     if (!data.msg) {
-  //       this.imageUrl.unshift({ url: data.imageSrc, imgId: "" });
-  //       this.imageData.push(data.imageBlob);
-  //       this.changeDetectorRef.detectChanges();
-  //     }
-  //   })
-  // }
   getPicture() {
-    this.csbzNave.selecPicture()
-    {
-      this.events.subscribe('picture', data => {
-        console.log(data);
-        if (!data.msg) {
-          this.imageUrl.unshift({ url: data.imageSrc, imgId: "" });
-          this.imageData.push(data.imageBlob);
-          this.changeDetectorRef.detectChanges();
-        }
-      })
-    }
+    this.csbzNave.selecPicture((data) => {
+      if (!data.msg) {
+        this.imageUrl.unshift({ url: data.imageSrc, imgId: "" });
+        this.imageData.push(data.imageBlob);
+        this.changeDetectorRef.detectChanges();
+      }
+    })
   }
 
 

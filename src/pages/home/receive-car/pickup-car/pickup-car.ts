@@ -1,5 +1,5 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { NavController, NavParams, PopoverController, AlertController, Content } from 'ionic-angular';
 import { EditPlatnumPopoverPage } from '../../../other/edit-platnum-popover/edit-platnum-popover';
 import { CarownerPopoverPage } from '../../../other/carowner-popover/carowner-popover';
 import { carTypePage } from '../car-type/car-type';
@@ -28,6 +28,8 @@ declare let cordova: any;
 })
 export class pickupCarPage {
 
+  @ViewChild(Content) content: Content;
+
   img_path = WebConfig.img_path;
   press: boolean = false;
   isFlag: boolean = true;//true--新车 false--有信息
@@ -40,32 +42,33 @@ export class pickupCarPage {
   imageData: any = [];
   dataArr: any;//老客户结果数组
   plateNumber: string = '';//车牌
-  olduserInfos: any = {//老客户当前显示的一个对象数据
-    'auditDate': '',
-    'autoId': '',
-    'autoimgs': '',
-    'automakeName': '',
-    'automodelName': '',
-    'autotypeName': '',
-    'biEdate': '',
-    'createMileage': '',
-    'currentMileage': '',
-    'engineNo': '',
-    'insuranceInfo': '',
-    'mcard': {
-      'mcardNum': '',
-      'totalbalance': '',
-      'mcards': []
-    },
-    'memberId': '',
-    'memberName': '',
-    'memberSex': '',
-    'memo': '',
-    'mobileNumber': '',
-    'order': '',
-    'plateNumber': '',
-    'vinCode': '',
-  };
+  olduserInfos: any = {};
+  // olduserInfos: any = {//老客户当前显示的一个对象数据
+  //   'auditDate': '',
+  //   'autoId': '',
+  //   'autoimgs': '',
+  //   'automakeName': '',
+  //   'automodelName': '',
+  //   'autotypeName': '',
+  //   'biEdate': '',
+  //   'createMileage': '',
+  //   'currentMileage': '',
+  //   'engineNo': '',
+  //   'insuranceInfo': '',
+  //   'mcard': {
+  //     'mcardNum': '',
+  //     'totalbalance': '',
+  //     'mcards': []
+  //   },
+  //   'memberId': '',
+  //   'memberName': '',
+  //   'memberSex': '',
+  //   'memo': '',
+  //   'mobileNumber': '',
+  //   'order': '',
+  //   'plateNumber': '',
+  //   'vinCode': '',
+  // };
   newuserInfos: any = {//新用户数据
     "plateNumber": '',//车牌,
     "automakeName": '',//"品牌名称",
@@ -98,22 +101,8 @@ export class pickupCarPage {
     public changeDetectorRef: ChangeDetectorRef,
     public alertCtrl: AlertController,
   ) {
-    var id;
-    if (this.navParams.get('flag')) {
-      id = "粤ESB110"
-    } else {
-      id = this.navParams.get('id');
-    }
-
-    // this.noResultFlag = false;
+    var id = this.navParams.get('id');
     this.reqPlateNumer(id, true);
-  }
-
-
-  tapChange(e) {
-    console.log(e);
-    this.changeDetectorRef.detectChanges();
-
   }
   //修改车牌
   EditPlatnum() {
@@ -290,7 +279,6 @@ export class pickupCarPage {
   //扫描车牌
   scanner() {
     this.csbzNave.carIdSacn(id => {
-      console.log(id);
       if (id) {//扫码有结果
         this.noResultFlag = false;
         this.reqPlateNumer(id, true);
@@ -301,16 +289,17 @@ export class pickupCarPage {
   }
 
   //进来执行请求对象车牌的信息
-  reqPlateNumer(plateNumber, flag) {
+  reqPlateNumer(plateNumber, flag) {//flag -- true代表有多车主要显示弹窗 false--代表有多车主 也不弹窗 显示刚刚显示的车主
     var _self = this;
     _self.plateNumber = plateNumber;
+
     _self.websites.httpPost('findMember4plateNumber', { 'plateNumber': plateNumber }, false)
       .subscribe((data) => {
         if (data) {//有信息
           _self.isFlag = false;
-          if (data.length > 1) {
+          if (data.length > 1) {//多车主情况
             _self.dataArr = data;
-            if (flag) {//多车主选择
+            if (flag) {//多车主 弹窗
               let owners = [];
               for (var i = 0; i < _self.dataArr.length; i++) {
                 var obj: any = {};
@@ -323,15 +312,18 @@ export class pickupCarPage {
                 'plateNumber': _self.plateNumber,
                 'owners': owners,
               };
-              let popover = _self.popoverCtrl.create(CarownerPopoverPage, param, { cssClass: "carownerPopover" });
+              let popover = _self.popoverCtrl.create(CarownerPopoverPage, param, { cssClass: "carownerPopover", enableBackdropDismiss: false, });
               popover.onDidDismiss(data => {
                 if (data) {
                   _self.olduserInfos = _self.dataArr[data.val];
                   _self.changeDetectorRef.detectChanges();
+                } else {
+                  _self.olduserInfos = data[0];
+                  _self.changeDetectorRef.detectChanges();
                 }
               });
               popover.present();
-            } else {//还是刚刚那个车主
+            } else {//多车主 不弹窗
               for (i = 0; i < _self.dataArr.length; i++) {
                 if (_self.dataArr[i].memberId == _self.olduserInfos.memberId) {
                   _self.olduserInfos = _self.dataArr[i];
@@ -340,13 +332,13 @@ export class pickupCarPage {
                 }
               }
             }
-          } else {
+          } else {//一个车主
             _self.olduserInfos = data[0];
             _self.changeDetectorRef.detectChanges();
           }
         } else {//新车
           _self.isFlag = true;
-          _self.resetInfos();
+          _self.resetNewInfos();
           _self.olduserInfos = {};
           _self.changeDetectorRef.detectChanges();
         }
@@ -359,7 +351,6 @@ export class pickupCarPage {
       if (!data.msg) {//上传图片成功
         this.imageUrl.unshift({ url: data.imageSrc, imgId: "" });//imgId： 用来判断是本地的图片还是服务器的图片
         this.imageData.push(data.imageBlob);
-        console.log(this.imageUrl);
         this.changeDetectorRef.detectChanges();
       }
     })
@@ -414,13 +405,6 @@ export class pickupCarPage {
     var param: any = {
       auto: {}
     };
-    if (this.imageData.length > 0) {
-      this.websites.qiniuUpload(this.imageData).subscribe(result => {
-        result.forEach((element, index) => {
-          this.newuserInfos.autoImg.push({ imgUrl: element.key, sortNo: index })
-        });
-      })
-    }
     if (!this.newuserInfos.memberName && !this.newuserInfos.mobileNumber) {
       this.presentAlert("请至少填写客户电话或者客户名称");
       return;
@@ -455,14 +439,24 @@ export class pickupCarPage {
     param.auto.currentMileage = this.newuserInfos.currentMileage;
     param.auto.biEdate = this.newuserInfos.biEdate;
     param.auto.auditDate = this.newuserInfos.auditDate;
-    param.auto.autoImg = this.newuserInfos.autoImg;
     param.auto.automakeName = this.newuserInfos.automakeName;
     param.auto.automodelName = this.newuserInfos.automodelName;
     param.auto.autotypeName = this.newuserInfos.autotypeName;
     param.auto.autotypeId = this.newuserInfos.autotypeId;
     param.auto.automodelId = this.newuserInfos.automodelId;
     param.auto.automakeId = this.newuserInfos.automakeId;
-    this.saveMsg(param);
+    if (this.imageData.length > 0) {
+      this.websites.qiniuUpload(this.imageData).subscribe(result => {
+        result.forEach((element, index) => {
+          this.newuserInfos.autoImg.push({ imgUrl: element.key, sortNo: index });
+        });
+        param.auto.autoImg = this.newuserInfos.autoImg;
+        this.saveMsg(param);
+      })  
+    }else{
+      param.auto.autoImg = [];
+      this.saveMsg(param);
+    }
   }
 
   //保存信息  
@@ -470,7 +464,7 @@ export class pickupCarPage {
     this.websites.httpPost('saveMember', param).subscribe(res => {
       if (res) {
         this.isFlag = false;
-        this.resetInfos();
+        this.resetNewInfos();
         this.reqPlateNumer(this.plateNumber, true);
       }
     }, error => {
@@ -481,13 +475,18 @@ export class pickupCarPage {
   pressEvent(e) {
     this.press = true;
   }
+
   tapEvent(e) {
     if (this.press == true) {
       this.press = false;
     }
   }
 
-  resetInfos() {
+  tapChange(e) {
+    this.newuserInfos.memberSex = e;
+  }
+
+  resetNewInfos() {
     this.newuserInfos = {//新用户数据
       "plateNumber": '',//车牌,
       "automakeName": '',//"品牌名称",
@@ -510,6 +509,8 @@ export class pickupCarPage {
       'memo': '',//客户备注
       'mobileNumber': '',//手机号码
     };
+    this.imageUrl = [];
+    this.imageData = [];
   }
 
   //最近消费
@@ -526,5 +527,15 @@ export class pickupCarPage {
   lMoreFlag() {
     this.lmoreFlag = !this.lmoreFlag
     this.changeDetectorRef.detectChanges();
+  }
+
+  focusFun(){
+    this.scrollTokeyboardHeight();
+  }
+  scrollTokeyboardHeight() {//让content向上滚动 软键盘的高度
+    window.addEventListener('native.keyboardshow',(e:any) =>{
+    //alert(e.keyboardHeight);
+    this.content.scrollTo(0,e.keyboardHeight);
+    });
   }
 }

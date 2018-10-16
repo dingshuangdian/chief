@@ -13,10 +13,9 @@ import { IonicPage, NavController, NavParams, ViewController} from 'ionic-angula
   templateUrl: 'carowner-popover.html',
 })
 export class CarownerPopoverPage {
-
+  
   plateNumber: string;//车牌
-  owners: any;//车主
-  val: any;//选中的车主的value
+  owners: Array<any>;//传递过来的车主
   
   constructor(
     public navCtrl: NavController, 
@@ -26,31 +25,9 @@ export class CarownerPopoverPage {
   ) {
     this.plateNumber = navParams.get('plateNumber');
     this.owners = navParams.get('owners');
-    for(var i=0;i<this.owners.length;i++){
-      this.owners[i].flag = false;
-    }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CarownerPopoverPage');
-  }
-
-  toggleCheckIn(obj) {
-    this.val = obj;
-    console.log(this.changeDetectorRef);
-    this.changeDetectorRef.markForCheck();
-    this.changeDetectorRef.detectChanges();
-  }
-
-  close(flag) {
-    if(flag){
-      var obj = {
-        'flag': true,
-        'val': this.val
-      };
-      this.viewCtrl.dismiss(obj);
-    }else{
-      this.viewCtrl.dismiss();
-    }
+  close(obj) {
+    this.viewCtrl.dismiss(obj);
   }
 }
