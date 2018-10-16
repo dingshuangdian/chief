@@ -24,10 +24,10 @@ tmp/
 temp/
 hooks/
 platforms/
-
+plugins/
 plugins/android.json
 plugins/ios.json
-
+www/
 hcp_build/
 $RECYCLE.BIN/
 
