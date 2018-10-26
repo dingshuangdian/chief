@@ -111,4 +111,7 @@
     <plugin name="easton-plugin-photoview" />
     <plugin name="easton-plugin-insurance" />
     <engine name="android" spec="7.0.0" />
+    <plugin name="jpush-phonegap-plugin" spec="^3.4.7">
+        <variable name="APP_KEY" value="b311b875dc8ab335287edbb4" />
+    </plugin>
 </widget>

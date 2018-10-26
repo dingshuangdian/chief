@@ -37,8 +37,8 @@ export class MyApp {
       this.keyboard.disableScroll(false);
       //this.csbzNave.pushInit();
       //this.csbzNave.appUpdate();
-      //jpush.init();
-      //jpush.setDebugMode(true);
+      jpush.init();
+      jpush.setDebugMode(true);
     });
     if (window.localStorage.getItem("toIntro") === null) {
       this.rootPage = SlidesPage;
