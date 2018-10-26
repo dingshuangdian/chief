@@ -86,7 +86,7 @@ export class WebConfig {
                 getTodayIncrement: '/CRUD/CRUD-Q-storeInfo-getTodayIncrement.do',
                 getStoreInfo: '/CRUD/CRUD-Q-storeInfo-getStoreInfo.do',
                 getBookOrdersCount: '/CRUD/CRUD-Q-bookorder-getBookOrdersCount.do',
-                //findPermissionCode: "/CRUD/CRUD-Q-common-findPermissionCode.do",
+                //findPermissionCode: "/CRUD/CRUD-Q-common-findPermissionCode.do", 
                 findPermissionCode: "/CRUD/CRUD-Q-Auth-qryMenuFuncTags.do",
                 loginOut: "/CRUD/CRUD-CQ-user-loginOut.do",
                 getIOSVersion: "/CRUD/CRUD-Q-system-getIOSVersion.do",
@@ -104,6 +104,7 @@ export class WebConfig {
                
                 findautotypeKeyword: "/CRUD/CRUD-Q-auto-findautotypeKeyword.do",
                 findMember4plateNumber: '/CRUD/CRUD-Q-member-findMember4plateNumber.do',
+                findGoods4keyWords:'/CRUD/CRUD-Q-goods-findGoods4keyWords.do'
 
         };
         static phone = "4008313400";

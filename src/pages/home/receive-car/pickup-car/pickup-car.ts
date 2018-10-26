@@ -101,7 +101,7 @@ export class pickupCarPage {
     public changeDetectorRef: ChangeDetectorRef,
     public alertCtrl: AlertController,
   ) {
-    var id = this.navParams.get('id');
+    var id = this.navParams.get('id');//上一个页面扫码返回的车牌号
     this.reqPlateNumer(id, true);
   }
   //修改车牌
@@ -339,6 +339,7 @@ export class pickupCarPage {
         } else {//新车
           _self.isFlag = true;
           _self.resetNewInfos();
+          _self.newuserInfos.memberName = plateNumber + "车主";
           _self.olduserInfos = {};
           _self.changeDetectorRef.detectChanges();
         }
@@ -406,7 +407,7 @@ export class pickupCarPage {
       auto: {}
     };
     if (!this.newuserInfos.memberName && !this.newuserInfos.mobileNumber) {
-      this.presentAlert("请至少填写客户电话或者客户名称");
+      this.presentAlert("请填写客户电话或者客户名称");
       return;
     }
     let CarNo = this.csbzNave.checkCarNo(this.plateNumber);
@@ -452,8 +453,8 @@ export class pickupCarPage {
         });
         param.auto.autoImg = this.newuserInfos.autoImg;
         this.saveMsg(param);
-      })  
-    }else{
+      })
+    } else {
       param.auto.autoImg = [];
       this.saveMsg(param);
     }
@@ -529,13 +530,13 @@ export class pickupCarPage {
     this.changeDetectorRef.detectChanges();
   }
 
-  focusFun(){
+  focusFun() {
     this.scrollTokeyboardHeight();
   }
   scrollTokeyboardHeight() {//让content向上滚动 软键盘的高度
-    window.addEventListener('native.keyboardshow',(e:any) =>{
-    //alert(e.keyboardHeight);
-    this.content.scrollTo(0,e.keyboardHeight);
+    window.addEventListener('native.keyboardshow', (e: any) => {
+      //alert(e.keyboardHeight);
+      this.content.scrollTo(0, e.keyboardHeight);
     });
   }
 }

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      搜索配件
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar class="searchStyle">
+    <ion-row>
+      <ion-col no-padding>
+        <ion-searchbar #searchbar [(ngModel)]="seachInfo.keyWords" placeholder="请输入配件名称搜索" (ngModelChange)="searchPj($event)">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="cate_right">
+    <ion-list>
+      <ion-item *ngFor="let item of customers " (click)="hyselectItem(item)">
+        <div class="con-se">
+          <div class="f">
+            <p>{{item.goodsName}}</p>
+            <p>￥{{item.salePrice}}</p>
+          </div>
+          <div class="g">
+            <p>编号
+              <span style="margin-left:5px;">{{item.goodsCode}}</span>
+            </p>
+          </div>
+          <div class="h">
+            <p>产地
+              <span style="margin-left:5px;">{{item.producingArea}}</span>
+            </p>
+            <p style="margin-left:50px;">库存
+              <span style="color: #ff5a10;">{{item.sumNum}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

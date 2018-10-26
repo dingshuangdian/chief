@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { WebSites } from '../../../providers/web-sites';
+import { OrderDetailPage } from '../order-detail/order-detail';
 
 /**
  * Generated class for the OrderPage page.
@@ -38,6 +39,9 @@ export class PayRecordlPage {
 
   ionViewDidLoad() {
     this.switchType();
+  }
+  goDetail(num) {
+    this.navCtrl.push(OrderDetailPage, { "orderId": num });
   }
   doLoadMore(infiniteScroll) {
     this.infiniteScroll = infiniteScroll;
@@ -197,6 +201,7 @@ export class PayRecordlPage {
         if (this.selectOption == 'all') {
 
           this.payRecord = this.payRecord.concat(res);
+        
         }
         if (infiniteScroll) {
           infiniteScroll.complete();

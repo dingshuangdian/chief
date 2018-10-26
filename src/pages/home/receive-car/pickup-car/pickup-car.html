@@ -332,7 +332,7 @@
       <ion-grid no-padding padding-horizontal>
         <ion-row>
           <div>当前公里数：</div>
-          <ion-col>{{olduserInfos.currentMileage / 1000}}KM</ion-col>
+          <ion-col>{{olduserInfos.currentMileage?olduserInfos.currentMileage:0}}KM</ion-col>
         </ion-row>
         <ion-row>
           <div>车 架 号：</div>

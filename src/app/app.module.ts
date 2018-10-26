@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { IonicStorageModule } from '@ionic/storage';
-
+import { JPush } from '@jiguang-ionic/jpush';
 import { MyApp } from './app.component';
 
 import { HomeModule } from '../pages/home/home.module';
@@ -39,7 +39,6 @@ import { CsbzNave } from '../providers/csbz-nave';
 import { DatePipe } from '@angular/common';
 import { SlidesPage } from '../pages/slides/slides';
 import { Keyboard } from '@ionic-native/keyboard';
-
 @NgModule({
   declarations: [
     MyApp,
@@ -100,7 +99,13 @@ import { Keyboard } from '@ionic-native/keyboard';
     WebSites,
     CsModal,
     DatePipe,
-    Keyboard
+    Keyboard,
+    JPush
+    
+    
+    
+ 
+   
 
   ]
 })

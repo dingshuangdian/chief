@@ -3,8 +3,14 @@
     <ion-title>
       选择配件
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="searchPro()">
+        <ion-icon>
+          <img style="width:20px;height:20px" src="assets/imgs/search.png" alt="">
+        </ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
   <!-- <ion-toolbar class="searchStyle">
     <ion-row>
       <ion-col no-padding>
@@ -34,15 +40,10 @@
                 <p>{{item.goodsName}}</p>
                 <p>￥{{item.salePrice}}</p>
               </div>
-
-
-
-              
               <div class="g">
                 <p>编号
                   <span style="margin-left:5px;">{{item.goodsCode}}</span>
                 </p>
-
               </div>
               <div class="h">
                 <p>产地
@@ -53,15 +54,9 @@
                 </p>
               </div>
             </div>
-
-
-
           </ion-item>
         </ion-list>
-
       </div>
     </ion-scroll>
   </div>
-
-
 </ion-content>
