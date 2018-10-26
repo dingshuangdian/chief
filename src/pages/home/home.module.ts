@@ -46,6 +46,7 @@ import { VisitedMsgPage } from './business-remind/visited-msg/visited-msg';
 import { CheckHelpPage } from './check-help/check-help';
 import { hycountPopover } from '../other/hycount-popover/hycount-popover';
 import { pickupCarPage } from '../home/receive-car/pickup-car/pickup-car';
+import { searchPjPage } from './receive-car/search-pj/search-pj';
 @NgModule({
   declarations: [
     HomePage,
@@ -93,7 +94,8 @@ import { pickupCarPage } from '../home/receive-car/pickup-car/pickup-car';
     RecordPageEdit,
     RecordPageRegistere,
     CheckHelpPage,
-    pickupCarPage
+    pickupCarPage,
+    searchPjPage
   ],
   imports: [
     ComponentsModule,
@@ -145,7 +147,7 @@ import { pickupCarPage } from '../home/receive-car/pickup-car/pickup-car';
     BusinessRemindPage,
     VisitedMsgPage,
     CheckHelpPage,
-    pickupCarPage
+    pickupCarPage,searchPjPage
   ]
 })
 export class HomeModule { }

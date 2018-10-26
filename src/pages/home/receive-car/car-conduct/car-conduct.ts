@@ -31,7 +31,7 @@ export class carConductPage {
   @ViewChild(Content) content: Content;
 
   isNave: boolean;
-  public flag = false;
+  public flag = false;//控制显示隐藏 点击更多
   public flag_ = false;
   public makeAllPrice: number = 0;
   public pjAllPrice: number = 0;
@@ -293,6 +293,7 @@ export class carConductPage {
     let $this = this;
     let demo;
     demo = function (data) {
+      console.log(data);
       return new Promise((resolve, reject) => {
         if (data != '') {
           $this.poAllPrice = 0;
@@ -338,7 +339,24 @@ export class carConductPage {
         if (data != '') {
           $this.pjAllPrice = 0;
           $this.flag_ = true;
-          $this.goods.push(data);
+          if($this.goods.length != 0){//判断选择的配件跟原来的配件是否有可以合并的
+            for(let i=0;i<$this.goods.length;i++){
+              if($this.goods[i].goodsId == data.goodsId 
+                && $this.goods[i].sellUid == data.sellUid 
+                && $this.goods[i].discountCoefficient == data.discountCoefficient
+              ){
+                $this.goods[i].goodsNum += data.goodsNum;
+                $this.goods[i].totalAmount += data.totalAmount;
+                data = {};
+                break;
+              }
+            }
+            if(JSON.stringify(data) != "{}"){
+              $this.goods.push(data);
+            }
+          }else{
+            $this.goods.push(data);
+          }
           $this.saveAll["goods"] = $this.goods;
           $this.saveAll["goods"].forEach(element => {
 
@@ -351,8 +369,6 @@ export class carConductPage {
     }
     this.navCtrl.push(carSelectPjPage, { callback: demo, type: type, addpro: '编辑配件' });
   }
-
-
 
   save_() {
     this.websites.httpPost('saveAsorder', this.saveAll, true, false).subscribe(res => {
@@ -396,12 +412,28 @@ export class carConductPage {
     demo = function (data) {
       return new Promise((resolve, reject) => {
         if (data != '') {
-          item = data;
+          // item = data;
+          if($this.goods.length > 1){//判断修改之后的配件跟原来的配件是否有可以合并的
+            for(let j=0;j<$this.goods.length;j++){
+              if(i != j){
+                if($this.goods[j].goodsId == data.goodsId 
+                  && $this.goods[j].sellUid == data.sellUid 
+                  && $this.goods[j].discountCoefficient == data.discountCoefficient
+                ){
+                  $this.goods[j].goodsNum += data.goodsNum;
+                  $this.goods[j].totalAmount += data.totalAmount;
+                  $this.goods.splice(i, 1);
+                  $this.saveAll["goods"] = $this.goods;
+                  break;
+                }
+              }
+            }
+          }
           $this.saveAll["goods"].forEach(element => {
             $this.pjAllPrice += element.totalAmount;
           });
 
-        } else {
+        } else {//在修改配件修改页面被删除
           $this.goods.splice(i, 1);
           $this.saveAll["goods"] = $this.goods;
           $this.saveAll["goods"].forEach(element => {

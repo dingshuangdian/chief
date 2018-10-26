@@ -113,7 +113,7 @@ export class newCarEditPage {
 
   postEdit() {
     if (!this.postCar.mobileNumber && !this.postCar.memberName) {
-      this.presentToast('请至少填写客户电话或者客户名称');
+      this.presentToast('请填写客户电话或者客户名称');
       return;
     }
     let CarNo = this.csbzNave.checkCarNo(this.carInfo.provinces + this.carInfo.plateNumber);
@@ -171,7 +171,7 @@ export class newCarEditPage {
       this.flag = true;
       this.title = "点击收起";
     }
-    //this.changeDetectorRef.detectChanges();
+    this.changeDetectorRef.detectChanges();
   }
   changeSex() {
     if (this.gender == 'f') {

@@ -172,6 +172,7 @@
       <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name,courseTab)">{{tab.name}}
       </span>
     </div>
+    <!-- 项目 -->
     <div class="con-btn" [hidden]='!courseTab[0].bol'>
       <div>
         <ion-list [hidden]="!flag_" no-lines>
@@ -217,6 +218,7 @@
         <button ion-button (click)="selectProject(customer.memberId)">选择项目</button>
       </div>
     </div>
+    <!-- 配件 -->
     <div class="con-btn" [hidden]='!courseTab[1].bol'>
       <div>
         <ion-list [hidden]="!flag_" no-lines>

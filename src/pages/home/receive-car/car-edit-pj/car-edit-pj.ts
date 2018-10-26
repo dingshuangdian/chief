@@ -14,6 +14,7 @@ export class carEditPjPage {
   public discountAmountt = 100;
   public allPrice = 0;
   addpro;
+  flag;
 
   callback;
   editPro;
@@ -25,18 +26,19 @@ export class carEditPjPage {
       goodsName: '',
       goodsPrice: 0,
       goodsNum: 1,
-      discountAmount: 0,
+      discountAmount: 0,//优惠多少价格
       totalAmount: 0,
       mcardId: '',
       sellUid: '',
       memo: '',
       showGoodsPrice: 0,
       sellUname: '选择销售',
-      discountCoefficient: 100,
+      discountCoefficient: 100,//优惠后的折扣
     }
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private alertCtrl: AlertController) {
     this.callback = this.navParams.get('callback');
     this.addpro = this.navParams.get('addpro');
+    this.flag = this.navParams.get('flag') ? this.navParams.get('flag') : ''
     if (this.addpro == '编辑配件') {
       this.flagXz = true;
       this.editPro = this.navParams.get('j');
@@ -55,7 +57,6 @@ export class carEditPjPage {
   }
   showSelect_(flagType) {
     let $this = this;
-    console.log(flagType);
     let d = function (data) {
       return new Promise((resolve, reject) => {
         $this.goods.sellUname = data.userName;
@@ -90,9 +91,13 @@ export class carEditPjPage {
       this.callback(this.goods).then(() => {
         this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 2));
       })
-    } else if (this.addpro == '编辑配件') {
+    } else if (this.addpro == '编辑配件' && !this.flag) {
       this.callback(this.goods).then(() => {
         this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 3));
+      })
+    } else {
+      this.callback(this.goods).then(() => {
+        this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 4));
       })
     }
   }
@@ -107,6 +112,7 @@ export class carEditPjPage {
       this.navCtrl.pop();
     })
   }
+
   removePro() {
     this.presentAlert("确定要删除吗？")
 

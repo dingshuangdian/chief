@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Events, AlertController } from 'ionic-angular';
+import { Events, AlertController, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Md5 } from 'ts-md5/dist/md5';
 import { WebSites } from './web-sites'
 import { Observable } from 'rxjs/Observable';
+import { JPush } from '@jiguang-ionic/jpush';
 
 
 @Injectable()
@@ -12,6 +13,8 @@ export class UserData {
   constructor(
     public events: Events,
     public storage: Storage,
+    public jpush: JPush,
+    public platform: Platform,
     public websites: WebSites,
     public alertCtrl: AlertController,
   ) { }

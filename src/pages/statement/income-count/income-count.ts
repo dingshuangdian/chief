@@ -116,9 +116,9 @@ export class IncomeCountPage {
         costAmount += e.costAmount;
         profitAmount += e.profitAmount;
 
-        this.profitData.push({ value: [e.date, e.profitAmount] });
-        this.costData.push({ value: [e.date, e.costAmount] });
-        this.incomeData.push({ value: [e.date, e.incomeAmount] });
+        this.profitData.push([e.date, e.profitAmount]);
+        this.costData.push([e.date, e.costAmount]);
+        this.incomeData.push([e.date, e.incomeAmount]);
 
       });
 
@@ -180,29 +180,28 @@ export class IncomeCountPage {
   }
 
   depictC(chart, arr, color, title, ) {
-    let curtt = this.datePipe.transform(new Date(), "yyyy/MM/dd");
+    // let curtt = this.datePipe.transform(new Date(), "yyyy/MM/dd");
 
-    let for30;
-    if (this.segmentType == '近半年') {
-      for30 = this.datePipe.transform(this.csbzNave.ionDateTool(new Date(), 6, 'm', '-'), "yyyy/MM/dd");
-    } else {
-      for30 = this.datePipe.transform(this.csbzNave.ionDateTool(new Date(), 30, 'd', '-'), "yyyy/MM/dd");
+    // let for30;
+    // if (this.segmentType == '近半年') {
+    //   for30 = this.datePipe.transform(this.csbzNave.ionDateTool(new Date(), 6, 'm', '-'), "yyyy/MM/dd");
+    // } else {
+    //   for30 = this.datePipe.transform(this.csbzNave.ionDateTool(new Date(), 30, 'd', '-'), "yyyy/MM/dd");
+    // }
+    let xData = [];
+    for(var i=0;i<arr.length;i++){
+      xData.push(arr[i][0]);
     }
-
-
     if (chart) {
-
-      arr.unshift({ value: [for30] });
-      arr.push({ value: [curtt] });
-
-
+      // arr.unshift({ value: [for30] });
+      // arr.push({ value: [curtt] });
       let eChart = ECharts.init(chart.nativeElement);
       let option = {
         tooltip: {
           trigger: 'axis'
         },
         grid: {
-          left: '15%',
+          left: '20%',
           right: '5%',
           top: '15%',
           bottom: '15%'
@@ -213,14 +212,29 @@ export class IncomeCountPage {
         },
         color: [color],
         xAxis: {
-          type: 'time',
-          splitNumber: 5
+          type: 'category',
+          data: xData,
+          axisLabel:{
+            interval:0,
+            rotate:40
+          },
+          splitLine : {
+            show: true,
+            lineStyle: {
+              color: '#ccc',
+              type: 'dashed',
+              width: 1
+            }
+          },
         },
         yAxis: {
           type: 'value',
           axisLabel: {
             formatter: '￥{value}',
-          }
+          },
+          axisTick: {
+            inside: true
+          },
         },
         series: [{
           name: title,

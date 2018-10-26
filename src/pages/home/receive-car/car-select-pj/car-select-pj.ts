@@ -3,6 +3,7 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { WebSites } from '../../../../providers/web-sites';
 import { carEditPjPage } from '../car-edit-pj/car-edit-pj';
+import { searchPjPage } from '../search-pj/search-pj';
 
 @Component({
   selector: 'page-car-select-pj',
@@ -36,6 +37,10 @@ export class carSelectPjPage {
 
 
   }
+  searchPro() {
+    this.navCtrl.push(searchPjPage, { callback: this.callback, addpro: this.addpro })
+
+  }
   getData() {
 
 
@@ -51,7 +56,6 @@ export class carSelectPjPage {
           }
         })
         this.leftCate = res;
-        console.log(this.leftCate);
       }
     }, error => {
       console.error(error);

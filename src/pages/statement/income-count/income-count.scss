@@ -72,9 +72,12 @@ page-income-count {
     }
   }
   .charts {
-      background-color: white;
-      padding: 10px 16px;
-      color: #555;
+    background-color: white;
+    padding: 10px 10px;
+    color: #555;
+    .title{
+      padding-left: 6px;
+    }
   }
   .redTag {
     color: color($colors, danger);
