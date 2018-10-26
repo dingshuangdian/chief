@@ -29,6 +29,7 @@ plugins/android.json
 plugins/ios.json
 package-lock.json/
 www/
+package-lock.json/
 hcp_build/
 $RECYCLE.BIN/
 
