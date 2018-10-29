@@ -38,6 +38,15 @@ export class CsModal {
         });
         toast.present();
     }
+    showToastbottom(msg) {
+        let toast = this.toastCtrl.create({
+            message: msg,
+            position: 'bottom',
+            duration: 3000,
+            dismissOnPageChange: true
+        });
+        toast.present();
+    }
 
     showAlert(msg, certainCallback?, cancelCallback?, certainText?, cancelText?, title?) {
 

@@ -39,6 +39,8 @@ import { CsbzNave } from '../providers/csbz-nave';
 import { DatePipe } from '@angular/common';
 import { SlidesPage } from '../pages/slides/slides';
 import { Keyboard } from '@ionic-native/keyboard';
+import { BackButtonService } from '../providers/backButton';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -100,7 +102,9 @@ import { Keyboard } from '@ionic-native/keyboard';
     CsModal,
     DatePipe,
     Keyboard,
-    JPush
+    JPush,
+    BackButtonService
+  
     
     
     
