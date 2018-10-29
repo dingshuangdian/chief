@@ -8,9 +8,7 @@ declare let CMInfo: any, cordova: any, FileTransfer: any, PushInit: any, navigat
 
 @Injectable()
 export class CsbzNave {
-
     // isNave: boolean = true;
-
     constructor(public platform: Platform,
         public websites: WebSites,
         public events: Events,
@@ -18,14 +16,11 @@ export class CsbzNave {
         public loadingCtrl: LoadingController,
         public actionSheetCtrl: ActionSheetController, ) {
     }
-
     pushInit() {
         if (!window["PushInit"]) {
             return
         }
-
         var pushInfo: any = {};
-
         PushInit.init(function (type) {
             if (type.channelType == "sys_jiguang") {
                 pushInfo.pushTypeId = 1;
