@@ -1,0 +1,40 @@
+{
+  "_from": "easton-plugin-photoview@^1.0.6",
+  "_id": "easton-plugin-photoview@1.0.6",
+  "_inBundle": false,
+  "_integrity": "sha512-eGC5Qy0Bpg+CjQMt5frQfC6hB/WIZmmAfYRwd6dKD+NoSr+p53/ddZ4JPeQinaYPX6aARWiCVZBu5B6lsy5WfQ==",
+  "_location": "/easton-plugin-photoview",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "easton-plugin-photoview@^1.0.6",
+    "name": "easton-plugin-photoview",
+    "escapedName": "easton-plugin-photoview",
+    "rawSpec": "^1.0.6",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.6"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/easton-plugin-photoview/-/easton-plugin-photoview-1.0.6.tgz",
+  "_shasum": "2aedcba4b831c632a87d57440dcb9cee3061c412",
+  "_spec": "easton-plugin-photoview@^1.0.6",
+  "_where": "D:\\ProJect\\android\\chief",
+  "author": "",
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "easton-plugin-photoview",
+    "platforms": []
+  },
+  "deprecated": false,
+  "description": "图片浏览器",
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "license": "ISC",
+  "name": "easton-plugin-photoview",
+  "version": "1.0.6"
+}
