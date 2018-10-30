@@ -189,6 +189,7 @@ export class pickupCarPage {
 
   //查看消费详情
   goConsumerMsg(orderId) {
+    console.log(orderId);
     this.navCtrl.push(OrderDetailPage, {
       'orderId': orderId
     });
@@ -362,6 +363,7 @@ export class pickupCarPage {
     this.imageData.splice(i, 1);
     this.changeDetectorRef.detectChanges();
   }
+
   //查看图片
   selectPicture(index) {
     var urlString = [];
