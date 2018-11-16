@@ -34,7 +34,8 @@ export class resourcesStaticProvider {
 
   //加载权限数据
   loadPermissionCode(callback?: Function): any {
-    this.webSites.httpPost('findPermissionCode', {}, false).subscribe(res => {
+    this.permissionData = [];
+    this.webSites.httpGet('findPermissionCode', {}, false).subscribe(res => {
       let ures = res.funcTags;
       this.openInsur = res.storesExt.openInsur;
       if (Object.prototype.toString.call(ures) == '[object Array]') {
@@ -43,18 +44,31 @@ export class resourcesStaticProvider {
         });
       }
       window.localStorage.setItem('permissionData', JSON.stringify(this.permissionData));
-      callback();
+
+      if (callback) {
+        callback();
+      }
+
     });
   }
-  JdPCode(menuId, childMenuId, menuId2?) {
+  JdPCode(menuId, childMenuId, menuId2?, childMenuId2?, menuId3?, childMenuId3?) {
+    let show;
+    let show2;
+    let show3;
     this.permissionData.forEach((element) => {
-      if (menuId == element.menuId || menuId2 == element.menuId) {
-        let show = element.funcTags & childMenuId;
-        if (show == childMenuId) {
-          this.flag = 0;
-        } else {
-          this.flag = 1;
-        }
+      if (menuId == element.menuId) {
+        show = element.funcTags & childMenuId;
+      }
+      if (menuId2 == element.menuId) {
+        show2 = element.funcTags & childMenuId2;
+      }
+      if (menuId3 == element.menuId) {
+        show3 = element.funcTags & childMenuId3;
+      }
+      if (show == childMenuId || show2 == childMenuId2 || show3 == childMenuId3) {
+        this.flag = 0;
+      } else {
+        this.flag = 1;
       }
     })
     return new Promise((resolve, reject) => {

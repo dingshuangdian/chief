@@ -38,15 +38,17 @@ export class IncomeGatherPage {
   chartInfo: any = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, private datePipe: DatePipe, public events: Events) {
-    this.events.subscribe('stateTabs:IncomeGatherPage', () => {
-      this.segmentChanged();
-    })
+
   }
 
-  ionViewDidLoad() {
+
+  ionViewWillEnter() {
     this.beginDate = this.endDate = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     this.month = this.datePipe.transform(new Date(), "yyyy-MM");
     this.year = this.datePipe.transform(new Date(), "yyyy");
+    this.events.subscribe('stateTabs:IncomeGatherPage', () => {
+      this.segmentChanged();
+    })
   }
 
   segmentChanged() {

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, App, Events } from 'ionic-angular';
+import { NavController, ViewController, App, Events, Platform  } from 'ionic-angular';
 import { WebSites } from '../../providers/web-sites'
-
-
+import { BackButtonService } from '../../providers/backButton';
 
 import { UserData } from '../../providers/user-data';
 import { TabsPage } from '../tabs/tabs';
@@ -22,7 +21,13 @@ export class LoginPage {
     public Websites: WebSites,
     public appCtrl: App,
     public userData: UserData, 
-    public event: Events) {
+    public event: Events,
+    private platform: Platform,
+    private backButtonService: BackButtonService,
+  ) {
+    platform.ready().then(() => {
+      backButtonService.registerBackButtonAction(null);
+    });
   }
   ionViewDidLoad() {
   }

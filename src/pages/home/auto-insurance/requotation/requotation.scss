@@ -1,0 +1,312 @@
+page-requotation {
+    .content-ios {
+        background: #F7F9FA !important;
+    } // 单选按钮样式
+    .radio-ios {
+        margin: 0 !important;
+        margin-right: 5px !important;
+        flex-grow: unset;
+        .radio-icon {
+            width: 15px;
+            height: 15px;
+            border: 0.55px solid #c8c7cc;
+            border-radius: 50%;
+        }
+        .radio-checked {
+            background-color: #FFB606;
+            border-radius: 50%;
+            border: 0 !important;
+            .radio-inner {
+                border-color: #fff;
+                top: 0;
+            }
+        }
+    }
+    .item-ios,
+    .item-radio-checked.item-ios ion-label {
+        color: #6B6C70;
+        font-size: 14px;
+    } // 复选框样式
+    .checkbox-ios {
+        margin-right: 5px !important;
+        .checkbox-icon {
+            width: 15px;
+            height: 15px;
+        }
+    }
+    .checkbox-ios .checkbox-checked {
+        border-color: #FFB606;
+        background-color: #FFB606;
+        .checkbox-inner {
+            top: 0;
+        }
+    }
+    .item {
+        .item-inner {
+            border-bottom: 0 !important;
+        }
+    }
+    .inCharge {
+        background: #fff;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 10px;
+        p {
+            float: left;
+            span:first-child {
+                color: #333;
+            }
+            span:last-child {
+                color: #6B6C70;
+            }
+        }
+        button {
+            float: right;
+            background: #fff;
+            line-height: 30px;
+            height: 30px;
+            border: 0.55px solid #c8c7cc;
+            color: #333;
+            font-size: 14px;
+        }
+        .button-ios.activated {
+            background-color: #d4d2d2;
+        }
+    }
+    .insName {
+        border-top: 0.55px solid #F7F9FA;
+        background: #fff;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 10px;
+        padding-left: 33px;
+    }
+    .list {
+        .grid {
+            background: #fff;
+        }
+        .row {
+            border-bottom: 0.55px solid #f4f4f4;
+            padding: 0 5px;
+            .col {
+                align-self: center;
+                padding: 0 !important;
+            }
+            .col:first-child {
+                color: #333;
+            }
+            .col:last-child {
+                color: #6B6C70;
+            }
+        }
+        .row:last-child {
+            border-bottom: 0;
+        }
+    } // 车辆信息
+    .carMsg {
+        .grid {
+            background-color: #fff;
+            margin-bottom: 15px;
+            .row:last-child {
+                border-bottom: 0;
+            }
+            .idType {
+                ion-select {
+                    height: 30px;
+                    max-width: 100%;
+                    width: 150px;
+                    border: 0.55px solid #c8c7cc;
+                    border-radius: 4px; // padding-top: 5px !important;
+                    // padding-bottom: 5px !important;
+                }
+                .select-ios {
+                    padding: 5px 8px 0 16px;
+                }
+            }
+        }
+        .grid:last-child {
+            margin-bottom: 0 !important;
+        }
+        .item {
+            min-height: auto;
+            height: 39px;
+            ion-select {
+                //padding-left: 0 !important;
+                color: #6B6C70;
+            }
+            .select-icon {
+                position: relative;
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .row {
+            height: 40px;
+        }
+        .insuredMsg {
+            display: flex;
+            flex-direction: row;
+            font-size: 14px;
+            .item {
+                min-height: auto;
+                border: 0 !important;
+                width: auto;
+                .item-inner {
+                    padding: 0 !important;
+                    border: 0 !important;
+                    flex-direction: row-reverse;
+                    .input-wrapper {}
+                    ion-label {
+                        margin: 0 !important;
+                    }
+                }
+            }
+            .item:nth-child(2) {
+                margin-left: 15px;
+            }
+        }
+    } // 保险日期
+    .insurance {
+        .grid {
+            background-color: #fff;
+            .row {
+                .col:last-child {
+                    text-align: right;
+                    border: 0.55px solid #f4f4f4;
+                    border-radius: 4px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    ion-datetime {
+                        padding-top: 5px !important;
+                        padding-bottom: 5px !important;
+                        flex-grow: 1;
+                    }
+                    img {
+                        width: 16px;
+                        height: 16px;
+                        align-self: center;
+                        padding: 0 5px;
+                        box-sizing: content-box;
+                    }
+                }
+            }
+        }
+    } // 交强险
+    .strongInsurance {
+        .item {
+            border-bottom: 0 !important;
+            padding-left: 10px !important;
+            ion-label {
+                p:first-child {
+                    font-size: 15px;
+                    color: #333;
+                }
+                p:last-child {
+                    font-size: 14px;
+                }
+            }
+        }
+    } // 商业险
+    .commercialInsurance {
+        .grid {
+            .row:nth-child(1),
+            .row:nth-child(5) {
+                .col:nth-child(2) {
+                    flex-grow: 0;
+                }
+            }
+            .row:nth-child(2),
+            .row:nth-child(3),
+            .row:nth-child(4) {
+                .col:nth-child(3) {
+                    flex-grow: 0;
+                }
+            }
+            ion-select {
+                max-width: 100%;
+                width: 100px;
+                border: 0.55px solid #c8c7cc;
+                border-radius: 4px; // padding-top: 5px !important;
+                // padding-bottom: 5px !important;
+            }
+            .row:nth-child(2),
+            .row:nth-child(3),
+            .row:nth-child(4) {
+                .col:nth-child(2) {
+                    flex-grow: 1;
+                }
+            }
+            .row:nth-child(4) {
+                .col {
+                    align-self: auto !important;
+                }
+                .col:nth-child(2) {
+                    .item:last-child {
+                        flex-direction: row-reverse !important;
+                        ion-input {
+                            border-bottom: 0.55px solid #f4f4f4;
+                            .text-input {
+                                margin: 0 !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } // 附加险
+    .additionalInsurance {
+        .grid {
+            margin-bottom: 15px;
+            .row:nth-child(3),
+            .row:nth-child(4) {
+                .col:nth-child(2) {
+                    flex-grow: 0;
+                }
+            }
+            ion-select {
+                max-width: 100%;
+                width: 100px;
+                border: 0.55px solid #c8c7cc;
+                border-radius: 4px; // padding-top: 5px !important;
+                // padding-bottom: 5px !important;
+            }
+        }
+    }
+    .commercialInsurance,
+    .additionalInsurance {
+        .item,
+        .row {
+            // font-size: 15px !important;
+            color: #333;
+            border-bottom: 0.55px solid #f4f4f4;
+        }
+    }
+    .memo {
+        background: #fff;
+        padding: 0 10px 10px 10px;
+        p {
+            line-height: 32px;
+            font-size: 16px;
+        }
+        ion-textarea {
+            border: 0.55px solid #d4d2d2;
+            border-radius: 4px;
+        }
+    }
+    .nextBtn {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 40px;
+        width: 75%;
+    }
+    .checkbox-ios.checkbox-disabled,
+    .item-ios.item-checkbox-disabled ion-label {
+        opacity: 0.7 !important;
+    }
+    .select-disabled,
+    .item-select-disabled ion-label {
+        opacity: 0.7 !important;
+    }
+}

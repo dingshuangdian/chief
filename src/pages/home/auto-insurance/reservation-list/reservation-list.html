@@ -1,0 +1,119 @@
+<!--
+  Generated template for the ReservationListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>填写信息</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-list class="insuredMsg" no-margin>
+    <sub-title [titleName]="'被保人信息'"></sub-title>
+    <ion-grid no-padding>
+      <ion-row nowrap>
+        <ion-col col-3>被保人姓名</ion-col>
+        <ion-col>{{insuredMsg.insuredName}}</ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col col-3>证件号码</ion-col>
+        <ion-col>{{insuredMsg.carownerCard}}</ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col col-3>手机号码</ion-col>
+        <ion-col>{{insuredMsg.insuredMobile?insuredMsg.insuredMobile:'无'}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <ion-list class="addresseeMsg" no-margin>
+    <sub-title [titleName]="'收件人信息'"></sub-title>
+    <ion-grid no-padding>
+      <ion-row nowrap>
+        <ion-col col-3>收件人姓名</ion-col>
+        <ion-col>{{consigneeMsg.consignee}}</ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col col-3>手机号码</ion-col>
+        <ion-col>{{consigneeMsg.consigneeMobile}}</ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col col-3>收件方式</ion-col>
+        <ion-col>
+          <ion-list class="receiveMode" radio-group no-margin no-padding
+           [(ngModel)]="consigneeMsg.consigneeType"
+          >
+            <ion-item no-padding no-margin>
+              <ion-radio value='1' checked></ion-radio>
+              <ion-label>门店</ion-label>
+            </ion-item>
+            <ion-item no-padding no-margin no-border>
+              <ion-radio value='2'></ion-radio>
+              <ion-label>自取</ion-label>
+            </ion-item>
+            <ion-item no-padding no-margin no-border>
+              <ion-radio value='4'></ion-radio>
+              <ion-label>邮寄</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row nowrap class="addr" [hidden]="consigneeMsg.consigneeType==2">
+        <ion-col col-3>收件地址</ion-col>
+        <ion-col>
+          <ion-textarea no-margin autoresize [(ngModel)]="consigneeMsg.consigneeAddress"></ion-textarea>
+        </ion-col>
+        <ion-col class="btn" [hidden]="consigneeMsg.consigneeType!=4" (click)="sendChooce()">
+          <button ion-button no-margin color="secondary">选择</button>
+        </ion-col>
+        <ion-col class="btn" [hidden]="consigneeMsg.consigneeType!=1" (click)="selectShop()">
+          <button ion-button no-margin color="secondary">门店</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- <ion-grid no-padding>
+      <ion-row nowrap>
+        <ion-col col-3>发票抬头</ion-col>
+        <ion-col>
+          <ion-list class="invoiceMode" radio-group no-margin no-padding
+           [(ngModel)]="invoiceMode"
+          >
+            <ion-item no-padding no-margin>
+              <ion-radio value=0 checked></ion-radio>
+              <ion-label>个人</ion-label>
+            </ion-item>
+            <ion-item no-padding no-margin no-border>
+              <ion-radio value=1></ion-radio>
+              <ion-label>单位</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col col-3>抬头内容</ion-col>
+        <ion-col>刘鑫</ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col col-3>收件人姓名</ion-col>
+        <ion-col>刘鑫</ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col col-3>手机号码</ion-col>
+        <ion-col>12345678910</ion-col>
+      </ion-row>
+      <ion-row nowrap class="addr addr1">
+        <ion-col col-3>收件地址</ion-col>
+        <ion-col>
+          <ion-textarea no-margin autoresize [(ngModel)]="addr"></ion-textarea>
+        </ion-col>
+        <ion-col>
+          <button ion-button no-margin color="secondary">门店</button>
+        </ion-col>
+      </ion-row>
+  </ion-grid> -->
+  </ion-list>
+  <button ion-button color="assist" class="submit" (click)="payOrder()">提交信息</button>
+</ion-content>

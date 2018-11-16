@@ -1,0 +1,11 @@
+repertory-popover {
+    background-color: #fff;
+  ion-col {
+    padding: 20px 0px 0px !important;
+    font-size: 16px;
+  }
+  .itemSelect {
+    background-color: color($colors, assist, base);
+    color: color($colors, assist, contrast) !important;
+  }
+}

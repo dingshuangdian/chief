@@ -1,29 +1,140 @@
 page-check-help {
-    .list-ios{
+    .searchStyle {
+        .toolbar-background {
+            background-color: #fff;
+        }
+        .button {
+            height: initial;
+        }
+    }
+    .list-ios {
         margin: 0 !important;
     }
-    .itemList{
-        .singleitem{
+    .itemList {
+        .singleitem {
             border-bottom: 0.55px solid #c8c7cc;
-            .item-inner{
+            .item-inner {
                 border-bottom: 0 !important;
             }
-            span{
+            span {
                 float: left;
             }
-            span:first-child{
+            span:first-child {
                 margin-right: 10px;
                 height: 100%;
                 display: inline-block;
-                img{
+                img {
                     width: 100%;
                     height: 100%;
                     background-size: contain;
                 }
             }
-            span:last-child{
+            span:last-child {
                 float: right;
             }
         }
+    }
+    .s {
+        margin-left: 20px;
+        font-size: 15px;
+    }
+    .cate_right {
+        height: 100%;
+        flex: 1;
+        overflow-y: auto;
+        ion-label {
+            font-size: 1.4rem;
+        }
+        ion-col {
+            p {
+                text-align: center;
+            }
+        }
+        ion-col:nth-child(3n) {
+            border-right: 0px;
+        }
+        .button {
+            border-radius: 6px;
+            border: 0.55px solid #ccc;
+            width: 100%;
+            margin-top: -8px;
+            color: #000;
+            font-size: 10px;
+            height: 32px;
+        }
+        .isSelect {
+            background-color: color($colors, assist, base);
+            color: color($colors, assist, contrast);
+        }
+        .row {
+            margin-top: 10px;
+        }
+        .list-ios {
+            margin: 0;
+        }
+        .list-ios>.item-block:first-child {
+            border-top: none !important;
+        }
+        .list-ios>.item-block:last-child,
+        .list-ios>.item-wrapper:last-child .item-block {
+            border-bottom: none !important;
+        }
+        .item-ios.item-block .item-inner {
+            padding-right: 3px;
+            border-bottom: none !important;
+        }
+        .label-ios {
+            margin: 5px 0px 0px 0;
+        }
+        .item-ios {
+            padding-left: 3px;
+            background-color: #f0f0f0;
+        }
+        .con-se {
+            height: 75px;
+            background-color: #fff;
+            display: flex;
+            padding: 10px;
+            flex-direction: column;
+            p {
+                //-webkit-margin-before: 1px;
+                font-size: 1px;
+            }
+            .f {
+                display: inline-flex;
+                justify-content: space-between;
+                :first-child {
+                    font-size: 18px;
+                }
+                :last-child {
+                    font-size: 18px;
+                    color: #ff5a10;
+                }
+            }
+            .g {
+                display: inline-flex;
+                margin: 10px 0;
+            }
+            .h {
+                display: inline-flex;
+                justify-content: space-between;
+            }
+        }
+    }
+    .course_tabBox {
+        display: inline-block;
+        width: 17%;
+        position: relative;
+        line-height: 30px;
+        text-align: center;
+        .course_tab {
+            padding: 5px 0;
+            color: rgb(184, 187, 189);
+            font-size: 15px;
+        }
+    }
+    .tabActive {
+        color: #ff4f02 !important;
+        border-bottom: 1px solid #fb4f29;
     }
 }

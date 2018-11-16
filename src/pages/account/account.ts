@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Events, App, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events, App, ViewController, PopoverController } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 import { ProblemAnswerPage } from './problem-answer/problem-answer';
 import { AboutChiefPage } from './about-chief/about-chief';
@@ -7,8 +7,9 @@ import { WebSites } from '../../providers/web-sites';
 import { CsbzNave } from '../../providers/csbz-nave';
 import { WebConfig } from '../../providers/web-config';
 import { Storage } from '@ionic/storage';
-import { LoginPage } from '../login/login';
-import { StatementPage } from '../statement/statement';
+
+import { departmentsPopover } from '../other/departments-popover/departments-popover';
+import { resourcesStaticProvider } from '../../providers/resources-static';
 
 
 
@@ -30,6 +31,12 @@ declare let CMInfo: any;
 })
 export class AccountPage {
   userInfo = [{ userName: '', userMobile: '' }]
+  departments;
+  departmentName;
+  did;
+  cTypeId;
+  store_type_id;
+  flag = false;
   storeMsg = {
     company_name: '',
     store_address: '',
@@ -45,29 +52,69 @@ export class AccountPage {
     public websize: WebSites,
     public events: Events,
     public storage: Storage,
+    public RSData: resourcesStaticProvider,
+    public popoverCtrl: PopoverController,
     public appCtrl: App,
-    public ViewController:ViewController,
+    public ViewController: ViewController,
     private csbzNave: CsbzNave) {
     this.userData.getUserInfo().subscribe(data => {
       this.userInfo = data;
       this.userInfo['headImg'] = 'assets/imgs/6667_03.png';
     });
-
     if (window["CMInfo"]) {
       this.versionName = CMInfo.appVersionName;
     }
-
-
   }
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    this.getInfo();
+    this.findDepartments();
+  }
+  getInfo() {
     this.websize.httpPost('getStoreInfo', '', false).subscribe(res => {
       if (res) {
         this.storeMsg = res;
+        this.store_type_id = res.store_type_id;
+        if ((res.cTypeId & 8) > 0) {
+          this.flag = true
+        } else {
+          this.flag = false;
+        }
       }
     })
   }
+  findDepartments() {
+    this.websize.httpGet('findDepartments', {}).subscribe(res => {
+      if (res) {
+        this.departments = res;
+        res.forEach(element => {
+          if (element.lastLogin) {
+            this.departmentName = element.dName;
+          }
+        });
+      }
+    })
+  }
+  changeDepartment() {
+    this.departments.forEach((element, i) => {
+      if (element.dTypeId == this.store_type_id) {
+        this.departments.splice(i, 1);
+      }
+    });
+    let popover = this.popoverCtrl.create(departmentsPopover, { t: this.departments }, { cssClass: "addProjectPopover" });
+    popover.onDidDismiss(data => {
+      if (data) {
+        this.websize.httpPost('changeDepartment', { dId: data.departmentId }).subscribe(res => {
+          if (res) {
+            this.departmentName = data.dName;
+            this.getInfo();
+            this.RSData.loadPermissionCode();
+          }
+        })
+      }
+    });
+    popover.present();
+  }
   ngOnInit() {
-
   }
   //疑问解答
   gotoQuestion() {

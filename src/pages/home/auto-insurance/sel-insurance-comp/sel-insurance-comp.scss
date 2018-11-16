@@ -1,0 +1,85 @@
+page-sel-insurance-comp {
+    .content-ios{background: #F7F9FA !important;}
+    // 单选按钮样式
+    .radio-ios{
+        margin: 0 !important;
+        flex-grow: unset;
+        .radio-icon{
+            width: 15px;
+            height: 15px;
+            border: 1px solid #c8c7cc;
+            border-radius: 50%;
+        }
+        .radio-checked{
+            background-color: #FFB606;
+            border-radius: 50%;
+            border: 0 !important;
+            .radio-inner{
+                border-color: #fff;
+                top: 0;
+            }
+        } 
+    } 
+    .item-ios,.item-radio-checked.item-ios ion-label{
+        color: #6B6C70;
+        font-size: 14px;
+    }
+    h5{
+        text-align: center;
+        line-height: 44px;
+        color: #000;
+        font-size: 16px;
+        background: #fff;
+    }
+    .list{
+        background: #fff;
+        .row{
+            .col{
+                border: 1px solid #c8c7cc;
+                border-radius: 4px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                .item{
+                    background: #e6e4e4;
+                    height: 44px;
+                    min-height: auto !important;
+                    border-radius: 4px !important;
+                    .item-inner{
+                        border: 0 !important;
+                        padding: 0 !important;
+                        .input-wrapper{
+                            width: 80%;
+                            flex-grow: 0;
+                            flex-basis: unset;
+                        }
+                        ion-label{
+                            width: 60%;
+                            height: 100%;
+                            background: #fff;
+                            display: flex;
+                            padding: 5px;
+                        }
+                        ion-radio{
+                            width: 20%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            .radio-icon{
+                                align-self: center;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    .nextBtn{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 40px;
+        width: 75%;
+    }
+}

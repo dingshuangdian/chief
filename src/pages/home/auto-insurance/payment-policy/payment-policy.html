@@ -1,0 +1,55 @@
+<!--
+  Generated template for the PaymentPolicyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>保单支付</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content no-padding>
+  <!-- 基本信息 -->
+  <ion-list class="baseMsg">
+    <ion-row>
+      <ion-col>
+        <img src="assets/imgs/InsuranceLOGO_{{qryPayCode.companyId}}.png" alt="">
+      </ion-col>
+      <ion-col>￥{{qryPayCode.totalAmount}}</ion-col>
+    </ion-row>
+    <ion-grid>
+      <ion-row>
+        <ion-col>车牌号</ion-col>
+        <ion-col>{{qryPayCode.licenseNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>保单号</ion-col>
+        <ion-col>{{qryPayCode.orderNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>被保人</ion-col>
+        <ion-col>{{qryPayCode.insuredName}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>保险代理专员</ion-col>
+        <ion-col>{{qryPayCode.insureAgentUname}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <!-- 支付方式 -->
+  <ion-list class="paymentWay" no-margin>
+    <sub-title [titleName]="'支付方式'"></sub-title>
+      <ion-list class="" radio-group no-margin no-padding
+        [(ngModel)]="paymentMode"
+      >
+        <ion-item no-padding no-margin>
+          <ion-label>
+            <img src="assets/imgs/wxpay.png" alt="">微信支付</ion-label>
+          <ion-radio no-margin value='1' checked></ion-radio>
+        </ion-item>
+      </ion-list>
+  </ion-list>
+  <button class="btn" ion-button color="assist" (click)="payCertain()">确认</button>
+</ion-content>

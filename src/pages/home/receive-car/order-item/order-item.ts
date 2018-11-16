@@ -16,6 +16,7 @@ import { memoRecordPage } from './memo-record/memo-record';
 import { CsbzNave } from '../../../../providers/csbz-nave';
 import { OrderDetailPage } from '../../../order/order-detail/order-detail';
 import { UserData } from '../../../../providers/user-data';
+import { AutoInsurancePage } from '../../../home/auto-insurance/auto-insurance';
 declare let cordova: any;
 
 
@@ -347,7 +348,7 @@ export class orderItemPage {
 
   //选省份
   showProvince() {
-    this.csModal.showProvince(ProvincesPage, (data) => {
+    this.csModal.showProvince(ProvincesPage, {}, (data) => {
       if (data == '无牌') {
         this.carInfo.plateNB = '无牌';
         this.carInfo.provinces = '';
@@ -356,6 +357,7 @@ export class orderItemPage {
         this.carInfo.provinces = '';
       } else {
         this.carInfo.plateNB = '';
+
         this.carInfo.provinces = data;
       }
     });
@@ -588,6 +590,7 @@ export class orderItemPage {
   }
 
   onCX() {
+    //this.navCtrl.push(AutoInsurancePage, { "carNum": this.customer.plateNumber });
     cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1, "carNum": this.customer.plateNumber }, (res) => {
 
     }, (error) => {

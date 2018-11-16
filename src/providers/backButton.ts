@@ -9,9 +9,11 @@ export class BackButtonService {
   backButtonPressed: boolean = false;
 
   //构造函数 依赖注入
-  constructor(public platform: Platform,
-              public appCtrl: App,
-              public toastCtrl: ToastController) { }
+  constructor(
+    public platform: Platform,
+    public appCtrl: App,
+    public toastCtrl: ToastController,
+    ) { }
 
   //注册方法
   registerBackButtonAction(tabRef: Tabs){
@@ -45,7 +47,9 @@ export class BackButtonService {
         this.toastCtrl.create({
             message: '再按一次退出应用',
             duration: 2000,
-            position: 'bottom'
+            position: 'bottom',
+            dismissOnPageChange: true,
+            cssClass: 'toastPop',
         }).present();
       //标记为true
       this.backButtonPressed = true;

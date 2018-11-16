@@ -72,7 +72,7 @@ export class newCarEditPage {
     }
   }
   showProvince() {
-    this.csModal.showProvince(ProvincesPage, (data) => {
+    this.csModal.showProvince(ProvincesPage,{}, (data) => {
       if (data == '无牌') {
         this.carInfo.plateNumber = '无牌';
         this.carInfo.provinces = '';

@@ -127,7 +127,7 @@ export class carAddProPage {
     });
   }
   showProvince() {
-    this.csModal.showProvince(ProvincesSelectPage, (data) => {
+    this.csModal.showProvince(ProvincesSelectPage, {},(data) => {
       this.selectCla.svctypeName = data.svctypeName;
       this.selectCla.svctypeId = data.svctypeId;
 

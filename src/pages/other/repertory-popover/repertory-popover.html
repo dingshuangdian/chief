@@ -1,0 +1,17 @@
+<ion-list>
+  <ion-item>
+    <ion-row>
+      <ion-col col-3 *ngFor="let item of repertory">
+        <button ion-button full color="selectItem" [disabled]="item.disable" [ngClass]="{'itemSelect': item.select}">{{item.wareAndDepar}}</button>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+</ion-list>
+<ion-row>
+  <ion-col>
+    <button ion-button block color="cancelBT" (click)="close(false)">取消</button>
+  </ion-col>
+  <ion-col>
+    <button ion-button block color="secondary" (click)="close(true)">确定</button>
+  </ion-col>
+</ion-row>

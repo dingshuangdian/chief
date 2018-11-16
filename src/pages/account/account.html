@@ -51,6 +51,14 @@
     </div>
     <div class="content" style='margin-top: 10px;'>
       <ion-list class="content2_con">
+        <ion-item ion-item (click)="changeDepartment()" *ngIf="flag">
+          <p>
+            <img src="assets/imgs/mh.png" alt="">
+          </p>
+          <p>当前门店</p>
+          <p style="margin-left: 20px;color: #000;">{{departmentName}}</p>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-item>
         <ion-item ion-item (click)="gotoQuestion()">
           <p>
             <img src="assets/imgs/my_qa.svg" alt="">

@@ -14,9 +14,11 @@ import { resourcesStaticProvider } from '../../providers/resources-static';
 import { CsbzNave } from '../../providers/csbz-nave';
 import { CheckHelpPage } from './check-help/check-help';
 import { JPush } from '@jiguang-ionic/jpush';
+import { AutoInsurancePage } from './auto-insurance/auto-insurance';
 
-
-
+import { ReservationListPage } from './auto-insurance/reservation-list/reservation-list';
+import { PaymentPolicyPage } from './auto-insurance/payment-policy/payment-policy';
+import { SelInsuranceCompPage } from './auto-insurance/sel-insurance-comp/sel-insurance-comp';
 
 /**
  * Generated class for the HomePage page.
@@ -69,6 +71,7 @@ export class HomePage {
     public event: Events,
     public RSData: resourcesStaticProvider,
     private csbzNave: CsbzNave) {
+
     let $this = this;
     $this.itemList = [
       { name: "接车", img: "home_03.png", tag: 0 },
@@ -77,24 +80,12 @@ export class HomePage {
       { name: "业务提醒", img: "home_16.png", tag: 3 },
       { name: "记一笔", img: "home_19.png", tag: 4 },
       { name: "客户查询", img: "home_22.png", tag: 5 },
-      { name: "查询助手", img: "home_24.png", tag: 6 }
+      { name: "库存查询", img: "home_24.png", tag: 6 }
     ];
     this.RSData.loadPermissionCode(() => {
       this.RSData.cxCode().then((msg) => {
         $this.itemList.splice(3, 0, { name: "车险业务", img: "home_09.png", tag: 7 });
-        $this.websize.httpPost('getExpireInsuranceList', {}, false).subscribe(res => {
-          if (res) {
-            this.InsuranceList.records = res.records;
-            if (res.rows && res.rows.length > 0) {
-              this.InsuranceList.expireDate = res.rows[0].expireDate;
-            }
-          }
-        })
-        $this.websize.httpPost('queryUnreadMsg', {}, false).subscribe(res => {
-          if (res) {
-            this.unreadMsg = res.unreadMsg;
-          }
-        });
+
       }, (msg) => { });
     });
     // document.addEventListener(
@@ -284,22 +275,19 @@ export class HomePage {
         break;
     }
   }
-
-
-
   onSignup() {
     this.RSData.JdPCode("202003", "2", "202004").then((msg) => {
       this.navCtrl.push(receiveCarPage);
     }, (msg) => { })
   }
   onMemberMng() {
-    this.RSData.JdPCode('203001', "1").then((msg) => {
+    this.RSData.JdPCode('203002', "1", "203007", "2","203007","4").then((msg) => {
       this.navCtrl.push(memberMngPage);
     }, (msg) => { })
 
   }
   onCustom() {
-    this.RSData.JdPCode("204001", "1").then((msg) => {
+    this.RSData.JdPCode("204001", "1", "204002", "1").then((msg) => {
       this.navCtrl.push(customPage);
     }, (msg) => { })
   }
@@ -327,11 +315,20 @@ export class HomePage {
     }, (msg) => { })
   }
   onCX() {
-    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
-      console.log(res);
-    }, (error) => {
-      console.log(error);
-    })
+    this.navCtrl.push(AutoInsurancePage);
+    // cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
+    //   console.log(res);
+    // }, (error) => {
+    //   console.log(error);
+    // })
   }
-
+  // test(){
+  //   this.navCtrl.push(ReservationListPage);
+  // }
+  // test1(){
+  //   this.navCtrl.push(PaymentPolicyPage);
+  // }
+  // test2(){
+  //   this.navCtrl.push(SelInsuranceCompPage);
+  // }
 }

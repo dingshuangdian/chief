@@ -5,14 +5,21 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <div class="setype" *ngIf="!openCard">
+    <div class="setype" *ngIf="!openCard&&openChard">
       <ion-segment color="secondary" [(ngModel)]="segmentType" (ngModelChange)="segmentChange()">
         <ion-segment-button value="topUp">
           会员卡充值
         </ion-segment-button>
       </ion-segment>
     </div>
-    <div *ngIf="openCard">
+    <div class="setype" *ngIf="openCard&&!openChard">
+      <ion-segment color="secondary" [(ngModel)]="segmentType" (ngModelChange)="segmentChange()">
+        <ion-segment-button value="open">
+          开立会员卡
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div *ngIf="openCard&&openChard">
       <ion-segment color="secondary" [(ngModel)]="segmentType" (ngModelChange)="segmentChange()">
         <ion-segment-button value="topUp">
           会员卡充值

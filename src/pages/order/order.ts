@@ -67,6 +67,10 @@ export class OrderPage {
     private csbzNave: CsbzNave) {
   }
   ionViewWillEnter() {
+    this.showOrder = false;
+    this.showPay = false;
+    this.showUpdata = false;
+    this.showCancel = false;
     this.permissionData = JSON.parse(window.localStorage.getItem('permissionData'));
     this.permissionData.forEach(element => {
       if (element.menuId == "202005") {
@@ -76,10 +80,11 @@ export class OrderPage {
         this.showCancel = (64 == (element.funcTags & 64)) ? true : false;
       }
     })
-  }
-
-  ngOnInit() {
+    this.items = [];
     this.getOrderList(this.orderListParam);
+  }
+  ngOnInit() {
+
   }
   //获取订单
   getOrderList(param) {

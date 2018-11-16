@@ -1,0 +1,19 @@
+page-exception-cause {
+    .content-ios {
+        background-color: #f8f9fd !important;
+    }
+    /**免责说明条款字体**/
+    .exceptionCauseTitle {
+        color: #333333;
+        font-weight: bold
+    }
+    .exceptionContent {
+        color: #333333;
+    }
+    .col {
+        flex: 1;
+        display: block;
+        padding: 5px;
+        width: 100%;
+    }
+}

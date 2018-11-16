@@ -1,0 +1,112 @@
+page-payment-policy {
+    .content-ios{background: #F7F9FA !important;}
+    .radio-ios{
+        width: auto !important;
+        flex-grow: 0 !important;
+        margin: 0 !important;
+        .radio-icon{
+            width: 15px;
+            height: 15px;
+            border: 1px solid #c8c7cc;
+            border-radius: 50%;
+        }
+        .radio-checked{
+            background-color: #FFB606;
+            border-radius: 50%;
+            border: 0 !important;
+            .radio-inner{
+                border-color: #fff;
+                top: 0;
+            }
+        } 
+    } 
+    .item-radio-checked.item-ios ion-label{
+        color: #000;
+    }
+    .list{
+        .row{
+            .col{
+                padding: 0 !important;
+                align-self: center;
+            }
+        }
+    }
+    .list.baseMsg{
+        margin-bottom: 0;
+        font-size: 16px;
+        background-color: #fff;
+        &>.row{
+            height: 44px;
+            border-bottom: 1px solid #c8c7cc;
+            padding: 0 10px;
+            margin: 0;
+            img{
+                height: 35px;
+                display: inline-block;
+            }
+            .col{
+                display: flex;
+            }
+            .col:last-child{
+                color: #FC5F3C;
+                text-align: right;
+            }
+        }
+        .grid{
+            padding: 10px 40px;
+            .row{
+                height: 32px;
+                border-bottom: 1px dotted #c8c7cc;
+                .col:first-child{
+                    flex-grow: 0;
+                    flex-basis: unset !important;
+                    width: auto !important;
+                }
+                .col:last-child{
+                    text-align: right;
+                    color: #6B6C70;
+                }
+            }
+            .row:last-child{
+                border-bottom: 0 !important;
+            }
+        }
+    }
+    .list.paymentWay{
+        margin-bottom: 10px;
+        .list{
+            background-color: #fff;
+            padding: 0 10px;
+            &>.item{
+                border: 0 !important;
+                .item-inner{
+                    padding-right: 0 !important;
+                    ion-label{
+                        display: flex;
+                        img{
+                            width: 20px;
+                            height: 20px;
+                            margin-right: 10px;
+                        }
+                    }  
+                }
+            }
+        }
+    }
+    .list.scanCode{
+        img{
+            width: 150px;
+            height: 150px;
+            display: block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFB606
+        }
+    }
+    .btn{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

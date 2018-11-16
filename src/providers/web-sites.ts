@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { LoadingController, AlertController, ToastController, Events } from 'ionic-angular';
+import { LoadingController, AlertController, ToastController, Events, NavController, App } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
@@ -11,7 +11,12 @@ import { WebConfig } from './web-config';
 @Injectable()
 export class WebSites {
 
-    constructor(public http: HttpClient, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, public events: Events) { }
+
+    constructor(public http: HttpClient, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, public events: Events, public appCtrl: App, ) {
+
+
+
+    }
 
     // 对参数进行编码
     encode(params, isForm: boolean = true) {
@@ -34,7 +39,7 @@ export class WebSites {
         return tParams;
     }
 
-    httpGet(url, params: object = {}, loader: boolean = true, isShowError: boolean = true, judgeUdf: boolean = false) {
+    httpGet(url, params: object = {}, loader: boolean = false, isShowError: boolean = true, judgeUdf: boolean = false) {
         let loading = this.loadingCtrl.create({});
         if (loader) loading.present();
         return this.http.get(WebConfig.server_ + WebConfig.API[url] + this.encode(params, false))
@@ -142,6 +147,7 @@ export class WebSites {
 
 
     private handleError(error: Response | any) {
+        let activeNav: NavController = this.appCtrl.getActiveNav();
         let msg = '';
         if (error.status == 0) {
             msg = error.message;
@@ -155,6 +161,7 @@ export class WebSites {
                 msg = error.message;
                 if (!msg) {
                     this.alert(error.body.msg)
+                    activeNav.pop();
                 }
             }
 

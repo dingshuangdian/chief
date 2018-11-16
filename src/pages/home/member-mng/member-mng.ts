@@ -16,10 +16,11 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 export class memberMngPage {
   isNave: boolean = false;
   openCard: boolean = false;
+  openChard: boolean = false;
   permissionData;
   searchPlaceholder: string = "请输入手机、车牌号或卡号进行模糊搜索";
   url: string = "findMcard4keywords";
-  segmentType: string = "topUp";
+  segmentType: string;
   keyWords: string = "";
   memberList: any;
 
@@ -30,6 +31,28 @@ export class memberMngPage {
       if (element.menuId == "203002") {
         if (1 == (element.funcTags & 1)) {
           this.openCard = true;
+          this.openChard = true;
+          this.segmentType = "topUp";
+        } else {
+          this.openCard = false;
+          this.openChard = false;
+        }
+      }
+
+      if (element.menuId == "203007") {
+        if (4 == (element.funcTags & 4)) {
+          this.openChard = true;
+          this.segmentType = "topUp";
+        } else {
+          this.openChard = false;
+        }
+      }
+      if (element.menuId == "203007") {
+        if (2 == (element.funcTags & 2)) {
+          this.openCard = true;
+          if (!this.openChard) {
+            this.segmentType = "open";
+          }
         } else {
           this.openCard = false;
         }

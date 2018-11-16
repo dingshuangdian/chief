@@ -1,0 +1,551 @@
+<!--
+  Generated template for the RequotationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>险种选择</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-list no-margin>
+    <ion-row class="inCharge" justify-content-between>
+      <p no-margin>
+        <span>跟进人员：</span>
+        <span>{{agentName}}</span>
+      </p>
+      <button ion-button>更换</button>
+    </ion-row>
+    <!-- <ion-row class="insName">
+      <span>被保人姓名：</span>
+      <ion-input no-margin no-padding placeholder='请输入被保人姓名'></ion-input>
+    </ion-row> -->
+  </ion-list>
+  <!-- 车辆信息 -->
+  <ion-list no-margin class="carMsg" *ngIf="isShow">
+    <sub-title [titleName]="'车辆信息'"></sub-title>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-4>车牌号码</ion-col>
+        <ion-col>{{lastMsg.licenseNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>品牌型号</ion-col>
+        <ion-col>{{lastMsg.modleName}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>注册日期</ion-col>
+        <ion-col>{{lastMsg.registerDate}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>投保公司</ion-col>
+        <ion-col>{{lastMsg.companyName||'暂无'}}</ion-col>
+      </ion-row>
+
+      <ion-row class="insName" *ngIf="!recordBool">
+        <ion-col col-4>投保人姓名</ion-col>
+        <ion-col>
+          <ion-input no-margin placeholder='请输入投保人姓名' [(ngModel)]="lastMsg.holderName"></ion-input>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+    <ion-grid no-padding>
+      <div *ngIf="recordBool">
+        <ion-row>
+          <ion-col col-4>投保人信息</ion-col>
+          <ion-col>
+            <ion-list class="insuredMsg" radio-group no-margin no-padding [(ngModel)]="infoHolderType" (ionChange)="showMessagess()">
+              <ion-item no-padding no-margin>
+                <ion-radio value=1 checked="true"></ion-radio>
+                <ion-label>与上年信息一致</ion-label>
+              </ion-item>
+              <ion-item no-padding no-margin no-border>
+                <ion-radio value=2></ion-radio>
+                <ion-label>不一致</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row class="insName" *ngIf="infoHolderType == 1">
+          <ion-col col-4>投保人姓名</ion-col>
+          <ion-col>
+            <ion-input no-margin placeholder='请输入投保人姓名' [(ngModel)]="lastMsg.holderName"></ion-input>
+          </ion-col>
+        </ion-row>
+        <!-- <div *ngIf="isShow">
+            <ion-row class="idType">
+              <ion-col col-4>证件类型</ion-col>
+              <ion-col>
+                <ion-item no-padding>
+                  <ion-select [(ngModel)]="lastMsg.holderIdCardType">
+                    <ion-option *ngFor="let x of cardType" value="x.cardTypeId">{{x.cardTypeName}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="insName">
+              <span>证件号码</span>
+              <ion-input no-margin no-padding placeholder='请输入证件号码' [(ngModel)]="lastMsg.holderIdCard" type="text"></ion-input>
+            </ion-row>
+            <ion-row class="insName">
+              <span>手机号码</span>
+              <ion-input no-margin no-padding placeholder='请输入手机号码' [(ngModel)]="lastMsg.holderMobile" type="tel"></ion-input>
+            </ion-row>
+          </div> -->
+
+        <div *ngIf="infoHolderType==2">
+          <ion-row class="insName">
+            <ion-col col-4>投保人姓名</ion-col>
+            <ion-col>
+              <ion-input no-margin placeholder='请输入投保人姓名' [(ngModel)]="lastMsg.newholderName" type="text"></ion-input>
+            </ion-col>
+          </ion-row>
+          <div *ngIf="isShow">
+            <ion-row class="idType">
+              <ion-col col-4>证件类型</ion-col>
+              <ion-col>
+                <ion-item no-padding>
+                  <ion-select okText="确定" cancelText="取消" [(ngModel)]="newholderCardName">
+                    <ion-option *ngFor="let x of cardType" value="{{x.cardTypeId}}">{{x.cardTypeName}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="insName">
+              <ion-col col-4>证件号码</ion-col>
+              <ion-col>
+                <ion-input no-margin placeholder='请输入证件号码' [(ngModel)]="lastMsg.newholderIdCard" type="text"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="insName">
+              <ion-col col-4>手机号码</ion-col>
+              <ion-col>
+                <ion-input no-margin placeholder='请输入手机号码' [(ngModel)]="lastMsg.newholderMobile" type="tel"></ion-input>
+              </ion-col>
+            </ion-row>
+
+          </div>
+        </div>
+      </div>
+
+      <ion-row class="insName" *ngIf="!recordBool">
+
+        <ion-col col-4>被保人姓名</ion-col>
+        <ion-col>
+          <ion-input no-margin placeholder='请输入被保人姓名' [(ngModel)]="lastMsg.insuredName" type="text"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <div *ngIf="recordBool">
+        <ion-row>
+          <ion-col col-4>被保人信息</ion-col>
+          <ion-col>
+            <ion-list class="insuredMsg" radio-group no-margin no-padding [(ngModel)]="infoType" (ionChange)="showMessagess()">
+              <ion-item no-padding no-margin>
+                <ion-radio value=1 checked="true"></ion-radio>
+                <ion-label>与上年信息一致</ion-label>
+              </ion-item>
+              <ion-item no-padding no-margin no-border>
+                <ion-radio value=2></ion-radio>
+                <ion-label>不一致</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row class="insName" *ngIf="infoType ==1 ">
+          <ion-col col-4>被保人姓名</ion-col>
+          <ion-col>
+            <ion-input no-margin placeholder='请输入被保人姓名' [(ngModel)]="lastMsg.insuredName" type="text"></ion-input>
+          </ion-col>
+        </ion-row>
+        <!-- 
+          <div *ngIf="isShow">
+            <ion-row class="idType">
+              <ion-col col-4>证件类型</ion-col>
+              <ion-col>
+                <ion-item no-padding>
+                  <ion-select [(ngModel)]="lastMsg.insuredIdCardType">
+                    <ion-option *ngFor="let x of cardType" value="x.cardTypeId">{{x.cardTypeName}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="insName">
+              <span>证件号码</span>
+              <ion-input no-margin no-padding placeholder='请输入证件号码' [(ngModel)]="lastMsg.insuredIdCard" type="text"></ion-input>
+            </ion-row>
+            <ion-row class="insName">
+              <span>手机号码</span>
+              <ion-input no-margin no-padding placeholder='请输入手机号码' [(ngModel)]="lastMsg.insuredMobile" type="tel"></ion-input>
+            </ion-row>
+          </div> -->
+
+        <div *ngIf="infoType == 2">
+          <ion-row class="insName">
+
+            <ion-col col-4>被保人姓名</ion-col>
+            <ion-col>
+              <ion-input no-margin placeholder='请输入被保人姓名' [(ngModel)]="lastMsg.newinsuredName" type="text"></ion-input>
+            </ion-col>
+          </ion-row>
+          <div *ngIf="isShow">
+            <ion-row class="idType">
+              <ion-col col-4>证件类型</ion-col>
+              <ion-col>
+                <ion-item no-padding>
+                  <ion-select okText="确定" cancelText="取消" [(ngModel)]="newselectCardName">
+                    <ion-option *ngFor="let x of cardType" value="{{x.cardTypeId}}">{{x.cardTypeName}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="insName">
+              <ion-col col-4>证件号码</ion-col>
+              <ion-col>
+                <ion-input no-margin placeholder='请输入证件号码' [(ngModel)]="lastMsg.newinsuredIdCard" type="text">
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="insName">
+              <ion-col col-4>手机号码</ion-col>
+              <ion-col>
+                <ion-input no-margin placeholder='请输入手机号码' [(ngModel)]="lastMsg.newinsuredMobile" type="tel"></ion-input>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </ion-grid>
+  </ion-list>
+  <!-- 保险日期 -->
+  <ion-list no-margin class="insurance" *ngIf="isShow">
+    <sub-title [titleName]="'保险日期'"></sub-title>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col>
+          <ion-label>交强险起保时间</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-datetime displayFormat="MM/DD/YYYY" cancelText="取消" doneText="确定" [(ngModel)]="lastMsg.nextForceStartdate"></ion-datetime>
+          <img src="assets/imgs/home_22.png" alt="">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>商业险起保时间</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-datetime displayFormat="MM/DD/YYYY" cancelText="取消" doneText="确定" [(ngModel)]="lastMsg.nextBusinessStartdate"></ion-datetime>
+          <img src="assets/imgs/home_22.png" alt="">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <!-- 交强险 -->
+  <ion-list no-margin class="strongInsurance">
+    <sub-title [titleName]="'交强险'"></sub-title>
+    <ion-item>
+      <ion-label>
+        <p>交强险/车船税</p>
+        <p>国家强制投保，未投保无法驱车并处双倍罚款</p>
+      </ion-label>
+      <ion-checkbox [disabled]='lastMsg.isForceRenewalDate==0' [(ngModel)]="lastMsg.forceTag"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <P style="color: brown" *ngIf="lastMsg.isForceRenewalDate==0">您的交强险（未到投保期），暂不能报价缴费。</P>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- 商业险 -->
+  <ion-list no-margin class="commercialInsurance">
+    <sub-title [titleName]="'商业险'"></sub-title>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col>
+          <ion-item no-padding>
+            <ion-label>车辆损失险</ion-label>
+            <ion-checkbox [disabled]='lastMsg.isBusinessRenewalDate==0' [(ngModel)]="lastMsg.cheSunTag" (ngModelChange)='changeSelect(lastMsg,"bujimianChesunTag","cheSunTag")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col *ngIf="lastMsg.isBusinessRenewalDate>0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]='!lastMsg.cheSunTag' [(ngModel)]="lastMsg.bujimianChesunTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col *ngIf="lastMsg.isBusinessRenewalDate==0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]='lastMsg.isBusinessRenewalDate==0' [(ngModel)]="lastMsg.bujimianChesunTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-label>第三者险</ion-label>
+            <ion-checkbox [disabled]='lastMsg.isBusinessRenewalDate==0' [(ngModel)]="lastMsg.sanZheTag" (ngModelChange)='changeSelect(lastMsg,"bujimianSanzheTag","sanZheTag","sanZheBaoE")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-select [(ngModel)]="lastMsg.sanZheBaoE" okText="确定" cancelText="取消" [disabled]='lastMsg.isBusinessRenewalDate==0'
+              (ngModelChange)='changeUnCheck("sanZheTag","bujimianSanzheTag","sanZheBaoE")'>
+              <ion-option *ngFor="let sz of sanZheVal" value="{{sz?.enumValue}}">{{sz?.enumKey}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]='!lastMsg.sanZheTag' [(ngModel)]="lastMsg.bujimianSanzheTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]='lastMsg.isBusinessRenewalDate==0' [(ngModel)]="lastMsg.bujimianSanzheTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-between>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-label>司机座位险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.siJiTag" (ngModelChange)='changeSelect(lastMsg,"bujimianSijiTag","siJiTag","siJiBaoE")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-select [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.siJiBaoE" (ngModelChange)='changeUnCheck("siJiTag","bujimianSijiTag","siJiBaoE")'
+              okText="确定" cancelText="取消">
+              <ion-option *ngFor="let sj of siJiVal" value="{{sj.enumValue}}">{{sj.enumKey}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="!lastMsg.siJiTag" [(ngModel)]="lastMsg.bujimianSijiTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianSijiTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-between>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-label>乘客座位险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.chengKeTag"
+              (ngModelChange)='changeSelect0(lastMsg,"bujimianChengkeTag","chengKeTag","chengKeBaoE")'></ion-checkbox>
+          </ion-item>
+          <ion-item style="padding-left: 20px;">车辆座位数</ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-select okText="确定" cancelText="取消" [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.chengKeBaoE"
+              (ngModelChange)='changeUnCheck("chengKeTag","bujimianChengkeTag","chengKeBaoE")'>
+              <ion-option *ngFor="let ck of chengKeVal" value="{{ck.enumValue}}">{{ck.enumKey}}</ion-option>
+
+            </ion-select>
+          </ion-item>
+          <ion-item no-padding>
+            <ion-input type="number" [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.seatCount"></ion-input>
+            <ion-label>座</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="!lastMsg.chengKeTag" [(ngModel)]="lastMsg.bujimianChengkeTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianChengkeTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-between>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-label>盗抢险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.daoQiangTag"
+              (ngModelChange)='changeSelect(lastMsg,"bujimianDaoqiangTag","daoQiangTag")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="!lastMsg.daoQiangTag" [(ngModel)]="lastMsg.bujimianDaoqiangTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianDaoqiangTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <!-- 附加险 -->
+  <ion-list no-margin class="additionalInsurance">
+    <sub-title [titleName]="'附加险'"></sub-title>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-label>玻璃破碎险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.boLiTag" (ngModelChange)='changeSelect(lastMsg,"","boLiTag","boLiBaoE")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-select okText="确定" cancelText="取消" [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.boLiBaoE"
+              (ngModelChange)='changeUnCheck("boLiTag","","boLiBaoE")'>
+              <ion-option *ngFor="let bl of boLiVal" value="{{bl.enumValue}}">{{bl.enumKey}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-label>划痕险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.huaHenTag" (ngModelChange)='changeSelect(lastMsg,"bujimianHuahenTag","huaHenTag","huahenBaoE")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.huahenBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0"
+              (ngModelChange)='changeUnCheck("huaHenTag","bujimianHuahenTag","huahenBaoE")'>
+              <ion-option *ngFor="let hh of huaHenVal" value="{{hh.enumValue}}">{{hh.enumKey}}</ion-option>
+
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="!lastMsg.huaHenTag" [(ngModel)]="lastMsg.bujimianHuahenTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianHuahenTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-between>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-label>自燃险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.ziRanTag" (ngModelChange)='changeSelect(lastMsg,"bujimianZiranTag","ziRanTag")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="!lastMsg.ziRanTag" [(ngModel)]="lastMsg.bujimianZiranTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianZiranTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-between>
+        <ion-col col-4>
+          <ion-item no-padding>
+            <ion-label>涉水险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.sheShuiTag"
+              (ngModelChange)='changeSelect(lastMsg,"bujimianSheshuiTag","sheShuiTag")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="!lastMsg.sheShuiTag" [(ngModel)]="lastMsg.bujimianSheshuiTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+          <ion-item no-padding>
+            <ion-label>不计免赔</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianSheshuiTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item no-padding>
+            <ion-label>第三方逃逸险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.hcSanfangteyueTag"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>
+          <ion-item no-padding>
+            <ion-label>指定修理厂险</ion-label>
+            <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.hcXiulichangTypeTag"
+              (ngModelChange)='changeSelect1(lastMsg,"hcXiulichangTag","hcXiulichangTypeTag","hcXiuLiCanBaoE","hcXiulichangBaoE")'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item no-padding>
+            <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.hcXiuLiCanBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0"
+              (ngModelChange)="changeCheck()">
+              <ion-option *ngFor="let xlc of xiuLiChangVal" value="{{xlc.enumValue}}">{{xlc.enumKey}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3 *ngIf="lastMsg.hcXiuLiCanBaoE==1">
+          <ion-item no-padding>
+            <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.hcXiulichangBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0">
+              <ion-option *ngFor="let gc of xiuLiChangGuochan" value="{{gc.enumValue}}">{{gc.enumKey}}</ion-option>
+
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 *ngIf="lastMsg.hcXiuLiCanBaoE==2">
+          <ion-item no-padding>
+            <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.hcXiulichangBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0">
+              <ion-option *ngFor="let jk of xiuLiChangJinkou" value="{{jk.enumValue}}">{{jk.enumKey}}</ion-option>
+
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <!-- 用户备注 -->
+  <ion-list no-margin class="memo">
+    <p no-margin>用户备注</p>
+    <ion-textarea aria-placeholder="请输入您要备注的信息" [(ngModel)]="lastMsg.memo"></ion-textarea>
+  </ion-list>
+  <ion-item>
+    <ion-label>
+      <P style="color: brown" *ngIf="lastMsg.isBusinessRenewalDate==0">您的商业险（未到投保期），暂不能报价缴费。</P>
+    </ion-label>
+  </ion-item>
+
+  <button ion-button color="assist" class="nextBtn" (click)="nextBtn()" *ngIf="isShow">下一步</button>
+
+  <button ion-button color="assist" class="nextBtn" (click)="manualCheck()" *ngIf="!isShow">人工核保</button>
+</ion-content>

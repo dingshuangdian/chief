@@ -29,7 +29,7 @@ export class WebConfig {
                 findWashCarService4Order: '/CRUD/CRUD-Q-service-findWashCarService4Order.do',
                 findAllStoreUser: '/CRUD/CRUD-Q-user-findAllStoreUser.do', //查询该公司所有商家用户
                 findStoreExt: '/CRUD/CRUD-Q-common-findStoreExt.do',
-                findProductByName: '/CRUD/CRUD-Q-goods-findProductByName.do', 
+                findProductByName: '/CRUD/CRUD-Q-goods-findProductByName.do',
                 findGoodsByCategoryId: '/CRUD/CRUD-Q-goods-findGoodsByCategoryId.do',
                 findCategoryList: '/CRUD/CRUD-Q-goods-findCategoryList.do ',
                 findmcardDiscount: '/CRUD/CRUD-Q-card-findmcardDiscount.do',
@@ -92,8 +92,7 @@ export class WebConfig {
                 getIOSVersion: "/CRUD/CRUD-Q-system-getIOSVersion.do",
                 getAndroidVersion: '/CRUD//CRUD-Q-system-getAndroidVersion.do',
                 InsuranceQryInfo: '/CRUD/CRUD-Q-IBS-Insurance-qryInfo.do',
-                queryUnreadMsg: "/CRUD/CRUD-Q-Msg-queryUnreadMsg.auth",
-                getExpireInsuranceList: '/CRUD/CRUD-Q-IBS-Insurance-getExpireInsuranceList.do',
+
                 uploadImg: '/CRUD/CRUD-Q-upload-uploadImg.do',
                 qiniuToken: '/CRUD/CRUD-Q-upload-qiniuToken.do',
                 updateAutoImage: '/CRUD/CRUD-U-auto-updateAutoImage.do ',
@@ -103,7 +102,80 @@ export class WebConfig {
                 findautotypes: "/CRUD/CRUD-Q-auto-findautotypes.do",
                 findautotypeKeyword: "/CRUD/CRUD-Q-auto-findautotypeKeyword.do",
                 findMember4plateNumber: '/CRUD/CRUD-Q-member-findMember4plateNumber.do',
-                findGoods4keyWords:'/CRUD/CRUD-Q-goods-findGoods4keyWords.do'
+                findGoods4keyWords: '/CRUD/CRUD-Q-goods-findGoods4keyWords.do',
+                findDepartments: '/CRUD/CRUD-Q-department-findDepartments.do',
+                changeDepartment: '/CRUD/CRUD-U-department-changeDepartment.do',
+                //查询所有品牌信息
+                findBrandList: '/CRUD/CRUD-Q-goods-findBrandList.do',
+                //查询商家仓库信息
+                findWareHousesInfo: '/CRUD/CRUD-Q-CM-stock-findWareHousesInfo.do',
+                //查询产品信息
+                findStocksInfo4Phone: '/CRUD/CRUD-Q-stock-findStocksInfo4Phone.do',
+
+
+                
+
+                //车险
+                getExpireInsuranceList: '/CRUD/CRUD-Q-IBS-Insurance-getExpireInsuranceList.do',
+                //获取未读消息
+                queryUnreadMsg: "/CRUD/CRUD-Q-Msg-queryUnreadMsg.auth",
+                //获取城市列表
+                getCityList: "/CRUD/CRUD-Q-IBS-Public-getCityList.do",
+                //获取默认城市
+                setDefaultAddress: "/CRUD/CRUD-Q-IBS-Public-setDefaultAddress.do",
+                //获取车牌简称
+                getLicenseplateShort: "/CRUD/CRUD-Q-IBS-Public-getLicenseplateShort.do",
+
+                //获取保险公司列表
+                getInsuranceComList: "/CRUD/CRUD-Q-IBS-Insurance-getInsuranceComList.do",
+
+                //获取消息列表
+                getMsgList: "/CRUD/CRUD-Q-Msg-getMsgList.do",
+                //消息状态更改
+                updateMsgStatus: "/CRUD/CRUD-U-Msg-updateMsgStatus.do",
+                //获取证件信息
+                getIDCardtype: "/CRUD/CRUD-Q-IBS-Public-getIDCardtype.do",
+                //获取保险金额信息
+                getInsureenumval: "/CRUD/CRUD-Q-IBS-Public-getInsureenumval.do",
+                //获取单位个人信息
+                getHolderPartytype: "/CRUD/CRUD-Q-IBS-Public-getHolderPartytype.do",
+                //获取跟进人员列表
+                getInsureAgentUList: "/CRUD/CRUD-Q-IBS-Insurance-getInsureAgentUList.do",
+                //获取保单详情
+                qryOrderInfo: '/CRUD/CRUD-Q-IBS-Order-qryOrderInfo.do',
+                //获取上一年续保信息
+                getInsuranceInfo: '/CRUD/CRUD-Q-IBS-Insurance-getInsuranceInfo.do',
+                //获取保险公司列表
+                getInsuranceCompanies: '/CRUD/CRUD-Q-IBS-Public-getInsuranceCompanies.do',
+                //人工报价
+                artificialQuotation: '/CRUD/CRUD-U-IBS-Insurance-artificialQuotation.do',
+                //修改订单
+                modifyInscuranceOrder: '/CRUD/CRUD-U-IBS-Order-modifyInscuranceOrder.do',
+                //自动报价
+                AutoQuotation: '/CRUD/CRUD-U-IBS-Insurance-AutoQuotation.do',
+                //获取车辆报价信息
+                getQuoteInfo: '/CRUD/CRUD-U-IBS-Insurance-getQuoteInfo.do',
+                //获取车辆核保信息
+                getQuoteSubmitInfo: '/CRUD/CRUD-U-IBS-Insurance-getQuoteSubmitInfo.do',
+
+
+
+
+                qryBackOrder: '/CRUD/CRUD-Q-IBS-Order-qryBackOrder.do',//已退回
+                qryUnderwritingOrder: '/CRUD/CRUD-Q-IBS-Order-qryUnderwritingOrder.do',//待核保
+                qryPayOrder: '/CRUD/CRUD-Q-IBS-Order-qryPayOrder.do',//待支付
+                qryIssuingOrder: '/CRUD/CRUD-Q-IBS-Order-qryIssuingOrder.do',//待收单
+                qryFinishOrder: '/CRUD/CRUD-Q-IBS-Order-qryFinishOrder.do',//已完成
+                issuingOrder: '/CRUD/CRUD-U-IBS-Order-issuingOrder.do',//确定收单
+                qryMessage: '/CRUD/CRUD-Q-IBS-Order-qryMessage.do',//获取信息模板
+                postMessage: '/CRUD/CRUD-Q-IBS-Order-postMessage.do',//发送短信
+                removeOrder: '/CRUD/CRUD-U-IBS-Order-removeOrder.do',//删除订单
+                supplementaryInformation: '/CRUD/CRUD-U-IBS-Order-supplementaryInformation.do',// 补充资料上传图片
+                payOrder: '/CRUD/CRUD-U-IBS-Order-payOrder',//提交保单
+                getInfo: '/CRUD/CRUD-Q-Auth-getUserInfo.do',//用户信息
+                qryPayOrderInfo: '/CRUD/CRUD-Q-IBS-Order-qryPayOrderInfo.do',//支付
+                qryPayCode: '/CRUD/CRUD-Q-IBS-Order-qryPayCode.do',//支付二维码
+                autoInsuranceRenewal: '/CRUD/CRUD-U-IBS-Insurance-autoInsuranceRenewal.auth',//一键续保
         };
         static phone = "4008313400";
 }

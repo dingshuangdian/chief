@@ -16,8 +16,8 @@ export class CsModal {
         this.renderer.appendChild(document.head, '<style type="text/css">@charset "UTF-8";' + css + '</style>');
     }
 
-    showModal(component: any, css: string = '', callback?) {
-        let profileModal = this.modalCtrl.create(component, {}, { cssClass: css });
+    showModal(component: any, css: string = '', obj?, callback?) {
+        let profileModal = this.modalCtrl.create(component, obj, { cssClass: css });
         profileModal.onDidDismiss(data => {
             if (callback && data) callback(data);
         });
@@ -25,8 +25,8 @@ export class CsModal {
     }
 
 
-    showProvince(component: any, callback?) {
-        this.showModal(component, 'provincesModal', callback);
+    showProvince(component: any, obj?, callback?) {
+        this.showModal(component, 'provincesModal', obj, callback);
     }
 
     showToast(msg) {

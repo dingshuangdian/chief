@@ -5,9 +5,28 @@
   Ionic pages and navigation.
 -->
 
-<ion-tabs #stateTabs tabsPlacement="top" tabsHighlight="true">
-  <ion-tab *ngIf="showYs" [root]="tab1Root" tabTitle="营收汇总" (ionSelect)="tabSelect()"></ion-tab>
-  <ion-tab *ngIf="showSz" [root]="tab2Root" tabTitle="收支统计" (ionSelect)="tabSelect()"></ion-tab>
-  <ion-tab *ngIf="showTc" [root]="tab3Root" tabTitle="提成统计" (ionSelect)="tabSelect()"></ion-tab>
-  <ion-tab *ngIf="!showYs&&!showSz&&!showTc" [root]="tab4Root" tabTitle="禁止访问" (ionSelect)="tabSelect()"></ion-tab>
+<!-- <ion-tabs #stateTabs tabsPlacement="top" tabsHighlight="true">
+  <ion-tab [hidden]="!showYs" [root]="tab1Root" tabTitle="营收汇总" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab [hidden]="!showSz" [root]="tab2Root" tabTitle="收支统计" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab [hidden]="!showTc" [root]="tab3Root" tabTitle="提成统计" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab [hidden]="showTc&&showYs&&showSz" [root]="tab4Root" tabTitle="禁止访问" (ionSelect)="tabSelect()"></ion-tab>
+
+</ion-tabs> -->
+<ion-tabs #stateTabs tabsPlacement="top" tabsHighlight="true" *ngIf="showYs||showSz||showTc">
+  <ion-tab [root]="tab1Root" tabTitle="营收汇总" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="收支统计" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="提成统计" (ionSelect)="tabSelect()"></ion-tab>
+  <!-- <ion-tab *ngIf="!showTc&&!showYs&&!showSz" [root]="tab4Root" tabTitle="禁止访问" (ionSelect)="tabSelect()"></ion-tab> -->
+
 </ion-tabs>
+<ion-tabs #stateTabs tabsPlacement="top" tabsHighlight="true" *ngIf="!showTc&&!showYs&&!showSz">
+
+<ion-tab [root]="tab4Root" tabTitle="禁止访问" (ionSelect)="tabSelect()"></ion-tab>
+
+</ion-tabs>
+<!-- <ion-tabs #stateTabs tabsPlacement="top" tabsHighlight="true">
+  <ion-tab  [root]="tab1Root" tabTitle="营收汇总" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="收支统计" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab  [root]="tab3Root" tabTitle="提成统计" (ionSelect)="tabSelect()"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="禁止访问" (ionSelect)="tabSelect()"></ion-tab>
+</ion-tabs> -->

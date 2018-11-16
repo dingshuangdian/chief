@@ -1,0 +1,38 @@
+page-sms-popover {
+    .col{
+        align-self: center;
+    }
+    ion-textarea,ion-input{
+        border: 1px solid #c8c7cc;
+        border-radius: 4px;
+    }
+    ion-textarea{
+        padding: 5px;
+        height: 65px;
+        textarea{
+            margin: 0 !important;
+            height: 100%;
+        }
+    }
+    .phone{
+        .col:first-child{
+            flex-grow: 0 !important;
+            flex-basis: unset !important;
+            width: auto !important;
+            padding-left: 0 !important;
+        }
+        .col:last-child{
+            padding-right: 0 !important;
+        }
+    }
+    .btn{
+        .col{
+            position: relative;
+            button{
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            } 
+        }
+    }
+}

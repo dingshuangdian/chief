@@ -45,8 +45,7 @@ page-account {
         width: 100%;
         .content {
             margin-top: 15px;
-            padding-bottom: 5px;
-           // box-shadow: 2px 0px 8px rgba(25, 25, 25, 0.1);
+            padding-bottom: 5px; // box-shadow: 2px 0px 8px rgba(25, 25, 25, 0.1);
             .content1_title {
                 border-bottom: 1px solid #f2f3f7;
                 height: 50px;
@@ -109,7 +108,7 @@ page-account {
                     p {
                         display: inline-block;
                         float: left;
-                        margin: 0 !important;
+                        margin: 0;
                         position: relative;
                     }
                     p:first-child {

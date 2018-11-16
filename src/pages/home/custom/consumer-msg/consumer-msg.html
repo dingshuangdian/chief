@@ -150,7 +150,6 @@
                         <div class='d'></div>
                       </ion-col> -->
                   </ion-row>
-
                 </ion-list>
               </ion-grid>
             </div>
@@ -164,8 +163,7 @@
           </ion-item>
         </ion-list>
       </div>
-      <button ion-button class="bbtn" (click)="openCard()">新开会员卡</button>
-
+      <button ion-button class="bbtn" (click)="openCard()" *ngIf="showOpenCard">新开会员卡</button>
     </div>
     <div class="hycard" [hidden]='!courseTab[2].bol'>
       <div class="hycard" *ngIf="recordCar.length==0">

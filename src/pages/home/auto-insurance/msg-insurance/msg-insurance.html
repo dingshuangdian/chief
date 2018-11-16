@@ -1,0 +1,34 @@
+<!--
+  Generated template for the MsgInsurancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>消息中心</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngFor="let item of msgList">
+    <ion-card-header>
+      保险订单通知 <span *ngIf="item.readStatus==0" style="color:#FC5F3C;" class="readtect">未读</span><span *ngIf="item.readStatus==1"
+        style="color:#6b6c70;" class="readtect">已读</span>
+      <span style="display: block;margin-top: 5px;font-size: 10px;">{{item.msgTime}}</span>
+    </ion-card-header>
+    <ion-card-content [innerHTML]="assembleHTML(item.msgText)">
+    </ion-card-content>
+    <button ion-item (click)="goInsureProgress(item)">
+      查看详情
+    </button>
+  </ion-card>
+  <div class="dish" style="margin-top:25px" *ngIf="!msgList">
+    <img src="assets/imgs/03.png">
+    <span style="color:#ccc">暂无推送消息</span>
+  </div>
+
+</ion-content>

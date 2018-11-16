@@ -35,7 +35,7 @@ export class TabsPage {
   statementRoot = StatementPage
   accountRoot = AccountPage
 
-  oldSelect: number = 0;
+  oldSelect: number = 0; 
 
   constructor(public navCtrl: NavController, public Websites: WebSites, public elementRef: ElementRef,
     public renderer: Renderer, public event: Events,

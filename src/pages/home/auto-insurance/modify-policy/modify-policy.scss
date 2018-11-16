@@ -1,0 +1,175 @@
+page-modify-policy {
+    .content-ios{background: #F7F9FA !important;}
+    // 单选按钮样式
+    .radio-ios {
+        margin: 0 !important;
+        margin-right: 5px !important;
+        flex-grow: unset;
+        .radio-icon {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #c8c7cc;
+            border-radius: 50%;
+        }
+        .radio-checked {
+            background-color: #FFB606;
+            border-radius: 50%;
+            border: 0 !important;
+            .radio-inner {
+                border-color: #fff;
+                top: 0;
+            }
+        }
+    }
+    .item-ios,
+    .item-radio-checked.item-ios ion-label {
+        color: #6B6C70;
+        font-size: 14px;
+    }
+    .submit{
+        background-color: #ffb606;
+        font-size: 16px; 
+        padding: 0 15px !important;
+    }
+    .pic{
+        .col{
+            height: 100px;
+            ion-thumbnail{
+                width: 100% !important;
+                height: 100% !important;
+                min-height: auto !important;
+                min-width: auto !important;
+                img{
+                    width: 100% !important;
+                    height: 100% !important;
+                }
+            }
+        }
+    }
+    .list{
+    }
+    .item{
+        padding: 0 10px !important;
+        border: 0 !important;
+        .item-inner{
+            border: 0 !important;
+            padding: 0 !important;
+            .label{margin: 0 !important;}
+        }
+    }
+    .segment-ios .segment-button{
+        border: 0 !important;
+        font-size: 16px;
+        color: #333;
+        
+    }
+    .segment-ios .segment-button.segment-activated{
+        background-color: transparent;
+        color: #ffb606;
+        border: 0 !important;
+        border-bottom: 2px solid #ffb606 !important;
+    }
+    .idCard{
+        .typeSel{
+            padding: 0 10px !important;
+            background-color: #fff;
+            height: 40px;
+            font-size: 16px;
+            .col{
+                padding: 0 !important;
+                .list{
+                    display: flex;
+                    height: 100%;
+                    .item{
+                        min-height: auto !important;
+                        flex-grow: 0 !important;
+                        flex-basis: unset !important;
+                        width: auto;
+                        ion-radio{
+                            margin-left: 5px !important;
+                        }
+                    }
+                }
+            }
+        }
+        .item{
+            .subTit{
+                line-height: 36px;
+                font-size: 16px;
+                color: #000;
+            }
+            .row{
+                .col{
+                    white-space: normal !important;
+                }
+                .col:last-child{
+                    font-size: 12px;
+                    color: #6B6C70;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .lookMore{
+        font-size: 16px;
+        color: #333;
+        text-align: center;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        text-decoration: underline;
+        background: transparent;
+    }
+    .checkCarPic{
+        .item{
+            .subTit1{
+                line-height: 36px;
+                font-size: 16px;
+                color: #000;
+                span:nth-child(1){
+                    i{
+                        font-style: normal;
+                        color: #FC5F3C;
+                    }
+                }
+                span:nth-child(2){
+                    color: #6B6C70;
+                    float: right;
+                    img{
+                        width: 14px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+            .row{
+                .col{
+                    -webkit-align-self: center;
+                    -ms-flex-item-align: center;
+                    align-self: center;
+                    ion-thumbnail{
+                        img{
+                            width: 80%;
+                        }
+                    }
+                }
+            }
+            .subTit2{
+                text-align: center;
+                line-height: 40px;
+                font-size: 12px;
+            }
+        }
+    }
+    .footer{
+        text-align: center;
+        background-color: #fff;
+        button{
+            width: 80%;
+            height: 40px !important;
+            // position: relative;
+            // left: 50%;
+            // transform: translateX(-50%);
+        }
+    }
+}
+

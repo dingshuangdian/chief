@@ -1,0 +1,22 @@
+<!--
+  Generated template for the InsProgPopoverPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div>
+  <ion-list radio-group [(ngModel)]="payFee" no-margin>
+    <ion-list-header text-center>选择支付费用</ion-list-header>
+    <div class="wrap">
+      <ion-item>
+        <ion-label class="mainTextColor">保单全费<span class="remindColor">(￥{{fullPremium}})</span></ion-label>
+        <ion-radio checked="true" value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label class="mainTextColor">保单净费<span class="remindColor">(￥{{netPremium}})</span></ion-label>
+        <ion-radio value="2"></ion-radio>
+      </ion-item>
+    </div>
+  </ion-list>
+  <button class="comfirBtn" color="secondary" (click)="comfirBtn()">确定</button>
+</div>

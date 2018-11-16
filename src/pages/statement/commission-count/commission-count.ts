@@ -34,12 +34,17 @@ export class CommissionCountPage {
     }
     this.beginDate = a + d;
 
-    this.events.subscribe('stateTabs:CommissionCountPage', () => {
-      this.checkTC('');
-    })
+    // this.events.subscribe('stateTabs:CommissionCountPage', () => {
+    //   this.checkTC('');
+    // })
 
   }
+  ionViewDidEnter() {
+    //this.tabSelect();
+    this.recordTC = [];
+    this.checkTC('');
 
+  }
 
   changeCheckTC() {
     this.recordTC = [];

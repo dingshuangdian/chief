@@ -1,0 +1,155 @@
+<!--
+  Generated template for the CarInsProgressPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>车险进度</ion-title>
+  </ion-navbar>
+  <ion-toolbar class="fixedTab">
+    <div class="course_tabBox"
+      *ngFor="let tab of courseTab; let i = index"
+      [ngClass]="{'tabActive':tab.bol}"
+      (click)="toggleTab(courseTab,i)"
+    >{{tab.name}}
+    </div>
+  </ion-toolbar>
+  <ion-toolbar class="searchStyle">
+    <ion-searchbar start [(ngModel)]="licenseNo" placeholder="输入车牌号进行查询">
+    </ion-searchbar>
+    <button ion-button end class="search" (click)="searchOrder()">查询</button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding [ngSwitch]="tab">
+  <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher> -->
+  <ion-list [hidden]="!isShow">
+    <ion-item no-padding *ngFor="let orderR of orderResult; let i=index">
+      <div class="top" (click)="toDetails(orderR.orderTags,orderR.orderId)">
+        <ion-row justify-content-between>
+          <ion-col class="back-blue">{{orderR.licenseNo}}</ion-col>
+          <ion-col text-right class="text-orange">{{orderR.stateFlag}}</ion-col>
+        </ion-row>
+        <ion-row justify-content-between>
+          <ion-col>
+            <img src="assets/imgs/recognizee.png" alt="">
+            <span class="text-black">被保人：</span>
+            <span class="text-gray">{{orderR.insuredName}}</span>
+          </ion-col>
+          <ion-col text-right>
+            <img src="assets/imgs/time.png" alt="">
+            <span class="text-gray">{{orderR.createTime}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-between>
+          <ion-col>
+            <img src="assets/imgs/company.png" alt="">
+            <span class="text-black">投保公司：</span>
+            <span class="text-gray">{{orderR.insuranceCompanyName}}</span>
+          </ion-col>
+          <ion-col text-right class="text-orange" [hidden]='showBtnType(orderR.opFlag)'>￥{{orderR.totalAmount || 0}}</ion-col>
+          <ion-col text-right class="text-gray" [hidden]='!showBtnType(orderR.opFlag)'>￥{{orderR.totalAmount || 0}}</ion-col>
+        </ion-row>
+        <ion-row [hidden]="orderR.orderTags<128">
+          <ion-col>
+            <img src="assets/imgs/home_22.png" alt="">
+            <span class="text-black">快递单号：</span>
+            <span class="text-gray">{{orderR.shippingCode || '无'}}</span>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="bottom">
+        <ion-row [hidden]='!isOneOrTwo'>
+          <ion-col text-center no-padding [hidden]='!orderMes'>
+            <button ion-button class="back-white" (click)="toDetails(orderR.orderTags,orderR.orderId)">保单详情</button>
+          </ion-col>
+          <ion-col text-center no-padding [hidden]='!changePolicy'>
+            <button ion-button class="back-white"(click)="goModifyPolicy(orderR.orderId)">修改保单</button>
+          </ion-col>
+          <ion-col text-center no-padding [hidden]='!addMes'>
+            <button ion-button class="back-orange" (click)="goSupplementaryInfo(orderR.orderId)">补充资料</button>
+          </ion-col>
+          <ion-col text-center no-padding [hidden]='!reBid'>
+            <button ion-button class="back-white" (click)="goRequotation(orderR.orderId)">重新报价</button>
+          </ion-col>
+          <ion-col text-center no-padding [hidden]='!applyUnderwriting'>
+            <button ion-button class="back-orange" (click)="toUnderwriting(orderR.orderId)">申请核保</button>
+          </ion-col>
+          <ion-col text-center no-padding [hidden]='!makeAppointment'>
+            <button ion-button class="back-orange" (click)="goReservationList(orderR.orderId)">预约出单</button>
+          </ion-col>
+          <ion-col text-center no-padding [hidden]='!sureOrder'>
+            <button ion-button class="back-orange" (click)="confirReceipt(orderR.orderId)">确定收单</button>
+          </ion-col>
+          <ion-col text-center no-padding [hidden]='!delOrder'>
+            <button ion-button class="back-gray" (click)="deleteOrder(orderR.orderId)">删除订单</button>
+          </ion-col>
+          <ion-col text-center no-padding [hidden]='!orderPay'>
+            <button ion-button class="back-orange" (click)="toPayOrder(orderR.orderId)">立即支付</button>
+          </ion-col>
+        </ion-row>
+        <ion-row [hidden]='isOneOrTwo'>
+          <ion-col text-center no-padding>
+            <button ion-button class="back-white" (click)="toDetails(orderR.orderTags,orderR.orderId)">保单详情</button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-item>
+    <!-- <ion-item no-padding>
+      <div class="top">
+        <ion-row>
+          <ion-col class="back-blue">粤A12345</ion-col>
+          <ion-col text-right class="text-orange">资料不齐</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <img src="assets/imgs/home_22.png" alt="">
+            <span class="text-black">投保人：</span>
+            <span class="text-gray">哈哈哈</span>
+          </ion-col>
+          <ion-col text-right>
+            <img src="assets/imgs/home_22.png" alt="">
+            <span class="text-gray">2016-02-22</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <img src="assets/imgs/home_22.png" alt="">
+            <span class="text-black">投保公司：</span>
+            <span class="text-gray">哈哈哈哈哈哈哈</span>
+          </ion-col>
+          <ion-col text-right class="text-orange">￥50425.32</ion-col>
+        </ion-row>
+      </div>
+      <div class="bottom">
+        <ion-row>
+          <ion-col text-center no-padding>
+            <button ion-button class="back-white" (click)="goDetailPolicy(1)">保单详情</button>
+          </ion-col>
+          <ion-col text-center no-padding>
+            <button ion-button class="back-orange" (click)="goSupplementaryInfo()">补充资料</button>
+          </ion-col>
+          <ion-col text-center no-padding>
+            <button ion-button class="back-gray" (click)="deleteOrder()">删除订单</button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-item> -->
+  </ion-list>
+  <ion-list [hidden]="isShow">
+    <div class="nullResult">
+      <div><img src="assets/imgs/02.png"></div>
+      <p class="">暂无订单数据</p>
+    </div>
+  </ion-list>
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%" *ngIf="moreData">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>

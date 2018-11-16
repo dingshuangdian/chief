@@ -33,10 +33,12 @@ export class ConsumerMsgPage {
     { "name": "会员卡", "bol": false, 'num': '' },
     { "name": "消费记录", "bol": false, 'num': '' }
   ];
+  showOpenCard: boolean = false;
   consumer = { memberId: '', autoId: '' };
   bindUid;
   isRecieveCar;
   carMsg;
+  permissionData;
   lastNum = '';
   hasMemberId = false;
   mcard;
@@ -45,10 +47,10 @@ export class ConsumerMsgPage {
   infiniteScroll;
   conacar = { headImg: '' };
   recordCar = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave,public storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public csbzNave: CsbzNave, public storage: Storage) {
     if (this.navParams.get('consumer')) {
       this.consumer = this.navParams.get('consumer');
-      this.isRecieveCar= window.localStorage.getItem("showRecieveCar");
+      this.isRecieveCar = window.localStorage.getItem("showRecieveCar");
     }
     if (this.navParams.get('res')) {
       this.consumer = this.navParams.get('res');
@@ -60,12 +62,30 @@ export class ConsumerMsgPage {
     if (this.navParams.get('mId')) {//从扫牌接车的最近消费的查看详情跳转过来的
       this.hasMemberId = true;
       this.consumer.memberId = this.navParams.get('mId');
-      for(var i=0;i<this.courseTab.length;i++){
+      for (var i = 0; i < this.courseTab.length; i++) {
         this.courseTab[i].bol = false;
       }
-      this.courseTab[this.courseTab.length-1].bol = true;
+      this.courseTab[this.courseTab.length - 1].bol = true;
     }
     this.isNave = this.csbzNave.isNave(this.navCtrl.getViews().length);
+    this.permissionData = JSON.parse(window.localStorage.getItem('permissionData'));
+    this.permissionData.forEach(element => {
+      if (element.menuId == "203002") {
+        if (1 == (element.funcTags & 1)) {
+          this.showOpenCard = true;
+        } else {
+          this.showOpenCard = false;
+        }
+      }
+      if (element.menuId == "203007") {
+        if (2 == (element.funcTags & 2)) {
+          this.showOpenCard = true;
+        } else {
+          this.showOpenCard = false;
+        }
+      }
+    })
+
   }
   ionViewDidLoad() {
     this.imgUrl = WebConfig.img_path;
@@ -191,6 +211,6 @@ export class ConsumerMsgPage {
   }
   openCard() {
 
-    this.navCtrl.push(memberOpenPage, { memberInfo: this.consumer});
+    this.navCtrl.push(memberOpenPage, { memberInfo: this.consumer });
   }
 }

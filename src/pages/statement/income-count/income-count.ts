@@ -37,15 +37,18 @@ export class IncomeCountPage {
   cakeData: any = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private datePipe: DatePipe, public websites: WebSites, private csbzNave: CsbzNave, public events: Events) {
+
+  }
+
+  ionViewDidLoad() {
+
+  }
+  ionViewWillEnter() {
+    this.beginDate = this.endDate = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     this.events.subscribe('stateTabs:IncomeCountPage', () => {
       this.segmentChanged();
     })
   }
-
-  ionViewDidLoad() {
-    this.beginDate = this.endDate = this.datePipe.transform(new Date(), "yyyy-MM-dd");
-  }
-
   segmentChanged() {
     if (this.segmentType == "单日") {
       this.dateChange();
@@ -56,23 +59,29 @@ export class IncomeCountPage {
     }
 
   }
-
   dateChange() {
     let parm = { beginDate: this.beginDate, endDate: this.endDate };
     this.websites.httpPost('findDayBalanceReport', parm, false).subscribe(res => {
-      this.calculate(res);
+      if (res) {
+        this.calculate(res);
+      }
+
     })
   }
 
   findBalanceReports4Month() {
     this.websites.httpPost('findBalanceReports4Month', {}, false).subscribe(res => {
-      this.calculate(res);
+      if (res) {
+        this.calculate(res);
+      }
     })
   }
 
   findBalanceReports4Year() {
     this.websites.httpPost('findBalanceReports4Year', {}, false).subscribe(res => {
-      this.calculate(res);
+      if (res) {
+        this.calculate(res);
+      }
     })
   }
 
@@ -189,7 +198,7 @@ export class IncomeCountPage {
     //   for30 = this.datePipe.transform(this.csbzNave.ionDateTool(new Date(), 30, 'd', '-'), "yyyy/MM/dd");
     // }
     let xData = [];
-    for(var i=0;i<arr.length;i++){
+    for (var i = 0; i < arr.length; i++) {
       xData.push(arr[i][0]);
     }
     if (chart) {
@@ -214,11 +223,11 @@ export class IncomeCountPage {
         xAxis: {
           type: 'category',
           data: xData,
-          axisLabel:{
-            interval:0,
-            rotate:40
+          axisLabel: {
+            interval: 0,
+            rotate: 40
           },
-          splitLine : {
+          splitLine: {
             show: true,
             lineStyle: {
               color: '#ccc',

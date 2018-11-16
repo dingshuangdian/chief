@@ -1,0 +1,71 @@
+<!--
+  Generated template for the QuotationDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>报价详情</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <!-- 基本信息 -->
+  <ion-list class="baseMsg">
+    <ion-row>
+      <ion-col>
+        <img src="assets/imgs/InsuranceLOGO_4.png" alt="">
+      </ion-col>
+      <ion-col [hidden]="!info.totalAmount">￥{{info.totalAmount}}</ion-col>
+    </ion-row>
+    <ion-grid>
+      <ion-row>
+        <ion-col>车牌号：</ion-col>
+        <ion-col>{{licenseNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>代理专员：</ion-col>
+        <ion-col>{{insureAgentUname}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <!-- 交强险信息 -->
+  <ion-list class="strongIns">
+    <sub-title [titleName]="'交强险信息'"></sub-title>
+    <ion-row [hidden]="!info.forceTotal">
+      <ion-col>交强险</ion-col>
+      <ion-col>￥{{info.forceTotal}}</ion-col>
+    </ion-row>
+    <ion-row [hidden]="!info.taxTotal">
+      <ion-col>车船税</ion-col>
+      <ion-col>￥{{info.taxTotal}}</ion-col>
+    </ion-row>
+  </ion-list>
+  <!-- 商业险信息 -->
+  <ion-list class="commercialIns">
+    <sub-title [titleName]="'商业险信息'"></sub-title>
+    <ion-row [hidden]="!info.businessTotal">
+      <ion-col>商业险</ion-col>
+      <ion-col>￥{{info.businessTotal}}</ion-col>
+    </ion-row>
+  </ion-list>
+  <!-- 发送报价给客户 -->
+  <ion-list class="sendOffer">
+    <ion-row>
+      <span>发送报价给客户：</span>
+      <ion-col ng-click="sendSMS()">
+        <img src="assets/imgs/messages.png" alt="">
+        <span>发送短信</span>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <p>
+    <span>总计：</span>
+    <span>￥{{info.totalAmount || 0}}<i *ngIf="hebaoModel">({{hebaoModel}})</i></span>
+  </p>
+  <button ion-button no-margin color="assist" (click)="toUploadData()">{{btnWord}}</button>
+</ion-footer>

@@ -1,0 +1,30 @@
+page-photo-ex {
+    .content-ios{background: #F7F9FA !important;}
+    h5{
+        text-align: center;
+        font-size: 16px;
+        color: #333;
+        background: #fff;
+        padding-top: 10px;
+    }
+    p{
+        margin: 0 !important;
+    }
+    .top{
+        color:#7C7C7C;
+        font-size: 14px;
+        background: #fff;
+        margin-bottom: 20px;
+    }
+    .bottom{
+        p{
+            color:#333;
+            font-size: 14px;
+            background: #fff;
+            margin-bottom: 10px;
+        }
+    }
+    .top,.bottom{
+        padding: 10px;
+    }
+}

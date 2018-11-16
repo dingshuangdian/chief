@@ -259,7 +259,7 @@ export class carConductPage {
 
   }
   showProvince() {
-    this.csModal.showProvince(MntcSelectPage, (data) => {
+    this.csModal.showProvince(MntcSelectPage,{}, (data) => {
       this.selectCla = data;
       this.saveAll.mntcClassId = data.mntc_class_id;
 
@@ -380,6 +380,7 @@ export class carConductPage {
       this.csModal.showToast(error.body.msg);
     })
   }
+  //修改项目
   toEdit(item, i) {
     let $this = this;
     let demo;
@@ -405,6 +406,7 @@ export class carConductPage {
     }
     this.navCtrl.push(carAddProPage, { callback: demo, item: item, addpro: '项目修改' });
   }
+  //修改配件
   toEditPj(item, i) {
     let $this = this;
     let demo;

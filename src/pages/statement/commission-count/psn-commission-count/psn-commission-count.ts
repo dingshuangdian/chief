@@ -17,7 +17,7 @@ export class PsnCommissionCountPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     let elements = document.querySelectorAll(".hideTabsTag");
     if (elements != null) {
       Object.keys(elements).map((key) => {

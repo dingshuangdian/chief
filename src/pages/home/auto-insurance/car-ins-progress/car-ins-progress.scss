@@ -1,0 +1,154 @@
+page-car-ins-progress {
+    .fixedTab{
+        position: relative;
+        padding: 0 !important;
+        min-height: 42px !important;
+        height: 42px;
+        border-bottom: 5px solid #F7F9FA;
+        box-sizing: content-box;
+        .toolbar-background {
+            background-color: #fff;
+        }
+        .toolbar-content{
+            line-height: 40px;
+            .course_tabBox {
+                display: inline-block;
+                width: 20%;
+                position: relative;
+                text-align: center;
+                color: #333;
+                font-size: 17px;
+            }
+            .tabActive {
+                border-bottom: 2px solid #ffb606;
+                color: #ffb606;
+            }
+        }
+        
+    }
+    .searchStyle{
+        position: relative;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        .toolbar-background {
+            background-color: #fff;
+            border-width: 0 !important;
+        }
+        .toolbar-content{
+            display: flex;
+        }
+        .search{
+            background-color: #FC5F3C;
+            color: #fff;
+            line-height: 30px;
+            height: 30px !important;
+            padding: 0px 1.375rem;
+            border-radius: 4px;
+            align-self: center;
+        }
+    }
+    ion-content{
+        background: #F7F9FA !important;
+        .list{
+            .item{
+                border: 0.55px solid #c8c7cc !important;
+                border-radius: 4px;
+                box-shadow: 0px 0px 5px #c8c7cc;
+                margin-bottom: 10px;
+                .item-inner{
+                    padding-right: 0 !important;
+                    .label-ios{
+                        margin: 15px 0 0 0 !important;
+                        .top{
+                            font-size: 16px;
+                            border-bottom: 0.55px solid #c8c7cc;
+                            img{
+                                display: inline-block;
+                                width: 14px;
+                                height: 14px;
+                                background-size: cover;
+                            }
+                            .text-gray{
+                                color: #6B6C70;
+                            }
+                            .text-black{
+                                color: #333;
+                            }
+                            .text-orange{
+                                color: #FC5F3C;
+                            }
+                            .row{
+                                .col{
+                                    display: flex;
+                                    flex-basis: unset !important;
+                                    flex-grow: 0 !important;
+                                    flex-shrink: 0 !important;
+                                    width: auto !important;
+                                    img{
+                                        align-self: center;
+                                        margin-right: 4px;
+                                    }
+                                }
+                                .col:first-child{
+                                    flex-shrink: 1 !important;
+                                }
+                            }
+                            .row:first-child{
+                                .col:first-child{
+                                    border-top-right-radius: 4px;
+                                    border-bottom-right-radius: 4px;
+                                    flex-grow: 0;
+                                    padding-left: 14px;
+                                    padding-right: 14px;
+                                }
+                                .back-blue{
+                                    background-color: #2A398E;
+                                    color: #fff;
+                                }
+                                .back-green{
+                                    background-color: #18D351;
+                                    color: #333;
+                                }
+                            }
+                        }
+                        .bottom{
+                            padding: 15px 10px;
+                            .row{
+                                .col{
+                                    button{
+                                        height: 38px;
+                                        margin: 0;
+                                        width: 80%;
+                                    }
+                                    .back-white{
+                                        background-color: #fff;
+                                        color: #000;
+                                        border: 0.55px solid #c8c7cc;
+                                    }
+                                    .back-orange{
+                                        background-color: #ffb606;
+                                        color: #fff;
+                                    }
+                                    .back-gray{
+                                        background-color: #6B6C70;
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .nullResult{
+            &>div{
+                display: flex;
+                justify-content: center;
+            }
+            p{
+                text-align: center;
+                font-size: 16px;
+            }
+        }
+    }
+}

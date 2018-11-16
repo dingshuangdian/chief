@@ -7,9 +7,49 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>查询助手</ion-title>
+    <ion-title>库存查询</ion-title>
   </ion-navbar>
+  <ion-toolbar class="searchStyle">
+    <ion-row>
+      <ion-col no-padding>
+        <ion-searchbar [(ngModel)]="seachInfo.keyWord" placeholder="请输入名称搜索" (ngModelChange)="searchCk($event)">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-toolbar class="searchStyle">
+    <div class="course_tabBox" *ngFor="let tab of courseTab; let i = index">
+      <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(courseTab,i)">{{tab.name }}
+      </span>
+    </div>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-  <p style="text-align: center">功能开发中,敬请期待！</p>
+  <!-- <p style="text-align: center">功能开发中,敬请期待！</p> -->
+  <div class="cate_right">
+    <ion-list>
+      <ion-item *ngFor="let item of customers">
+        <div class="con-se">
+          <div class="f">
+            <p>{{item.goodsName}}</p>
+            <p>￥{{item.salePrice}}</p>
+          </div>
+          <div class="g">
+            <p>编号：
+              <span style="margin-left:5px;">{{item.goodsCode}}</span>
+            </p>
+          </div>
+          <div class="h">
+            <p>产地：
+              <span style="margin-left:5px;">{{item.producingArea}}</span>
+            </p>
+            <p style="margin-left:50px;">库存：
+              <span style="color: #ff5a10;">{{item.stockNum}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>

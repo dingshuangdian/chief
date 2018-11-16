@@ -60,7 +60,6 @@ export class memberOpenCertainPage {
     this.websites.httpPost('findmcardtmpl', { mcardtmplId: this.salecard.mcardtmplId, memberId: this.memberInfo.memberId }).subscribe(res => {
       if (res) {
         this.salecardDetail = res;
-        console.log(res);
         this.validityMonthChange();
         if (this.salecardDetail.mcard2svc) {
           this.methodSinglePrice();
@@ -183,8 +182,6 @@ export class memberOpenCertainPage {
       }
     }
   }
-
-
   certain() {
     if (typeof this.salecardDetail.validityMonth == "string" && this.salecardDetail.validityMonth.length == 0) {
       this.csModal.showToast("请输入正确的有效期");
@@ -222,8 +219,8 @@ export class memberOpenCertainPage {
         }
 
         // this.navCtrl.push(memberOpenSuccessPage, { memberInfo: this.memberInfo, mcardNo: "80061" });
-        console.log(pamras);
-        this.websites.httpPost("addCard", pamras).subscribe(res => {
+       
+        this.websites.httpPost("addCard", pamras,false).subscribe(res => {
           if (res) {
             this.navCtrl.push(memberOpenSuccessPage, { memberInfo: res, mcardNo: res.mcardNo });
           }

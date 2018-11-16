@@ -1,0 +1,185 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="dateSegment row-distance">
+    <ion-segment [(ngModel)]="segmentType" (ionChange)="toggleTab(segmentType)">
+      <ion-segment-button value='1'>人工报价</ion-segment-button>
+      <ion-segment-button value='2'>新车报价</ion-segment-button>
+    </ion-segment>
+  </div>
+  <!-- 证件照上传 -->
+  <ion-list class="idCard" no-margin>
+    <sub-title [titleName]="'证件上传'"></sub-title>
+    <!-- 报价类型 -->
+    <ion-row class="typeSel" margin-bottom>
+      <ion-col col-3 align-self-center>报价类型</ion-col>
+      <ion-col>
+        <ion-list radio-group no-margin no-padding [(ngModel)]="quoteType">
+          <ion-item no-padding no-margin>
+            <ion-radio value='1' checked></ion-radio>
+            <ion-label>个人</ion-label>
+          </ion-item>
+          <ion-item no-padding no-margin no-border>
+            <ion-radio value='2'></ion-radio>
+            <ion-label>单位</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <div [ngSwitch]="quoteType">
+      <!-- 个人 -->
+      <div *ngSwitchCase="'1'">
+        <!-- 投保人身份证正面照 -->
+        <ion-item margin-bottom>
+          <p class="subTit">投保人身份证正面照</p>
+          <ion-row nowrap padding-bottom class="pic">
+            <ion-col>
+              <ion-thumbnail tappable>
+                <img src='assets/imgs/id.png' [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col *ngFor="let item of insuredIdCardPhoto;let i=index">
+              <ion-thumbnail tappable (click)="getPicture(insuredIdCardPhoto,i)">
+                <img src={{item.url}} [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col align-self-center>请上传证件照，图片要求在手机拍照框内，不反光，并清晰易辨认。</ion-col>
+          </ion-row>
+        </ion-item>
+        <!-- 机动车行驶证 -->
+        <ion-item [hidden]="segmentType==2">
+          <p class="subTit">机动车行驶证</p>
+          <ion-row nowrap padding-bottom class="pic">
+            <ion-col>
+              <ion-thumbnail tappable>
+                <img src='assets/imgs/driver.png' [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col *ngFor="let item of drivingLicensesPhoto;let i=index">
+              <ion-thumbnail tappable (click)="getPicture(insuredIdCardPhoto,i)">
+                <img src={{item.url}} [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col align-self-center>请上传证件照，图片要求在手机拍照框内，不反光，并清晰易辨认。</ion-col>
+          </ion-row>
+        </ion-item>
+        <!-- 购车发票上传 -->
+        <ion-item [hidden]="segmentType==1">
+          <p class="subTit">购车发票上传</p>
+          <ion-row nowrap padding-bottom class="pic">
+            <ion-col>
+              <ion-thumbnail tappable>
+                <img src='assets/imgs/invoice.png' [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col *ngFor="let item of invoicePhoto;let i=index">
+              <ion-thumbnail tappable (click)="getPicture(invoicePhoto,i)">
+                <img src={{item.url}} [style.height]="width"/>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col align-self-center>请上传证件照，图片要求在手机拍照框内，不反光，并清晰易辨认。</ion-col>
+          </ion-row>
+        </ion-item>
+        <!-- 核保所需照片 -->
+        <ion-item margin-bottom>
+          <p class="subTit">核保所需照片</p>
+          <ion-row nowrap padding-bottom class="pic">
+            <ion-col *ngFor="let item of underwritingPhotos;let i=index">
+              <ion-thumbnail tappable (click)="getPicture(underwritingPhotos,i)">
+                <img src={{item.url}} [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+      <!-- 单位 -->
+      <div *ngSwitchCase="'2'">
+        <!-- 加盖公章的单位委托书与企业组织机构代码及营业执照 -->
+        <ion-item margin-bottom>
+          <p class="subTit">加盖公章的单位委托书与企业组织机构代码及营业执照</p>
+          <ion-row nowrap padding-bottom class="pic">
+            <ion-col col-4 *ngFor="let item of businessLicense;let i=index">
+              <ion-thumbnail tappable (click)="getPicture(businessLicense,i)">
+                <img src={{item.url}} [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col col-8 align-self-center class="explainTextColor">请将委托书、企业组织机构代码、营业执照合并拍摄，图片要求在手机拍照框内，不反光，并清晰易辨认。</ion-col>
+          </ion-row>
+        </ion-item>
+        <!-- 代办人身份证正反面照 -->
+        <ion-item margin-bottom>
+          <p class="subTit">代办人身份证正反面照</p>
+          <ion-row nowrap padding-bottom class="pic">
+            <ion-col>
+              <ion-thumbnail tappable>
+                <img src='assets/imgs/id.png' [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col *ngFor="let item of agentIdCardPhoto;let i=index">
+              <ion-thumbnail tappable (click)="getPicture(agentIdCardPhoto,i)">
+                <img src={{item.url}} [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <!-- 代办人签署投保单、投保提示书、免责任说明照片 -->
+        <ion-item margin-bottom>
+          <p class="subTit">代办人签署投保单、投保提示书、免责任说明照片</p>
+          <ion-row nowrap padding-bottom class="pic">
+            <ion-col col-4 *ngFor="let item of agentSignPhoto;let i = index">
+              <ion-thumbnail tappable (click)="getPicture(agentSignPhoto,i)">
+                <img src={{item.url}} [style.height]="width" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col col-8 class="explainTextColor">请上传证件照片，图片要求在手机拍照框内，不反光，并清晰易辨认。</ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+    </div>
+  </ion-list>
+  <button class="lookMore" margin-top (click)="lookMoreBtn()">{{lookMore}}</button>
+  <!-- 上传验车照 -->
+  <div [hidden]='lookMoreFlag'>
+    <ion-list class="checkCarPic" no-margin>
+      <sub-title [titleName]="'上传验车照'"></sub-title>
+      <ion-item>
+        <p class="subTit1">
+          <span>45度车身照<i>4</i>张，车架号<i>1</i>张</span>
+          <span end><img src="assets/imgs/edition.png" alt="">示例</span>
+        </p>
+        <ion-row row-wrap class="pic">
+          <ion-col col-4 *ngFor="let item of verificationCarPhotos;let i=index">
+            <ion-thumbnail tappable (click)="getPicture(verificationCarPhotos,i)">
+              <img src={{item.url}}  class="auto-image" [style.height]="width" />
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+        <p class="subTit2">请上次验车照，图片清晰，图片需要包括当天的报纸。</p>
+      </ion-item>
+    </ion-list>
+    <ion-list class="checkCarPic" no-margin>
+      <sub-title [titleName]="'其他证件'"></sub-title>
+      <ion-item>
+        <p class="subTit1">
+          <span>其他证件上传</span>
+        </p>
+        <ion-row row-wrap class="pic">
+          <ion-col col-4 *ngFor="let item of otherDocumentsPhotos;let i=index">
+            <ion-thumbnail tappable (click)="getPicture(otherDocumentsPhotos,i)">
+              <img src={{item.url}}  class="auto-image" [style.height]="width" />
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+        <p class="subTit2">请上次证件照，图片要求在手机拍照框内，不反光，并清晰易辨认。</p>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <button ion-button color="assist" (click)="nextBtn()">下一步</button>
+</ion-footer>
+  

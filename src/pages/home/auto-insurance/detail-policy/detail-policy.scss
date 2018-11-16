@@ -1,0 +1,190 @@
+page-detail-policy {
+    font-size: 15px;
+    ion-content{
+        background: #F7F9FA !important;
+    }
+    .text-gray{
+        color: #ccc
+    }
+    .text-blue{
+        color: #2A398E
+    }
+    .text-orange{
+        color: #e74c3c !important;
+    }
+    .list{
+        background-color: #fff;
+        .row{
+            .col{
+                padding: 0;
+                -webkit-align-self: center;
+                -ms-flex-item-align: center;
+                align-self: center;
+            }
+            .col:first-child{
+                color: #333;
+            }
+            .col:last-child{
+                text-align: right;
+                color: #6b6c70;
+            }
+        }
+    }
+    .list.baseMsg{
+        margin-bottom: 0;
+        .row{
+            height: 40px;
+            border-bottom: 1px dotted #c8c7cc;
+            margin: 0 20px;
+        }
+        .row:nth-child(1){
+            height: 44px;
+            border-bottom: 1px solid #c8c7cc;
+            padding: 0 20px 0 10px;
+            margin: 0;
+            img{
+                height: 35px;
+            }
+        }
+        .row:last-child{
+            border-bottom: 0;
+        }
+    }
+    .list.insurance,.list.strongIns,
+    .list.carMsg,.list.insMsg{
+        margin-bottom: 0;
+        .row{
+            height: 40px;
+            border-bottom: 1px solid #c8c7cc;
+            padding: 0 10px;
+        }
+        .row:first-child,.row:last-child{
+            border-bottom: 0;
+        }
+    }
+    .list.commercialIns{
+        .row{
+            padding: 0 10px;
+        }
+        .row:nth-child(2){
+            height: 40px;
+            .col:last-child{
+                ion-icon{
+                    color: #6b6c70 !important;
+                    margin-left: 10px;
+                }
+            }
+        }
+        .row.tip{
+            color: #9e9fa3; 
+            font-size: 13px;
+            padding-bottom: 10px;
+        }
+        .grid{
+            background: #f8f9fb;
+            padding: 0 10px;
+            .row{
+                height: auto;
+                border-bottom: 1px dotted #c8c7cc;
+                padding: 5px;
+                .col:nth-child(2){
+                    text-align: center;
+                }
+                .col:nth-child(2),.col:nth-child(3){
+                    color: #6b6c70;
+                }
+            }
+            .row:last-child{
+                border-bottom: 0 !important;
+            }
+        }
+    }
+    .list.idImg{
+        &>.row{
+            height: 40px;
+            border-bottom: 1px solid #c8c7cc;
+            padding-left: 10px;
+            .col:last-child{
+                width: auto !important;
+                flex-grow: 0 !important;
+                flex-basis: unset !important;
+                padding: 0 10px;
+            }
+        }
+        .row:first-child,.row:last-child{
+            border-bottom: 0;
+        }
+    }
+    .list.sendOffer{
+        margin-bottom: 0;
+        &>.row{
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+            .col{
+                text-align: left !important;
+                flex-grow: 0 !important;
+                flex-basis: unset !important;
+                width: auto !important; 
+                img{
+                    display: inline-block;
+                    width: 14px;
+                    height: 14px;
+                    padding-left: 4px;
+                    padding-right: 4px;
+                    box-sizing: content-box;
+                }
+                span{
+                    color: #6B6C70;
+                }
+            }
+        }
+    }
+    .lookMore{
+        font-size: 16px;
+        color: #333;
+        text-align: center;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 20px 0;
+        text-decoration: underline;
+        background: transparent;
+    }
+    ion-footer{
+        background: #fff;
+        line-height: 44px;
+        height: 44px;
+        font-size: 16px;
+        p{
+            margin: 0;
+            display: inline-block;
+            padding-left: 10px;
+            span:first-child{
+                color: #333;
+            }
+        }
+        button{
+            height: 100%;
+            width: 40%;
+            background: #FC5F3C;
+            color: #fff;
+            float: right;
+            padding: 0;
+            font-size: 16px;
+            border-radius: 0 !important;
+        }
+    }
+    .noResult{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        div{
+            img{
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}

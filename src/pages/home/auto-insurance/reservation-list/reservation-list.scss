@@ -1,0 +1,108 @@
+page-reservation-list {
+    .content-ios{background: #F7F9FA !important;}
+    .radio-ios{
+        width: auto !important;
+        flex-grow: 0 !important;
+        margin: 0 10px 0 0 !important;
+        .radio-icon{
+            width: 15px;
+            height: 15px;
+            border: 1px solid #c8c7cc;
+            border-radius: 50%;
+        }
+        .radio-checked{
+            background-color: #FFB606;
+            border-radius: 50%;
+            border: 0 !important;
+            .radio-inner{
+                border-color: #fff;
+                top: 0;
+            }
+        } 
+    } 
+    .item-ios,.item-radio-checked.item-ios{
+        flex-direction: row-reverse;
+    }
+    .item-ios,.item-radio-checked.item-ios ion-label{
+        color: #6B6C70;
+        font-size: 14px;
+    }
+    .list{
+        .grid{
+            border-bottom: 0 !important;
+            background-color: #fff;
+            .row{
+                border-bottom: 1px solid #c8c7cc;
+                padding: 0 10px;
+                line-height: 40px;
+                .col{
+                    font-size: 15px;
+                    padding: 0 !important;
+                    -webkit-align-self: center;
+                    -ms-flex-item-align: center;
+                    align-self: center;
+                    .receiveMode,.invoiceMode{
+                        display: flex;
+                        flex-direction: row;
+                        font-size: 14px;
+                        .item{
+                            min-height: auto;
+                            border: 0 !important;
+                            flex-grow: 0;
+                            width: auto;
+                            flex-basis: unset;
+                            margin-right: 15px;
+                            .item-inner{
+                                padding: 0 !important;
+                                border: 0 !important;
+                                .input-wrapper{
+                                }
+                                ion-label{
+                                    margin: 0 !important;
+                                }
+                            }
+                        }
+                        .item:last-child{
+                            margin: 0 !important;
+                        }
+                    }
+                    
+                }
+                .col:first-child{
+                    color: #000;
+                }
+                .col:last-child{
+                    color: #6B6C70;
+                }
+            }
+            .addr{
+                padding-top: 15px;
+                padding-bottom: 15px;
+                textarea{
+                    border: 1px solid #c8c7cc;
+                    border-radius: 4px;
+                    height: 50px;
+                }
+                .col.btn{
+                    flex-grow: 0;
+                    display: flex;
+                    button{
+                        height: 34px !important;
+                        align-self: center;
+                    }
+                }
+            }
+            .row:last-child{
+                border-bottom: 0;
+            }
+        }
+    }
+    .submit{
+        width: 80%;
+        line-height: 40px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 40px;
+    }
+}

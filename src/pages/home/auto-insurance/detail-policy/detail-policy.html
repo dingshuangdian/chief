@@ -1,0 +1,362 @@
+<!--
+  Generated template for the DetailPolicyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>保单详情</ion-title>
+  </ion-navbar>
+</ion-header>
+<!-- 订单数据 -->
+<ion-content no-padding [hidden]='!isContentShow'>
+  <!-- 基本信息 -->
+  <ion-list class="baseMsg">
+    <ion-row>
+      <ion-col>
+        <img src="assets/imgs/InsuranceLOGO_4.png" alt="">
+      </ion-col>
+      <ion-col class="text-orange">{{qryOrderInfo.stateFlag}}</ion-col>
+    </ion-row>
+    <!-- 资料不齐/无法核价/已报价未核保/核保中/已报价/待支付/未支付/15天无反馈/待支付 -->
+    <div [hidden]="isShowOrHide==8 || isShowOrHide==9">
+      <ion-row>
+        <ion-col>被保人</ion-col>
+        <ion-col>{{qryOrderInfo.insuredName}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>车牌号</ion-col>
+        <ion-col>{{qryOrderInfo.licenseNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>车辆型号</ion-col>
+        <ion-col>{{qryOrderInfo.modleName || '暂无数据'}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="isShowOrHide!=5 && isShowOrHide!=7">
+        <ion-col>创建时间</ion-col>
+        <ion-col>{{qryOrderInfo.createTime}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="isShowOrHide!=5 && isShowOrHide!=7">
+        <ion-col>投保总额</ion-col>
+        <ion-col class="text-orange">￥{{qryOrderInfo.totalAmount || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="isShowOrHide!=5 && isShowOrHide!=7">
+        <ion-col>订单号</ion-col>
+        <ion-col>{{qryOrderInfo.orderNo}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="isShowOrHide==8 || isShowOrHide==9">
+        <ion-col>交强险保单号</ion-col>
+        <ion-col>{{qryOrderInfo.businessOrderNo}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="isShowOrHide==8 || isShowOrHide==9">
+        <ion-col>商业险保单号</ion-col>
+        <ion-col>{{qryOrderInfo.forceOrderNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>保险代理专员</ion-col>
+        <ion-col>{{qryOrderInfo.insureAgentUname}}</ion-col>
+      </ion-row>
+    </div>
+    <!-- 已支付/确定收单 -->
+    <div [hidden]="isShowOrHide!=8 && isShowOrHide!=9">
+      <ion-row>
+        <ion-col>被保人</ion-col>
+        <ion-col>{{qryOrderInfo.insuredName}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>车牌号</ion-col>
+        <ion-col>{{qryOrderInfo.licenseNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>快递单号</ion-col>
+        <ion-col>{{qryOrderInfo.shippingCode || '无'}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>手机号码</ion-col>
+        <ion-col>{{qryOrderInfo.insuredMobile}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>订单号</ion-col>
+        <ion-col>{{qryOrderInfo.orderNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>交强险保单号</ion-col>
+        <ion-col>{{qryOrderInfo.businessOrderNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>商业险保单号</ion-col>
+        <ion-col>{{qryOrderInfo.forceOrderNo}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>保单总额</ion-col>
+        <ion-col>{{qryOrderInfo.totalAmount || 0}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>创建时间</ion-col>
+        <ion-col>{{qryOrderInfo.forceStartDate}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>保险代理专员</ion-col>
+        <ion-col>{{qryOrderInfo.insureAgentUname}}</ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+  <button class="lookMore" (click)="lookMore1()" *ngIf="isShowOrHide==8 || isShowOrHide==9">{{moreMsg}}</button>
+  <div [hidden]="lookMoreFlag1">
+    <!-- 投保期限 -->
+    <ion-list class="insurance" *ngIf="isShowOrHide!=5 && isShowOrHide!=6">
+      <sub-title [titleName]="'投保期限'"></sub-title>
+      <ion-row>
+        <ion-col>交强险期限</ion-col>
+        <ion-col>{{qryOrderInfo.forceStartDate||'0000-00-00'}}~{{qryOrderInfo.forceExpireDate||'0000-00-00'}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>商业险期限</ion-col>
+        <ion-col>{{qryOrderInfo.businessStartDate||'0000-00-00'}}~{{qryOrderInfo.businessExpireDate||'0000-00-00'}}</ion-col>
+      </ion-row>
+    </ion-list>
+    <!-- 交强险信息 -->
+    <ion-list class="strongIns">
+      <sub-title [titleName]="'交强险信息'"></sub-title>
+      <ion-row>
+        <ion-col>交强险</ion-col>
+        <ion-col class="text-orange">￥{{qryOrderInfo.forceTotal||0}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>车船税</ion-col>
+        <ion-col class="text-orange">￥{{qryOrderInfo.taxTotal||0}}</ion-col>
+      </ion-row>
+    </ion-list>
+    <!-- 商业险信息 -->
+    <ion-list class="commercialIns" no-margin>
+      <sub-title [titleName]="'商业险信息'"></sub-title>
+      <ion-row>
+        <ion-col>商业险</ion-col>
+        <ion-col class="text-orange">
+          ￥{{qryOrderInfo.businessTotal||0}}
+          <ion-icon *ngIf="isShowOrHide!=2 && qryOrderInfo.quoteTypeId !=3"  (click)="isBusinessStartDate=!isBusinessStartDate;" [hidden]="!isBusinessStartDate" name="arrow-down"></ion-icon>
+          <ion-icon [hidden]="isBusinessStartDate"  (click)="isBusinessStartDate=!isBusinessStartDate;" name="arrow-up"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="tip" *ngIf="isShowOrHide!=2 && qryOrderInfo.quoteTypeId !=3">车辆损失险({{qryOrderInfo.cheSun||0}})、第三者险({{qryOrderInfo.sanZhe||0}})、全车盗抢险({{qryOrderInfo.daoQiang||0}})、乘客座位险({{qryOrderInfo.chengKe||0}})、司机座位险({{qryOrderInfo.siJi||0}})、划痕险({{qryOrderInfo.huaHen||0}})、玻璃破碎险({{qryOrderInfo.boLi||0}})、涉水险({{qryOrderInfo.sheShui||0}})、自燃险({{qryOrderInfo.ziRan||0}})、指定修理厂险({{qryOrderInfo.hcXiulichang||0}})、机动车无法找到三方特约险({{qryOrderInfo.hcSanfangteyue||0}})</ion-row>
+      <ion-grid [hidden]="isBusinessStartDate">
+        <ion-row>
+          <ion-col>车辆损失险</ion-col>
+          <ion-col>{{qryOrderInfo.cheSun}}</ion-col>
+          <ion-col>{{qryOrderInfo.cheSunFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>第三者险</ion-col>
+          <ion-col>{{qryOrderInfo.sanZhe}}</ion-col>
+          <ion-col>{{qryOrderInfo.sanZheFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>全车盗抢险</ion-col>
+          <ion-col>{{qryOrderInfo.daoQiang}}</ion-col>
+          <ion-col>{{qryOrderInfo.daoQiangFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>乘客座位险</ion-col>
+          <ion-col>{{qryOrderInfo.chengKe}}</ion-col>
+          <ion-col>{{qryOrderInfo.chengKeFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>司机座位险</ion-col>
+          <ion-col>{{qryOrderInfo.siJi}}</ion-col>
+          <ion-col>{{qryOrderInfo.siJiFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>划痕险</ion-col>
+          <ion-col>{{qryOrderInfo.huaHen}}</ion-col>
+          <ion-col>{{qryOrderInfo.huaHenFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>玻璃破碎险</ion-col>
+          <ion-col>{{qryOrderInfo.boLi}}</ion-col>
+          <ion-col>{{qryOrderInfo.boLiFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>涉水险</ion-col>
+          <ion-col>{{qryOrderInfo.sheShui}}</ion-col>
+          <ion-col>{{qryOrderInfo.sheShuiFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>自燃险</ion-col>
+          <ion-col>{{qryOrderInfo.ziRan}}</ion-col>
+          <ion-col>{{qryOrderInfo.ziRanFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>指定修理厂险</ion-col>
+          <ion-col>{{qryOrderInfo.hcXiulichang}}</ion-col>
+          <ion-col>{{qryOrderInfo.hcXiulichangFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>机动车无法找到三方特约险</ion-col>
+          <ion-col>{{qryOrderInfo.hcSanfangteyue}}</ion-col>
+          <ion-col>{{qryOrderInfo.hcSanfangteyueFee || 0}}</ion-col>
+        </ion-row>
+        <ion-row class="tip">不计免赔车辆损失险(￥{{qryOrderInfo.bujimianChesunFee||0}})、不计免赔第三者险(￥{{qryOrderInfo.bujimianSanzheFee||0}})、不计免赔全车盗抢险(￥{{qryOrderInfo.bujimianDaoqiangFee||0}})、不计免赔乘客座位险(￥{{qryOrderInfo.bujimianChengkeFee||0}})、不计免赔司机座位险(￥{{qryOrderInfo.bujimianSijiFee||0}})、不计免赔涉水险(￥{{qryOrderInfo.bujimianSheshuiFee||0}})、不计免赔自燃险(￥{{qryOrderInfo.bujimianZiranFee||0}})</ion-row>
+      </ion-grid>
+    </ion-list>
+    <!-- 证件照片 -->
+    <ion-list class="idImg" no-margin>
+      <sub-title [titleName]="'证件照片'"></sub-title>
+      <ion-row>
+        <ion-col>车辆行驶证</ion-col>
+        <ion-col class="text-blue" *ngIf="qryOrderInfo.drivingLicense" (click)="photoView(0)">查看</ion-col>
+        <ion-col class="text-gray" *ngIf="!qryOrderInfo.drivingLicense">查看</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>身份证</ion-col>
+        <ion-col class="text-blue" *ngIf="qryOrderInfo.insuredIdCardPhoto" (click)="photoView(1)">查看</ion-col>
+        <ion-col class="text-gray" *ngIf="!qryOrderInfo.insuredIdCardPhoto">查看</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>购车发票照片</ion-col>
+        <ion-col class="text-blue" *ngIf="qryOrderInfo.carInvoicePhoto" (click)="photoView(2)">查看</ion-col>
+        <ion-col class="text-gray" *ngIf="!qryOrderInfo.carInvoicePhoto">查看</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>车架号照片</ion-col>
+        <ion-col class="text-blue" *ngIf="qryOrderInfo.carvinPhoto" (click)="photoView(3)">查看</ion-col>
+        <ion-col class="text-gray" *ngIf="!qryOrderInfo.carvinPhoto">查看</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>车身照片</ion-col>
+        <ion-col class="text-blue" *ngIf="qryOrderInfo.carbodyPhoto1" (click)="photoView(4)">查看</ion-col>
+        <ion-col class="text-gray" *ngIf="!qryOrderInfo.carbodyPhoto1">查看</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>其他照片</ion-col>
+        <ion-col class="text-blue" *ngIf="qryOrderInfo.otherPhoto" (click)="photoView(5)">查看</ion-col>
+        <ion-col class="text-gray" *ngIf="!qryOrderInfo.otherPhoto">查看</ion-col>
+      </ion-row>
+    </ion-list>
+    <!-- 保险公司保单 -->
+    <ion-list class="insComppolicy" no-margin *ngIf="qryOrderInfo.epolicy != null || qryOrderInfo.epolicy2 != null || qryOrderInfo.epolicy3 != null">
+      <sub-title [titleName]="'保险公司保单'"></sub-title>
+      <ion-row>
+        <ion-col *ngFor="let item of epolicyList"  col-3 (click)="photoView(6)">
+          <img src="{{item.imageSrc}}" alt="">
+        </ion-col>
+      </ion-row>
+    </ion-list>
+    <!-- 发送报价给客户 -->
+    <ion-list class="sendOffer" *ngIf="isShowOrHide==1 || isShowOrHide==3 || isShowOrHide==5 || isShowOrHide==7 || qryOrderInfo.quoteTypeId==3">
+      <sub-title [titleName]="'发送报价'"></sub-title>
+      <ion-row>
+        <span>发送报价给客户：</span>
+        <ion-col (click)="sendSMS(qryOrderInfo.orderId)">
+          <img src="assets/imgs/messages.png" alt="">
+          <span>发送短信</span>
+        </ion-col>
+        <!-- <ion-col align-self-start>
+          <img src="assets/imgs/home_22.png" alt="">
+          <span>微信分享</span>
+        </ion-col> -->
+      </ion-row>
+    </ion-list>
+    <button class="lookMore" (click)="lookMore2()" *ngIf="isShowOrHide!=8 && isShowOrHide!=9">{{moreMsg}}</button>
+    <div [hidden]="lookMoreFlag2">
+      <!-- 车辆信息 -->
+      <ion-list class="carMsg">
+        <sub-title [titleName]="'车辆信息'"></sub-title>
+        <ion-row>
+          <ion-col>车牌号码</ion-col>
+          <ion-col>{{qryOrderInfo.licenseNo}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>车主姓名</ion-col>
+          <ion-col>{{qryOrderInfo.carownerName}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>车架编号</ion-col>
+          <ion-col>{{qryOrderInfo.carVin}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>发动机型号</ion-col>
+          <ion-col>{{qryOrderInfo.engineNo}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>品牌型号</ion-col>
+          <ion-col>{{qryOrderInfo.modleName}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>注册日期</ion-col>
+          <ion-col>{{qryOrderInfo.registerDate}}</ion-col>
+        </ion-row>
+      </ion-list>
+      <!-- 投保人信息 -->
+      <ion-list class="insMsg">
+        <sub-title [titleName]="'投保人信息'"></sub-title>
+        <ion-row>
+          <ion-col>投保人姓名</ion-col>
+          <ion-col>{{qryOrderInfo.holderName}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>身份证号码</ion-col>
+          <ion-col>{{qryOrderInfo.holderIdCardNumber}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>手机号码</ion-col>
+          <ion-col>{{qryOrderInfo.holderMobile}}</ion-col>
+        </ion-row>
+      </ion-list>
+      <!-- 被保人信息 -->
+      <ion-list class="insMsg">
+        <sub-title [titleName]="'被保人信息'"></sub-title>
+        <ion-row>
+          <ion-col>被保人姓名</ion-col>
+          <ion-col>{{qryOrderInfo.insuredName}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>身份证号码</ion-col>
+          <ion-col>{{qryOrderInfo.insuredIdCardNumber}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>手机号码</ion-col>
+          <ion-col>{{qryOrderInfo.insuredMobile}}</ion-col>
+        </ion-row>
+      </ion-list>
+    </div> 
+  </div>
+</ion-content>
+<!-- 暂无订单数据 -->
+<ion-content [hidden]='isContentShow'>
+  <div class="noResult" padding-top>
+    <div><img src="assets/imgs/null.png"></div>
+    <p text-center>暂无订单数据</p>
+  </div>
+</ion-content>
+<ion-footer *ngIf="isShowOrHide==1">
+  <p>
+    <span>总计：</span>
+    <span class="text-orange">￥{{qryOrderInfo.totalAmount||0}}</span>
+  </p>
+  <button ion-button no-margin (click)="goSupplementaryInfo(qryOrderInfo.orderId)" color="assist">补充资料</button>
+</ion-footer>
+<ion-footer *ngIf="isShowOrHide==3">
+  <p>
+    <span>总计：</span>
+    <span class="text-orange">￥{{qryOrderInfo.totalAmount||0}}</span>
+  </p>
+  <button (click)="toFillInfo(qryOrderInfo.orderId)">预约出单</button>
+</ion-footer>
+<ion-footer *ngIf="isShowOrHide==4">
+  <p>
+    <span>总计：</span>
+    <span class="text-orange">￥{{qryOrderInfo.totalAmount||0}}</span>
+  </p>
+  <button (click)="toPayOrder(qryOrderInfo.orderId)">立即支付</button>
+</ion-footer>
+<ion-footer *ngIf="isShowOrHide==5">
+  <p>
+    <span>总计：</span>
+    <span class="text-orange">￥{{qryOrderInfo.totalAmount||0}}</span>
+  </p>
+  <button (click)="toSupplementaryInfo(qryOrderInfo.orderId)">申请核保</button>
+</ion-footer>
+<ion-footer *ngIf="isShowOrHide==8">
+  <button (click)="confirmOrder(qryOrderInfo.orderId)">确定收单</button>
+</ion-footer>

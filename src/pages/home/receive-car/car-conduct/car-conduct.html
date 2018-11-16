@@ -175,7 +175,7 @@
     <!-- 项目 -->
     <div class="con-btn" [hidden]='!courseTab[0].bol'>
       <div>
-        <ion-list [hidden]="!flag_" no-lines>
+        <ion-list [hidden]="!flag_ || !saveAll.services" no-lines>
           <ion-item *ngFor="let item of saveAll.services; let i=index" (click)="toEdit(item,i)">
 
             <div class="con-se">
@@ -221,7 +221,7 @@
     <!-- 配件 -->
     <div class="con-btn" [hidden]='!courseTab[1].bol'>
       <div>
-        <ion-list [hidden]="!flag_" no-lines>
+        <ion-list [hidden]="!flag_ || goods.length==0" no-lines>
           <ion-item *ngFor="let item of goods;let i = index" (click)="toEditPj(item,i)">
             <div class="con-se">
               <div class="f">

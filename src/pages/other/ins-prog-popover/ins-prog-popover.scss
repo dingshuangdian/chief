@@ -1,0 +1,67 @@
+page-ins-prog-popover {
+    ion-backdrop{
+        opacity: 0.4;
+    }
+    .radio-ios{
+        width: auto !important;
+        flex-grow: 0 !important;
+        margin: 0 10px 0 0 !important;
+        .radio-icon{
+            width: 15px;
+            height: 15px;
+            border: 1px solid #c8c7cc;
+            border-radius: 50%;
+        }
+        .radio-checked{
+            background-color: #FFB606;
+            border-radius: 50%;
+            border: 0 !important;
+            .radio-inner{
+                border-color: #fff;
+                top: 0;
+            }
+        } 
+    } 
+    .item-radio-checked.item-ios ion-label{
+        color: #000;
+    }
+    .remindColor {
+        color: #e74c3c !important;
+    }
+    .mainTextColor {
+        color: #6b6c70 !important;
+    }
+    .list-header-ios{
+        font-size: 16px;
+        border-bottom: 0 !important;
+    }
+    .list-ios .item-block .item-inner{
+        border-bottom: 0 !important;
+    }
+    .wrap{
+        .item{
+            min-height: auto !important;
+            height: 40px;
+            flex-direction: row-reverse;
+            justify-content: center;
+            .item-inner{
+                flex-grow: 0 !important;
+                flex-basis: unset !important;
+                .input-wrapper{
+                    flex-grow: 0 !important;
+                    flex-basis: unset !important;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    .comfirBtn{
+        color: #FFB606;
+        font-size: 16px;
+        width: 100%;
+        line-height: 44px;
+        text-align: center;
+        background-color: transparent;
+        border-top: 1px solid #c8c7cc;
+    }
+}

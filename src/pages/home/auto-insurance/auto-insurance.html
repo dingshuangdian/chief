@@ -1,0 +1,91 @@
+<!--
+  Generated template for the AutoInsurancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      车仆车险
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="tomsg()">
+        <ion-icon>
+          <img style="width:20px;height:20px" src="assets/imgs/message.png">
+        </ion-icon>
+        <span class="red-point" *ngIf="msg"></span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="cxt">
+
+    <div class="cxdata">
+      日期：{{currentDate}}
+      <button ion-button full (click)="goCarInsProg()">车险进度</button>
+    </div>
+    <img style="width: 180px;margin: 15px 0" src="assets/imgs/logo1.png">
+  </div>
+  <div class="cxc">
+    <ion-item>
+      <div class="cp">
+        <img style="width: 16px;height: 14px;" src="assets/imgs/qqqq_03.gif">
+        <span style="margin: 0 5px;font-size: 13px;">车牌号：</span>
+        <button ion-button icon-end (click)="showProvince()">
+          {{selectedLicense}}
+          <ion-icon name="arrow-down"></ion-icon>
+        </button>
+        <input placeholder="请输入车牌" [(ngModel)]="platmNum" style="text-transform: uppercase">
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="cp">
+        <img style="width: 16px;height: 14px;" src="assets/imgs/leftbar_address.png">
+        <span style="margin: 0 5px;font-size: 13px;">投保地区：</span>
+        <input style="border: 0.55px solid #ccc;border-radius: 3px;width: 40px;background-color: #fff;margin-left: 0;"
+          type="button" [(ngModel)]="defaultCity" (click)="SelectCity()">
+      </div>
+    </ion-item>
+
+
+    <button style="width: 80%;color: aliceblue;margin:20px 0;height: 40px;" ion-button color="btn" (click)="nextOperation()">下一步</button>
+
+
+    <span style="color: #5462a4" (click)="toQuotedPrice()">新车,过户车等转人工报价>></span>
+    <div class="chec">
+      <ion-checkbox color="btn" [(ngModel)]="cucumber"></ion-checkbox>
+      <ion-label style="font-size:5px">我已认真阅读并同意相关<span style="color: #5462a4;margin-left: 5px" (click)="tomz()">《免责条款》</span></ion-label>
+    </div>
+    <span style="color:#6f6f6f">--------------&nbsp;&nbsp;&nbsp;&nbsp;车险到期提醒&nbsp;&nbsp;&nbsp;&nbsp;--------------</span>
+  </div>
+  <ion-list no-lines *ngIf="cxData">
+    <ion-item *ngFor="let item of cxData">
+      <div class="la">
+        <button *ngIf="!item.isNewEnergy" ion-button>{{item.licenseNo}}</button>
+        <button *ngIf="item.isNewEnergy" style="background-color:#19d252" ion-button>{{item.licenseNo}}</button>
+        <div style="align-items: center;display: flex"><button style=" width: 18px;height: 18px; background-color: #fe5c3a;margin-right: 5px;"
+            ion-button>期</button><span style="color:#fa6b4a">{{item.expireDate}}</span></div>
+      </div>
+      <div class="lb" (click)="goSelectSurrence(item.cityCode,item.licenseNo)">
+        <div class="lb1">
+          <div class="ad"><img src="assets/imgs/agent.png"><span>被保人姓名：</span><span style="color:#bdbcc0">{{item.insuredName}}</span></div>
+          <div class="ad"><img src="assets/imgs/phone.png"><span>手机号码：</span><span style="color:#bdbcc0">{{item.insuredMobile}}</span></div>
+          <div class="ad"><img src="assets/imgs/company.png"><span>投保公司：</span><span style="color:#bdbcc0">{{item.companyName}}</span></div>
+        </div>
+        <div class="ad">
+          <img src="assets/imgs/right-icon.png">
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+  <div class="dish" style="margin-top:15px" *ngIf="!cxData">
+    <img src="assets/imgs/01.png">
+    <span style="color:#ccc">暂无车险到期数据</span>
+  </div>
+</ion-content>
+<ion-footer>
+  <button ion-button color="btn" (click)="toALList()">查看全部到期车辆</button>
+</ion-footer>

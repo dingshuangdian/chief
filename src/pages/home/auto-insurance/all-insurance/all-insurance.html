@@ -1,0 +1,56 @@
+<!--
+  Generated template for the AllInsurancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-searchbar placeholder="输入车牌号查询" [(ngModel)]="licenseNo" (ngModelChange)="searchInsur($event)">
+    </ion-searchbar>
+  </ion-navbar>
+  <div class="headls">
+    <div>
+      <button ion-button icon-end (click)="sord()">
+        到期时间
+        <ion-icon [name]="upordown"></ion-icon>
+      </button>
+    </div>
+    <div style="display: flex;align-items: center;">
+      | </div>
+    <div class="comp">
+      <button ion-button icon-end (click)="showCompany()">
+        {{companyName}}
+        <ion-icon name="arrow-down"></ion-icon>
+      </button>
+    </div>
+  </div>
+</ion-header>
+<ion-content>
+  <ion-list no-lines *ngIf="cxData">
+    <ion-item *ngFor="let item of cxData">
+      <div class="la">
+        <button *ngIf="!item.isNewEnergy" ion-button>{{item.licenseNo}}</button>
+        <button *ngIf="item.isNewEnergy" style="background-color:#19d252" ion-button>{{item.licenseNo}}</button>
+        <div style="align-items: center;display: flex"><button style=" width: 18px;height: 18px; background-color: #fe5c3a;margin-right: 5px;"
+            ion-button>期</button><span style="color:#fa6b4a">{{item.expireDate}}</span></div>
+      </div>
+      <div class="lb">
+        <div class="lb1">
+          <div class="ad"><img src="assets/imgs/agent.png"><span>被保人姓名：</span><span style="color:#bdbcc0">{{item.insuredName}}</span></div>
+          <div class="ad"><img src="assets/imgs/phone.png"><span>手机号码：</span><span style="color:#bdbcc0">{{item.insuredMobile}}</span></div>
+          <div class="ad"><img src="assets/imgs/company.png"><span>投保公司：</span><span style="color:#bdbcc0">{{item.companyName}}</span></div>
+        </div>
+        <div class="ad">
+          <img src="assets/imgs/right-icon.png">
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+  <div class="dish" style="margin-top:15px" *ngIf="!cxData">
+    <img src="assets/imgs/01.png">
+    <span style="color:#ccc">暂无车险到期数据</span>
+  </div>
+</ion-content>

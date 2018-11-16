@@ -4,6 +4,7 @@ import { WebSites } from '../../../../providers/web-sites';
 import { CsbzNave } from '../../../../providers/csbz-nave';
 import { receiveCarPage } from '../receive-car';
 import { UserData } from '../../../../providers/user-data';
+import { AutoInsurancePage } from '../../../home/auto-insurance/auto-insurance';
 
 
 
@@ -90,6 +91,7 @@ export class orderPostPage {
     });
   }
   goInsurance() {
+    //this.navCtrl.push(AutoInsurancePage, { "carNum": this.auto.plateNumber });
     cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1, "carNum": this.auto.plateNumber }, (res) => {
 
     }, (error) => {
