@@ -5,7 +5,7 @@ var $cfg = {
     // api: 'http://ibs.chiefchain.com:9080/ChiefOSS',
     // imgApi: 'http://ibs.chiefchain.com:9080/OSS',
 
-    api: 'https://ndmapp.chiefchain.cn/mnt',
+    api: 'https://cptt.chiefchain.cn/mnt',
     imgApi: 'http://ibs.chiefchain.com:9080/OSS',
 
     pj: 1

@@ -27,10 +27,8 @@ platforms/
 plugins/android.json
 plugins/ios.json
 www/
-package-lock.json/
 hcp_build/
 $RECYCLE.BIN/
-
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate

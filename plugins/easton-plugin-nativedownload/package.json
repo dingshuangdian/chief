@@ -1,0 +1,40 @@
+{
+  "_from": "easton-plugin-nativedownload@^1.0.0",
+  "_id": "easton-plugin-nativedownload@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-KshkWhK4O3iHfIcO6VNTAQ8j8Fiz/F/CEuJV/Z4yptnE9Jy+Jas9w4uX/WOcv2tCkAhh3/VdU1eGf7yWN9wvgw==",
+  "_location": "/easton-plugin-nativedownload",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "easton-plugin-nativedownload@^1.0.0",
+    "name": "easton-plugin-nativedownload",
+    "escapedName": "easton-plugin-nativedownload",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/easton-plugin-nativedownload/-/easton-plugin-nativedownload-1.0.0.tgz",
+  "_shasum": "557aa743c0716ad16eed3aa2db8fbc7cae4a9816",
+  "_spec": "easton-plugin-nativedownload@^1.0.0",
+  "_where": "D:\\ProJect\\android\\chief",
+  "author": "",
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "easton-plugin-nativedownload",
+    "platforms": []
+  },
+  "deprecated": false,
+  "description": "升级下载",
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "license": "ISC",
+  "name": "easton-plugin-nativedownload",
+  "version": "1.0.0"
+}
