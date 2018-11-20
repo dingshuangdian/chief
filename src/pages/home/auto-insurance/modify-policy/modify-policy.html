@@ -60,7 +60,7 @@
               </ion-thumbnail>
             </ion-col>
             <ion-col *ngFor="let item of drivingLicensesPhoto;let i=index">
-              <ion-thumbnail tappable (click)="getPicture(insuredIdCardPhoto,i)">
+              <ion-thumbnail tappable (click)="getPicture(drivingLicensesPhoto,i)">
                 <img src={{item.url}} [style.height]="width" />
               </ion-thumbnail>
             </ion-col>
@@ -149,7 +149,7 @@
       <ion-item>
         <p class="subTit1">
           <span>45度车身照<i>4</i>张，车架号<i>1</i>张</span>
-          <span end><img src="assets/imgs/edition.png" alt="">示例</span>
+          <span end (click)="goEx()"><img src="assets/imgs/edition.png" alt="">示例</span>
         </p>
         <ion-row row-wrap class="pic">
           <ion-col col-4 *ngFor="let item of verificationCarPhotos;let i=index">

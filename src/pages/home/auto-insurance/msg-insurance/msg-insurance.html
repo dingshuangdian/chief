@@ -14,6 +14,11 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor="let item of msgList">
     <ion-card-header>
       保险订单通知 <span *ngIf="item.readStatus==0" style="color:#FC5F3C;" class="readtect">未读</span><span *ngIf="item.readStatus==1"

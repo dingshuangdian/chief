@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RequotationPage } from '../requotation/requotation';
 import { PhotoExPage } from '../photo-ex/photo-ex';
@@ -67,6 +67,7 @@ export class ModifyPolicyPage {
     public navParams: NavParams,
     public csbzNave: CsbzNave,
     public csModal: CsModal,
+    public changeDetectorRef: ChangeDetectorRef,
   ) {
     this.cityCode = this.navParams.get('cityCode');
     this.agentName = this.navParams.get('agentName');
@@ -102,6 +103,7 @@ export class ModifyPolicyPage {
       if (!data.msg) {//上传图片成功
         obj[i].url = data.imageSrc;
         obj[i].blob = data.imageBlob;
+        this.changeDetectorRef.detectChanges();
       }
     })
   }
@@ -109,25 +111,24 @@ export class ModifyPolicyPage {
   // 下一步
   nextBtn() {
     if (this.quoteType == '1') {
-      if (!this.insuredIdCardPhoto.blob || !this.drivingLicensesPhoto.blob) {
+      if (!this.insuredIdCardPhoto[0].blob || !this.drivingLicensesPhoto[0].blob) {
         this.csModal.showAlert('请上传投保人证件照或机动车行驶证!','','','确定','','');
         return false;
       }
     } else if (this.quoteType == '2') {
-      if (!this.businessLicense.blob) {
-        this.csModal.showAlert('请上传企业营业执照！!','','','确定','','');
+      if (!this.businessLicense[0].blob) {
+        this.csModal.showAlert('请上传企业营业执照!','','','确定','','');
         return false;
       }
     }
     let param: any = {
-      'carownerMobile': '',
-      'cityCode': this.cityCode,
-      'agentName': this.agentName,
-      'userId': this.userId,
-      'requotationType': 2,
-      'quoteTypeId': this.segmentType,
-    };
-    param = {
+      carownerMobile: '',
+      cityCode: this.cityCode,
+      agentName: this.agentName,
+      userId: this.userId,
+      requotationType: 2,
+      quoteTypeId: this.segmentType,
+
       insuredIdCardPhotoImg: this.insuredIdCardPhoto[0].blob,
       insuredIdCardPhotoImg_name: '1.png',
 

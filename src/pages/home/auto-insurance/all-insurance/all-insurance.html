@@ -29,6 +29,11 @@
   </div>
 </ion-header>
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list no-lines *ngIf="cxData">
     <ion-item *ngFor="let item of cxData">
       <div class="la">
@@ -37,7 +42,7 @@
         <div style="align-items: center;display: flex"><button style=" width: 18px;height: 18px; background-color: #fe5c3a;margin-right: 5px;"
             ion-button>期</button><span style="color:#fa6b4a">{{item.expireDate}}</span></div>
       </div>
-      <div class="lb">
+      <div class="lb" (click)="goSelectSurrence(item.cityCode,item.licenseNo)">
         <div class="lb1">
           <div class="ad"><img src="assets/imgs/agent.png"><span>被保人姓名：</span><span style="color:#bdbcc0">{{item.insuredName}}</span></div>
           <div class="ad"><img src="assets/imgs/phone.png"><span>手机号码：</span><span style="color:#bdbcc0">{{item.insuredMobile}}</span></div>

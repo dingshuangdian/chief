@@ -106,14 +106,11 @@ export class WebConfig {
                 findDepartments: '/CRUD/CRUD-Q-department-findDepartments.do',
                 changeDepartment: '/CRUD/CRUD-U-department-changeDepartment.do',
                 //查询所有品牌信息
-                findBrandList: '/CRUD/CRUD-Q-goods-findBrandList.do',
+                findBrandList: '/CRUD/CRUD-Q-goods-findBrandListByPage.do',
                 //查询商家仓库信息
                 findWareHousesInfo: '/CRUD/CRUD-Q-CM-stock-findWareHousesInfo.do',
                 //查询产品信息
                 findStocksInfo4Phone: '/CRUD/CRUD-Q-stock-findStocksInfo4Phone.do',
-
-
-                
 
                 //车险
                 getExpireInsuranceList: '/CRUD/CRUD-Q-IBS-Insurance-getExpireInsuranceList.do',

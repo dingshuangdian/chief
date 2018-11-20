@@ -39,8 +39,6 @@ export class carSelectProPage {
 
   getData(memberId) {
     this.servicsData.loadService(memberId).then(res => {
-      console.log(res);
-
       if (res['mcardServices']) {
         this.mcardServices = res['mcardServices'];
         this.leftCate.push({ flName: "会员卡", select: false, service: this.mcardServices });
@@ -75,11 +73,9 @@ export class carSelectProPage {
 
   dataConfig() {
     if (this.leftCate.length > 0) {
-
       this.leftCate[0].select = true;
       this.rightCate = this.leftCate[0].service;
       this.flag = this.leftCate[0].flName !== "会员卡" ? true : false;
-
       if (this.PType == "common") {
         if (this.leftCate[0].flName == "会员卡") {
           let member = this.leftCate[0];

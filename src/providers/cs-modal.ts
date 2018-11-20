@@ -28,7 +28,6 @@ export class CsModal {
     showProvince(component: any, obj?, callback?) {
         this.showModal(component, 'provincesModal', obj, callback);
     }
-
     showToast(msg) {
         let toast = this.toastCtrl.create({
             message: msg,

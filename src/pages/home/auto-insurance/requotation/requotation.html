@@ -233,7 +233,7 @@
         </ion-col>
         <ion-col>
           <ion-datetime displayFormat="MM/DD/YYYY" cancelText="取消" doneText="确定" [(ngModel)]="lastMsg.nextForceStartdate"></ion-datetime>
-          <img src="assets/imgs/home_22.png" alt="">
+          <img src="assets/imgs/date.png" alt="">
         </ion-col>
       </ion-row>
       <ion-row>
@@ -242,7 +242,7 @@
         </ion-col>
         <ion-col>
           <ion-datetime displayFormat="MM/DD/YYYY" cancelText="取消" doneText="确定" [(ngModel)]="lastMsg.nextBusinessStartdate"></ion-datetime>
-          <img src="assets/imgs/home_22.png" alt="">
+          <img src="assets/imgs/date.png" alt="">
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -257,9 +257,9 @@
       </ion-label>
       <ion-checkbox [disabled]='lastMsg.isForceRenewalDate==0' [(ngModel)]="lastMsg.forceTag"></ion-checkbox>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="lastMsg.isForceRenewalDate==0">
       <ion-label>
-        <P style="color: brown" *ngIf="lastMsg.isForceRenewalDate==0">您的交强险（未到投保期），暂不能报价缴费。</P>
+        <P style="color: brown">您的交强险（未到投保期），暂不能报价缴费。</P>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -267,20 +267,20 @@
   <ion-list no-margin class="commercialInsurance">
     <sub-title [titleName]="'商业险'"></sub-title>
     <ion-grid no-padding>
-      <ion-row>
-        <ion-col>
+      <ion-row justify-content-between>
+        <ion-col col-4>
           <ion-item no-padding>
             <ion-label>车辆损失险</ion-label>
             <ion-checkbox [disabled]='lastMsg.isBusinessRenewalDate==0' [(ngModel)]="lastMsg.cheSunTag" (ngModelChange)='changeSelect(lastMsg,"bujimianChesunTag","cheSunTag")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col *ngIf="lastMsg.isBusinessRenewalDate>0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate>0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]='!lastMsg.cheSunTag' [(ngModel)]="lastMsg.bujimianChesunTag"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col *ngIf="lastMsg.isBusinessRenewalDate==0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate==0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]='lastMsg.isBusinessRenewalDate==0' [(ngModel)]="lastMsg.bujimianChesunTag"></ion-checkbox>
@@ -294,7 +294,7 @@
             <ion-checkbox [disabled]='lastMsg.isBusinessRenewalDate==0' [(ngModel)]="lastMsg.sanZheTag" (ngModelChange)='changeSelect(lastMsg,"bujimianSanzheTag","sanZheTag","sanZheBaoE")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-4 class="flexCenter">
           <ion-item no-padding>
             <ion-select [(ngModel)]="lastMsg.sanZheBaoE" okText="确定" cancelText="取消" [disabled]='lastMsg.isBusinessRenewalDate==0'
               (ngModelChange)='changeUnCheck("sanZheTag","bujimianSanzheTag","sanZheBaoE")'>
@@ -302,27 +302,27 @@
             </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate>0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]='!lastMsg.sanZheTag' [(ngModel)]="lastMsg.bujimianSanzheTag"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate==0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]='lastMsg.isBusinessRenewalDate==0' [(ngModel)]="lastMsg.bujimianSanzheTag"></ion-checkbox>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row justify-content-between>
+      <ion-row>
         <ion-col col-4>
           <ion-item no-padding>
             <ion-label>司机座位险</ion-label>
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.siJiTag" (ngModelChange)='changeSelect(lastMsg,"bujimianSijiTag","siJiTag","siJiBaoE")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-4 class="flexCenter">
           <ion-item no-padding>
             <ion-select [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.siJiBaoE" (ngModelChange)='changeUnCheck("siJiTag","bujimianSijiTag","siJiBaoE")'
               okText="确定" cancelText="取消">
@@ -330,20 +330,20 @@
             </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate>0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="!lastMsg.siJiTag" [(ngModel)]="lastMsg.bujimianSijiTag"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate==0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianSijiTag"></ion-checkbox>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row justify-content-between>
+      <ion-row>
         <ion-col col-4>
           <ion-item no-padding>
             <ion-label>乘客座位险</ion-label>
@@ -352,7 +352,7 @@
           </ion-item>
           <ion-item style="padding-left: 20px;">车辆座位数</ion-item>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-4 class="flexCenter">
           <ion-item no-padding>
             <ion-select okText="确定" cancelText="取消" [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.chengKeBaoE"
               (ngModelChange)='changeUnCheck("chengKeTag","bujimianChengkeTag","chengKeBaoE")'>
@@ -365,13 +365,13 @@
             <ion-label>座</ion-label>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate>0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="!lastMsg.chengKeTag" [(ngModel)]="lastMsg.bujimianChengkeTag"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate==0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianChengkeTag"></ion-checkbox>
@@ -386,13 +386,13 @@
               (ngModelChange)='changeSelect(lastMsg,"bujimianDaoqiangTag","daoQiangTag")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate>0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="!lastMsg.daoQiangTag" [(ngModel)]="lastMsg.bujimianDaoqiangTag"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate==0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianDaoqiangTag"></ion-checkbox>
@@ -412,7 +412,7 @@
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.boLiTag" (ngModelChange)='changeSelect(lastMsg,"","boLiTag","boLiBaoE")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-4 class="flexCenter">
           <ion-item no-padding>
             <ion-select okText="确定" cancelText="取消" [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.boLiBaoE"
               (ngModelChange)='changeUnCheck("boLiTag","","boLiBaoE")'>
@@ -428,7 +428,7 @@
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.huaHenTag" (ngModelChange)='changeSelect(lastMsg,"bujimianHuahenTag","huaHenTag","huahenBaoE")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-4 class="flexCenter">
           <ion-item no-padding>
             <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.huahenBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0"
               (ngModelChange)='changeUnCheck("huaHenTag","bujimianHuahenTag","huahenBaoE")'>
@@ -437,13 +437,13 @@
             </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate>0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="!lastMsg.huaHenTag" [(ngModel)]="lastMsg.bujimianHuahenTag"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate==0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianHuahenTag"></ion-checkbox>
@@ -457,13 +457,13 @@
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.ziRanTag" (ngModelChange)='changeSelect(lastMsg,"bujimianZiranTag","ziRanTag")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate>0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="!lastMsg.ziRanTag" [(ngModel)]="lastMsg.bujimianZiranTag"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate==0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianZiranTag"></ion-checkbox>
@@ -478,13 +478,13 @@
               (ngModelChange)='changeSelect(lastMsg,"bujimianSheshuiTag","sheShuiTag")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate>0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate>0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="!lastMsg.sheShuiTag" [(ngModel)]="lastMsg.bujimianSheshuiTag"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.isBusinessRenewalDate==0">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.isBusinessRenewalDate==0">
           <ion-item no-padding>
             <ion-label>不计免赔</ion-label>
             <ion-checkbox [disabled]="lastMsg.isBusinessRenewalDate==0" [(ngModel)]="lastMsg.bujimianSheshuiTag"></ion-checkbox>
@@ -507,7 +507,7 @@
               (ngModelChange)='changeSelect1(lastMsg,"hcXiulichangTag","hcXiulichangTypeTag","hcXiuLiCanBaoE","hcXiulichangBaoE")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-3>
+        <ion-col col-3 class="flexCenter">
           <ion-item no-padding>
             <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.hcXiuLiCanBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0"
               (ngModelChange)="changeCheck()">
@@ -539,9 +539,9 @@
     <p no-margin>用户备注</p>
     <ion-textarea aria-placeholder="请输入您要备注的信息" [(ngModel)]="lastMsg.memo"></ion-textarea>
   </ion-list>
-  <ion-item>
+  <ion-item *ngIf="lastMsg.isBusinessRenewalDate==0">
     <ion-label>
-      <P style="color: brown" *ngIf="lastMsg.isBusinessRenewalDate==0">您的商业险（未到投保期），暂不能报价缴费。</P>
+      <P style="color: brown">您的商业险（未到投保期），暂不能报价缴费。</P>
     </ion-label>
   </ion-item>
 

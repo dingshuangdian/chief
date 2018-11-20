@@ -46,23 +46,81 @@
   <!-- 商业险信息 -->
   <ion-list class="commercialIns">
     <sub-title [titleName]="'商业险信息'"></sub-title>
-    <ion-row [hidden]="!info.businessTotal">
+    <ion-row [hidden]="info.businessTotal">
       <ion-col>商业险</ion-col>
       <ion-col>￥{{info.businessTotal}}</ion-col>
     </ion-row>
+    <ion-grid padding-left padding-right>
+      <ion-row *ngIf="info.cheSunFee">
+        <ion-col>车辆损失险</ion-col>
+        <ion-col>{{info.cheSun}}</ion-col>
+        <ion-col>{{info.cheSunFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.sanZheFee">
+        <ion-col>第三者险</ion-col>
+        <ion-col>{{info.sanZhe}}</ion-col>
+        <ion-col>{{info.sanZheFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.siJiFee">
+        <ion-col>司机座位险</ion-col>
+        <ion-col>{{info.siJi}}</ion-col>
+        <ion-col>{{info.siJiFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.chengKeFee">
+        <ion-col>乘客座位险</ion-col>
+        <ion-col>{{info.chengKe}}</ion-col>
+        <ion-col>{{info.chengKeFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.boLiFee">
+        <ion-col>玻璃破碎险</ion-col>
+        <ion-col>{{info.boLi}}</ion-col>
+        <ion-col>{{info.boLiFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.huaHenFee">
+        <ion-col>划痕险</ion-col>
+        <ion-col>{{info.huaHen}}</ion-col>
+        <ion-col>{{info.huaHenFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.daoQiangFee">
+        <ion-col>全车盗抢险</ion-col>
+        <ion-col>{{info.daoQiang}}</ion-col>
+        <ion-col>{{info.daoQiangFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.ziRanFee">
+        <ion-col>自燃险</ion-col>
+        <ion-col>{{info.ziRan}}</ion-col>
+        <ion-col>{{info.ziRanFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.sheShuiFee">
+        <ion-col>涉水险</ion-col>
+        <ion-col>{{info.sheShui}}</ion-col>
+        <ion-col>{{info.sheShuiFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.hcSanfangteyueFee">
+        <ion-col>第三方逃逸险</ion-col>
+        <ion-col>{{info.hcSanfangteyue}}</ion-col>
+        <ion-col>{{info.hcSanfangteyueFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="info.hcXiulichangFee">
+        <ion-col>指定修理厂险</ion-col>
+        <ion-col>{{info.hcXiulichang}}</ion-col>
+        <ion-col>{{info.hcXiulichangFee || 0}}</ion-col>
+      </ion-row>
+      <ion-row class="tip" *ngIf="info">第三者不计免赔(￥{{info.bujimianSanzheFee||0}})、司机座位险不计免赔(￥{{info.bujimianSijiFee||0}})、车辆损失险不计免赔(￥{{info.bujimianChesunFee||0}})、划痕险不计免赔(￥{{info.bujimianHuahenFee||0}})、乘客座位险不计免赔(￥{{info.bujimianChengkeFee||0}})、自燃险不计免赔(￥{{info.ziRanFee||0}})、涉水险不计免赔(￥{{info.bujimianSheshuiFee||0}})</ion-row>
+    </ion-grid>
   </ion-list>
   <!-- 发送报价给客户 -->
   <ion-list class="sendOffer">
     <ion-row>
       <span>发送报价给客户：</span>
-      <ion-col ng-click="sendSMS()">
+      <ion-col (click)="sendSMS()">
         <img src="assets/imgs/messages.png" alt="">
         <span>发送短信</span>
       </ion-col>
     </ion-row>
   </ion-list>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="isShowFooter">
   <p>
     <span>总计：</span>
     <span>￥{{info.totalAmount || 0}}<i *ngIf="hebaoModel">({{hebaoModel}})</i></span>

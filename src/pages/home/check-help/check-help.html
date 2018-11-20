@@ -9,13 +9,11 @@
   <ion-navbar>
     <ion-title>库存查询</ion-title>
   </ion-navbar>
-  <ion-toolbar class="searchStyle">
-    <ion-row>
-      <ion-col no-padding>
-        <ion-searchbar [(ngModel)]="seachInfo.keyWord" placeholder="请输入名称搜索" (ngModelChange)="searchCk($event)">
-        </ion-searchbar>
-      </ion-col>
-    </ion-row>
+
+  <ion-toolbar class="searchStyle1">
+    <ion-searchbar start [(ngModel)]="seachInfo.keyWord" placeholder="输入关键字进行查询" (ionInput)="change()">
+    </ion-searchbar>
+    <button ion-button end class="search" (click)="searchOrder()">查询</button>
   </ion-toolbar>
   <ion-toolbar class="searchStyle">
     <div class="course_tabBox" *ngFor="let tab of courseTab; let i = index">
@@ -26,7 +24,7 @@
 </ion-header>
 <ion-content>
   <!-- <p style="text-align: center">功能开发中,敬请期待！</p> -->
-  <div class="cate_right">
+  <div class="cate_right" *ngIf="customers">
     <ion-list>
       <ion-item *ngFor="let item of customers">
         <div class="con-se">
@@ -51,5 +49,12 @@
       </ion-item>
     </ion-list>
   </div>
-
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)" threshold="50px" *ngIf="moredata">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div class="dish" style="margin-top:15px" *ngIf="customers.length==0">
+    <img src="assets/imgs/01.png">
+    <span style="color:#ccc">没有更多数据</span>
+  </div>
 </ion-content>

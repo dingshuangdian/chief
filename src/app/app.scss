@@ -30,6 +30,7 @@
   display: none;
 }
 
+
 .provincesModal {
   ion-backdrop {
     visibility: initial;
@@ -43,20 +44,6 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
-.repertoryModal {
-  ion-backdrop {
-    visibility: initial;
-  }
-  .modal-wrapper {
-    position: absolute;
-    top: 0;
-    height: 272px;
-    width: inherit;
-    padding-bottom: constant(safe-area-inset-bottom);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
-
 .agentPopover {
   .popover-content {
     width: 300px;

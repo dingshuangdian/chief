@@ -68,6 +68,7 @@ import { SmsPopoverPage } from '../other/sms-popover/sms-popover';
 import { InsProgPopoverPage } from '../other/ins-prog-popover/ins-prog-popover';
 import { WxPayPopoverPage } from '../other/wx-pay-popover/wx-pay-popover';
 import { repertoryPopover } from '../other/repertory-popover/repertory-popover';
+import { brandPopover } from '../other/brand-popover/brand-popover';
 @NgModule({
     declarations: [
         HomePage,
@@ -124,6 +125,7 @@ import { repertoryPopover } from '../other/repertory-popover/repertory-popover';
         companyPopover,
         ExceptionCausePage,
         MsgInsurancePage,
+        brandPopover,
 
         CarInsProgressPage,
         DetailPolicyPage,
@@ -199,7 +201,7 @@ import { repertoryPopover } from '../other/repertory-popover/repertory-popover';
         ExceptionCausePage,
         MsgInsurancePage,
         repertoryPopover,
-
+        brandPopover,
 
 
         CarInsProgressPage,

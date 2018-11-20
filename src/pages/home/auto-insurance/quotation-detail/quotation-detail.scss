@@ -71,13 +71,26 @@ page-quotation-detail {
                 color: #FC5F3C;
             }
         }
-        .row:nth-child(2){
-            height: 40px;
-        }
         &>.row:last-child{
             color: #9e9fa3; 
             font-size: 13px;
             padding-bottom: 10px;
+        }
+        .grid{
+            background-color: #F7F9FA;
+            .row{
+                height: auto;
+                border-bottom: 1px dotted #c8c7cc;
+                padding: 5px 0;
+                .col:nth-child(2),.col:nth-child(3){
+                    color: #6b6c70;
+                }
+            }
+            .row.tip{
+                color: #9e9fa3; 
+                font-size: 13px;
+                border-bottom: 0 !important;
+            }
         }
     }
     .list.sendOffer{
@@ -87,7 +100,9 @@ page-quotation-detail {
             line-height: 40px;
             padding: 0 10px;
             .col{
-                text-align: left !important;
+                flex-basis: unset !important;
+                flex-grow: 0 !important;
+                width: auto !important;
                 img{
                     display: inline-block;
                     width: 14px;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { PhotoExPage } from '../photo-ex/photo-ex';
 import {CsbzNave } from '../../../../providers/csbz-nave';
@@ -60,6 +60,7 @@ export class SupplementaryInfoPage {
     public csbzNave: CsbzNave,
     public webSites: WebSites,
     public csModal: CsModal,
+    public changeDetectorRef: ChangeDetectorRef,
   ) {
     this.orderId = this.navParams.get('orderId');
   }
@@ -86,6 +87,7 @@ export class SupplementaryInfoPage {
         this.isSubmit = false;
         obj[i].url = data.imageSrc;
         obj[i].blob = data.imageBlob;
+        this.changeDetectorRef.detectChanges();
       }
     })
   }

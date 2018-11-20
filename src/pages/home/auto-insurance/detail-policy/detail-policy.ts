@@ -225,106 +225,74 @@ export class DetailPolicyPage {
   photoView(showTypeId){
     let item = [];
     if(showTypeId == 0){
-      if (this.qryOrderInfo['drivingLicense'] != null) {
-        let url = this.intercept(this.qryOrderInfo['drivingLicense']);
-        item.push({
-          'url': url,
-        });
-      }
+      let url = this.intercept(this.qryOrderInfo['drivingLicense']);
+      item.push({
+        'url': url,
+      });
     }else if(showTypeId == 1){
-      if (this.qryOrderInfo['insuredIdCardPhoto'] != null) {
-        let url = this.intercept(this.qryOrderInfo['insuredIdCardPhoto']);
-        item.push({
-          'url': url,
-        });
-      }
+      let url = this.intercept(this.qryOrderInfo['insuredIdCardPhoto']);
+      item.push({
+        'url': url,
+      });
     }else if(showTypeId == 2){
-      if (this.qryOrderInfo['carInvoicePhoto'] != null) {
-        let url = this.intercept(this.qryOrderInfo['carInvoicePhoto']);
-        item.push({
-          'url': url,
-        });
-      }
+      let url = this.intercept(this.qryOrderInfo['carInvoicePhoto']);
+      item.push({
+        'url': url,
+      });
     }else if(showTypeId == 3){
-      if (this.qryOrderInfo['carvinPhoto'] != null) {
-        let url = this.intercept(this.qryOrderInfo['carvinPhoto']);
-        item.push({
-          'url': url,
-        });
-      }
+      let url = this.intercept(this.qryOrderInfo['carvinPhoto']);
+      item.push({
+        'url': url,
+      });
     }else if(showTypeId == 4){
-      if (this.qryOrderInfo['carbodyPhoto1'] != null) {
-        let url = this.intercept(this.qryOrderInfo['carbodyPhoto1']);
-        item.push({
-          'url': url,
-        });
-      }
-      if (this.qryOrderInfo['carbodyPhoto2'] != null) {
-        let url = this.intercept(this.qryOrderInfo['carbodyPhoto2']);
-        item.push({
-          'url': url,
-        });
-      }
-      if (this.qryOrderInfo['carbodyPhoto3'] != null) {
-        let url = this.intercept(this.qryOrderInfo['carbodyPhoto3']);
-        item.push({
-          'url': url,
-        });
-      }
-      if (this.qryOrderInfo['carbodyPhoto4'] != null) {
-        let url = this.intercept(this.qryOrderInfo['carbodyPhoto4']);
-        item.push({
-          'url': url,
-        });
-      }
+      let url1 = this.intercept(this.qryOrderInfo['carbodyPhoto1']);
+      item.push({
+        'url': url1,
+      });
+      let url2 = this.intercept(this.qryOrderInfo['carbodyPhoto2']);
+      item.push({
+        'url': url2,
+      });
+      let url3 = this.intercept(this.qryOrderInfo['carbodyPhoto3']);
+      item.push({
+        'url': url3,
+      });
+      let url4 = this.intercept(this.qryOrderInfo['carbodyPhoto4']);
+      item.push({
+        'url': url4,
+      });
     }else if(showTypeId == 5){
-      if (this.qryOrderInfo['otherPhoto'] != null) {
-        let url = this.intercept(this.qryOrderInfo['otherPhoto']);
-        item.push({
-          'url': url,
-        });
-      }
-      if (this.qryOrderInfo['otherPhoto2'] != null) {
-        let url = this.intercept(this.qryOrderInfo['otherPhoto2']);
-        item.push({
-          'url': url,
-        });
-      }
-      if (this.qryOrderInfo['otherPhoto3'] != null) {
-        let url = this.intercept(this.qryOrderInfo['otherPhoto3']);
-        item.push({
-          'url': url,
-        });
-      }
+      let url1 = this.intercept(this.qryOrderInfo['otherPhoto']);
+      item.push({
+        'url': url1,
+      });
+      let url2 = this.intercept(this.qryOrderInfo['otherPhoto2']);
+      item.push({
+        'url': url2,
+      });
+      let url3 = this.intercept(this.qryOrderInfo['otherPhoto3']);
+      item.push({
+        'url': url3,
+      });
     }else{
-      if (this.qryOrderInfo['epolicy'] != null) {
-        let url = this.intercept(this.qryOrderInfo['epolicy']);
-        item.push({
-          'url': url,
-        });
-      }
-      if (this.qryOrderInfo['epolicy2'] != null) {
-        let url = this.intercept(this.qryOrderInfo['epolicy2']);
-        item.push({
-          'url': url,
-        });
-      }
-      if (this.qryOrderInfo['epolicy3'] != null) {
-        let url = this.intercept(this.qryOrderInfo['epolicy3']);
-        item.push({
-          'url': url,
-        });
-      }
+      let url1 = this.intercept(this.qryOrderInfo['epolicy']);
+      item.push({
+        'url': url1,
+      });
+      let url2 = this.intercept(this.qryOrderInfo['epolicy2']);
+      item.push({
+        'url': url2,
+      });
+      let url3 = this.intercept(this.qryOrderInfo['epolicy3']);
+      item.push({
+        'url': url3,
+      });
     }
-    if(item.length == 0){
-      return ;
-    }
-    return ;
-    // cordova.plugins.PhotoView.show({ imageArr: item, index: showTypeId }, (res) => {
-    //   console.log(res);
-    // }, (error) => {
-    //   console.log(error);
-    // })
+    cordova.plugins.PhotoView.show({ imageArr: item, index: showTypeId }, (res) => {
+      console.log(res);
+    }, (error) => {
+      console.log(error);
+    })
   }
 
 }

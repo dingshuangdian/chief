@@ -24,7 +24,7 @@ import { PaymentPolicyPage } from '../payment-policy/payment-policy';
 export class CarInsProgressPage {
 
   public courseTab = [
-    {'name': '已退回','bol': true},
+    {'name': '已退回','bol': false},
     {'name': '待核保','bol': false},
     {'name': '待支付','bol': false},
     {'name': '待收单','bol': false},
@@ -43,7 +43,33 @@ export class CarInsProgressPage {
     public websites: WebSites,
     public csModal: CsModal,
   ) {
-    this.cUrl_ = 'qryBackOrder';
+  }
+
+  ionViewDidEnter() {
+    let num = this.navParams.get('num');
+    if(num){
+      this.courseTab[num].bol = true;
+      switch(num){
+        case 0:
+          this.cUrl_ = 'qryBackOrder';//已退回数据
+          break;
+        case 1:
+          this.cUrl_ = 'qryUnderwritingOrder';//待核保数据
+          break;
+        case 2:
+          this.cUrl_ = 'qryPayOrder';//待支付数据
+          break;
+        case 3:
+          this.cUrl_ = 'qryIssuingOrder';//待收单数据
+          break;
+        case 4:
+          this.cUrl_ = 'qryFinishOrder';//已完成数据
+          break;
+      }
+    }else{
+      this.courseTab[1].bol = true;
+      this.cUrl_ = 'qryUnderwritingOrder';//待核保数据
+    }
     this.reqResult(this.cUrl_,{});
   }
 

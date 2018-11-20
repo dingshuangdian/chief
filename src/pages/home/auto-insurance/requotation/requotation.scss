@@ -46,6 +46,27 @@ page-requotation {
             border-bottom: 0 !important;
         }
     }
+    .flexCenter{
+        .item{
+            justify-content: center;
+            .item-inner{
+                width: auto !important;
+                flex-basis: unset !important;
+                flex-grow: 0 !important;
+                padding-right: 0 !important;
+            }
+        }
+    }
+    .flexEnd{
+        .item{
+            justify-content: flex-end;
+            .item-inner{
+                width: auto !important;
+                flex-basis: unset !important;
+                flex-grow: 0 !important;
+            }
+        }
+    }
     .inCharge {
         background: #fff;
         height: 44px;
@@ -86,7 +107,7 @@ page-requotation {
             background: #fff;
         }
         .row {
-            border-bottom: 0.55px solid #f4f4f4;
+            border-bottom: 1px solid #f4f4f4;
             padding: 0 5px;
             .col {
                 align-self: center;
@@ -277,9 +298,7 @@ page-requotation {
     .additionalInsurance {
         .item,
         .row {
-            // font-size: 15px !important;
             color: #333;
-            border-bottom: 0.55px solid #f4f4f4;
         }
     }
     .memo {

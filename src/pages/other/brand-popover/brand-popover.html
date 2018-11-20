@@ -1,0 +1,20 @@
+<ion-content>
+
+  <div class="cbn">
+    <button *ngFor="let item of brand" ion-button color="selectItem" [ngClass]="{'bitemSelect': item.selected}" (click)="bselectItem(item)">{{item.brand_name}}</button>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)" threshold="50px">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div class="dish" style="margin-top:15px" *ngIf="brand.length==0">
+    <img src="assets/imgs/01.png">
+    <span style="color:#ccc">没有更多数据</span>
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="fbn">
+    <button ion-button block color="cancelBT" (click)="close(false)">重置</button>
+    <button ion-button block color="secondary" (click)="close(true)">确定</button>
+  </div>
+</ion-footer>

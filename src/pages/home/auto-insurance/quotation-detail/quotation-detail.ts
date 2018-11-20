@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ToastController, LoadingController } from 'ionic-angular';
 import { ReservationListPage } from '../reservation-list/reservation-list';
 import { SupplementaryInfoPage } from '../supplementary-info/supplementary-info';
 import { WebSites } from '../../../../providers/web-sites';
@@ -21,8 +21,8 @@ import { SmsPopoverPage } from '../../../other/sms-popover/sms-popover';
 export class QuotationDetailPage {
 
   listParams;
-  insuranceCompanyList;
-  quotationList;
+  insuranceCompanyList;//选择的保险公司
+  quotationList;//上一个页面传递过来的参数对象中的list对象
   licenseNo;//车牌号
   carVin;
   errorReport;
@@ -30,11 +30,11 @@ export class QuotationDetailPage {
   orderId;//订单id
   id;
   btnWord;//按钮状态 1--预约出单 else--申请核保
-  hebaoModel;
-  insuranceCompanyId;
-  isShowFooter;
+  hebaoModel;//核保信息
+  insuranceCompanyId;//选择的保险公司id
+  isShowFooter;//是否显示底部 true--显示 false--不显示
   insureAgentUname;//代理专员
-  insureenumval = {
+  insureenumval = {//保险信息
     sanZhe: {},
     boLi: {},
     chengKe: {},
@@ -47,9 +47,9 @@ export class QuotationDetailPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private websize: WebSites,
-    private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
     public csModal: CsModal,
   ) {
     this.listParams = this.navParams.get('listParams');
@@ -189,9 +189,7 @@ export class QuotationDetailPage {
           this.btnWord = '申请核保';
         }
       }
-
     })
-
   }
 
   //弹窗
@@ -214,8 +212,8 @@ export class QuotationDetailPage {
   }
 
   //发送短信
-  sendSMS = function() {
-    this.webSites.httpPost('qryMessage',{'orderId': this.orderId})
+  sendSMS() {
+    this.websize.httpPost('qryMessage',{'orderId': this.orderId})
     .subscribe(res => {
       let smsModal = this.modalCtrl.create(SmsPopoverPage,{
         'postMsg': res
@@ -224,17 +222,17 @@ export class QuotationDetailPage {
         showBackdrop: true,
         cssClass: 'smsModal'
       });
-      smsModal.onDidDismiss();
+      smsModal.onDidDismiss(data => {});
       smsModal.present();
     });
   }
 
-  //
+  //预约出单 / 申请核保
   toUploadData = function(id) {
     if (id == 1) {
       this.navCtrl.push(SupplementaryInfoPage, { orderId: this.orderId });
     } else {
       this.navCtrl.push(ReservationListPage, { orderId: this.orderId });
     }
-};
+  };
 }

@@ -1,7 +1,9 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { WebSites } from '../../../providers/web-sites';
 import { repertoryPopover } from '../../other/repertory-popover/repertory-popover';
+import { CsModal } from '../../../providers/cs-modal';
+import { brandPopover } from '../../other/brand-popover/brand-popover';
 
 
 /**
@@ -12,43 +14,50 @@ import { repertoryPopover } from '../../other/repertory-popover/repertory-popove
  */
 
 @Component({
-
   selector: 'page-check-help',
   templateUrl: 'check-help.html',
 })
 export class CheckHelpPage {
-  seachInfo: any = { keyWord: '', page: '', rows: 20, warehouseId: 65 };
-  customers;
-  repertory;
+  pages = 1;
+  seachInfo: any = { keyWord: '', page: 1, rows: 20, warehouseId: [], brandId: [] };
+  customers = [];
+  repertory = [];
+  brandhasSelected = [];
+  moredata = true;
+  infiniteScroll;
   public courseTab = [
     { "name": "全部", "bol": true },
     { "name": "品牌", "bol": false },
     { "name": "仓库", "bol": false },
   ];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public changeDetectorRef: ChangeDetectorRef, public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, public changeDetectorRef: ChangeDetectorRef, public popoverCtrl: PopoverController, public csModal: CsModal) {
   }
-
   ionViewDidLoad() {
-    this.findWareHousesInfo();
-
   }
-  findWareHousesInfo() {
-    this.websites.httpGet("findWareHousesInfo", {}).subscribe(res => {
-      if (res) {
-        console.log(res);
-        this.repertory = res;
-      }
-    })
-  }
-  searchCk(key) {
-    if (key) {
-      this.seachInfo.keyWord = key;
+  searchOrder(infiniteScroll) {
+    if (!this.seachInfo.keyWord) return;
+    if (this.customers.length <= 20) {
+      this.pages = 2;
     }
-
+    this.seachInfo.page = infiniteScroll ? this.pages : 1;
     this.websites.httpPost('findStocksInfo4Phone', this.seachInfo, false).subscribe(res => {
-      console.log(res);
-      this.customers = res.rows ? res.rows : [];
-      this.changeDetectorRef.detectChanges();
+      if (res.rows) {
+        if (infiniteScroll) {
+          this.moredata = true;
+          this.customers = this.customers.concat(res.rows);
+          infiniteScroll.complete();
+          if (res.rows.length < 20) {
+            infiniteScroll.enable(false);
+          }
+          this.pages++;
+        } else {
+          this.customers = res.rows;
+          this.moredata = res.rows.length < 20 ? false : true;
+        };
+      } else {
+        this.customers = [];
+        this.moredata = false;
+      }
     })
   }
   ionViewDidEnter() {
@@ -60,28 +69,57 @@ export class CheckHelpPage {
     list[index].bol = true;
     switch (index) {
       case 0:
-
+        this.seachInfo.warehouseId = [];
+        this.seachInfo.brandId = [];
+        this.repertory = [];
+        this.brandhasSelected = [];
+        this.searchOrder("");
         break;
       case 1:
-
+        this.brandPopover();
         break;
       case 2:
-        this.presentPopover();
-
+        this.repertoryPopover();
         break;
-
     }
-
   }
-  presentPopover() {
-    const popover = this.popoverCtrl.create(repertoryPopover, { repertory: this.repertory }, { cssClass: "repertoryModal" });
-    popover.onDidDismiss(data => {
+  repertoryPopover() {
+    this.csModal.showProvince(repertoryPopover, { repertory: this.repertory }, (data) => {
       if (data) {
-        console.log(data);
+        this.repertory = data;
+        this.seachInfo.warehouseId = [];
+        data.forEach(element => {
+          if (element.select) {
+            this.seachInfo.warehouseId.push({ id: element.warehouse_id })
+          }
+        });
+        this.searchOrder("");
       }
     });
-
-    popover.present();
+  }
+  brandPopover() {
+    this.csModal.showProvince(brandPopover, { brandhasSelected: this.brandhasSelected }, (data) => {
+      if (data) {
+        this.brandhasSelected = data;
+        this.seachInfo.brandId = [];
+        data.forEach(element => {
+          if (element.selected) {
+            this.seachInfo.brandId.push({ id: element.brand_id });
+          }
+        });
+        this.searchOrder("");
+      }
+    });
+  }
+  doLoadMore(infiniteScrolll) {
+    this.infiniteScroll = infiniteScrolll;
+    this.searchOrder(this.infiniteScroll);
+  }
+  change() {
+    this.pages = 1;
+    if (this.infiniteScroll) {
+      this.infiniteScroll.enable(true);
+    }
   }
 
 }

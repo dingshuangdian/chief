@@ -1,17 +1,16 @@
-<ion-list>
-  <ion-item>
-    <ion-row>
-      <ion-col col-3 *ngFor="let item of repertory">
-        <button ion-button full color="selectItem" [disabled]="item.disable" [ngClass]="{'itemSelect': item.select}">{{item.wareAndDepar}}</button>
-      </ion-col>
-    </ion-row>
-  </ion-item>
-</ion-list>
-<ion-row>
-  <ion-col>
-    <button ion-button block color="cancelBT" (click)="close(false)">取消</button>
-  </ion-col>
-  <ion-col>
+<ion-content>
+  <div class="cbn">
+    <button *ngFor="let item of repertory" ion-button color="selectItem" [ngClass]="{'itemSelect': item.select}"
+      (click)="selectItem(item)">{{item.wareAndDepar}}</button>
+  </div>
+  <div class="dish" style="margin-top:15px" *ngIf="repertory.length==0">
+    <img src="assets/imgs/01.png">
+    <span style="color:#ccc">没有更多数据</span>
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="fbn">
+    <button ion-button block color="cancelBT" (click)="close(false)">重置</button>
     <button ion-button block color="secondary" (click)="close(true)">确定</button>
-  </ion-col>
-</ion-row>
+  </div>
+</ion-footer>
