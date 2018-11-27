@@ -18,7 +18,7 @@
         <span>跟进人员：</span>
         <span>{{agentName}}</span>
       </p>
-      <button ion-button>更换</button>
+      <button ion-button menuToggle (click)="changeAgentName($event)">更换</button>
     </ion-row>
     <!-- <ion-row class="insName">
       <span>被保人姓名：</span>
@@ -549,3 +549,7 @@
 
   <button ion-button color="assist" class="nextBtn" (click)="manualCheck()" *ngIf="!isShow">人工核保</button>
 </ion-content>
+<page-agentlist-popover (selectEvent)="selectAgent($event)" 
+  [insureAgent]="insureAgent" 
+  [insureAgentUid]="insureAgentUid"
+></page-agentlist-popover>

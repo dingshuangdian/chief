@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, MenuController  } from 'ionic-angular';
 import { SelInsuranceCompPage } from '../sel-insurance-comp/sel-insurance-comp';
 import { WebSites } from '../../../../providers/web-sites';
 import { CsbzNave } from '../../../../providers/csbz-nave';
+import { AgentlistPopoverPage } from '../../../other/agentlist-popover/agentlist-popover';
 
 
 /**
@@ -17,56 +18,56 @@ import { CsbzNave } from '../../../../providers/csbz-nave';
   templateUrl: 'requotation.html',
 })
 export class RequotationPage {
-  forceTag;
-  cheSunTag;
-  ziRanTag;
-  bujimianChesunTag;
-  bujimianZiranTag;
-  bujimianSheshuiTag;
-  bujimianHuahenTag;
-  sheShuiTag;
-  bujimianChengkeTag;
-  daoQiangTag;
-  siJiTag;
-  bujimianSijiTag;
-  bujimianSanzheTag;
-  chengKeTag;
+  forceTag;//交强险 true--勾选 false--不勾选
+  cheSunTag;//商业险(车辆损失险) true--勾选 false--不勾选
+  ziRanTag;//商业险(自燃险) true--勾选 false--不勾选
+  bujimianChesunTag;//商业险(车辆损失险 不计免赔)
+  bujimianZiranTag;//商业险(自燃险 不计免赔)
+  bujimianSheshuiTag;//商业险(涉水险 不计免赔)
+  bujimianHuahenTag;//商业险(划痕险 不计免赔)
+  sheShuiTag;//商业险(涉水险)
+  bujimianChengkeTag;//商业险(乘客座位险 不计免赔)
+  daoQiangTag;//商业险(盗抢险)
+  siJiTag;//商业险(司机座位险)
+  bujimianSijiTag;//商业险(司机座位险 不计免赔)
+  bujimianSanzheTag;//商业险(第三者险 不计免赔)
+  chengKeTag;//商业险(乘客座位险)
   hcXiulichangTag;
-  bujimianDaoqiangTag;
-  huaHenTag;
-  hcSanfangteyueTag;
-  boLiTag;
-  sanZheTag;
-  hcXiulichangTypeTag;
-  params = { licenseNo: "", cityCode: "" };
-  lastMsg = {
-    nextForceStartdate: '', nextBusinessStartdate: ''
-
-
-
-
+  bujimianDaoqiangTag;//商业险(盗抢险 不计免赔)
+  huaHenTag;//商业险(划痕险)
+  hcSanfangteyueTag;//附加险(第三方逃逸险)
+  boLiTag;//商业险(玻璃破碎险)
+  sanZheTag;//商业险(第三者险)
+  hcXiulichangTypeTag;//商业险(指定修理厂险)
+  params = { 
+    licenseNo: "", 
+    cityCode: "",
   };
-  sanZheVal;
-  siJiVal;
-  boLiVal;
-  huaHenVal;
-  chengKeVal;
-  xiuLiChangVal;
-  xiuLiChangGuochan;
-  xiuLiChangJinkou;
-  insureAgent;
-  router;
-  recordBool;
-  isShow;
+  lastMsg = {
+    nextForceStartdate: '', //保险日期(交强险起保时间)
+    nextBusinessStartdate: '',//保险日期(商业险起保时间)
+  };
+  sanZheVal;//第三者险下拉选项
+  siJiVal;//司机座位险下拉选项
+  boLiVal;//玻璃破碎险下拉选项
+  huaHenVal;//划痕险下拉选项
+  chengKeVal;//乘客座位险下拉选项
+  xiuLiChangVal;//指定修理厂险下拉选项
+  xiuLiChangGuochan;//指定修理厂险国产下拉选项
+  xiuLiChangJinkou;//指定修理厂险进口下拉选项
+  insureAgent;//跟进人员
+  router;//1--自动报价 2--人工报价 3--重新报价 6--修改保单
+  recordBool;//控制投保人和被保人信息的显示隐藏
+  isShow;//控制证件类型、保险日期、下一步、人工核保信息的显示隐藏
   isRenewalDate;
-  agentName;
-  orderId;
-  insureAgentUid;
-  newselectCardName;
-  newholderCardName;
-  cardType;
+  agentName;//跟进人员姓名
+  insureAgentUid;//跟进人员id
+  orderId;//订单号
+  newselectCardName;//被保人证件类型选择项
+  newholderCardName;//投保人证件类型选择项
+  cardType;//被保人证件类型下拉选项
   infoHolderType;
-  infoType;
+  infoType;//被保人信息(与上年信息一致/不一致)
   carOrArtificial = {};
   //复选框
   valmap = {
@@ -78,33 +79,26 @@ export class RequotationPage {
     'hcXiulichangTypeTag': 1,
     'hcXiulichangTag': 0.1
   };
-  public foldFlag: boolean = true;// true--折叠 flse--展开 
-  public foldMsg = "展开";
-  /** 
-   * 1--待核保/修改保单/报价/提交 
-   * 2--
-   **/
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private websize: WebSites,
     private csNav: CsbzNave,
     private toastCtrl: ToastController,
+    public menuCtrl: MenuController,
   ) {
     this.router = this.navParams.get('requotationType');
     if (this.navParams.get('licenseNo')) {
       this.params.licenseNo = this.navParams.get('licenseNo');
     }
-    this.insureAgentUid = this.navParams.get('userId')
+    this.insureAgentUid = this.navParams.get('userId');
     this.agentName = this.navParams.get("agentName");
-
 
     if (this.router == 1) {//自动报价
       this.recordBool = true;
       this.isShow = true;
       this.params.cityCode = this.navParams.get('cityCode');
       this.getInsuranceInfo();
-
 
     } else if (this.router == 2) {//人工报价
       this.recordBool = false;
@@ -142,19 +136,10 @@ export class RequotationPage {
     this.getIDCardtype();//获取证件信息
     this.getInsureenumval();//获取保险金额信息
     //this.getHolderPartytype();//获取单位个人信息
-    //this.getInsureAgentUList();//获取跟进人员列表
+    this.getInsureAgentUList();//获取跟进人员列表
     //this.getInsuranceInfo();
   }
 
-  // 折叠
-  fold() {
-    this.foldFlag = !this.foldFlag;
-    if (this.foldFlag) {
-      this.foldMsg = '展开';
-    } else {
-      this.foldMsg = '收起';
-    }
-  }
   getIDCardtype() {
     this.websize.httpGet("getIDCardtype", {}).subscribe(res => {
       if (res) {
@@ -192,7 +177,6 @@ export class RequotationPage {
     this.websize.httpGet("getInsureAgentUList", {}).subscribe(res => {
       if (res) {
         this.insureAgent = res;
-        console.log(res);
       }
     })
 
@@ -278,7 +262,6 @@ export class RequotationPage {
   orderDetail() {
     this.websize.httpPost("qryOrderInfo", { orderId: this.orderId }).subscribe(res => {
       if (res) {
-        console.log(res);
         this.lastMsg = res;
         if (res.isForceRenewalDate > 0 || res.isBusinessRenewalDate > 0) {
           this.isRenewalDate = false;
@@ -356,12 +339,10 @@ export class RequotationPage {
         this.lastMsg['forceTag'] = true;
         this.newselectCardName = 1;
         this.newholderCardName = 1;
-
-
       }
-
     })
   }
+
   getValues() {
     if (this.lastMsg['isForceRenewalDate'] > 0) {
       if (this.lastMsg['forceTag']) {
@@ -480,7 +461,6 @@ export class RequotationPage {
     }
   }
 
-
   changeSelect(info, key1, key2, valBaoE) {
     if (key2 == 'cheSunTag') {
       if (this.lastMsg['cheSunTag']) {
@@ -495,8 +475,8 @@ export class RequotationPage {
     } else {
       this.lastMsg[valBaoE] = 0;
     }
-
   }
+
   changeUnCheck(key1, key2, valBaoE) {
     if (this.lastMsg[valBaoE] > 0) {
       this.lastMsg[key1] = true;
@@ -507,6 +487,7 @@ export class RequotationPage {
 
     }
   }
+
   changeCheck() {
     if (this.lastMsg['hcXiuLiCanBaoE'] > 0) {
       this.lastMsg['hcXiulichangTypeTag'] = true;
@@ -517,6 +498,7 @@ export class RequotationPage {
     }
 
   };
+
   changeSelect0(info, key1, key2, valBaoE) {
     info[key1] = info[key2];
     if (this.lastMsg['chengKeTag'] == true) {
@@ -530,6 +512,7 @@ export class RequotationPage {
       this.lastMsg[valBaoE] = 0;
     }
   };
+
   changeSelect1(info, key1, key2, valBaoE, hcXiulichangBaoE) {
     info[key1] = info[key2];
     if (info[key2]) {
@@ -540,8 +523,6 @@ export class RequotationPage {
       this.lastMsg[hcXiulichangBaoE] = 0;
     }
   };
-
-
 
   //自动下一步
   nextBtn() {
@@ -677,6 +658,7 @@ export class RequotationPage {
     }
 
   }
+
   goNext() {
 
     if (this.carOrArtificial['list'].insuredName == '') {
@@ -719,6 +701,7 @@ export class RequotationPage {
     this.navCtrl.push(SelInsuranceCompPage, { carOrArtificial: this.carOrArtificial, selInsCompType: 2 });
 
   }
+
   //人工核保
   manualCheck() {
     if (this.router == 1) {//待核保/重新报价/险种选择
@@ -730,6 +713,7 @@ export class RequotationPage {
       this.navCtrl.push(SelInsuranceCompPage, { 'selInsCompType': 3 });
     }
   }
+
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
@@ -738,6 +722,7 @@ export class RequotationPage {
     });
     toast.present();
   }
+
   showMessagess() {
     if (this.infoType == 2) {
       this.lastMsg['newinsuredName'] = "";
@@ -752,5 +737,14 @@ export class RequotationPage {
       this.lastMsg['newholderMobile'] = "";
     }
 
+  }
+
+  //更换按钮
+  changeAgentName(myEvent){
+    this.menuCtrl.open();
+  }
+  //选择跟进人员
+  selectAgent(obj){ //insureAgentUid insureAgentUname
+    this.agentName = obj.insureAgentUname;
   }
 }

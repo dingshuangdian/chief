@@ -68,6 +68,7 @@ import { SmsPopoverPage } from '../other/sms-popover/sms-popover';
 import { InsProgPopoverPage } from '../other/ins-prog-popover/ins-prog-popover';
 import { WxPayPopoverPage } from '../other/wx-pay-popover/wx-pay-popover';
 import { repertoryPopover } from '../other/repertory-popover/repertory-popover';
+import { AgentlistPopoverPage } from '../other/agentlist-popover/agentlist-popover';
 import { brandPopover } from '../other/brand-popover/brand-popover';
 @NgModule({
     declarations: [
@@ -141,6 +142,7 @@ import { brandPopover } from '../other/brand-popover/brand-popover';
         InsProgPopoverPage,
         WxPayPopoverPage,
         repertoryPopover,
+        AgentlistPopoverPage,
     ],
     imports: [
         ComponentsModule,
@@ -201,6 +203,8 @@ import { brandPopover } from '../other/brand-popover/brand-popover';
         ExceptionCausePage,
         MsgInsurancePage,
         repertoryPopover,
+        AgentlistPopoverPage,
+
         brandPopover,
 
 

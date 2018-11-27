@@ -62,20 +62,21 @@ page-check-help {
             background-color: #f0f0f0;
         }
         .con-se {
-            height: 75px;
             background-color: #fff;
             display: flex;
             padding: 10px;
             flex-direction: column;
             p {
                 //-webkit-margin-before: 1px;
-                font-size: 1px;
+                font-size: 14px;
             }
             .f {
                 display: inline-flex;
                 justify-content: space-between;
                 :first-child {
-                    font-size: 18px;
+                    font-size: 14px;
+                    color: #000;
+                    font-weight: bold;
                 }
                 :last-child {
                     font-size: 18px;

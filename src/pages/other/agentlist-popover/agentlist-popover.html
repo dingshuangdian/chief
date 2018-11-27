@@ -1,0 +1,13 @@
+<ion-menu [content]="mycontent" side="right" type="overlay">
+  <ion-content>
+    <h4 text-center style="color: #333;">跟进人员</h4>
+    <ion-list no-margin radio-group [(ngModel)]="isItem">
+      <ion-item *ngFor="let item of insureAgent;let i=index;">
+        <ion-label>{{item.insureAgentUname}}</ion-label>
+        <ion-radio [value]="item" [checked]="item.insureAgentUid == insureAgentUid"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button class="doSure" ion-button color='assist' menuClose (click)="doSure()">确定</button>
+  </ion-content>
+</ion-menu>
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

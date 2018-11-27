@@ -45,24 +45,24 @@ export class CarInsProgressPage {
   ) {
   }
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     let num = this.navParams.get('num');
     if(num){
       this.courseTab[num].bol = true;
       switch(num){
-        case 0:
+        case '0':
           this.cUrl_ = 'qryBackOrder';//已退回数据
           break;
-        case 1:
+        case '1':
           this.cUrl_ = 'qryUnderwritingOrder';//待核保数据
           break;
-        case 2:
+        case '2':
           this.cUrl_ = 'qryPayOrder';//待支付数据
           break;
-        case 3:
+        case '3':
           this.cUrl_ = 'qryIssuingOrder';//待收单数据
           break;
-        case 4:
+        case '4':
           this.cUrl_ = 'qryFinishOrder';//已完成数据
           break;
       }
@@ -260,7 +260,10 @@ export class CarInsProgressPage {
   searchOrder(){
     if(!this.licenseNo) return ;
     var param = {'licenseNo': this.licenseNo};
-    this.reqResult(this.cUrl_,param);
+    this.reqResult(this.cUrl_,param)
+    .then(res => {
+      this.licenseNo = '';
+    });
   }
 
   //显示的操作按钮

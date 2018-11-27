@@ -94,7 +94,7 @@ export class SupplementaryInfoPage {
 
   //提交
   submit(){
-    let param;
+    let param: any = {};
     param.orderId = this.orderId;
     param.quoteType = this.quoteType;
     // 身份证

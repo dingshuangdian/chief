@@ -315,12 +315,12 @@ export class HomePage {
     }, (msg) => { })
   }
   onCX() {
-    this.navCtrl.push(AutoInsurancePage);
-    // cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
-    //   console.log(res);
-    // }, (error) => {
-    //   console.log(error);
-    // })
+    //this.navCtrl.push(AutoInsurancePage);
+    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
+      console.log(res);
+    }, (error) => {
+      console.log(error);
+    })
   }
   // test(){
   //   this.navCtrl.push(ReservationListPage);

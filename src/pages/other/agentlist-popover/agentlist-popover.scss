@@ -1,0 +1,16 @@
+page-agentlist-popover {
+    ion-menu{
+        .menu-inner{
+            width: 65%;
+            .row{
+                font-size: 15px;
+                padding: 10px !important;
+            }
+        }
+    }
+    .doSure{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
