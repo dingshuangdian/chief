@@ -60,7 +60,7 @@ export class QuotationDetailPage {
     this.getInsureenumval();
   }
   getInsureenumval() {
-    this.websize.httpGet("getInsureenumval", {}).subscribe(res => {
+    this.websize.httpPost("getInsureenumval", {}).subscribe(res => {
       if (res) {
         for (var i in res.sanZhe) {
           this.insureenumval.sanZhe[res.sanZhe[i].enumValue] = res.sanZhe[i].enumKey;

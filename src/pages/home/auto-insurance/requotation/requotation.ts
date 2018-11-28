@@ -141,7 +141,7 @@ export class RequotationPage {
   }
 
   getIDCardtype() {
-    this.websize.httpGet("getIDCardtype", {}).subscribe(res => {
+    this.websize.httpPost("getIDCardtype", {}).subscribe(res => {
       if (res) {
         this.cardType = res;
       }
@@ -150,7 +150,7 @@ export class RequotationPage {
   }
   //获取保险金额信息
   getInsureenumval() {
-    this.websize.httpGet('getInsureenumval', {}).subscribe(res => {
+    this.websize.httpPost('getInsureenumval', {}).subscribe(res => {
       if (res) {
         this.sanZheVal = res.sanZhe;
         this.siJiVal = res.siJi;
@@ -166,7 +166,7 @@ export class RequotationPage {
   }
   //获取单位个人信息
   getHolderPartytype() {
-    this.websize.httpGet("getHolderPartytype", {}).subscribe(res => {
+    this.websize.httpPost("getHolderPartytype", {}).subscribe(res => {
       if (res) {
       }
     })
@@ -174,7 +174,7 @@ export class RequotationPage {
   }
   //获取跟进人员列表
   getInsureAgentUList() {
-    this.websize.httpGet("getInsureAgentUList", {}).subscribe(res => {
+    this.websize.httpPost("getInsureAgentUList", {}).subscribe(res => {
       if (res) {
         this.insureAgent = res;
       }

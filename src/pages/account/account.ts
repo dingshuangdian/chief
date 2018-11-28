@@ -83,7 +83,7 @@ export class AccountPage {
     })
   }
   findDepartments() {
-    this.websize.httpGet('findDepartments', {}).subscribe(res => {
+    this.websize.httpPost('findDepartments', {}).subscribe(res => {
       if (res) {
         this.departments = res;
         res.forEach(element => {

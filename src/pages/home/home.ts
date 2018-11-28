@@ -15,18 +15,15 @@ import { CsbzNave } from '../../providers/csbz-nave';
 import { CheckHelpPage } from './check-help/check-help';
 import { JPush } from '@jiguang-ionic/jpush';
 import { AutoInsurancePage } from './auto-insurance/auto-insurance';
-
 import { ReservationListPage } from './auto-insurance/reservation-list/reservation-list';
 import { PaymentPolicyPage } from './auto-insurance/payment-policy/payment-policy';
 import { SelInsuranceCompPage } from './auto-insurance/sel-insurance-comp/sel-insurance-comp';
-
 /**
  * Generated class for the HomePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
 declare let cordova: any;
 @Component({
   selector: 'page-home',
@@ -38,11 +35,9 @@ export class HomePage {
   userInfo = [{ userMobile: '', userName: '' }]
   bookCount = { bookCount: 0 };
   tipMsg = { mcCount: '0', autoCount: '0', memberCount: '0', wxCount: '0', };
-
   itemList: any = [];
   unreadMsg: string = "0";
   InsuranceList: any = { records: "", expireDate: "" }
-
   // tagResultHandler = function (result) {
   //   var sequence: number = result.sequence;
   //   var tags: Array<string> = result.tags == null ? [] : result.tags;
@@ -71,7 +66,6 @@ export class HomePage {
     public event: Events,
     public RSData: resourcesStaticProvider,
     private csbzNave: CsbzNave) {
-
     let $this = this;
     $this.itemList = [
       { name: "接车", img: "home_03.png", tag: 0 },
@@ -138,8 +132,6 @@ export class HomePage {
     //   false
     // );
   }
-
-
   // getRegistrationID() {
   //   this.jpush.getRegistrationID().then(rId => {
   //     this.registrationId = rId;
@@ -227,7 +219,6 @@ export class HomePage {
   ionViewDidEnter() {
     this.csbzNave.appUpdate();
   }
-
   ionViewWillEnter() {
     this.userData.getUserInfo().subscribe(data => {
       this.userInfo = data;
@@ -239,7 +230,6 @@ export class HomePage {
         this.tipMsg = res;
       }
     })
-
     this.websize.httpPost('getBookOrdersCount', '', false).subscribe(res => {
       if (res) { this.bookCount = res; }
     })

@@ -41,7 +41,7 @@ export class MsgInsurancePage {
   getMsglist() {
     let self = this;
     return new Promise(function (resolve, reject) {
-      self.websize.httpGet("getMsgList", {}).subscribe(res => {
+      self.websize.httpPost("getMsgList", {}).subscribe(res => {
         if (res) {
           self.msgList = res;
           resolve();

@@ -16,7 +16,7 @@ export class repertoryPopover {
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public websites: WebSites) {
   }
   findWareHousesInfo() {
-    this.websites.httpGet("findWareHousesInfo", {}).subscribe(res => {
+    this.websites.httpPost("findWareHousesInfo", {}).subscribe(res => {
       if (res) {
         this.repertory = res;
         if (this.hasSelected && this.hasSelected.length > 0) {

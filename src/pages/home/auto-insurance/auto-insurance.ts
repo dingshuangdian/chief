@@ -116,7 +116,7 @@ export class AutoInsurancePage {
 
   // 获取到期车险列表
   getcxData() {
-    this.websize.httpGet('getExpireInsuranceList', {}, true).subscribe(res => {
+    this.websize.httpPost('getExpireInsuranceList', {}, true).subscribe(res => {
       if (res) {
         this.cxData = res.rows;
       }
@@ -125,7 +125,7 @@ export class AutoInsurancePage {
 
   // 获取城市列表
   getcxCity() {
-    this.websize.httpGet('getCityList', {}).subscribe(res => {
+    this.websize.httpPost('getCityList', {}).subscribe(res => {
       if (res) {
         this.cityList = res;
         this.defaultCity = res[0].cityName;
@@ -143,7 +143,7 @@ export class AutoInsurancePage {
 
   //获取未读消息
   getUnReadMsg() {
-    this.websize.httpGet('queryUnreadMsg', {}).subscribe(res => {
+    this.websize.httpPost('queryUnreadMsg', {}).subscribe(res => {
       if (res) {
         this.msg = res.unreadMsg > 0 ? true : false;
       }
@@ -152,7 +152,7 @@ export class AutoInsurancePage {
 
   //获取车牌简称
   getLicenseplateShort() {
-    this.websize.httpGet('getLicenseplateShort', {}).subscribe(res => {
+    this.websize.httpPost('getLicenseplateShort', {}).subscribe(res => {
       if (res) {
         res.forEach(element => {
           if (element.isDefault == 1) {
@@ -168,7 +168,7 @@ export class AutoInsurancePage {
 
   //获取默认城市
   getDefaultcity() {
-    this.websize.httpGet('setDefaultAddress', {}).subscribe(res => {
+    this.websize.httpPost('setDefaultAddress', {}).subscribe(res => {
       if (res) {
         //this.defaultCity = res;
       }
