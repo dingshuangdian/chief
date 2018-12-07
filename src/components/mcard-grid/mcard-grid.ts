@@ -25,7 +25,7 @@ export class mcardGridComponent {
 
   findMemberCard() {
     let parmas = this.memberId ? { memberId: this.memberId } : {};
-    this.websites.httpPost('findmemberCard', parmas).subscribe(res => {
+    this.websites.httpPost('findmemberCard', parmas,true).subscribe(res => {
       if (res != null) {
         this.memberCard.card = res;
       }

@@ -319,7 +319,7 @@ export class CarInsProgressPage {
   //请求接口
   reqResult(url,param){
     return new Promise((resolve,reject) => {
-      this.websites.httpPost(this.cUrl_, param)
+      this.websites.httpPost(this.cUrl_, param,true)
       .subscribe(res => {
         if(res){
           this.isShow = true;

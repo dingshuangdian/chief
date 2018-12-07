@@ -123,7 +123,7 @@ export class pickupCarPage {
   changeMobileNumber() {
     if (this.csbzNave.checkTelephone(this.newuserInfos.mobileNumber)) {
       let params = { mobileNumber: this.newuserInfos.mobileNumber };
-      this.websites.httpPost('getMemberDetailedByTel', params, false).subscribe(res => {
+      this.websites.httpPost('getMemberDetailedByTel', params).subscribe(res => {
         if (res) {
           this.presentAlert('电话号码' + this.newuserInfos.mobileNumber + "已存在");
         }
@@ -293,7 +293,7 @@ export class pickupCarPage {
     var _self = this;
     _self.plateNumber = plateNumber;
 
-    _self.websites.httpPost('findMember4plateNumber', { 'plateNumber': plateNumber }, false)
+    _self.websites.httpPost('findMember4plateNumber', { 'plateNumber': plateNumber },true)
       .subscribe((data) => {
         if (data) {//有信息
           _self.isFlag = false;

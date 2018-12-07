@@ -4,6 +4,7 @@ import { Platform, LoadingController, ActionSheetController, Events } from 'ioni
 import { WebSites } from './web-sites';
 import { CsModal } from './cs-modal';
 import { Md5 } from 'ts-md5';
+import { JPush } from '@jiguang-ionic/jpush';
 declare let CMInfo: any, cordova: any, FileTransfer: any, PushInit: any, navigator: any, Camera: any;
 
 @Injectable()
@@ -15,6 +16,7 @@ export class CsbzNave {
         public websites: WebSites,
         public events: Events,
         private csModal: CsModal,
+        private jpush: JPush,
         public loadingCtrl: LoadingController,
         public actionSheetCtrl: ActionSheetController, ) {
     }
@@ -106,7 +108,46 @@ export class CsbzNave {
             PushInit.setApplicationIconBadgeNumber(0);
         }
     }
-
+    getRegistrationID() {
+        this.jpush.getRegistrationID().then(rId => {
+            console.log("极光注册RegistrationID：", rId);
+        });
+    }
+    pushLis() {
+        document.addEventListener(
+            "jpush.receiveNotification",
+            (event: any) => {
+                var content;
+                if (this.platform.is('Android')) {
+                    content = event.alert;
+                } else {
+                    content = event.aps.alert;
+                }
+                // alert("Receive notification: " + JSON.stringify(event));
+            },
+            false
+        );
+        document.addEventListener(
+            "jpush.openNotification",
+            (event: any) => {
+                var content;
+                if (this.platform.is('Android')) {
+                    content = event.alert;
+                } else {
+                    // iOS
+                    if (event.aps == undefined) {
+                        // 本地通知
+                        content = event.content;
+                    } else {
+                        // APNS
+                        content = event.aps.alert;
+                    }
+                }
+                //alert("open notification: " + JSON.stringify(event));
+            },
+            false
+        );
+    }
     appUpdate(checkTag?) {
         if (!window["CMInfo"]) {
             return;
@@ -118,7 +159,7 @@ export class CsbzNave {
             urlsuffix = "getIOSVersion";
         }
 
-        this.websites.httpPost(urlsuffix, { version: CMInfo.appVersion }, false).subscribe(res => {
+        this.websites.httpPost(urlsuffix, { version: CMInfo.appVersion }).subscribe(res => {
             if (res == '' || res == null) {
                 if (checkTag) {
                     this.csModal.showAlert("已是最新版本");

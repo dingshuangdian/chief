@@ -77,7 +77,7 @@ export class carSelectPjPage {
   }
   getRightData(i?) {
     let categoryId = { categoryId: i };
-    this.websites.httpPost('findGoodsByCategoryId', categoryId, true).subscribe(res => {
+    this.websites.httpPost('findGoodsByCategoryId', categoryId).subscribe(res => {
       if (res != null) {
         this.rightCate = res;
 

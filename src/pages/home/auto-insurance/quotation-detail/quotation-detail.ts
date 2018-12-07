@@ -53,14 +53,13 @@ export class QuotationDetailPage {
     public csModal: CsModal,
   ) {
     this.listParams = this.navParams.get('listParams');
-    console.log(this.listParams);
   }
 
   ionViewDidLoad() {
     this.getInsureenumval();
   }
   getInsureenumval() {
-    this.websize.httpPost("getInsureenumval", {}).subscribe(res => {
+    this.websize.httpPost("getInsureenumval", {},true).subscribe(res => {
       if (res) {
         for (var i in res.sanZhe) {
           this.insureenumval.sanZhe[res.sanZhe[i].enumValue] = res.sanZhe[i].enumKey;

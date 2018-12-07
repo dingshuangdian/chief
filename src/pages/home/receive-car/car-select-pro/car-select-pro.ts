@@ -61,7 +61,7 @@ export class carSelectProPage {
       }
 
       if (this.PType == "conduct") {
-        this.websites.httpPost('findCustomService4Order', true).subscribe(res => {
+        this.websites.httpPost('findCustomService4Order',{}).subscribe(res => {
           let newS = { flName: "自定义", select: false, service: res };
           this.leftCate.push(newS);
           this.dataConfig();

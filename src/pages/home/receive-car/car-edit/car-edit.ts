@@ -146,7 +146,7 @@ export class carEditPage {
     let plateNumber = this.carInfo.provinces + this.carInfo.plateNumber
     if (this.csbzNave.checkCarNo(plateNumber)) {
       let params = { plateNumber: plateNumber }
-      this.websites.httpPost('getMemberDetailedByPlateNumber', params, false).subscribe(res => {
+      this.websites.httpPost('getMemberDetailedByPlateNumber', params).subscribe(res => {
         if (res) {
           this.csModal.showAlert("车牌号" + plateNumber + "已存在!", () => {
             this.carInfo.plateNumber = "";

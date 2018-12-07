@@ -87,7 +87,7 @@ export class PayRecordlPage_ {
   }
   getPayRecordListA(infiniteScroll) {
     let params = { membrId: this.membrId, autoId: this.autoId, pageSize: 15, pageNo: this.page };
-    this.Websites.httpPost('findOrderLogsBymember', params, false).subscribe(res => {
+    this.Websites.httpPost('findOrderLogsBymember', params).subscribe(res => {
       if (res) {
         if (this.selectOption == 'mr') {
 
@@ -258,7 +258,7 @@ export class PayRecordlPage_ {
   }
   getPayRecordListB(infiniteScroll) {
     let params = { membrId: this.membrId, autoId: this.autoId, pageSize: 15, pageNo: this.page };
-    this.Websites.httpPost('findOrderCopyLogs', params, false).subscribe(res => {
+    this.Websites.httpPost('findOrderCopyLogs', params).subscribe(res => {
       if (res) {
         if (this.selectOption == 'mr') {
 

@@ -91,7 +91,7 @@ export class OrderPage {
     let self = this;
     return new Promise(function (resolve, reject) {
       if (!param.keyWords) {
-        self.Websites.httpPost('orderList', param, false).subscribe(res => {
+        self.Websites.httpPost('orderList', param).subscribe(res => {
           if (!res) {
             self.moreData = false;
             resolve();
@@ -320,7 +320,7 @@ export class OrderPage {
   searchCar(params) {
     let self = this;
     return new Promise(function (resolve, reject) {
-      self.Websites.httpPost('orderList', params, false).subscribe(res => {
+      self.Websites.httpPost('orderList', params).subscribe(res => {
         if (!res) {
           self.moreData = false;
           resolve();

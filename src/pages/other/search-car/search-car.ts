@@ -34,14 +34,14 @@ export class SearchCarPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchCarPage');
+ 
   }
 
   searchCar(text){
     this.moreData = true;
     this.searchCarParam.page = 1;
     this.searchCarParam.keyWords = text;
-    this.webSites.httpPost('orderList',this.searchCarParam,false).subscribe(
+    this.webSites.httpPost('orderList',this.searchCarParam).subscribe(
       (res) => {
         this.items = res;
         if(this.items){
@@ -85,7 +85,7 @@ export class SearchCarPage {
 
   doInfinite(infiniteScroll){
     this.searchCarParam.page++;
-    this.webSites.httpPost('orderList',this.searchCarParam,false).subscribe(
+    this.webSites.httpPost('orderList',this.searchCarParam).subscribe(
       (res) => {
         if(res){
           for(var i=0;i< res.length;i++){

@@ -40,7 +40,7 @@ export class CheckHelpPage {
       this.pages = 2;
     }
     this.seachInfo.page = infiniteScroll ? this.pages : 1;
-    this.websites.httpPost('findStocksInfo4Phone', this.seachInfo, false).subscribe(res => {
+    this.websites.httpPost('findStocksInfo4Phone', this.seachInfo).subscribe(res => {
       if (res.rows) {
         if (infiniteScroll) {
           this.moredata = true;

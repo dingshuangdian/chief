@@ -130,7 +130,7 @@ export class newCustomPage {
 
     if (this.csbzNave.checkTelephone(this.mobilePhone)) {
       let params = { mobileNumber: this.mobilePhone };
-      this.websites.httpPost('getMemberDetailedByTel', params, false).subscribe(res => {
+      this.websites.httpPost('getMemberDetailedByTel', params).subscribe(res => {
         if (res) {
           this.presentAlert('电话号码' + this.mobilePhone + "已存在");
         }

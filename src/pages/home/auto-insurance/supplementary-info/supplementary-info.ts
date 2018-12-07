@@ -134,7 +134,7 @@ export class SupplementaryInfoPage {
     param.otherPhotoImg2_name = '9.png';
     param.otherPhotoImg3 = this.otherDocumentsPhotos[2].blob;
     param.otherPhotoImg4_name = '10.png';
-    this.webSites.httpPost('supplementaryInformation',param)
+    this.webSites.httpPost('supplementaryInformation',param,true)
     .subscribe(res => {
       this.csModal.showAlert('提交成功!','','','确定','','');
     });

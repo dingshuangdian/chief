@@ -53,7 +53,7 @@ export class CommissionCountPage {
   }
   checkTC(infiniteScroll) {
     let params = { beginDate: this.beginDate, endDate: this.endDate, page: this.page, row: 10 };
-    this.websize.httpPost('findPmbdReport', params, false).subscribe(res => {
+    this.websize.httpPost('findPmbdReport', params).subscribe(res => {
       if (res != null) {
         this.recordTC = this.recordTC.concat(res);
         if (infiniteScroll) {

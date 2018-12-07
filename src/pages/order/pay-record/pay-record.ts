@@ -49,7 +49,7 @@ export class PayRecordlPage {
   }
   getPayRecordList(infiniteScroll) {
     let params = { membrId: this.membrId, autoId: this.autoId, row: 15, page: this.page };
-    this.Websites.httpPost('findOrderLogs', params, false).subscribe(res => {
+    this.Websites.httpPost('findOrderLogs', params).subscribe(res => {
       if (res) {
         if (this.selectOption == 'mr') {
           res.forEach(element => {

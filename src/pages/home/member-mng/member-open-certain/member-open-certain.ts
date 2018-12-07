@@ -57,7 +57,7 @@ export class memberOpenCertainPage {
   }
 
   findmcardtmpl() {
-    this.websites.httpPost('findmcardtmpl', { mcardtmplId: this.salecard.mcardtmplId, memberId: this.memberInfo.memberId }).subscribe(res => {
+    this.websites.httpPost('findmcardtmpl', { mcardtmplId: this.salecard.mcardtmplId, memberId: this.memberInfo.memberId },true).subscribe(res => {
       if (res) {
         this.salecardDetail = res;
         this.validityMonthChange();
@@ -220,7 +220,7 @@ export class memberOpenCertainPage {
 
         // this.navCtrl.push(memberOpenSuccessPage, { memberInfo: this.memberInfo, mcardNo: "80061" });
        
-        this.websites.httpPost("addCard", pamras,false).subscribe(res => {
+        this.websites.httpPost("addCard", pamras).subscribe(res => {
           if (res) {
             this.navCtrl.push(memberOpenSuccessPage, { memberInfo: res, mcardNo: res.mcardNo });
           }

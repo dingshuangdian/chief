@@ -76,7 +76,7 @@ export class DetailPolicyPage {
 
   //获取数据
   init(){
-    this.webSites.httpPost('getInsureenumval', {})
+    this.webSites.httpPost('getInsureenumval', {},true)
     .subscribe(
       res => {
         var data = res;

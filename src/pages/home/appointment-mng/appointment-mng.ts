@@ -34,7 +34,7 @@ export class appointmentMngPage {
 
   findBookOrders() {
     let parmas = { beginDate: this.selectDate, endDate: this.selectDate };
-    this.websites.httpPost("findBookOrders", parmas).subscribe(res => {
+    this.websites.httpPost("findBookOrders", parmas,true).subscribe(res => {
       this.contentList = res;
     })
   }

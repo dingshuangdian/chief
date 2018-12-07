@@ -25,8 +25,7 @@ export class memoRecordPage {
   }
 
   findAutoMemosByAutoId() {
-    this.Websites.httpPost('findAutoMemosByAutoId', { autoId: this.customer.autoId }).subscribe(res => {
-      console.log(res);
+    this.Websites.httpPost('findAutoMemosByAutoId', { autoId: this.customer.autoId },true).subscribe(res => {
       if (res) {
         this.memoList = res;
       }
@@ -36,21 +35,18 @@ export class memoRecordPage {
 
   addAutoMemo(addAutoMemo) {
     this.Websites.httpPost('addAutoMemo', { autoId: this.customer.autoId, autoMemo: addAutoMemo }).subscribe(res => {
-      console.log(res);
       this.findAutoMemosByAutoId();
     })
   }
 
   updateAutoHandleResult(m, handleResult) {
     this.Websites.httpPost("updateAutoHandleResult", { handleResult: handleResult, memoId: m.memoId }).subscribe(res => {
-      console.log(res);
       this.findAutoMemosByAutoId();
     })
   }
 
   updateAutoMemo(m, autoMemo) {
     this.Websites.httpPost("updateAutoMemo", { autoMemo: autoMemo, memoId: m.memoId }).subscribe(res => {
-      console.log(res);
       this.findAutoMemosByAutoId();
     })
   }

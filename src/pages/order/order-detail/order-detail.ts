@@ -56,7 +56,7 @@ export class OrderDetailPage {
     let param = {
       orderId: this.orderId,
     }
-    this.webSites.httpPost('findOrderById', param).subscribe((res) => {
+    this.webSites.httpPost('findOrderById', param,true).subscribe((res) => {
       this.plateNumber = res.plateNumber;
       this.fillDate = res.fillDate;
       this.settlementTime = res.settlementTime;

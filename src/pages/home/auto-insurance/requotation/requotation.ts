@@ -150,7 +150,7 @@ export class RequotationPage {
   }
   //获取保险金额信息
   getInsureenumval() {
-    this.websize.httpPost('getInsureenumval', {}).subscribe(res => {
+    this.websize.httpPost('getInsureenumval', {},true).subscribe(res => {
       if (res) {
         this.sanZheVal = res.sanZhe;
         this.siJiVal = res.siJi;
@@ -183,7 +183,7 @@ export class RequotationPage {
   }
   //获取上一年续保信息
   getInsuranceInfo() {
-    this.websize.httpPost("getInsuranceInfo", this.params).subscribe(res => {
+    this.websize.httpPost("getInsuranceInfo", this.params,true).subscribe(res => {
       if (res) {
         this.lastMsg = res;
         if (res.isForceRenewalDate > 0 || res.isBusinessRenewalDate > 0) {

@@ -83,7 +83,7 @@ export class memberOpenPage {
 
   //获取卡模板列表
   findmcardtmpls4salecard() {
-    this.websites.httpPost('findmcardtmpls4salecard', {}).subscribe(res => {
+    this.websites.httpPost('findmcardtmpls4salecard', {},true).subscribe(res => {
       this.salecardList = res;
     })
   }
@@ -163,7 +163,7 @@ export class memberOpenPage {
     let plateNumber = this.carInfo.provinces + this.carInfo.plateNB
     if (this.csbzNave.checkCarNo(plateNumber)) {
       let params = { plateNumber: plateNumber }
-      this.websites.httpPost('getMemberDetailedByPlateNumber', params, false).subscribe(res => {
+      this.websites.httpPost('getMemberDetailedByPlateNumber', params).subscribe(res => {
 
         if (res) {
 
@@ -177,7 +177,7 @@ export class memberOpenPage {
   changeMobileNumber() {
     if (this.csbzNave.checkTelephone(this.memberInfo.mobileNumber)) {
       let params = { mobileNumber: this.memberInfo.mobileNumber };
-      this.websites.httpPost('getMemberDetailedByTel', params, false).subscribe(res => {
+      this.websites.httpPost('getMemberDetailedByTel', params).subscribe(res => {
         if (res) {
           let isUsed = "";
           if (res.hasOwnProperty('isUsed')) {

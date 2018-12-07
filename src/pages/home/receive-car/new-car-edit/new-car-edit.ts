@@ -193,7 +193,7 @@ export class newCarEditPage {
 
     if (this.csbzNave.checkTelephone(this.postCar.mobileNumber)) {
       let params = { mobileNumber: this.postCar.mobileNumber };
-      this.websites.httpPost('getMemberDetailedByTel', params, false).subscribe(res => {
+      this.websites.httpPost('getMemberDetailedByTel', params).subscribe(res => {
         if (res) {
           this.presentAlert('电话号码' + this.postCar.mobileNumber + "已存在");
         }
@@ -229,7 +229,7 @@ export class newCarEditPage {
     let plateNumber = this.carInfo.provinces + this.carInfo.plateNumber.toLocaleUpperCase()
     if (this.csbzNave.checkCarNo(plateNumber)) {
       let params = { plateNumber: plateNumber }
-      this.websites.httpPost('getMemberDetailedByPlateNumber', params, false).subscribe(res => {
+      this.websites.httpPost('getMemberDetailedByPlateNumber', params).subscribe(res => {
         if (res) {
           this.alert("车牌号" + plateNumber + "已存在，是否用该车牌号接车？", res, plateNumber);
         }

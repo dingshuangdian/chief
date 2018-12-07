@@ -34,7 +34,7 @@ export class searchPjPage {
       this.seachInfo.keyWords = key;
     }
 
-    this.websites.httpPost('findGoods4keyWords', this.seachInfo, false).subscribe(res => {
+    this.websites.httpPost('findGoods4keyWords', this.seachInfo).subscribe(res => {
       this.customers = res ? res : [];
       this.changeDetectorRef.detectChanges();
     })

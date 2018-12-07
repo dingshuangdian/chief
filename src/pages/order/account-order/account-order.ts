@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { WebSites } from '../../../providers/web-sites';
-import { OrderPage } from '../order';
 import { CsbzNave } from '../../../providers/csbz-nave';
 
 /**
@@ -29,6 +28,7 @@ export class AccountOrderPage {
   settlementTime: any;//结算时间
   orderAmount: any;//总价
   paiclUpMoney: any;//实收金额
+  pointNumMoney: any;//抵扣的金额
   paidMoney: any;//本次付款
   memo: any;//备注
   warmTips: any;//温馨提示
@@ -41,13 +41,21 @@ export class AccountOrderPage {
   payments: any = {};//暂存支付方式
   settlementParam: any = {};//结算参数
   hangUpParam: any = {};//挂账参数
+  pointBalanceNum: any;// 客户积分账户余额
+  pointNum: any;// 使用的积分
+  pointRatio: any;
   isNave: boolean = false;
   noticeFlag: boolean = true;
+  discountAmount;
+  pointConfig;
+  usePointNum;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public Websites: WebSites,
     public csbzNave: CsbzNave,
+    public el: ElementRef,
+
     public alertCtrl: AlertController) {
     this.isNave = this.csbzNave.isNave(this.navCtrl.getViews().length);
     this.orderId = navParams.get('orderId');
@@ -59,62 +67,72 @@ export class AccountOrderPage {
   }
   //请求结算单接口
   reqAccount(orderId) {
-    this.Websites.httpPost('accountOrder', { 'orderId': orderId }).subscribe(res => {
+    this.Websites.httpPost('accountOrder', { 'orderId': orderId }, true).subscribe(res => {
       // order
-      let orderMsg = res.order;
-      this.memberId = orderMsg.memberId;
-      this.goods = orderMsg.goods;
-      this.services = orderMsg.services;
-      this.memberName = orderMsg.memberName;
-      this.plateNumber = orderMsg.plateNumber;
-      this.orderStateName = orderMsg.orderStateName;
-      this.fillDate = orderMsg.fillDate;
-      this.settlementTime = orderMsg.settlementTime;
-      this.memo = orderMsg.memo;
-      this.warmTips = orderMsg.warmTips;
-      this.orderAmount = orderMsg.orderAmount;
-      this.paiclUpMoney = orderMsg.orderAmount;
-      this.paidMoney = orderMsg.orderAmount;
-      this.mobileNumber = orderMsg.mobileNumber;
-      if (this.services) {
-        for (let i = 0; i < this.services.length; i++) {
-          this.services[i]['staff_isSalesman0'] = [];
-          this.services[i]['staff_isSalesman1'] = [];
-          if (this.services[i].staffs) {
-            for (let j = 0; j < this.services[i].staffs.length; j++) {
-              if (this.services[i].staffs[j].isSalesman == 0) {
-                this.services[i]['staff_isSalesman0'].push(this.services[i].staffs[j].userName);
-              } else {
-                this.services[i]['staff_isSalesman1'].push(this.services[i].staffs[j].userName);
+      if (res) {
+        let orderMsg = res.order;
+        this.memberId = orderMsg.memberId;
+        this.pointRatio = orderMsg.pointRatio;
+        this.goods = orderMsg.goods;
+        this.services = orderMsg.services;
+        this.memberName = orderMsg.memberName;
+        this.plateNumber = orderMsg.plateNumber;
+        this.orderStateName = orderMsg.orderStateName;
+        this.fillDate = orderMsg.fillDate;
+        this.settlementTime = orderMsg.settlementTime;
+        this.memo = orderMsg.memo;
+        this.warmTips = orderMsg.warmTips;
+        this.orderAmount = orderMsg.orderAmount;
+        this.paiclUpMoney = orderMsg.orderAmount;
+        this.noPayMoney = orderMsg.orderAmount;
+        this.paidMoney = orderMsg.orderAmount;
+        this.mobileNumber = orderMsg.mobileNumber;
+        this.pointBalanceNum = orderMsg.pointBalanceNum;
+        this.discountAmount = orderMsg.discountAmount;
+        this.usePointNum = orderMsg.usePointNum;
+        this.pointConfig = res.config.pointConfig;
+
+        if (this.services) {
+          for (let i = 0; i < this.services.length; i++) {
+            this.services[i]['staff_isSalesman0'] = [];
+            this.services[i]['staff_isSalesman1'] = [];
+            if (this.services[i].staffs) {
+              for (let j = 0; j < this.services[i].staffs.length; j++) {
+                if (this.services[i].staffs[j].isSalesman == 0) {
+                  this.services[i]['staff_isSalesman0'].push(this.services[i].staffs[j].userName);
+                } else {
+                  this.services[i]['staff_isSalesman1'].push(this.services[i].staffs[j].userName);
+                }
               }
+            } else {
+              this.services[i]['staff_isSalesman0'] = null;
+              this.services[i]['staff_isSalesman1'] = null;
             }
-          } else {
-            this.services[i]['staff_isSalesman0'] = null;
-            this.services[i]['staff_isSalesman1'] = null;
           }
         }
-      }
-      
-      // notifys
-      this.notifys = res.notifys;
-      if (this.notifys) {
-        for (let i = 0; i < this.notifys.length; i++) {
-          if (this.notifys[i].notifyTag == 1 && !this.mobileNumber) {
-            this.notifys[i].flag = false;
-            continue;
+
+        // notifys
+        this.notifys = res.notifys;
+        if (this.notifys) {
+          for (let i = 0; i < this.notifys.length; i++) {
+            if (this.notifys[i].notifyTag == 1 && !this.mobileNumber) {
+              this.notifys[i].flag = false;
+              continue;
+            }
+            this.notifys[i].flag = true;
+            this.notifyTags = this.notifyTags ^ this.notifys[i].notifyTag;
           }
-          this.notifys[i].flag = true;
-          this.notifyTags = this.notifyTags ^ this.notifys[i].notifyTag;
         }
+        //支付情况
+        if (res.paymentRecords) {
+          this.paymentRecords = res.paymentRecords;
+        } else {
+          this.paymentRecords = null;
+        }
+        this.computedMoney();
       }
-      //支付情况
-      if (res.paymentRecords) {
-        this.paymentRecords = res.paymentRecords;
-      } else {
-        this.paymentRecords = null;
-      }
-      this.computedMoney();
     })
+
   }
   //选择通知方式
   noticeWay(tag, index) {
@@ -186,6 +204,7 @@ export class AccountOrderPage {
       self.settlementParam['memo'] = self.memo ? self.memo : "";
       self.settlementParam['warmTips'] = self.warmTips ? self.warmTips : "";
       self.settlementParam['notifyTags'] = self.notifyTags;
+      self.settlementParam['pointNum'] = self.pointNum ? self.pointNum : "";
       let obj = self.payments.paymentId == 11 ? {
         money: self.paidMoney,
         paymentId: self.payments.paymentId,
@@ -284,6 +303,30 @@ export class AccountOrderPage {
   changeMoney(e) {
     this.computedMoney();
   }
+  changeNum(e) {
+    //this.el.nativeElement.querySelector('.mal').maxlength = this.pointBalanceNum.length;
+    if (this.pointNum <= this.pointBalanceNum) {
+      this.pointNumMoney = this.pointNum / this.pointRatio;
+      this.noPayMoney = this.orderAmount - this.pointNumMoney;
+      this.paiclUpMoney = this.orderAmount - this.pointNumMoney;
+      this.paidMoney = this.orderAmount - this.pointNumMoney;
+    } else {
+      this.alertbox(1, '注意', '没有更多积分', '确定', '', function () { return; }, function () { });
+      this.pointNum = 0;
+      this.pointNumMoney = 0;
+      this.paiclUpMoney = this.orderAmount;
+      this.paidMoney = this.orderAmount;
+    }
+    if (this.pointNumMoney > this.orderAmount) {
+      this.alertbox(1, '注意', '积分抵扣不能超过总价', '确定', '', function () { return; }, function () { });
+      this.pointNum = 0;
+      this.pointNumMoney = 0;
+      this.paiclUpMoney = this.orderAmount;
+      this.paidMoney = this.orderAmount;
+    }
+    this.discountAmount = this.pointNumMoney;
+
+  }
   //计算未支付金额
   computedMoney() {
     let sum = 0;
@@ -297,6 +340,8 @@ export class AccountOrderPage {
       }
     }
     this.noPayMoney = this.paiclUpMoney - sum;
+    this.paidMoney = this.paiclUpMoney - sum;
+
   }
   //选择支付方式
   selectPay(obj) {

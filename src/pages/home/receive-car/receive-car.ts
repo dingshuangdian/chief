@@ -177,7 +177,7 @@ export class receiveCarPage {
             pageSize: 20,
             pageNo: this.seachInfo.pageNo
         }
-        this.websites.httpPost('findMemberAuto', seachInfo, false).subscribe(res => {
+        this.websites.httpPost('findMemberAuto', seachInfo).subscribe(res => {
             if (res != null) {
                 this.customers = res;
                 this.flag = true;

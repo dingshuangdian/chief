@@ -19,7 +19,7 @@ export class brandPopover {
       page: this.page,
       rows: 40,
     }
-    this.websites.httpPost("findBrandList", param, false).subscribe(res => {
+    this.websites.httpPost("findBrandList", param).subscribe(res => {
       if (res) {
         this.brand = this.brand.concat(res.rows);
         if (this.brandhasSelected && this.brandhasSelected.length > 0) {

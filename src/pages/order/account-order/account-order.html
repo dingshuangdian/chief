@@ -41,7 +41,7 @@
     <!-- 消费项目 -->
     <div [hidden]='!services'>
       <h3>消费项目</h3>
-      <div style="border-top: 0.55px solid#f0f0f0; border-bottom: 0.55px solid #f0f0f0;position: relative;" *ngFor="let service of services;">
+      <div style="border-top: 0.55px solid#f0f0f0;position: relative;" *ngFor="let service of services;">
         <div class="pr-t">
           <div>{{service.serviceName}}
             <span *ngIf="service.mcardName">({{service.mcardName}})</span>
@@ -78,7 +78,7 @@
     <!-- 配件项目 -->
     <div [hidden]='!goods' style="border-top: 10px solid #f0f0f0;">
       <h3>配件项目</h3>
-      <div style="border-top: 0.55px solid#f0f0f0; border-bottom: 0.55px solid#f0f0f0;" *ngFor="let good of goods;">
+      <div style="border-top: 0.55px solid#f0f0f0;" *ngFor="let good of goods;">
         <div class="pr-t">
           <div>{{good.goodsName}}
             <span [hidden]="!good.sellUname">(销售:{{good.sellUname}})</span>
@@ -93,17 +93,49 @@
         </div>
       </div>
     </div>
-
-    <div class="tot" style="border-top: 10px solid #f0f0f0;">
-      <span style="font-size: 15px;">总价:
-        <span style="color:#ff5001;font-size: 25px;">￥{{orderAmount}}</span>
-      </span>
+    <!--客户积分-->
+    <div class="jf" *ngIf="pointConfig==1&&pointBalanceNum">
+      <h3>客户积分</h3>
+      <div style="border-top: 0.55px solid#f0f0f0;">
+        <div class="prj">
+          <p>积分总数:
+            <span>{{pointBalanceNum}}</span>
+          </p>
+        </div>
+        <div class="prj" *ngIf="usePointNum">
+          <p>积分使用:
+            <span style="color:#ff5001">-{{usePointNum}}</span>
+          </p>
+        </div>
+        <div *ngIf="!usePointNum&&!paymentRecords">
+          <div class="tot-bj prj">
+            <div style="display: flex;align-items: center;">
+              <p>积分使用：</p>
+              <input type="number" [(ngModel)]="pointNum" (ngModelChange)='changeNum($event)'>
+            </div>
+          </div>
+          <div class="prj">
+            <p>抵扣金额:
+              <span>{{pointNumMoney}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tot">
+      <div style="margin-right: 10px;"> <span style="font-size: 15px">总价:
+          <span style="color:#ff5001;font-size: 25px;">￥{{orderAmount}}</span>
+        </span>
+        <span style="font-size: 10px;margin-left: 10px" *ngIf="discountAmount">优惠金额：</span><span *ngIf="discountAmount"
+          style="color:#ff5001;font-size: 10px;">{{discountAmount}}</span><span style="font-size: 10px;" *ngIf="discountAmount">(包含积分抵扣)</span>
+      </div>
     </div>
   </div>
   <div class="tot-a">
     <div style="padding:0px 10px; display: flex;align-items: center;">
       <p>实收金额</p>
-      <input type="number" name="number" id="" [(ngModel)]="paiclUpMoney" (ngModelChange)='changeMoney($event)'>
+      <input type="number" name="number" id="" [(ngModel)]="paiclUpMoney" (ngModelChange)='changeMoney($event)'
+        [disabled]="paymentRecords">
     </div>
   </div>
   <div class="payState" *ngIf="paymentRecords">
@@ -133,7 +165,8 @@
   <div class="meg" [hidden]="!notifys">
     <h3>通知方式</h3>
     <div class="meg-btn" style="border-top: 0.55px solid #f0f0f0;">
-      <button ion-button *ngFor="let notify of notifys;let i = index;" [ngClass]="notify.flag?'btnActive':'nobtnActive'" (click)='noticeWay(notify.notifyTag,i)'>{{notify.notifyTypeName}}</button>
+      <button ion-button *ngFor="let notify of notifys;let i = index;" [ngClass]="notify.flag?'btnActive':'nobtnActive'"
+        (click)='noticeWay(notify.notifyTag,i)'>{{notify.notifyTypeName}}</button>
     </div>
     <div class="notice" [hidden]="noticeFlag">
       <span style="color:red;">注意：</span>

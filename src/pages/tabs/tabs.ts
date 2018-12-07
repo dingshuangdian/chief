@@ -1,20 +1,13 @@
 import { Component, ElementRef, Renderer, ViewChild } from '@angular/core';
 import { NavController, Events, Tabs, App, Platform } from 'ionic-angular';
-
 import { HomePage } from '../home/home';
 import { AccountPage } from '../account/account';
-// import { IdOrcPage } from '../id-orc/id-orc';
 import { OrderPage } from '../order/order';
 import { StatementPage } from '../statement/statement';
-
 import { WebSites } from '../../providers/web-sites'
-import { receiveCarPage } from '../home/receive-car/receive-car';
 import { pickupCarPage } from '../home/receive-car/pickup-car/pickup-car';
 import { CsbzNave } from '../../providers/csbz-nave';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { resourcesStaticProvider } from '../../providers/resources-static';
-import { timeout } from 'rxjs/operators';
-import { LoginPage } from '../login/login';
 import { BackButtonService } from '../../providers/backButton';
 /**
  * Generated class for the TabsPage tabs.
@@ -34,13 +27,12 @@ export class TabsPage {
   // idOrcRoot = IdOrcPage
   statementRoot = StatementPage
   accountRoot = AccountPage
-
-  oldSelect: number = 0; 
-
+  oldSelect: number = 0;
   constructor(public navCtrl: NavController, public Websites: WebSites, public elementRef: ElementRef,
     public renderer: Renderer, public event: Events,
     public csNave: CsbzNave,
     public appCtrl: App,
+    private csb: CsbzNave,
     public platform: Platform,
     public backButtonService: BackButtonService,
     public RSData: resourcesStaticProvider) {
@@ -50,7 +42,6 @@ export class TabsPage {
 
   }
   ionViewDidLoad() {
-
     //this.appCtrl.getRootNav().setRoot(LoginPage);
     // let tabs = this.queryElement(this.elementRef.nativeElement, '.tabbar');
     // this.event.subscribe('hideTabs', () => {

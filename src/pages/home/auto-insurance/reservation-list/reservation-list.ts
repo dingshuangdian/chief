@@ -104,7 +104,7 @@ export class ReservationListPage {
   reqOrderInfo(){
     this.webSites.httpPost('qryOrderInfo',{
       'orderId': this.orderId,
-    })
+    },true)
     .subscribe(res => {
       this.insuredMsg.insuredName = res.insuredName;
       this.insuredMsg.carownerCard = res.carownerCard;

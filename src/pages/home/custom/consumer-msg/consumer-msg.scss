@@ -10,28 +10,28 @@ page-consumer-msg {
             display: flex;
             align-items: center;
             img {
-                width: 30%;
-                height: 52%;
+                height: 108px;
+                width: 27%;
                 margin: 0px 0px 0px 10px;
             }
             .top-right {
-                padding-bottom: 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                margin-left: 5px;
                 width: 100%;
-                margin: 0px 10px; // border-bottom: 0.55px solid#ccc;
                 span,
                 p {
-                    padding-bottom: 10px;
-                    border-bottom: 0.55px solid#eaeaea;
-                    font-size: 13px;
+                    // padding-bottom: 10px;
+                    // border-bottom: 0.55px solid#eaeaea;
+                    font-size: 14px;
                 }
                 img {
-                    float: right;
-                    width: 22px;
-                    height: 22px;
-                    margin-top: 2px;
+                    width: 20px;
+                    height: 20px;
                 }
                 .item-ios {
-                    padding-left: 0px;
+                    font-size: 14px;
                 }
                 .item-inner {
                     border-bottom: 0.55px solid#eaeaea;

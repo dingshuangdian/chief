@@ -95,7 +95,7 @@ export class orderEditPage {
   }
   findAsorderByOrderId() {
     let params = { orderId: this.orderId };
-    this.webSites.httpPost('findAsorderByOrderId', params).subscribe(res => {
+    this.webSites.httpPost('findAsorderByOrderId', params,true).subscribe(res => {
       if (res) {
         this.otherInfo.orderId = res['orderId'] || '';
         this.otherInfo.originalNo = res['originalNo'] || '';

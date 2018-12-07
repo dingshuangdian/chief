@@ -1,7 +1,7 @@
 page-account-order {
     .bg {
         background-color: #f0f0f0;
-        .scroll-content{
+        .scroll-content {
             margin-bottom: 20px;
         }
         .or-top {
@@ -14,10 +14,10 @@ page-account-order {
                 display: inline-flex;
                 justify-content: space-between;
                 border-bottom: 0.55px solid#f0f0f0;
-                 :first-child {
+                :first-child {
                     font-size: 18px;
                 }
-                 :last-child {
+                :last-child {
                     font-size: 16px;
                     color: #ff5001;
                 }
@@ -50,16 +50,14 @@ page-account-order {
             }
             .pr-t {
                 margin-top: 10px;
-                div{
+                div {
                     margin-left: 15px;
                     margin-right: 15px;
                     font-size: 14px;
                     font-weight: bold;
-                    span{
-                        
-                    }
+                    span {}
                     i {
-                        font-size: 14px; 
+                        font-size: 14px;
                         font-style: normal;
                     }
                 }
@@ -68,7 +66,7 @@ page-account-order {
                 margin: 0 15px;
                 width: 90%;
             }
-            .totalAmount{
+            .totalAmount {
                 display: inline-block;
                 margin: 0;
                 position: absolute;
@@ -77,12 +75,11 @@ page-account-order {
                 right: 10px;
             }
             .tot {
+                border-top: 10px solid #f0f0f0;
                 height: 60px;
                 line-height: 60px;
-                span{
-                    float: right;
-                    margin-right: 15px;
-                }
+                display: flex;
+                justify-content: flex-end;
             }
         }
         .tot-a {
@@ -99,46 +96,46 @@ page-account-order {
                 height: 35px;
             }
         }
-        .payState{
+        .payState {
             background: #fff;
             padding: 10px;
             padding-right: 0;
             display: flex;
             flex-direction: row;
-            p{
+            p {
                 margin: 0;
             }
-            &>div:first-child{
+            &>div:first-child {
                 margin-right: 15px;
                 font-size: 20px;
                 font-weight: 500;
                 flex-grow: 0;
-                p{
+                p {
                     position: relative;
                     top: 50%;
                     transform: translateY(-50%);
                 }
             }
-            &>div:last-child{
+            &>div:last-child {
                 flex-grow: 1;
-                div{
+                div {
                     background: #f0f0f0;
                     height: 30px;
                     line-height: 30px;
                     border-bottom: 1px solid #fff;
                     padding: 0 8px;
-                    span{
+                    span {
                         color: red;
                         font-size: 12px;
                     }
-                    button{
+                    button {
                         float: right;
                         position: relative;
                         top: 50%;
                         transform: translateY(-50%);
                         color: #fff;
                         border-radius: 2px;
-                        background: #ffb413; 
+                        background: #ffb413;
                         height: 18px;
                         line-height: 18px;
                         font-size: 12px;
@@ -146,31 +143,30 @@ page-account-order {
                 }
             }
         }
-        .noPayState:after{
+        .noPayState:after {
             display: block;
             content: '.';
             clear: both;
             line-height: 0;
             visibility: hidden;
         }
-        .noPayState{
+        .noPayState {
             background: #fff;
             padding: 10px;
             padding-right: 0;
-            p{
+            p {
                 margin: 0;
                 float: left;
             }
-            p:first-child{
+            p:first-child {
                 margin-right: 15px;
                 font-size: 20px;
             }
-            p:last-child{
+            p:last-child {
                 font-size: 24px;
                 color: #ef5112;
             }
-        }
-        // .pay {
+        } // .pay {
         //     background-color: #fff;
         //     margin-top: 10px;
         //     h3 {
@@ -210,18 +206,18 @@ page-account-order {
         //         border-color: #c8c7cc;
         //     }
         // }
-        .payway{
+        .payway {
             margin-top: 10px;
             display: block;
-            .title{
+            .title {
                 font-size: 20px;
                 font-weight: 500;
                 padding-left: 10px;
             }
-            ion-list{
+            ion-list {
                 margin-bottom: 0 !important;
-                &>div:last-child{
-                    .item-inner{
+                &>div:last-child {
+                    .item-inner {
                         border-bottom: 0;
                     }
                 }
@@ -263,20 +259,20 @@ page-account-order {
                     color: #333333;
                     font-weight: bolder;
                 }
-                .btnActive{
+                .btnActive {
                     background: #ffb413;
                     color: #fff;
                 }
-                .nobtnActive{
+                .nobtnActive {
                     background: #f0f0f0;
                     color: #000;
                 }
             }
-            .notice{
+            .notice {
                 padding-bottom: 5px;
                 display: flex;
                 justify-content: center;
-                input{
+                input {
                     text-indent: 5px;
                 }
             }
@@ -321,6 +317,22 @@ page-account-order {
                 width: 100px;
                 height: 40px;
                 margin: 0;
+            }
+        }
+    }
+    .jf {
+        border-top: 0.55px solid#f0f0f0;
+        .prj {
+            margin: 0 15px;
+            width: 90%;
+        }
+        .tot-bj {
+            background-color: #fff;
+            margin-top: 10px;
+            clear: both;
+            input {
+                width: 50%;
+                height: 30px;
             }
         }
     }

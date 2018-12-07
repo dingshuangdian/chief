@@ -61,7 +61,7 @@ export class IncomeCountPage {
   }
   dateChange() {
     let parm = { beginDate: this.beginDate, endDate: this.endDate };
-    this.websites.httpPost('findDayBalanceReport', parm, false).subscribe(res => {
+    this.websites.httpPost('findDayBalanceReport', parm).subscribe(res => {
       if (res) {
         this.calculate(res);
       }
@@ -70,7 +70,7 @@ export class IncomeCountPage {
   }
 
   findBalanceReports4Month() {
-    this.websites.httpPost('findBalanceReports4Month', {}, false).subscribe(res => {
+    this.websites.httpPost('findBalanceReports4Month', {}).subscribe(res => {
       if (res) {
         this.calculate(res);
       }
@@ -78,7 +78,7 @@ export class IncomeCountPage {
   }
 
   findBalanceReports4Year() {
-    this.websites.httpPost('findBalanceReports4Year', {}, false).subscribe(res => {
+    this.websites.httpPost('findBalanceReports4Year', {}).subscribe(res => {
       if (res) {
         this.calculate(res);
       }

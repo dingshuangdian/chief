@@ -101,6 +101,7 @@ export class orderItemPage {
         this.findService();
         if (this.navParams.get('carNum')) {
           let keyWords = this.navParams.get('carNum');
+          this.carInfo.plateNB=keyWords
           if (this.csbzNave.checkCarNo(keyWords)) {
             this.carInfo.plateNB = keyWords.substr(1);
             this.carInfo.provinces = keyWords.substr(0, 1);
@@ -134,7 +135,7 @@ export class orderItemPage {
   }
 
   getRecord(autoId) {
-    this.Websites.httpPost('findOrderInfoByAutoId', { autoId: autoId }, false).subscribe(res => {
+    this.Websites.httpPost('findOrderInfoByAutoId', { autoId: autoId }).subscribe(res => {
       if (res) {
         if (res.count4Completed) {
           if (res.count4Completed.length > 0) {
@@ -168,7 +169,7 @@ export class orderItemPage {
   //获取客户信息
   findmember(memberId, callback?) {
     let params = { memberId: memberId, auto: true }
-    this.Websites.httpPost('findmember', params, false).subscribe(res => {
+    this.Websites.httpPost('findmember', params,true).subscribe(res => {
       res.autoId = this.customer.autoId;
       this.amountUnpaid = res.suspendedMoney.amountUnpaid;
       if (res.hasOwnProperty('autos') && res.autos.length >= 0) {
@@ -196,13 +197,13 @@ export class orderItemPage {
 
   //获取默认省份
   findStoreExt() {
-    this.Websites.httpPost('findStoreExt', {}, false).subscribe(res => {
+    this.Websites.httpPost('findStoreExt', {}).subscribe(res => {
       this.carInfo.provinces = res.defCtiyPrefix;
     })
   }
 
   getBookOrder() {
-    this.Websites.httpPost('getBookOrder', { orderId: this.navParams.get("orderId") }, false).subscribe(res => {
+    this.Websites.httpPost('getBookOrder', { orderId: this.navParams.get("orderId") }).subscribe(res => {
       this.findService(this.customer.memberId, () => {
 
         var allServices = this.mcardServices.concat(this.servicesList)
@@ -239,7 +240,7 @@ export class orderItemPage {
   InsuranceQryInfo(licenseNo) {
     this.RSData.cxCode().then((msg) => {
       if (licenseNo) {
-        this.Websites.httpPost('InsuranceQryInfo', { licenseNo: licenseNo }, false).subscribe(res => {
+        this.Websites.httpPost('InsuranceQryInfo', { licenseNo: licenseNo }).subscribe(res => {
           this.qryInfo = res;
         })
       } else {
@@ -257,11 +258,8 @@ export class orderItemPage {
         resolve();
       })
     }
-
-
     this.navCtrl.push(carEditPage, { carInfo: this.customer, callback: callback });
   }
-
   //选择项目
   selectItem(i) {
     i.select = !i.select;
@@ -271,7 +269,6 @@ export class orderItemPage {
     i.goodsNum = i.goodsNum || 1;
     i.serviceCoefficient = i.serviceCoefficient || 100;
     i.goodsCoefficient = i.goodsCoefficient || 100;
-
     if (i.select) {
       this.priceInfo.totalNum++;
       this.priceInfo.servicePrice += i.servicePrice * i.serviceNum * i.goodsCoefficient / 100;
@@ -283,7 +280,6 @@ export class orderItemPage {
       this.priceInfo.servicePrice -= i.servicePrice * i.serviceNum * i.goodsCoefficient / 100;
       this.priceInfo.projePrice -= i.goodsPrice * i.goodsNum * i.serviceCoefficient / 100;
     }
-
     this.priceInfo.totalPrice = this.priceInfo.servicePrice + this.priceInfo.projePrice;
   }
   //选择车辆
@@ -304,7 +300,7 @@ export class orderItemPage {
     let plateNumber = this.carInfo.provinces + this.carInfo.plateNB
     if (this.csbzNave.checkCarNo(plateNumber)) {
       let params = { plateNumber: plateNumber }
-      this.Websites.httpPost('getMemberDetailedByPlateNumber', params, false).subscribe(res => {
+      this.Websites.httpPost('getMemberDetailedByPlateNumber', params).subscribe(res => {
 
         if (res) {
           if (this.isNewCustomer) {
@@ -356,8 +352,7 @@ export class orderItemPage {
         this.carInfo.plateNB = '';
         this.carInfo.provinces = '';
       } else {
-        this.carInfo.plateNB = '';
-
+        //this.carInfo.plateNB = '';
         this.carInfo.provinces = data;
       }
     });

@@ -96,7 +96,7 @@ export class carConductPage {
     if (this.navParams.get('orderId')) {
       this.orderId = this.navParams.get("orderId");
       let params = { orderId: this.orderId };
-      this.websites.httpPost('findAsorderByOrderId', params).subscribe(res => {
+      this.websites.httpPost('findAsorderByOrderId', params, true).subscribe(res => {
         if (res) {
 
           this.flag_ = true;
@@ -193,7 +193,7 @@ export class carConductPage {
   //获取客户信息
   findmember(memberId) {
     let params = { memberId: memberId, auto: true }
-    this.websites.httpPost('findmember', params, false).subscribe(res => {
+    this.websites.httpPost('findmember', params).subscribe(res => {
       this.bindUid = res.bindUid;
       this.amountUnpaid = res.suspendedMoney.amountUnpaid;
       var element = document.getElementById("wechat");
@@ -259,7 +259,7 @@ export class carConductPage {
 
   }
   showProvince() {
-    this.csModal.showProvince(MntcSelectPage,{}, (data) => {
+    this.csModal.showProvince(MntcSelectPage, {}, (data) => {
       this.selectCla = data;
       this.saveAll.mntcClassId = data.mntc_class_id;
 
@@ -293,7 +293,6 @@ export class carConductPage {
     let $this = this;
     let demo;
     demo = function (data) {
-      console.log(data);
       return new Promise((resolve, reject) => {
         if (data != '') {
           $this.poAllPrice = 0;
@@ -339,22 +338,22 @@ export class carConductPage {
         if (data != '') {
           $this.pjAllPrice = 0;
           $this.flag_ = true;
-          if($this.goods.length != 0){//判断选择的配件跟原来的配件是否有可以合并的
-            for(let i=0;i<$this.goods.length;i++){
-              if($this.goods[i].goodsId == data.goodsId 
-                && $this.goods[i].sellUid == data.sellUid 
+          if ($this.goods.length != 0) {//判断选择的配件跟原来的配件是否有可以合并的
+            for (let i = 0; i < $this.goods.length; i++) {
+              if ($this.goods[i].goodsId == data.goodsId
+                && $this.goods[i].sellUid == data.sellUid
                 && $this.goods[i].discountCoefficient == data.discountCoefficient
-              ){
+              ) {
                 $this.goods[i].goodsNum += data.goodsNum;
                 $this.goods[i].totalAmount += data.totalAmount;
                 data = {};
                 break;
               }
             }
-            if(JSON.stringify(data) != "{}"){
+            if (JSON.stringify(data) != "{}") {
               $this.goods.push(data);
             }
-          }else{
+          } else {
             $this.goods.push(data);
           }
           $this.saveAll["goods"] = $this.goods;
@@ -371,7 +370,7 @@ export class carConductPage {
   }
 
   save_() {
-    this.websites.httpPost('saveAsorder', this.saveAll, true, false).subscribe(res => {
+    this.websites.httpPost('saveAsorder', this.saveAll, false, false).subscribe(res => {
       if (res != null) {
         this.navCtrl.popToRoot();
         this.navCtrl.parent.select(1);
@@ -415,13 +414,13 @@ export class carConductPage {
       return new Promise((resolve, reject) => {
         if (data != '') {
           // item = data;
-          if($this.goods.length > 1){//判断修改之后的配件跟原来的配件是否有可以合并的
-            for(let j=0;j<$this.goods.length;j++){
-              if(i != j){
-                if($this.goods[j].goodsId == data.goodsId 
-                  && $this.goods[j].sellUid == data.sellUid 
+          if ($this.goods.length > 1) {//判断修改之后的配件跟原来的配件是否有可以合并的
+            for (let j = 0; j < $this.goods.length; j++) {
+              if (i != j) {
+                if ($this.goods[j].goodsId == data.goodsId
+                  && $this.goods[j].sellUid == data.sellUid
                   && $this.goods[j].discountCoefficient == data.discountCoefficient
-                ){
+                ) {
                   $this.goods[j].goodsNum += data.goodsNum;
                   $this.goods[j].totalAmount += data.totalAmount;
                   $this.goods.splice(i, 1);
@@ -474,12 +473,12 @@ export class carConductPage {
     this.navCtrl.push(ConsumerMsgPage, { consumer: this.customer });
   }
 
-  focusFun(){
+  focusFun() {
     this.scrollTokeyboardHeight();
   }
   scrollTokeyboardHeight() {//让content向上滚动 软键盘的高度
-    window.addEventListener('native.keyboardshow',(e:any) =>{
-    this.content.scrollTo(0,e.keyboardHeight);
+    window.addEventListener('native.keyboardshow', (e: any) => {
+      this.content.scrollTo(0, e.keyboardHeight);
     });
   }
 }

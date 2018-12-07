@@ -87,7 +87,7 @@ export class memberMngPage {
   }
 
   searchAction() {
-    this.websites.httpPost(this.url, { keywords: this.keyWords }, false).pipe(debounceTime(500), distinctUntilChanged()).subscribe(res => {
+    this.websites.httpPost(this.url, { keywords: this.keyWords }).pipe(debounceTime(500), distinctUntilChanged()).subscribe(res => {
       this.memberList = res || [];
     })
   }

@@ -19,7 +19,7 @@ export class ProvincesSelectPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public websites: WebSites) {
-    this.websites.httpPost("findServiceTypeTree", false).subscribe(res => {
+    this.websites.httpPost("findServiceTypeTree",{}).subscribe(res => {
       if (res != null) {
         this.selectCla = res;
       }

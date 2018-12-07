@@ -70,7 +70,7 @@ export class AccountPage {
     this.findDepartments();
   }
   getInfo() {
-    this.websize.httpPost('getStoreInfo', '', false).subscribe(res => {
+    this.websize.httpPost('getStoreInfo', '').subscribe(res => {
       if (res) {
         this.storeMsg = res;
         this.store_type_id = res.store_type_id;

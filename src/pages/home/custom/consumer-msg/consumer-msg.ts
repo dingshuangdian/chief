@@ -33,6 +33,7 @@ export class ConsumerMsgPage {
     { "name": "会员卡", "bol": false, 'num': '' },
     { "name": "消费记录", "bol": false, 'num': '' }
   ];
+  pointBalanceNum;
   showOpenCard: boolean = false;
   consumer = { memberId: '', autoId: '' };
   bindUid;
@@ -98,11 +99,12 @@ export class ConsumerMsgPage {
   }
   getMember(memberId) {
     let params = { memberId: memberId, auto: true }
-    this.websites.httpPost('findmember', params, false).subscribe(res => {
+    this.websites.httpPost('findmember', params).subscribe(res => {
       if (res.autos) {
         this.carMsg = res.autos;
         this.courseTab[0].num = this.carMsg.length;
       }
+      this.pointBalanceNum = res.pointBalanceNum || 0;
       this.conacar = res;
       this.bindUid = res.bindUid;
       //var element = document.getElementById("wechat");
@@ -136,14 +138,14 @@ export class ConsumerMsgPage {
   }
   goCarRecord(infiniteScroll) {
     let params1 = { memberId: this.consumer.memberId, page: 0, row: 0 };
-    this.websites.httpPost('findOrderLogs', params1, false).subscribe(res => {
+    this.websites.httpPost('findOrderLogs', params1).subscribe(res => {
       if (res) {
         this.courseTab[2].num = res.length;
       }
 
     })
     let params = { memberId: this.consumer.memberId, page: this.page, row: 10 };
-    this.websites.httpPost('findOrderLogs', params, false).subscribe(res => {
+    this.websites.httpPost('findOrderLogs', params, true).subscribe(res => {
       if (res != null) {
         this.recordCar = this.recordCar.concat(res);
         if (infiniteScroll) {

@@ -39,7 +39,7 @@ export class AllInsurancePage {
 
   //获取到期车辆列表
   getcxData() {
-    this.websize.httpPost('getExpireInsuranceList', {}).subscribe(res => {
+    this.websize.httpPost('getExpireInsuranceList', {},true).subscribe(res => {
       if (res) {
         this.cxData = res.rows;
       }
@@ -48,7 +48,7 @@ export class AllInsurancePage {
 
   //获取保险公司列表
   getInsuranceComList() {
-    this.websize.httpPost('getInsuranceComList', {}, false).subscribe(res => {
+    this.websize.httpPost('getInsuranceComList', {}).subscribe(res => {
       if (res) {
         this.InsuranceComList = res;
         this.companyName = this.InsuranceComList[0].companyName;
@@ -87,7 +87,7 @@ export class AllInsurancePage {
   //搜索框
   searchInsur(text) {
     this.licenseNo = text;
-    this.websize.httpPost("getExpireInsuranceList", { licenseNo: text }, false).subscribe(res => {
+    this.websize.httpPost("getExpireInsuranceList", { licenseNo: text }).subscribe(res => {
       if (res) {
         this.cxData = res.rows;
       }
@@ -107,7 +107,7 @@ export class AllInsurancePage {
 
   //下拉刷新
   doRefresh(event){
-    this.websize.httpPost('getExpireInsuranceList', {},false).subscribe(res => {
+    this.websize.httpPost('getExpireInsuranceList', {}).subscribe(res => {
       if (res) {
         event.complete();
         this.cxData = res.rows;

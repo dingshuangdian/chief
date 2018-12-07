@@ -21,15 +21,18 @@
       <img *ngIf='conacar.headImg' src="{{conacar.headImg}}">
       <div class="top-right">
         <button ion-item style="align-items: center" (click)="goEditCustom()">
-          <span>{{conacar.memberName}}
-            <span>({{conacar.mobileNumber}})</span>
-          </span>
-          <img *ngIf="!bindUid" src="assets/imgs/msg_06.gif">
-          <img *ngIf="bindUid" src="assets/imgs/ico-wechat1.png">
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <span style="display: inline-flex;overflow: hidden;">{{conacar.memberName}}
+              ({{conacar.mobileNumber}})
+            </span>
+            <img *ngIf="!bindUid" src="assets/imgs/msg_06.png">
+            <img *ngIf="bindUid" src="assets/imgs/ico-wechat1.png">
+          </div>
         </button>
+        <ion-item>积分：{{pointBalanceNum}}</ion-item>
 
         <!-- <p style="padding-bottom: 14px">
-          <span style="border-bottom: none">消费:￥0</span>
+          <span style="border-bottom: none"></span>
         </p> -->
       </div>
     </div>
@@ -38,7 +41,7 @@
       <span>暂无标记！</span>
     </div> -->
     <div class="bj" style=" border-bottom:none">
-      <img src="assets/imgs/6667_06.gif">
+      <img src="assets/imgs/6667_06.png">
       <span>最后到店:
         <span *ngIf="!conacar.recentConsumption">暂无记录</span>
         <span *ngIf="conacar.recentConsumption">{{conacar.recentConsumption}}</span>

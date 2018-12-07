@@ -150,7 +150,7 @@ export class washCarPage {
   }
   //获取接车信息
   findService(memberId?) {
-    this.Websites.httpPost("findWashCarService4Order", { memberId: memberId, service: true }).subscribe(res => {
+    this.Websites.httpPost("findWashCarService4Order", { memberId: memberId, service: true },true).subscribe(res => {
       if (res['mcardServices']) this.mcardServices = res['mcardServices'];
       if (res['services']) this.servicesList = res['services'];
 
@@ -249,7 +249,7 @@ export class washCarPage {
     let plateNumber = this.carInfo.provinces + this.carInfo.plateNB
     if (this.csbzNave.checkCarNo(plateNumber)) {
       let params = { plateNumber: plateNumber }
-      this.Websites.httpPost('getMemberDetailedByPlateNumber', params, false).subscribe(res => {
+      this.Websites.httpPost('getMemberDetailedByPlateNumber', params).subscribe(res => {
         if (res) {
           if (this.isNewCustomer) {
             this.presentAlert("车牌号" + plateNumber + "已存在，是否用该车牌号接车？", res, 'plateNumber');

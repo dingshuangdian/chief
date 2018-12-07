@@ -63,7 +63,7 @@ export class IncomeGatherPage {
 
   dateChange() {
     let parm = { beginDate: this.beginDate, endDate: this.endDate };
-    this.websites.httpPost('finddaysReport', parm, false).subscribe(res => {
+    this.websites.httpPost('finddaysReport', parm).subscribe(res => {
       if (res) {
         this.dailyInfo = res;
       } else {
@@ -74,7 +74,7 @@ export class IncomeGatherPage {
 
   monthChange() {
     let parm = { month: this.month };
-    this.websites.httpPost('findmonthReport', parm, false).subscribe(res => {
+    this.websites.httpPost('findmonthReport', parm).subscribe(res => {
       if (res) {
         this.monthlyInfo = res;
       } else {
@@ -85,7 +85,7 @@ export class IncomeGatherPage {
 
   yeasChange() {
     let parm = { year: this.year };
-    this.websites.httpPost('findyearReport', parm, false).subscribe(res => {
+    this.websites.httpPost('findyearReport', parm).subscribe(res => {
       if (res) {
         this.annualInfo = res;
         let xd = [], id = [], cd = [], pd = [];

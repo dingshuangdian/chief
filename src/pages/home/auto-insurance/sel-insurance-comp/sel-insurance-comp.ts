@@ -35,7 +35,6 @@ export class SelInsuranceCompPage {
     if (this.navParams.get("carOrArtificial")) {
       this.carOrArtificial = this.navParams.get("carOrArtificial");
       this.paramsList = this.carOrArtificial.list;
-      console.log("router++++++" + this.carOrArtificial.router)
     }
   }
 
@@ -227,7 +226,8 @@ export class SelInsuranceCompPage {
     })
   };
   modifyInscuranceOrder(paramsLists) { //修改保单
-    this.websize.httpPost('modifyInscuranceOrder', paramsLists, true).subscribe(res => {
+    this.websize.httpPost('modifyInscuranceOrder', paramsLists
+    ).subscribe(res => {
       if (res) {
         this.showAlert('修改成功！');
         this.navCtrl.push(CarInsProgressPage, { num: 1 })

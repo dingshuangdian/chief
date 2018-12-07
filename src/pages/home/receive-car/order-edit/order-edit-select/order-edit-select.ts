@@ -81,7 +81,7 @@ export class OrderEditSelectPage {
     }
   }
   getRightData() {
-    this.websites.httpPost("findAllStoreUser", true).subscribe(res => {
+    this.websites.httpPost("findAllStoreUser",{}).subscribe(res => {
       if (res) {
         res.forEach(e => {
           e.select = false;

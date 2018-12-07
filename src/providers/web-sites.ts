@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { LoadingController, AlertController, ToastController, Events, NavController, App } from 'ionic-angular';
+import { LoadingController, AlertController, ToastController, Events, NavController, App, NavControllerBase } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
@@ -60,7 +60,7 @@ export class WebSites {
             });
     }
 
-    httpPost(url, params, loader: boolean = true, isShowError: boolean = true, judgeUdf: boolean = false) {
+    httpPost(url, params, loader: boolean = false, isShowError: boolean = true, judgeUdf: boolean = false) {
         let loading = this.loadingCtrl.create();
         if (loader) loading.present();
 
@@ -147,7 +147,7 @@ export class WebSites {
 
 
     private handleError(error: Response | any) {
-        let activeNav: NavController = this.appCtrl.getActiveNav();
+        let activeNav: NavControllerBase[] = this.appCtrl.getActiveNavs();
         let msg = '';
         if (error.status == 0) {
             msg = error.message;
@@ -161,7 +161,9 @@ export class WebSites {
                 msg = error.message;
                 if (!msg) {
                     this.alert(error.body.msg)
+                    console.log(activeNav);
                     activeNav.pop();
+                    
                 }
             }
 

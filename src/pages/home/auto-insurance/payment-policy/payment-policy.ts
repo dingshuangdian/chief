@@ -37,7 +37,7 @@ export class PaymentPolicyPage {
       this.qryPayCode = res;
       this.webSites.httpPost('qryPayCode',{
         'orderId': this.orderId
-      })
+      },true)
       .subscribe(res => {
         this.qryPayCode.codeUrl = res.codeUrl;
       });
