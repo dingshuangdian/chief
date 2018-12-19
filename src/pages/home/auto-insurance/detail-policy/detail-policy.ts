@@ -110,7 +110,7 @@ export class DetailPolicyPage {
         this.qryOrderInfo['chengKe'] = this.insureenumval['chengKe'][this.qryOrderInfo['chengKe']];
         this.qryOrderInfo['huaHen'] = this.insureenumval['huaHen'][this.qryOrderInfo['huaHen']];
         this.qryOrderInfo['siJi'] = this.insureenumval['siJi'][this.qryOrderInfo['siJi']];
-        this.qryOrderInfo['hcXiulichang'] = this.insureenumval['hcXiulichang'][this.qryOrderInfo['hcXiulichang']];
+        this.qryOrderInfo['hcXiulichang'] = this.insureenumval['hcXiulichang'][this.qryOrderInfo['hcXiulichangType']];
         this.qryOrderInfo['daoQiang'] = this.qryOrderInfo['daoQiang'] == 0 ? '不投保' : this.qryOrderInfo['daoQiang'];
         this.qryOrderInfo['ziRan'] = this.qryOrderInfo['ziRan'] == 0 ? '不投保' : this.qryOrderInfo['ziRan'];
         this.qryOrderInfo['sheShui'] = this.qryOrderInfo['sheShui'] == 0 ? '不投保' : this.qryOrderInfo['sheShui'];

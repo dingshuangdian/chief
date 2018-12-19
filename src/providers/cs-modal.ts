@@ -16,8 +16,8 @@ export class CsModal {
         this.renderer.appendChild(document.head, '<style type="text/css">@charset "UTF-8";' + css + '</style>');
     }
 
-    showModal(component: any, css: string = '', obj?, callback?) {
-        let profileModal = this.modalCtrl.create(component, obj, { cssClass: css });
+    showModal(component: any, css: string = '', enableBackdropDismiss: boolean = true, obj?, callback?) {
+        let profileModal = this.modalCtrl.create(component, obj, { cssClass: css, enableBackdropDismiss: enableBackdropDismiss });
         profileModal.onDidDismiss(data => {
             if (callback && data) callback(data);
         });
@@ -25,8 +25,8 @@ export class CsModal {
     }
 
 
-    showProvince(component: any, obj?, callback?) {
-        this.showModal(component, 'provincesModal', obj, callback);
+    showProvince(component: any, obj?, enableBackdropDismiss?, callback?) {
+        this.showModal(component, 'provincesModal', enableBackdropDismiss, obj, callback);
     }
     showToast(msg) {
         let toast = this.toastCtrl.create({

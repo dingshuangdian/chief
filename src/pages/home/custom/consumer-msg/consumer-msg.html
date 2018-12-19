@@ -51,7 +51,7 @@
   <div class="msg-btn">
     <div class="course_tabBox" *ngFor="let tab of courseTab">
       <span class="course_tab" [ngClass]="{'tabActive':tab.bol}" (click)="toggleTab(tab.name,courseTab)">{{tab.name}}
-        <span class="red-point" *ngIf="tab.num!=''">{{tab.num}}</span>
+        <span class="red-point" *ngIf="tab.num">{{tab.num}}</span>
       </span>
     </div>
     <div class="btm-content" [hidden]='!courseTab[0].bol'>
@@ -68,7 +68,6 @@
             </div>
           </button>
           <div class="con">
-
             <img *ngIf="msg.autoImg" src={{imgUrl}}{{msg.autoImg[0].imgUrl}}>
             <img *ngIf="!msg.autoImg" src="assets/imgs/msg_17.gif">
             <div class="btn-right">
@@ -169,6 +168,31 @@
       <button ion-button class="bbtn" (click)="openCard()" *ngIf="showOpenCard">新开会员卡</button>
     </div>
     <div class="hycard" [hidden]='!courseTab[2].bol'>
+      <div class="hycard" *ngIf="!coupon">
+        <img src="assets/imgs/car_03.gif">
+        <p>暂无优惠卷</p>
+      </div>
+        <div class="yhj" *ngFor="let item of coupon">
+          <div class="lf">
+            <div>
+              <p style="color:black;font-weight: bold;font-size: larger">{{item.name}}</p>
+            </div>
+            <div style="color:darkgray;font-size:xx-small;margin-bottom: 10px">
+              <span style="display:block;margin-bottom: 7px">{{item.area}}</span>
+              <span>有效期至：{{item.data}}</span>
+            </div>
+          </div>
+          <img style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/gq.png" alt="">
+          <div class="rf">
+            <img src="assets/imgs/line_03.gif" alt="">
+            <div style="display:inline-flex;flex-direction: column;align-items: center;justify-content: center;width: 70px">
+              <span style="display:block;color: #578cef;font-size: 20px">{{item.balance}}元</span>
+              <span style="display:block;color:darkgray;font-size:xx-small;margin-top:5px">{{item.describe}}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="hycard" [hidden]='!courseTab[3].bol'>
       <div class="hycard" *ngIf="recordCar.length==0">
         <img src="assets/imgs/record_03.gif">
         <p>暂无消费记录</p>

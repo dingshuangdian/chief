@@ -26,7 +26,7 @@ export class PayTypeComponent {
   findPaymentAndCard() {
     let parmas = this.memberId ? { memberId: this.memberId } : {};
 
-    this.websites.httpPost('findPaymentAndCard', parmas,true).subscribe(res => {
+    this.websites.httpPost('findPaymentAndCard', parmas).subscribe(res => {
       if (res && res.payments) {
         this.payList = res.payments;
         if (res.cards) {

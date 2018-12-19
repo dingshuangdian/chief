@@ -1,0 +1,56 @@
+coupon-popover {
+    .content-ios {
+        background: #f2f4f8;
+    }
+    .yhj {
+        width: 95%;
+        background-color: #fff;
+        display: flex;
+        position: relative;
+        border-radius: 5px;
+        margin: 0 10px 10px;
+        justify-content: space-between;
+        .lf {
+            max-width: 60%;
+            margin-left: 15px;
+            display: inline-flex;
+            flex-direction: column;
+        }
+        .rf {
+            display: inline-flex;
+            justify-content: space-between;
+            img {
+                width: 1px;
+                height: 77px;
+                margin: 10px;
+            }
+            margin-right: 15px;
+        }
+        span {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+    .item-ios {
+        padding-left: 5px;
+        .item-inner {
+            border-bottom: none !important;
+        }
+    }
+    .toolbar-background-ios {
+        background: #fff;
+        border-width: 0 !important;
+    }
+    .selectType {
+        button {
+            height: initial;
+            margin: initial;
+            padding: 0;
+            vertical-align: middle;
+            font-size: 1.4rem;
+            .icon {
+                margin-left: 10px;
+            }
+        }
+    }
+}

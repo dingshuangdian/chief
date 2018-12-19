@@ -101,7 +101,7 @@ export class AllInsurancePage {
       'cityCode': cityCode,
       'agentName': this.userInfo.userName,
       'userId': this.userInfo.userId,
-      'requotationType': 1
+      'router': 1
     });
   }
 

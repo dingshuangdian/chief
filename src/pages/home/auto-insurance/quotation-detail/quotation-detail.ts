@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { ReservationListPage } from '../reservation-list/reservation-list';
 import { SupplementaryInfoPage } from '../supplementary-info/supplementary-info';
 import { WebSites } from '../../../../providers/web-sites';
@@ -51,11 +51,12 @@ export class QuotationDetailPage {
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public csModal: CsModal,
+    public alertCtrl: AlertController,
   ) {
     this.listParams = this.navParams.get('listParams');
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.getInsureenumval();
   }
   getInsureenumval() {
@@ -104,20 +105,22 @@ export class QuotationDetailPage {
   }
   //自动报价
   AutoQuotation() {
-    this.websize.httpPost('AutoQuotation', this.quotationList).subscribe(res => {
-      if (res) {
-        this.getQuoteInfo();
-      }
+    this.websize.httpPost('AutoQuotation', this.quotationList)
+    .subscribe(res => {
+      this.getQuoteInfo();
     })
   }
 
   //获取车辆报价信息
   getQuoteInfo() {
-    this.websize.httpPost('getQuoteInfo', { licenseNo: this.licenseNo, quoteGroup: this.insuranceCompanyId }).subscribe(res => {
+    this.websize.httpPost('getQuoteInfo', { licenseNo: this.licenseNo, quoteGroup: this.insuranceCompanyId })
+    .subscribe(res => {
       if (res) {
         if (res.QuoteStatus == 0 || res.QuoteStatus == -1) {
-          this.presentToast(res.QuoteResult);
-          this.navCtrl.popTo(AutoInsurancePage);
+          var self = this;
+          this.presentAlert(res.QuoteResult, function(){
+            self.navCtrl.popTo(self.navCtrl.getByIndex(self.navCtrl.length() - 4));
+          });
         } else {
           this.info = res;
           this.info['sanZhe'] = this.insureenumval['sanZhe'][this.info['sanZhe']];
@@ -199,6 +202,25 @@ export class QuotationDetailPage {
       duration: 2000
     });
     toast.present();
+  }
+
+  //alert
+  presentAlert(msg, callback?){
+    let alert = this.alertCtrl.create({
+      title: '提示!',
+      subTitle: msg,
+      buttons: [
+        {
+          text: '确定',
+          handler: data => {
+            if(callback){
+              callback();
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   //加载...

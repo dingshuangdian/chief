@@ -70,6 +70,7 @@ import { WxPayPopoverPage } from '../other/wx-pay-popover/wx-pay-popover';
 import { repertoryPopover } from '../other/repertory-popover/repertory-popover';
 import { AgentlistPopoverPage } from '../other/agentlist-popover/agentlist-popover';
 import { brandPopover } from '../other/brand-popover/brand-popover';
+import { couponPopover } from '../other/coupon-popover/coupon-popover';
 @NgModule({
     declarations: [
         HomePage,
@@ -127,6 +128,7 @@ import { brandPopover } from '../other/brand-popover/brand-popover';
         ExceptionCausePage,
         MsgInsurancePage,
         brandPopover,
+        couponPopover,
 
         CarInsProgressPage,
         DetailPolicyPage,
@@ -206,7 +208,7 @@ import { brandPopover } from '../other/brand-popover/brand-popover';
         AgentlistPopoverPage,
 
         brandPopover,
-
+        couponPopover,
 
         CarInsProgressPage,
         DetailPolicyPage,

@@ -20,15 +20,11 @@
       </p>
       <button ion-button menuToggle (click)="changeAgentName($event)">更换</button>
     </ion-row>
-    <!-- <ion-row class="insName">
-      <span>被保人姓名：</span>
-      <ion-input no-margin no-padding placeholder='请输入被保人姓名'></ion-input>
-    </ion-row> -->
   </ion-list>
   <!-- 车辆信息 -->
-  <ion-list no-margin class="carMsg" *ngIf="isShow">
-    <sub-title [titleName]="'车辆信息'"></sub-title>
-    <ion-grid no-padding>
+  <ion-list no-margin class="carMsg">
+    <sub-title [titleName]="'车辆信息'" *ngIf="isShow"></sub-title>
+    <ion-grid no-padding *ngIf="isShow">
       <ion-row>
         <ion-col col-4>车牌号码</ion-col>
         <ion-col>{{lastMsg.licenseNo}}</ion-col>
@@ -45,16 +41,14 @@
         <ion-col col-4>投保公司</ion-col>
         <ion-col>{{lastMsg.companyName||'暂无'}}</ion-col>
       </ion-row>
-
+    </ion-grid>
+    <ion-grid no-padding>
       <ion-row class="insName" *ngIf="!recordBool">
         <ion-col col-4>投保人姓名</ion-col>
         <ion-col>
           <ion-input no-margin placeholder='请输入投保人姓名' [(ngModel)]="lastMsg.holderName"></ion-input>
         </ion-col>
       </ion-row>
-
-    </ion-grid>
-    <ion-grid no-padding>
       <div *ngIf="recordBool">
         <ion-row>
           <ion-col col-4>投保人信息</ion-col>
@@ -507,7 +501,7 @@
               (ngModelChange)='changeSelect1(lastMsg,"hcXiulichangTag","hcXiulichangTypeTag","hcXiuLiCanBaoE","hcXiulichangBaoE")'></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-3 class="flexCenter">
+        <ion-col col-4 class="flexCenter">
           <ion-item no-padding>
             <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.hcXiuLiCanBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0"
               (ngModelChange)="changeCheck()">
@@ -515,19 +509,17 @@
             </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col col-3 *ngIf="lastMsg.hcXiuLiCanBaoE==1">
+        <ion-col col-3 class="flexEnd" *ngIf="lastMsg.hcXiuLiCanBaoE==1">
           <ion-item no-padding>
             <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.hcXiulichangBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0">
               <ion-option *ngFor="let gc of xiuLiChangGuochan" value="{{gc.enumValue}}">{{gc.enumKey}}</ion-option>
-
             </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col col-4 *ngIf="lastMsg.hcXiuLiCanBaoE==2">
+        <ion-col col-4 class="flexEnd" *ngIf="lastMsg.hcXiuLiCanBaoE==2">
           <ion-item no-padding>
             <ion-select okText="确定" cancelText="取消" [(ngModel)]="lastMsg.hcXiulichangBaoE" [disabled]="lastMsg.isBusinessRenewalDate==0">
               <ion-option *ngFor="let jk of xiuLiChangJinkou" value="{{jk.enumValue}}">{{jk.enumKey}}</ion-option>
-
             </ion-select>
           </ion-item>
         </ion-col>

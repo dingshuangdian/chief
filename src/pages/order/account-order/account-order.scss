@@ -284,7 +284,7 @@ page-account-order {
                 font-size: 19px;
                 height: 55px;
                 line-height: 55px;
-                margin-left: 15px;
+                padding-left: 15px;
                 -webkit-margin-before: 10px;
                 -webkit-margin-after: -5px;
             }
@@ -322,6 +322,7 @@ page-account-order {
     }
     .jf {
         border-top: 0.55px solid#f0f0f0;
+        //border-bottom: 0.55px solid#f0f0f0;
         .prj {
             margin: 0 15px;
             width: 90%;
@@ -333,6 +334,29 @@ page-account-order {
             input {
                 width: 50%;
                 height: 30px;
+            }
+        }
+    }
+    .yhj {
+       
+        .item-ios {
+            border-top: 0.55px solid#f0f0f0;
+            padding-left:15px;
+            .item-inner {
+                border-bottom: none;
+                padding-right: 0;
+            }
+        }
+        .selectType {
+            button {
+                height: initial;
+                margin: initial;
+                padding: 0;
+                vertical-align: middle;
+                font-size: 1.4rem;
+                .icon {
+                    margin-left: 10px;
+                }
             }
         }
     }

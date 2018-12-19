@@ -57,6 +57,7 @@ page-car-ins-progress {
                 margin-bottom: 10px;
                 .item-inner{
                     padding-right: 0 !important;
+                    border-bottom: 0 !important;
                     .label-ios{
                         margin: 15px 0 0 0 !important;
                         .top{
@@ -112,9 +113,9 @@ page-car-ins-progress {
                             }
                         }
                         .bottom{
-                            padding: 15px 10px;
                             .row{
                                 .col{
+                                    padding: 10px 0;
                                     button{
                                         height: 38px;
                                         margin: 0;

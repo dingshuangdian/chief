@@ -84,7 +84,7 @@ export class CheckHelpPage {
     }
   }
   repertoryPopover() {
-    this.csModal.showProvince(repertoryPopover, { repertory: this.repertory }, (data) => {
+    this.csModal.showProvince(repertoryPopover, { repertory: this.repertory }, 1, (data) => {
       if (data) {
         this.repertory = data;
         this.seachInfo.warehouseId = [];
@@ -98,7 +98,7 @@ export class CheckHelpPage {
     });
   }
   brandPopover() {
-    this.csModal.showProvince(brandPopover, { brandhasSelected: this.brandhasSelected }, (data) => {
+    this.csModal.showProvince(brandPopover, { brandhasSelected: this.brandhasSelected }, 1, (data) => {
       if (data) {
         this.brandhasSelected = data;
         this.seachInfo.brandId = [];

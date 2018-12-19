@@ -132,7 +132,7 @@ export class memberOpenPage {
 
   //选省份
   showProvince() {
-    this.csModal.showProvince(ProvincesPage,{}, (data) => {
+    this.csModal.showProvince(ProvincesPage,{},1, (data) => {
       if (data == '无牌') {
         this.carInfo.plateNB = '无牌';
         this.carInfo.provinces = '';

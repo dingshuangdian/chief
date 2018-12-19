@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { PhotoExPage } from '../photo-ex/photo-ex';
 import {CsbzNave } from '../../../../providers/csbz-nave';
 import { WebSites } from '../../../../providers/web-sites';
@@ -57,6 +57,7 @@ export class SupplementaryInfoPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
     public csbzNave: CsbzNave,
     public webSites: WebSites,
     public csModal: CsModal,
@@ -94,6 +95,10 @@ export class SupplementaryInfoPage {
 
   //提交
   submit(){
+    let loader = this.loadingCtrl.create({
+      content: "图片上传中,请稍等片刻......",
+    });
+    loader.present();
     let param: any = {};
     param.orderId = this.orderId;
     param.quoteType = this.quoteType;
@@ -136,7 +141,13 @@ export class SupplementaryInfoPage {
     param.otherPhotoImg4_name = '10.png';
     this.webSites.httpPost('supplementaryInformation',param,true)
     .subscribe(res => {
-      this.csModal.showAlert('提交成功!','','','确定','','');
+      loader.dismiss();
+      loader.onDidDismiss(() => {
+        this.csModal.showAlert('提交成功!', callback(this), '', '确定', '', '');
+      });
+      function callback(self){
+        self.navCtrl.pop({ num: 1 });
+      }
     });
   }
 

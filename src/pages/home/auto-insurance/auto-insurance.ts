@@ -69,7 +69,7 @@ export class AutoInsurancePage {
       this.presentToast("请勾选《免责条款》")
       return;
     }
-    this.navCtrl.push(RequotationPage, { licenseNo: this.licenseNo, cityCode: this.cityCode, userId: this.userId, agentName: this.agentName, requotationType: 1 })
+    this.navCtrl.push(RequotationPage, { licenseNo: this.licenseNo, cityCode: this.cityCode, userId: this.userId, agentName: this.agentName, router: 1 })
   }
 
   presentToast(msg) {
@@ -190,7 +190,7 @@ export class AutoInsurancePage {
 
   //选省份
   showProvince() {
-    this.csModal.showProvince(ProvincesPage, { provinces: this.licenseplateShort }, (data) => {
+    this.csModal.showProvince(ProvincesPage, { provinces: this.licenseplateShort }, 1, (data) => {
       this.selectedLicense = data;
     });
   }
@@ -225,14 +225,14 @@ export class AutoInsurancePage {
   }
 
   // 车险到期提醒点击跳转
-  goSelectSurrence(cityCode,licenseNo){
+  goSelectSurrence(cityCode, licenseNo) {
     this.navCtrl.push(RequotationPage, {
       'licenseNo': licenseNo,
       'cityCode': cityCode,
       'agentName': this.agentName,
       'userId': this.userId,
-      'requotationType': 1
-  });
+      'router': 1
+    });
   }
 
 }

@@ -2,6 +2,8 @@ import { Component, ElementRef } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { WebSites } from '../../../providers/web-sites';
 import { CsbzNave } from '../../../providers/csbz-nave';
+import { CsModal } from '../../../providers/cs-modal';
+import { couponPopover } from '../../other/coupon-popover/coupon-popover';
 
 /**
  * Generated class for the AccountOrderPage page.
@@ -48,6 +50,7 @@ export class AccountOrderPage {
   noticeFlag: boolean = true;
   discountAmount;
   pointConfig;
+  coupon = "选择优惠卷";
   usePointNum;
   constructor(
     public navCtrl: NavController,
@@ -55,6 +58,7 @@ export class AccountOrderPage {
     public Websites: WebSites,
     public csbzNave: CsbzNave,
     public el: ElementRef,
+    private csModal: CsModal,
 
     public alertCtrl: AlertController) {
     this.isNave = this.csbzNave.isNave(this.navCtrl.getViews().length);
@@ -342,6 +346,16 @@ export class AccountOrderPage {
     this.noPayMoney = this.paiclUpMoney - sum;
     this.paidMoney = this.paiclUpMoney - sum;
 
+  }
+  selectCoupon() {
+    this.repertoryPopover();
+  }
+  repertoryPopover() {
+    this.csModal.showProvince(couponPopover, {}, false, (data) => {
+      if (data) {
+        this.coupon = data == 1 ? "选择优惠卷" : data.name + "(" + data.describe + ")";
+      }
+    });
   }
   //选择支付方式
   selectPay(obj) {

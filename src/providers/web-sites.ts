@@ -7,15 +7,14 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 
 import { WebConfig } from './web-config';
+import { HomePage } from '../pages/home/home';
+import { TabsPage } from '../pages/tabs/tabs';
 
 @Injectable()
 export class WebSites {
 
 
     constructor(public http: HttpClient, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, public events: Events, public appCtrl: App, ) {
-
-
-
     }
 
     // 对参数进行编码
@@ -147,7 +146,7 @@ export class WebSites {
 
 
     private handleError(error: Response | any) {
-        let activeNav: NavControllerBase[] = this.appCtrl.getActiveNavs();
+        let activeNav: NavController = this.appCtrl.getActiveNav();
         let msg = '';
         if (error.status == 0) {
             msg = error.message;
@@ -160,13 +159,16 @@ export class WebSites {
             } else {
                 msg = error.message;
                 if (!msg) {
-                    this.alert(error.body.msg)
-                    console.log(activeNav);
-                    activeNav.pop();
-                    
+                    let self = this;
+                    this.alert(error.body.msg, function(){
+                        if (activeNav.canGoBack()) {
+                            activeNav.pop();
+                        } else {
+                            self.appCtrl.getRootNav().setRoot(TabsPage);
+                        }
+                    })
                 }
             }
-
             console.log('请检查请求参数或url是否匹配');
             return;
         }
@@ -184,6 +186,20 @@ export class WebSites {
         if (error.status == 404) {
             msg = '请求资源不存在(code：404)';
             console.error(msg + '，请检查路径是否正确');
+        }
+        if (error.status == 504) {
+            msg = '网络请求超时,请稍后重试!';
+            let activeNav: NavController = this.appCtrl.getActiveNav();
+            let self = this;
+            this.alert(msg, function(){
+                if (activeNav.canGoBack()) {
+                    activeNav.pop();
+                } else {
+                    self.appCtrl.getRootNav().setRoot(TabsPage);
+                }
+            })
+            
+            return ;
         }
 
         if (msg != '') {

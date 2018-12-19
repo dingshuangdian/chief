@@ -259,7 +259,7 @@ export class carConductPage {
 
   }
   showProvince() {
-    this.csModal.showProvince(MntcSelectPage, {}, (data) => {
+    this.csModal.showProvince(MntcSelectPage, {},1, (data) => {
       this.selectCla = data;
       this.saveAll.mntcClassId = data.mntc_class_id;
 

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events, IonicApp, IonicModule, Platform } from 'ionic-angular';
-
 import { receiveCarPage } from './receive-car/receive-car';
-
 import { UserData } from '../../providers/user-data'
 import { memberMngPage } from './member-mng/member-mng';
 import { customPage } from './custom/custom';
@@ -66,7 +64,7 @@ export class HomePage {
   }
   ionViewDidEnter() {
     this.csbzNave.appUpdate();
-    this.csbzNave.getRegistrationID();
+    //this.csbzNave.getRegistrationID();
 
   }
   ionViewWillEnter() {
@@ -78,7 +76,7 @@ export class HomePage {
     this.websize.httpPost('getTodayIncrement', '').subscribe(res => {
       if (res) {
         this.tipMsg = res;
-      }
+      } 
     })
     this.websize.httpPost('getBookOrdersCount', '').subscribe(res => {
       if (res) { this.bookCount = res; }
@@ -155,12 +153,12 @@ export class HomePage {
     }, (msg) => { })
   }
   onCX() {
-    this.navCtrl.push(AutoInsurancePage);
-    // cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
-    //   console.log(res);
-    // }, (error) => {
-    //   console.log(error);
-    // })
+   // this.navCtrl.push(AutoInsurancePage);
+    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
+      console.log(res);
+    }, (error) => {
+      console.log(error);
+    })
   }
   // test(){
   //   this.navCtrl.push(ReservationListPage);

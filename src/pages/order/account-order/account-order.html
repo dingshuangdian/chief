@@ -122,6 +122,24 @@
         </div>
       </div>
     </div>
+    <!--优惠卷-->
+    <div class="yhj">
+      <ion-item>
+        <ion-row>
+          <div style="padding: 5px;">
+            优惠卷
+          </div>
+          <ion-col text-right class="selectType">
+            <button ion-button color="dark" clear (click)="selectCoupon()">
+              {{coupon}}
+              <ion-icon name="ios-arrow-forward"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+
+
     <div class="tot">
       <div style="margin-right: 10px;"> <span style="font-size: 15px">总价:
           <span style="color:#ff5001;font-size: 25px;">￥{{orderAmount}}</span>

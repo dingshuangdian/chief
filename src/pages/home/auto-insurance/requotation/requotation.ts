@@ -87,7 +87,9 @@ export class RequotationPage {
     private toastCtrl: ToastController,
     public menuCtrl: MenuController,
   ) {
-    this.router = this.navParams.get('requotationType');
+    this.carOrArtificial = this.navParams;
+    this.router = this.navParams.get('router');
+    console.log(this.router);
     if (this.navParams.get('licenseNo')) {
       this.params.licenseNo = this.navParams.get('licenseNo');
     }
@@ -103,6 +105,7 @@ export class RequotationPage {
     } else if (this.router == 2) {//人工报价
       this.recordBool = false;
       this.isShow = false;
+      this.params.cityCode = this.navParams.get('cityCode');
       this.isRenewalDate = false;
       this.lastMsg['nextForceStartdate'] = new Date().toLocaleDateString();
       this.lastMsg['nextBusinessStartdate'] = new Date().toLocaleDateString();
@@ -300,6 +303,7 @@ export class RequotationPage {
         this.agentName = res.insureAgentUname;
         this.insureAgentUid = res.insureAgentUid;
         this.params.cityCode = res.cityCode;
+        this.params.licenseNo = res.licenseNo;
         this.lastMsg['licenseNo'] = res.licenseNo;
         this.lastMsg['carownerName'] = res.carownerName;
         this.lastMsg['carownerCard'] = res.carownerCard;
@@ -698,19 +702,76 @@ export class RequotationPage {
         return false;
       }
     }
-    this.navCtrl.push(SelInsuranceCompPage, { carOrArtificial: this.carOrArtificial, selInsCompType: 2 });
+    this.navCtrl.push(SelInsuranceCompPage, { 
+      'carOrArtificial': this.carOrArtificial,
+    });
 
   }
 
   //人工核保
   manualCheck() {
-    if (this.router == 1) {//待核保/重新报价/险种选择
-
-      this.navCtrl.push(SelInsuranceCompPage, { 'selInsCompType': 2 });
-    } else if (this.router == 2) {//待核保/修改保单/险种选择
-      this.navCtrl.push(SelInsuranceCompPage, { 'selInsCompType': 1 });
-    } else {//待支付/重新报价/险种选择
-      this.navCtrl.push(SelInsuranceCompPage, { 'selInsCompType': 3 });
+    this.getValues();
+    let paramsList = {
+      cityCode: this.params.cityCode,
+      insureAgentUid: this.insureAgentUid,
+      insureAgentUname: this.agentName,
+      holderPartytype: '',
+      insuredName: this.lastMsg['insuredName'],
+      holderName: this.lastMsg['holderName'],
+      forceStartDate: this.lastMsg['nextForceStartdate'],
+      businessStartDate: this.lastMsg['nextBusinessStartdate'],
+      seatCount: this.lastMsg['seatCount'],
+      force: this.forceTag,
+      cheSun: this.cheSunTag,
+      bujimianChesun: this.bujimianChesunTag,
+      sanZhe: this.sanZheTag,
+      bujimianSanzhe: this.bujimianSanzheTag,
+      daoQiang: this.daoQiangTag,
+      bujimianDaoqiang: this.bujimianDaoqiangTag,
+      siJi: this.siJiTag,
+      bujimianSiji: this.bujimianSijiTag,
+      chengKe: this.chengKeTag,
+      bujimianChengke: this.bujimianChengkeTag,
+      boLi: this.boLiTag,
+      huaHen: this.huaHenTag,
+      bujimianHuahen: this.bujimianHuahenTag,
+      sheShui: this.sheShuiTag,
+      bujimianSheshui: this.bujimianSheshuiTag,
+      ziRan: this.ziRanTag,
+      bujimianZiran: this.bujimianZiranTag,
+      hcSanfangteyue: this.hcSanfangteyueTag,
+      hcXiulichangType: this.hcXiulichangTypeTag,
+      hcXiulichang: this.hcXiulichangTag,
+      memo: this.lastMsg['memo'] || '',
+    };
+    if (this.router == 2) {
+      paramsList['holderName'] = this.lastMsg['holderName'];
+    } else {
+      paramsList['insuredIdCard'] = this.lastMsg['insuredIdCard'];
+      paramsList['insuredMobile'] = this.lastMsg['insuredMobile'];
+      paramsList['insuredIdCardType'] = this.lastMsg['insuredIdCardType'];
+      if (this.router == 6) {
+        paramsList['orderId'] = this.lastMsg['orderId'];
+      }
+    }
+    this.carOrArtificial['list'] = paramsList;
+    this.carOrArtificial['router'] = this.router;
+    if (this.chengKeTag) {
+      if (this.lastMsg['seatCount'] == "" || this.lastMsg['seatCount'] == 0) {
+        this.presentToast('请填写座位数！');  
+        return false;
+      }
+    }
+    if (!this.lastMsg['insuredName']) {
+      this.presentToast('请输入被保人姓名！');
+      return false;
+    } else if (!this.forceTag && !this.cheSunTag && !this.sanZheTag && !this.daoQiangTag && !this.siJiTag && !this.chengKeTag && !this.boLiTag && !this.huaHenTag && !this.sheShuiTag && !this.ziRanTag && !this.hcSanfangteyueTag && !this.hcXiulichangTypeTag) {
+      this.presentToast('请至少选择一种险种！');
+      return false;
+    }else {
+      this.navCtrl.push(SelInsuranceCompPage, {
+        'carOrArtificial': this.carOrArtificial,
+      } );
     }
   }
 

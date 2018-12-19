@@ -126,7 +126,7 @@ export class ModifyPolicyPage {
       cityCode: this.cityCode,
       agentName: this.agentName,
       userId: this.userId,
-      requotationType: 2,
+      router: 2,
       quoteTypeId: this.segmentType,
 
       insuredIdCardPhotoImg: this.insuredIdCardPhoto[0].blob,
@@ -165,16 +165,17 @@ export class ModifyPolicyPage {
       agentPhotoImg2: this.agentIdCardPhoto[1].blob,
       agentPhotoImg2_name: '24.png',
 
-      agentSignPhotoImg: this.agentSignPhoto.blob,
+      agentSignPhotoImg: this.agentSignPhoto[0].blob,
       agentSignPhotoImg_name: '25.png',
     };
     if (this.segmentType == '1') {//人工报价
         param.drivingLicenseImg = this.drivingLicensesPhoto[0].blob;
         param.drivingLicenseImg_name = '2.png';
     } else {//新车报价
-        param.drivingLicenseImg = this.invoicePhoto[0].blob;
-        param.drivingLicenseImg_name = '3.png';
+        param.carInvoicePhotoImg = this.invoicePhoto[0].blob;
+        param.carInvoicePhotoImg_name = '3.png';
     }
+    // console.log(param);
     this.navCtrl.push(RequotationPage, param);
   }
 

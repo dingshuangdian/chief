@@ -60,7 +60,7 @@ page-consumer-msg {
         margin-top: 15px;
         .course_tabBox {
             display: inline-block;
-            width: 33.3%;
+            width: 25%;
             position: relative;
             line-height: 42px;
             background: #fff;
@@ -73,15 +73,15 @@ page-consumer-msg {
                 font-weight: bolder;
                 .red-point {
                     position: absolute;
-                    height: 14px;
-                    width: 20px;
+                    height: 12px;
+                    width: 14px;
                     border-radius: 25%;
                     background-color: #fb4f29;
                     top: -5px;
-                    right: -20px;
-                    font-size: 12px;
+                    right: -12px;
+                    font-size: xx-small;
                     color: #fff;
-                    line-height: 14px;
+                    line-height: 12px;
                     font-weight: normal;
                 }
             }
@@ -200,8 +200,38 @@ page-consumer-msg {
                 border: 0.55px solid #ff5a10;
                 color: #ff5a10;
             }
+            .yhj {
+                width: 97%;
+                background-color: #fff;
+                display: flex;
+                position: relative;
+                border-radius:5px;
+                margin-bottom: 10px;
+                justify-content: space-between;
+                .lf {
+                    max-width: 60%;
+                    margin-left: 15px;
+                    display: inline-flex;
+                    flex-direction: column;
+                }
+                .rf {
+                    display: inline-flex;
+                    justify-content: space-between;
+                    img {
+                        width: 1px;
+                        height: 77px;
+                        margin: 10px;
+                    }
+                    margin-right: 15px;
+                }
+                span{
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+            }
             .hasCar {
                 width: 100%;
+             
                 .carTop {
                     img {
                         height: 35px;

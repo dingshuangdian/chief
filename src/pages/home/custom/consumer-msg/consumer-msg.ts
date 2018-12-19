@@ -29,9 +29,10 @@ export class ConsumerMsgPage {
   isNave: boolean;
 
   public courseTab = [
-    { "name": "车辆", "bol": true, 'num': '' },
-    { "name": "会员卡", "bol": false, 'num': '' },
-    { "name": "消费记录", "bol": false, 'num': '' }
+    { "name": "车辆", "bol": true, 'num': 0 },
+    { "name": "会员卡", "bol": false, 'num': 0 },
+    { "name": "优惠卷", "bol": false, 'num': 0 },
+    { "name": "消费记录", "bol": false, 'num': 0 }
   ];
   pointBalanceNum;
   showOpenCard: boolean = false;
@@ -43,6 +44,7 @@ export class ConsumerMsgPage {
   lastNum = '';
   hasMemberId = false;
   mcard;
+  coupon = [{ name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" }, { name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州" }, { name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州" }, { name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州" }, { name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州" }];
   page = 1;
   imgUrl;
   infiniteScroll;
@@ -92,6 +94,7 @@ export class ConsumerMsgPage {
     this.imgUrl = WebConfig.img_path;
     this.findMemberCard(this.consumer.memberId);
     this.goCarRecord(this.infiniteScroll);
+    this.findCouponCard();
   }
   ionViewWillEnter() {
     this.getMember(this.consumer.memberId);
@@ -136,16 +139,19 @@ export class ConsumerMsgPage {
       console.error(error);
     })
   }
+  findCouponCard() {
+    this.courseTab[2].num = this.coupon.length;
+
+  }
   goCarRecord(infiniteScroll) {
     let params1 = { memberId: this.consumer.memberId, page: 0, row: 0 };
     this.websites.httpPost('findOrderLogs', params1).subscribe(res => {
       if (res) {
-        this.courseTab[2].num = res.length;
+        this.courseTab[3].num = res.length;
       }
-
     })
     let params = { memberId: this.consumer.memberId, page: this.page, row: 10 };
-    this.websites.httpPost('findOrderLogs', params, true).subscribe(res => {
+    this.websites.httpPost('findOrderLogs', params).subscribe(res => {
       if (res != null) {
         this.recordCar = this.recordCar.concat(res);
         if (infiniteScroll) {

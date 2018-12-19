@@ -17,11 +17,11 @@ import { CarInsProgressPage } from '../car-ins-progress/car-ins-progress';
 })
 export class SelInsuranceCompPage {
 
-  selInsCompType: any;
   carOrArtificial;
   companyList;
   companySelect;//选中的保险公司对象
   paramsList;
+  carPicList;
   listParams = {};
   constructor(
     public navCtrl: NavController,
@@ -34,6 +34,7 @@ export class SelInsuranceCompPage {
   ) {
     if (this.navParams.get("carOrArtificial")) {
       this.carOrArtificial = this.navParams.get("carOrArtificial");
+      this.carPicList = this.carOrArtificial.data;
       this.paramsList = this.carOrArtificial.list;
     }
   }
@@ -44,7 +45,10 @@ export class SelInsuranceCompPage {
 
   //获取保险公司列表
   getInsuranceCompanies() {
-    this.websize.httpPost("getInsuranceCompanies", { cityCode: this.carOrArtificial.list.cityCode }, true).subscribe(res => {
+    this.websize.httpPost("getInsuranceCompanies", { 
+      'cityCode': this.carOrArtificial.list.cityCode 
+    })
+    .subscribe(res => {
       if (res) {
         this.companyList = res;
         this.companySelect = this.companyList[0];
@@ -134,15 +138,15 @@ export class SelInsuranceCompPage {
         insureAgentUname: this.paramsList.insureAgentUname,
         licenseNo: this.paramsList.licenseNo,
         holderName: this.paramsList.holderName,
-        holderIdCard: this.paramsList.holderIdCard,
-        holderMobile: this.paramsList.holderMobile,
-        holderIdCardType: this.paramsList.holderIdCardType,
+        holderIdCard: this.paramsList.holderIdCard?this.paramsList.holderIdCard:'',
+        holderMobile: this.paramsList.holderMobile?this.paramsList.holderMobile:'',
+        holderIdCardType: this.paramsList.holderIdCardType?this.paramsList.holderIdCardType:'',
         insuredName: this.paramsList.insuredName,
         insuredIdCard: this.paramsList.insuredIdCard,
         insuredMobile: this.paramsList.insuredMobile,
         insuredIdCardType: this.paramsList.insuredIdCardType,
-        forceStartDate: this.paramsList.forceStartDate,
-        businessStartDate: this.paramsList.businessStartDate,
+        forceStartDate: this.paramsList.forceStartDate?this.paramsList.forceStartDate:'',
+        businessStartDate: this.paramsList.businessStartDate?this.paramsList.businessStartDate:'',
         seatCount: this.paramsList.seatCount,
         force: this.paramsList.force,
         cheSun: this.paramsList.cheSun,
@@ -168,44 +172,44 @@ export class SelInsuranceCompPage {
         insuranceCompanyList: JSON.stringify(insuranceCompanyList),
         quoteGroup: quoteGroup,
         memo: this.paramsList.memo,
-        carownerMobile: "",
-        quoteTypeId: "",
-        insuredIdCardPhotoImg: "",
-        insuredIdCardPhotoImg_name: "",
-        drivingLicenseImg: "",
-        drivingLicenseImg_name: "",
-        carInvoicePhotoImg: "",
-        carInvoicePhotoImg_name: "",
-        carbodyPhotoImg1: "",
-        carbodyPhotoImg1_name: "",
-        carbodyPhotoImg2: "",
-        carbodyPhotoImg2_name: "",
-        carbodyPhotoImg3: "",
-        carbodyPhotoImg3_name: "",
-        carbodyPhotoImg4: "",
-        carbodyPhotoImg4_name: "",
-        carvinPhotoImg: "",
-        carvinPhotoImg_name: "",
-        otherPhotoImg1: "",
-        otherPhotoImg1_name: "",
-        otherPhotoImg2: "",
-        otherPhotoImg2_name: "",
-        otherPhotoImg3: "",
-        otherPhotoImg3_name: "",
-        underwritingPhotoImg1: "",
-        underwritingPhotoImg1_name: "",
-        underwritingPhotoImg2: "",
-        underwritingPhotoImg2_name: "",
-        underwritingPhotoImg3: "",
-        underwritingPhotoImg3_name: "",
-        businessLicenseImg: "",
-        businessLicenseImg_name: "",
-        agentPhotoImg1: "",
-        agentPhotoImg1_name: "",
-        agentPhotoImg2: "",
-        agentPhotoImg2_name: "",
-        agentSignPhotoImg: "",
-        agentSignPhotoImg_name: ""
+        carownerMobile: this.carPicList.carownerMobile,
+        quoteTypeId: this.carPicList.quoteTypeId,
+        insuredIdCardPhotoImg: this.carPicList.insuredIdCardPhotoImg,
+        insuredIdCardPhotoImg_name: this.carPicList.insuredIdCardPhotoImg_name,
+        drivingLicenseImg: this.carPicList.drivingLicenseImg,
+        drivingLicenseImg_name: this.carPicList.drivingLicenseImg_name,
+        carInvoicePhotoImg: this.carPicList.carInvoicePhotoImg,
+        carInvoicePhotoImg_name: this.carPicList.carInvoicePhotoImg_name,
+        carbodyPhotoImg1: this.carPicList.carbodyPhotoImg1,
+        carbodyPhotoImg1_name: this.carPicList.carbodyPhotoImg1_name,
+        carbodyPhotoImg2: this.carPicList.carbodyPhotoImg2,
+        carbodyPhotoImg2_name: this.carPicList.carbodyPhotoImg2_name,
+        carbodyPhotoImg3: this.carPicList.carbodyPhotoImg3,
+        carbodyPhotoImg3_name: this.carPicList.carbodyPhotoImg3_name,
+        carbodyPhotoImg4: this.carPicList.carbodyPhotoImg4,
+        carbodyPhotoImg4_name: this.carPicList.carbodyPhotoImg4_name,
+        carvinPhotoImg: this.carPicList.carvinPhotoImg,
+        carvinPhotoImg_name: this.carPicList.carvinPhotoImg_name,
+        otherPhotoImg1: this.carPicList.otherPhotoImg1,
+        otherPhotoImg1_name: this.carPicList.otherPhotoImg1_name,
+        otherPhotoImg2: this.carPicList.otherPhotoImg2,
+        otherPhotoImg2_name: this.carPicList.otherPhotoImg2_name,
+        otherPhotoImg3: this.carPicList.otherPhotoImg3,
+        otherPhotoImg3_name: this.carPicList.otherPhotoImg3_name,
+        underwritingPhotoImg1: this.carPicList.underwritingPhotoImg1,
+        underwritingPhotoImg1_name: this.carPicList.underwritingPhotoImg1_name,
+        underwritingPhotoImg2: this.carPicList.underwritingPhotoImg2,
+        underwritingPhotoImg2_name: this.carPicList.underwritingPhotoImg2_name,
+        underwritingPhotoImg3: this.carPicList.underwritingPhotoImg3,
+        underwritingPhotoImg3_name: this.carPicList.underwritingPhotoImg3_name,
+        businessLicenseImg: this.carPicList.businessLicenseImg,
+        businessLicenseImg_name: this.carPicList.businessLicenseImg_name,
+        agentPhotoImg1: this.carPicList.agentPhotoImg1,
+        agentPhotoImg1_name: this.carPicList.agentPhotoImg1_name,
+        agentPhotoImg2: this.carPicList.agentPhotoImg2,
+        agentPhotoImg2_name: this.carPicList.agentPhotoImg2_name,
+        agentSignPhotoImg: this.carPicList.agentSignPhotoImg,
+        agentSignPhotoImg_name: this.carPicList.agentSignPhotoImg_name,
       };
       if (this.carOrArtificial.router == 2) {
         this.artificialQuotation(paramsLists); //人工报价
@@ -218,7 +222,6 @@ export class SelInsuranceCompPage {
   artificialQuotation(paramsLists) { //人工报价
     this.websize.httpPost('artificialQuotation', paramsLists, true).subscribe(res => {
       if (res) {
-        console.log(res);
         this.showAlert('资料提交成功，等待人工核保');
         this.navCtrl.push(CarInsProgressPage, { num: 1 })
       }

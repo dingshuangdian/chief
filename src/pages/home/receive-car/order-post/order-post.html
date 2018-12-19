@@ -4,7 +4,6 @@
       订单提交成功
     </ion-title>
   </ion-navbar>
-
 </ion-header>
 <ion-content class="bg">
   <div class="tit">
@@ -14,7 +13,6 @@
         <h3>保存订单成功!</h3>
       </span>
     </div>
-
   </div>
   <div>
     <div class="carmsg">您还可以登记车辆信息</div>
@@ -27,7 +25,6 @@
           <ion-col>
             <ion-input [(ngModel)]="auto.plateNumber"></ion-input>
           </ion-col>
-
         </ion-row>
         <ion-row>
           <div class="colName">
@@ -81,25 +78,11 @@
     </div>
   </div>
   <div class="btn">
-
     <div class="bt">
-
       <button ion-button (click)="saveCarInfo()">保存车辆信息</button>
-
-
       <button ion-button (click)="goInsurance()">车险报价</button>
-
-
       <button ion-button (click)="goOrderList()">查看订单列表</button>
-
-
       <button ion-button (click)="goBack()">继续接车</button>
-
-
-
     </div>
   </div>
-
-
-
 </ion-content>
