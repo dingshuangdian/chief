@@ -51,6 +51,9 @@ export class AccountOrderPage {
   discountAmount;
   pointConfig;
   coupon = "选择优惠卷";
+  couponArr: Array<any> = [];
+  couponId: any;
+  couponAmount: 0;
   usePointNum;
   constructor(
     public navCtrl: NavController,
@@ -114,7 +117,6 @@ export class AccountOrderPage {
             }
           }
         }
-
         // notifys
         this.notifys = res.notifys;
         if (this.notifys) {
@@ -133,10 +135,25 @@ export class AccountOrderPage {
         } else {
           this.paymentRecords = null;
         }
+        //优惠券情况
+        this.couponArr = res.coupons ? res.coupons : null;
+        if (this.couponArr != null) {
+          for(var i=0;i<this.couponArr.length;i++){
+            if(this.couponArr[i].validityEtime > this.getToday()){
+              this.couponArr[i].expired = false;
+            }else{
+              this.couponArr[i].expired = true;
+            }
+          }
+        }
         this.computedMoney();
       }
     })
-
+  }
+  getToday(){
+    var today = new Date();
+    var todayFormatDate = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+    return todayFormatDate;
   }
   //选择通知方式
   noticeWay(tag, index) {
@@ -209,6 +226,7 @@ export class AccountOrderPage {
       self.settlementParam['warmTips'] = self.warmTips ? self.warmTips : "";
       self.settlementParam['notifyTags'] = self.notifyTags;
       self.settlementParam['pointNum'] = self.pointNum ? self.pointNum : "";
+      self.settlementParam['couponId'] = self.couponId ? self.couponId : "";
       let obj = self.payments.paymentId == 11 ? {
         money: self.paidMoney,
         paymentId: self.payments.paymentId,
@@ -345,15 +363,33 @@ export class AccountOrderPage {
     }
     this.noPayMoney = this.paiclUpMoney - sum;
     this.paidMoney = this.paiclUpMoney - sum;
-
   }
+
+  //点击优惠券
   selectCoupon() {
     this.repertoryPopover();
   }
   repertoryPopover() {
-    this.csModal.showProvince(couponPopover, {}, false, (data) => {
+    var self = this;
+    this.csModal.showProvince(couponPopover, {
+      'couponArr': this.couponArr
+    }, false, (data) => {
       if (data) {
-        this.coupon = data == 1 ? "选择优惠卷" : data.name + "(" + data.describe + ")";
+        this.coupon = data == 1 ? "选择优惠卷" : data.couponTypeName;
+        this.couponId = data == 1 ? '' : data.couponId;
+        this.couponAmount = data == 1 ? 0 : data.couponAmount;
+        if(this.couponId){
+          if(this.paiclUpMoney > this.couponAmount){
+            this.paiclUpMoney = this.paiclUpMoney - this.couponAmount;
+            this.paidMoney = this.paiclUpMoney;
+          }else{
+            self.alertbox(1, '注意', '优惠券不能使用', '确定', '', function () {
+              self.couponId = '';
+              self.couponAmount = 0;
+              self.coupon = '选择优惠卷';
+            }, function () { });
+          }
+        }
       }
     });
   }

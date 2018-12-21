@@ -153,7 +153,7 @@ export class HomePage {
     }, (msg) => { })
   }
   onCX() {
-   // this.navCtrl.push(AutoInsurancePage);
+    //this.navCtrl.push(AutoInsurancePage);
     cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
       console.log(res);
     }, (error) => {

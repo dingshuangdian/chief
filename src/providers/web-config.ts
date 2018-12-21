@@ -173,6 +173,7 @@ export class WebConfig {
                 qryPayOrderInfo: '/CRUD/CRUD-Q-IBS-Order-qryPayOrderInfo.do',//支付
                 qryPayCode: '/CRUD/CRUD-Q-IBS-Order-qryPayCode.do',//支付二维码
                 autoInsuranceRenewal: '/CRUD/CRUD-U-IBS-Insurance-autoInsuranceRenewal.auth',//一键续保
+                findCouponsByMemberId: '/CRUD/CRUD-Q-coupon-findCouponsByMemberId.do',
         };
         static phone = "4008313400";
 }

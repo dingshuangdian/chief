@@ -14,26 +14,27 @@
 </ion-header>
 <ion-content>
   <div style=" display:flex;flex-direction:column;align-items:center;margin-top:10px">
-    <div *ngIf="!coupon">
+    <div class="noYhj" *ngIf="!coupon">
       <img src="assets/imgs/car_03.gif">
       <p>暂无优惠卷</p>
     </div>
     <div class="yhj" *ngFor="let item of coupon" (click)="select(item)">
       <div class="lf">
         <div>
-          <p style="color:black;font-weight: bold;font-size: larger">{{item.name}}</p>
+          <p style="color:black;font-weight: bold;font-size: larger">{{item.couponTypeName}}</p>
         </div>
         <div style="color:darkgray;font-size:xx-small;margin-bottom: 10px">
-          <span style="display:block;margin-bottom: 7px">{{item.area}}</span>
-          <span>有效期至：{{item.data}}</span>
+          <!-- <span style="display:block;margin-bottom: 7px">{{item.area}}</span> -->
+          <span>提示：当支付金额大于{{item.couponAmount}}元时可用</span>
+          <span>有效期至：{{item.validityEtime}}</span>
         </div>
       </div>
-      <img style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/gq.png" alt="">
+      <img *ngIf="item.expired" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/gq.png" alt="">
       <div class="rf">
         <img src="assets/imgs/line_03.gif" alt="">
         <div style="display:inline-flex;flex-direction: column;align-items: center;justify-content: center;width: 70px">
-          <span style="display:block;color: #578cef;font-size: 20px">{{item.balance}}元</span>
-          <span style="display:block;color:darkgray;font-size:xx-small;margin-top:5px">{{item.describe}}</span>
+          <span style="display:block;color: #578cef;font-size: 20px">{{item.couponAmount}}元</span>
+          <!-- <span style="display:block;color:darkgray;font-size:xx-small;margin-top:5px">{{item.couponInfo}}</span> -->
         </div>
       </div>
     </div>

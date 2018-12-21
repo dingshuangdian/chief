@@ -44,7 +44,7 @@ export class ConsumerMsgPage {
   lastNum = '';
   hasMemberId = false;
   mcard;
-  coupon = [{ name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" }, { name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州" }, { name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州" }, { name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州" }, { name: "洗车优惠卷", data: "2018.12.31", balance: 50, describe: '满2000减50', area: "适用于广州" }];
+  coupon: any;//优惠券
   page = 1;
   imgUrl;
   infiniteScroll;
@@ -94,7 +94,7 @@ export class ConsumerMsgPage {
     this.imgUrl = WebConfig.img_path;
     this.findMemberCard(this.consumer.memberId);
     this.goCarRecord(this.infiniteScroll);
-    this.findCouponCard();
+    this.findCouponCard(this.consumer.memberId);
   }
   ionViewWillEnter() {
     this.getMember(this.consumer.memberId);
@@ -139,9 +139,27 @@ export class ConsumerMsgPage {
       console.error(error);
     })
   }
-  findCouponCard() {
-    this.courseTab[2].num = this.coupon.length;
-
+  //优惠券
+  findCouponCard(memberId) {
+    this.websites.httpPost('findCouponsByMemberId', { 'memberId': memberId }, true)
+    .subscribe(res => {
+      this.coupon = res;
+      if (res != null) {
+        this.courseTab[2].num = this.coupon.length;
+        for(var i=0;i<this.coupon.length;i++){
+          if(this.coupon[i].validityEtime > this.getToday()){
+            this.coupon[i].expired = false;
+          }else{
+            this.coupon[i].expired = true;
+          }
+        }
+      }
+    });
+  }
+  getToday(){
+    var today = new Date();
+    var todayFormatDate = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+    return todayFormatDate;
   }
   goCarRecord(infiniteScroll) {
     let params1 = { memberId: this.consumer.memberId, page: 0, row: 0 };
@@ -218,7 +236,6 @@ export class ConsumerMsgPage {
     this.csbzNave.closewin();
   }
   openCard() {
-
     this.navCtrl.push(memberOpenPage, { memberInfo: this.consumer });
   }
 }

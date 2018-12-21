@@ -72,8 +72,11 @@ export class AccountPage {
   getInfo() {
     this.websize.httpPost('getStoreInfo', '').subscribe(res => {
       if (res) {
-        this.storeMsg = res;
-        this.store_type_id = res.store_type_id;
+        this.storeMsg.company_name = res.companyName;
+        this.storeMsg.store_address = res.officeAddress;
+        this.storeMsg.office_tel = res.officeTel;
+        this.storeMsg.business_time = res.businessTime;
+        this.store_type_id = res.storeTypeId;
         if ((res.cTypeId & 8) > 0) {
           this.flag = true
         } else {
