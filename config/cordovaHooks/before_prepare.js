@@ -7,7 +7,7 @@ var resolveToString = require('es6-template-strings/resolve-to-string');
 
 var ROOT_DIR = path.resolve(__dirname, '../../')
 
-var env = process.env.NODE_ENV || 'dev';
+var env = process.env.NODE_ENV || 'prod';
 var envFile = 'src/environments/env.' + env + '.ts';
 
 var FILES = {

@@ -27,6 +27,7 @@ platforms/
 plugins/android.json
 plugins/ios.json
 www/
+plugins
 hcp_build/
 $RECYCLE.BIN/
 .DS_Store
