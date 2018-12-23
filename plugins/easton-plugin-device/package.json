@@ -1,0 +1,45 @@
+{
+  "_from": "easton-plugin-device@^1.0.0",
+  "_id": "easton-plugin-device@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-tkxfNHKxl77gIJIWC7xxzAjm73S3i+fEpSDZmQ7WsqavevXGyFQRdbayfgI0wQjNM+8MyEggzTj3bzkrb0jEfA==",
+  "_location": "/easton-plugin-device",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "easton-plugin-device@^1.0.0",
+    "name": "easton-plugin-device",
+    "escapedName": "easton-plugin-device",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/easton-plugin-device/-/easton-plugin-device-1.0.0.tgz",
+  "_shasum": "10704198a760a9e141c3a1ab67e4178baccbddca",
+  "_spec": "easton-plugin-device@^1.0.0",
+  "_where": "/Users/easton/Documents/project/ionic/chief/chief",
+  "author": "",
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "easton-plugin-device",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "ISC",
+  "name": "easton-plugin-device",
+  "version": "1.0.0"
+}

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="easton-plugin-insurance" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>BSTool</name>
+    <js-module name="BSTool" src="www/BSTool.js">
+        <clobbers target="cordova.BSTool" />
+    </js-module>
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="BSTool">
+                <param name="ios-package" value="BSTool" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/BSTool.h" />
+        <source-file src="src/ios/BSTool.m" />
+    </platform>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="BSTool">
+                <param name="android-package" value="chiefchain.BSTool" />
+            </feature>
+        </config-file>
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			
+    
+ <activity android:name="chiefchain.CXActivity"></activity>
+		</config-file>
+		
+        <source-file src="src/android/BSTool.java" target-dir="app/src/main/java/chiefchain" />
+		<source-file src="src/android/CordovaInterfaceImpl.java" target-dir="app/src/main/java/chiefchain" />
+		<source-file src="src/android/CXActivity.java" target-dir="app/src/main/java/chiefchain" />
+		<source-file src="src/android/MyConfig.java" target-dir="app/src/main/java/chiefchain" />
+		<source-file src="src/android/MyConfigXmlParser.java" target-dir="app/src/main/java/chiefchain" />
+		<source-file src="src/android/MyCordovaActivity.java" target-dir="app/src/main/java/chiefchain" />
+		<source-file src="src/android/SharedPreferences.java" target-dir="app/src/main/java/chiefchain" />
+		
+		
+    </platform>
+</plugin>

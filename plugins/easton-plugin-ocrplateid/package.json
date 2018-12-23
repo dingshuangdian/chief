@@ -1,0 +1,45 @@
+{
+  "_from": "easton-plugin-ocrplateid@^1.0.8",
+  "_id": "easton-plugin-ocrplateid@1.0.8",
+  "_inBundle": false,
+  "_integrity": "sha512-y5TZuk/j2xgCZNyGA9uX+GGId7DOWr7QtHguywYDv8M5H3RYPdb/qPH4r+qWKFmMIOXGQqDxyKJMK4KSN0YQuQ==",
+  "_location": "/easton-plugin-ocrplateid",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "easton-plugin-ocrplateid@^1.0.8",
+    "name": "easton-plugin-ocrplateid",
+    "escapedName": "easton-plugin-ocrplateid",
+    "rawSpec": "^1.0.8",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.8"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/easton-plugin-ocrplateid/-/easton-plugin-ocrplateid-1.0.8.tgz",
+  "_shasum": "f18b7ac6f8dd9a0b60810350d36c7e0fd63e7afd",
+  "_spec": "easton-plugin-ocrplateid@^1.0.8",
+  "_where": "/Users/easton/Documents/project/ionic/chief/chief",
+  "author": {
+    "name": "dingshuangdian"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "easton-plugin-ocrplateid",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "",
+  "keywords": [
+    "扫车牌"
+  ],
+  "license": "ISC",
+  "name": "easton-plugin-ocrplateid",
+  "version": "1.0.8"
+}

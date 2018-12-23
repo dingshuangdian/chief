@@ -1,0 +1,57 @@
+{
+  "_from": "cordova-plugin-jcore@^1.2.6",
+  "_id": "cordova-plugin-jcore@1.2.6",
+  "_inBundle": false,
+  "_integrity": "sha512-RDb82m+weURGWgemUDSPKJOGeGWq2t4vfKbmwSo2GAa5zGJ92SLwljgVs+BcuOyvWP07zuH4uaZvaaaC4HCPcg==",
+  "_location": "/cordova-plugin-jcore",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "cordova-plugin-jcore@^1.2.6",
+    "name": "cordova-plugin-jcore",
+    "escapedName": "cordova-plugin-jcore",
+    "rawSpec": "^1.2.6",
+    "saveSpec": null,
+    "fetchSpec": "^1.2.6"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-jcore/-/cordova-plugin-jcore-1.2.6.tgz",
+  "_shasum": "22c3a18a5bc877cd586ec169015f19639a6ba200",
+  "_spec": "cordova-plugin-jcore@^1.2.6",
+  "_where": "/Users/easton/Documents/project/ionic/chief/chief",
+  "author": {
+    "name": "wilhantian, jiguang"
+  },
+  "bugs": {
+    "url": "https://github.com/jpush/cordova-plugin-jcore/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-jcore",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "jcore for cordova plugin",
+  "homepage": "https://github.com/jpush/cordova-plugin-jcore#readme",
+  "keywords": [
+    "jcore",
+    "jpush",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "MIT License",
+  "name": "cordova-plugin-jcore",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpush/cordova-plugin-jcore.git"
+  },
+  "version": "1.2.6"
+}

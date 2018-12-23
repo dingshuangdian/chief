@@ -1,0 +1,38 @@
+allprojects {
+  repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://jitpack.io' }
+  }
+}
+configurations.all {
+  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    def requested = details.requested
+    if (requested.group == 'com.android.support') {
+      if (!requested.name
+        .startsWith("multidex")) {
+        details.useVersion '22.2.0'
+      }
+    }
+  }
+}
+android {
+  dexOptions {
+    javaMaxHeapSize "4g"
+    preDexLibraries = false
+  }
+
+  defaultConfig {
+
+    //multiDexEnabled true
+  }
+}
+cdvPluginPostBuildExtras.add({
+  dependencies {
+    implementation "com.android.support:multidex:1.0.0"
+    implementation "com.android.support:support-v4:22.2.0"
+    implementation 'com.github.dingshuangdian:ocrplateid:v1.0.2'
+  }
+})
+
+
