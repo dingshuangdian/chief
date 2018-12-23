@@ -1,5 +1,9 @@
 #!/usr/bin/env node
-
+var fs = require('fs');
+var path = require('path');
+var compile = require('es6-template-strings/compile');
+var resolveToString = require('es6-template-strings/resolve-to-string');
+var program = require('commander');
 var co = require('co');
 var prompt = require('co-prompt');
 var program = require('commander');
@@ -7,10 +11,7 @@ var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path')
 var child_process = require('child_process');
-
 var configChange = require('./config_script');
-
-
 var hot_build = function (cmd, cmdArr, callback) {
   configChange();
   var ionic_build_process = child_process.spawn(cmd, cmdArr);
@@ -21,17 +22,17 @@ var hot_build = function (cmd, cmdArr, callback) {
     console.log("" + data);
   });
   ionic_build_process.on('close', function (code) {
-    console.log('ionic build close，code: ' + code);
-
     child_process.exec('cordova-hcp build', function (error, stdout, stderr) {
       if (error) {
         console.error('error: ' + error);
         return;
-      } 
+      }
       if (stderr) {
         console.log(chalk.yellow('stderr: ' + stderr));
       }
       console.log('stdout: ' + stdout);
+      child_process.exec("cordova prepare");
+
       callback();
     })
   });
@@ -56,7 +57,7 @@ var mkdirsDir = function (dirname, callback) {
 var copy = function (src, dst) {
   //读取目录
   fs.readdir(src, function (err, paths) {
-    console.log(paths)
+    //console.log(paths)
     if (err) {
       throw err;
     }
@@ -106,7 +107,7 @@ program
   .action(function (env, options) {
 
     var cmd = process.platform === 'win32' ? 'ionic.cmd' : 'ionic',
-      cmdArr = ['build',"--no-interactive"];
+      cmdArr = ['build', "--no-interactive"];
     process.env.NODE_ENV = "dev";
 
     if (env) {
@@ -115,14 +116,14 @@ program
 
     if (options.prod) {
       process.env.NODE_ENV = 'prod';
-      cmdArr = ["build", "--prod", "--aot", "--minifyjs", "--minifycss", "--optimizejs","--no-interactive"];
+      cmdArr = ["build", "--prod", "--aot", "--minifyjs", "--minifycss", "--optimizejs", "--no-interactive"];
     } else if (options.test) {
       process.env.NODE_ENV = 'test';
-      cmdArr = ["build", "--prod", "--aot", "--minifyjs", "--minifycss", "--optimizejs","--no-interactive"];
+      cmdArr = ["build", "--prod", "--aot", "--minifyjs", "--minifycss", "--optimizejs", "--no-interactive"];
     }
 
     if (options.optimize || env == "prod") {
-      cmdArr = ["build", "--prod", "--aot", "--minifyjs", "--minifycss", "--optimizejs","--no-interactive"];
+      cmdArr = ["build", "--prod", "--aot", "--minifyjs", "--minifycss", "--optimizejs", "--no-interactive"];
     }
 
     if (!fs.existsSync('src/environments/env.' + process.env.NODE_ENV + '.ts')) {
@@ -144,15 +145,14 @@ program
       var rootPath = path.resolve(__dirname, '../');
       var rootPathArr = rootPath.split(process.platform === 'win32' ? '\\' : '/');
       var rootName = rootPathArr[rootPathArr.length - 1];
-
-
       mkdirsDir(path.resolve(__dirname, '../hcp_build', rootName + '_' + process.env.NODE_ENV + time), function () {
         exists(path.resolve(__dirname, '../www'), path.resolve(__dirname, '../hcp_build', rootName + '_' + process.env.NODE_ENV + time, 'www'), copy);
       });
-
-
     });
   });
+
+
+
 
 
 program
@@ -164,7 +164,6 @@ program
   .action(function (platform, options) {
 
     var method = "beta";
-
     if (options.release) {
       method = "release";
     } else if (options.beta) {
@@ -209,7 +208,6 @@ program
         console.log('stdout: ' + stdout);
       });
     }
-
   })
   .on('--help', function () {
     console.log('  Examples:');
@@ -219,8 +217,6 @@ program
     console.log('    $ build nav android      安卓包');
     console.log('');
   });;
-
-
 program.parse(process.argv);
 
 

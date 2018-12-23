@@ -11,9 +11,9 @@
     },
     "debug":
     {
-      "keystore": "./chiefStore_android.jks",
+      "keystore": "./chiefStore_android_test.jks",
       "storePassword": ".luochen",
-      "alias": "chepu",
+      "alias": "key0",
       "password": ".luochen",
       "keystoreType": "jks"
     }

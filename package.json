@@ -50,7 +50,7 @@
         "easton-plugin-device": "^1.0.0",
         "easton-plugin-insurance": "^1.0.0",
         "easton-plugin-nativedownload": "^1.0.0",
-        "easton-plugin-ocrplateid": "^1.0.7",
+        "easton-plugin-ocrplateid": "^1.0.8",
         "easton-plugin-photoview": "^1.0.6",
         "echarts": "^4.1.0",
         "ionic-angular": "3.9.2",
