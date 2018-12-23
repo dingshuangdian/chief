@@ -23,7 +23,6 @@
     <chcp>
         <config-file url="${chcp_url}" />
     </chcp>
-    <hook src="config/cordovaHooks/before_prepare.js" type="before_prepare" />
     <hook src="config/cordovaHooks/after_platform_add.js" type="after_platform_add" />
     <platform name="android">
         <name>${app_name}</name>
