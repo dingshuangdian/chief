@@ -72,13 +72,15 @@ export class UserData {
       lgiPwd: lgiPwd.toString()
     }
     this.websites.httpPost('login', loginInfo).subscribe(res => {
-      this.setToken(res.tokenId);
-      this.setLgiName(lgiName);
-      this.setLgiPwd(lgiPwd);
-      this.getUserInfo(true).subscribe(data => {
-        callback();
-        this.events.publish('user:login');
-      });
+      if (res) {
+        this.setToken(res.tokenId);
+        this.setLgiName(lgiName);
+        this.setLgiPwd(lgiPwd);
+        this.getUserInfo(true).subscribe(data => {
+          callback();
+          this.events.publish('user:login');
+        });
+      }
     })
   }
 }

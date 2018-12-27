@@ -143,6 +143,7 @@ export class ConsumerMsgPage {
   findCouponCard(memberId) {
     this.websites.httpPost('findCouponsByMemberId', { 'memberId': memberId }, true)
     .subscribe(res => {
+      console.log(res);
       this.coupon = res;
       if (res != null) {
         this.courseTab[2].num = this.coupon.length;

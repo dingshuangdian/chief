@@ -182,7 +182,10 @@
               <span>有效期至：{{item.validityEtime}}</span>
             </div>
           </div>
-          <img *ngIf="item.expired" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/gq.png" alt="">
+          <img *ngIf="item.couponStateId == 1" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-noused.gif" alt="">
+          <img *ngIf="item.couponStateId == 2" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-hadused.png" alt="">
+          <img *ngIf="item.couponStateId == 3" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-rescinded.gif" alt="">
+          <img *ngIf="item.couponStateId == 4" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/gq.png" alt="">
           <div class="rf">
             <img src="assets/imgs/line_03.gif" alt="">
             <div style="display:inline-flex;flex-direction: column;align-items: center;justify-content: center;width: 70px">

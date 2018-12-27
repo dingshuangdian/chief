@@ -1,42 +1,49 @@
 <ion-header>
   <ion-navbar>
-      <ion-row>
-        <div style="padding: 5px;">
-          优惠卷
-        </div>
-        <ion-col text-right class="selectType">
-          <button ion-button color="dark" clear (click)="close()">
-            <ion-icon name="ios-close-circle-outline"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
+    <ion-row>
+      <div style="padding: 5px;">
+        优惠卷
+      </div>
+      <ion-col text-right class="selectType">
+        <label (click)="unuse()">不使用</label>
+        <button ion-button color="dark" clear (click)="close()">
+          <ion-icon name="ios-close-circle-outline"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div style=" display:flex;flex-direction:column;align-items:center;margin-top:10px">
+  <div style=" display:flex;flex-direction:column;align-items:center;margin-top:10px;">
     <div class="noYhj" *ngIf="!coupon">
       <img src="assets/imgs/car_03.gif">
       <p>暂无优惠卷</p>
     </div>
-    <div class="yhj" *ngFor="let item of coupon" (click)="select(item)">
-      <div class="lf">
-        <div>
-          <p style="color:black;font-weight: bold;font-size: larger">{{item.couponTypeName}}</p>
+    <button ion-button clear *ngFor="let item of coupon" (click)="select(item)" style="height:auto;width: 100%"
+      [disabled]="item.isCanUse==0 || item.couponId==hasSelect.couponId">
+      <div class="yhj">
+        <div class="lf">
+          <div>
+            <p style="color:black;font-weight: bold;font-size: larger;text-align: start;margin-bottom: 10px">{{item.couponTypeName}}</p>
+          </div>
+          <div style="color:darkgray;font-size:12px;margin-bottom: 10px;text-align: start">
+            <!-- <span style="display:block;margin-bottom: 7px">{{item.area}}</span> -->
+            <span style="margin-bottom: 10px;display: block">提示：当支付金额大于{{item.couponAmount}}元时可用</span>
+            <span style="display: block">有效期至：{{item.validityEtime}}</span>
+          </div>
         </div>
-        <div style="color:darkgray;font-size:xx-small;margin-bottom: 10px">
-          <!-- <span style="display:block;margin-bottom: 7px">{{item.area}}</span> -->
-          <span>提示：当支付金额大于{{item.couponAmount}}元时可用</span>
-          <span>有效期至：{{item.validityEtime}}</span>
+        <img *ngIf="item.isCanUse==0" style="left:50%;width:80px;height:80px;position: absolute;top:10px" src="assets/imgs/unuse.gif"
+          alt="">
+        <div class="rf">
+          <img src="assets/imgs/line_03.gif" alt="">
+          <div style="display:inline-flex;flex-direction: column;align-items: center;justify-content: center;width: 70px">
+            <span style="display:block;color: #578cef;font-size: 20px">{{item.couponAmount}}元</span>
+            <span style="display:block;color:darkgray;font-size:xx-small;margin-top:5px">{{item.couponInfo}}</span>
+          </div>
         </div>
+
       </div>
-      <img *ngIf="item.expired" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/gq.png" alt="">
-      <div class="rf">
-        <img src="assets/imgs/line_03.gif" alt="">
-        <div style="display:inline-flex;flex-direction: column;align-items: center;justify-content: center;width: 70px">
-          <span style="display:block;color: #578cef;font-size: 20px">{{item.couponAmount}}元</span>
-          <!-- <span style="display:block;color:darkgray;font-size:xx-small;margin-top:5px">{{item.couponInfo}}</span> -->
-        </div>
-      </div>
-    </div>
+    </button>
+
   </div>
 </ion-content>

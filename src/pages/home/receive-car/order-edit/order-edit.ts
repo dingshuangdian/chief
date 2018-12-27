@@ -514,6 +514,7 @@ export class orderEditPage {
     params['member'] = member;
     params['auto'] = this.auto;
     params['services'] = services;
+    console.log(params);
     this.webSites.httpPost('saveAsorder', params).subscribe(res => {
       this.navCtrl.push(orderPostPage, { autoId: res.autoId, orderId: res.orderId, pickupMileage: this.otherInfo.pickupMileage });
     }, error => {

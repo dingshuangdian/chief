@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpParams } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -49,7 +49,7 @@ import { BackButtonService } from '../providers/backButton';
     LoginPage,
     ProvincesPage,
     SearchCarPage,
-    ProvincesSelectPage,
+    ProvincesSelectPage, 
     MntcSelectPage,
     SlidesPage,
 
@@ -62,7 +62,6 @@ import { BackButtonService } from '../providers/backButton';
     OrderPageModule,
     AccountPageModule,
     StatementPageModule,
-
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: 'true',
       iconMode: 'ios',

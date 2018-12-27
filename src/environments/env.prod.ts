@@ -9,8 +9,8 @@ export const ENV = {
         "android_packageName": "com.chief.store",
         "android_versionCode": "113",
         "ios_packageName": "com.chief.storeI",
-        "ios_versionCode": "61",
-        "version": "3.1.1",
+        "ios_versionCode": "64",
+        "version": "3.2.1",
         "chcp_url": "https://ndmapp.chiefchain.cn/app/www/chcp.json",
         "hcp_content_url": "https://ndmapp.chiefchain.cn/app/www",
         "ios": {
