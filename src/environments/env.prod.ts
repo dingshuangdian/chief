@@ -7,10 +7,10 @@ export const ENV = {
         "app_name": "车仆之家",
         "project_name": "CZBS",
         "android_packageName": "com.chief.store",
-        "android_versionCode": "113",
+        "android_versionCode": "116",
         "ios_packageName": "com.chief.storeI",
         "ios_versionCode": "64",
-        "version": "3.2.1",
+        "version": "3.3.1",
         "chcp_url": "https://ndmapp.chiefchain.cn/app/www/chcp.json",
         "hcp_content_url": "https://ndmapp.chiefchain.cn/app/www",
         "ios": {

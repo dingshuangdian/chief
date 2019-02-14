@@ -26,17 +26,18 @@ export class MyApp {
     public modalCtrl: ModalController,
     public userData: UserData,
     public csbzNave: CsbzNave,
-    private keyboard: Keyboard,
     public appCtrl: App,
     public jpush: JPush,
   ) {
 
     platform.ready().then(() => {
-      statusBar.styleLightContent();
-      splashScreen.hide();
-      this.keyboard.disableScroll(false);
+      //statusBar.styleLightContent();
+      //splashScreen.hide();
+      //this.keyboard.disableScroll(false);
       //this.csbzNave.pushInit();
       //this.csbzNave.appUpdate();
+      statusBar.styleDefault();
+      splashScreen.hide();
       jpush.init();
       jpush.setDebugMode(true);
     });

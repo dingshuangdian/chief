@@ -9,7 +9,7 @@
       <ion-row *ngFor="let c of memberCard.card">
         <img class="mcardImg" src="{{img_path}}{{c?.imageUrl}}">
         <ion-col>
-          <div class="mcardName">{{c.mcardMame}}</div>
+          <div class="mcardName">{{c.mcardMame}}({{c.mcardNo}})</div>
           <div>开卡日期：{{c.startDate}}</div>
           <div [ngClass]="{'dangerInfo': c.cardStateId == 4}">截止日期：{{c.stopDate}}</div>
           <div>{{c.mcardDesc}}</div>

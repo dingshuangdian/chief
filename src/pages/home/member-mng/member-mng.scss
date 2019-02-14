@@ -67,4 +67,11 @@ page-member-mng {
             border-bottom-left-radius: 4px;
         }
     }
+    .cold {
+        .col {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
 }

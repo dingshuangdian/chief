@@ -150,7 +150,7 @@ export class washCarPage {
   }
   //获取接车信息
   findService(memberId?) {
-    this.Websites.httpPost("findWashCarService4Order", { memberId: memberId, service: true },true).subscribe(res => {
+    this.Websites.httpPost("findWashCarService4Order", { memberId: memberId, service: true }).subscribe(res => {
       if (res['mcardServices']) this.mcardServices = res['mcardServices'];
       if (res['services']) this.servicesList = res['services'];
 
@@ -242,6 +242,8 @@ export class washCarPage {
       this.selectCar = auto;
       this.customer.plateNumber = auto.plateNumber;
       this.customer.autoId = auto.autoId;
+      this.findService(this.customer.memberId);
+
     }
   }
 

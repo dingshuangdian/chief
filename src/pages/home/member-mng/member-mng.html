@@ -37,16 +37,16 @@
 </ion-header>
 <ion-content class="outer-content">
   <div [ngSwitch]="segmentType">
-    <ion-list no-border-top *ngSwitchCase="'topUp'">
+    <ion-list no-border-top *ngSwitchCase="'topUp'" class="cold">
       <button ion-item *ngFor="let c of memberList" (click)="selectItem(c)">
         <ion-row>
           <ion-col>
-            <p style="color: #000;padding-bottom: 5px">{{c.plateNumber}}</p>
+            <p style="color: #000;">{{c.plateNumber}}</p>
             <span>{{c.mcardName}}&nbsp;&nbsp;&nbsp;&nbsp;[{{c.mcardNo}}]</span>
           </ion-col>
           <ion-col>
-            <p style="color: #000;padding-bottom: 5px">{{c.memberName}}</p>
-            {{c.mobileNumber}}
+            <p style="color: #000;">{{c.memberName}}</p>
+            <span>{{c.mobileNumber}}</span>
           </ion-col>
         </ion-row>
       </button>

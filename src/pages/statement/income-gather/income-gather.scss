@@ -133,6 +133,8 @@ page-income-gather {
       background-color: #efeff4;
     }
     .col {
+      white-space: nowrap;
+      overflow: hidden;
       border-bottom: solid 1px #D1D3D6;
       border-right: solid 1px #D1D3D6;
     }
@@ -146,4 +148,5 @@ page-income-gather {
 
     }
   }
+
 }

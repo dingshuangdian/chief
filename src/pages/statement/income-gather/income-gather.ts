@@ -4,6 +4,7 @@ import { NavController, NavParams, Events } from 'ionic-angular';
 import ECharts from 'echarts';
 import { WebSites } from '../../../providers/web-sites';
 import { DatePipe } from '@angular/common';
+import { CsModal } from '../../../providers/cs-modal';
 
 /**
  * Generated class for the IncomeGatherPage page.
@@ -37,7 +38,7 @@ export class IncomeGatherPage {
 
   chartInfo: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, private datePipe: DatePipe, public events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public websites: WebSites, private datePipe: DatePipe, public events: Events, public csmodel: CsModal) {
 
   }
 
@@ -77,6 +78,12 @@ export class IncomeGatherPage {
     this.websites.httpPost('findmonthReport', parm).subscribe(res => {
       if (res) {
         this.monthlyInfo = res;
+        this.monthlyInfo.forEach((element, i) => {
+          this.monthlyInfo[i].settleDate=element.settleDate.substr(5, element.length).replace(/-/g,"/");
+          this.monthlyInfo[i].incomeAmount = this.csmodel.unitConvert(element.incomeAmount);
+          this.monthlyInfo[i].costAmount = this.csmodel.unitConvert(element.costAmount);
+          this.monthlyInfo[i].profitAmount = this.csmodel.unitConvert(element.profitAmount);
+        });
       } else {
         this.monthlyInfo = [];
       }
@@ -89,7 +96,10 @@ export class IncomeGatherPage {
       if (res) {
         this.annualInfo = res;
         let xd = [], id = [], cd = [], pd = [];
-        this.annualInfo.forEach(c => {
+        this.annualInfo.forEach((c, i) => {
+          this.annualInfo[i].incomeAmount = this.csmodel.unitConvert(c.incomeAmount);
+          this.annualInfo[i].costAmount = this.csmodel.unitConvert(c.costAmount);
+          this.annualInfo[i].profitAmount = this.csmodel.unitConvert(c.profitAmount);
           xd.push(c.month);
           id.push(c.incomeAmount);
           cd.push(c.costAmount);

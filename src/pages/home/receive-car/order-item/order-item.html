@@ -167,7 +167,8 @@
           <ion-row>
             <ion-col col-4 *ngFor="let s of mcardP.childtypeList">
               <div class="bdg">
-                <button ion-button full color="selectItem" [ngClass]="{'isSelect': s.select}" (click)="selectItem(s)">{{s.serviceName}}</button>
+                <button ion-button full color="selectItem" [ngClass]="{'isSelect': s.select}" (click)="selectItem(s)"
+                  [disabled]="s.unable==0">{{s.serviceName}}</button>
                 <span class="red-point" *ngIf="s.svcNum<=5">{{s.svcNum}}</span>
               </div>
             </ion-col>

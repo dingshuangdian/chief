@@ -16,7 +16,7 @@
   <ion-list class="baseMsg">
     <ion-row>
       <ion-col>
-        <img src="assets/imgs/InsuranceLOGO_4.png" alt="">
+        <img src="assets/imgs/InsuranceLOGO_{{insuranceCompanyId}}-{{companyCatgory}}.png" alt="">
       </ion-col>
       <ion-col [hidden]="!info.totalAmount">￥{{info.totalAmount}}</ion-col>
     </ion-row>
@@ -46,7 +46,7 @@
   <!-- 商业险信息 -->
   <ion-list class="commercialIns">
     <sub-title [titleName]="'商业险信息'"></sub-title>
-    <ion-row [hidden]="info.businessTotal">
+    <ion-row [hidden]="!info.businessTotal">
       <ion-col>商业险</ion-col>
       <ion-col>￥{{info.businessTotal}}</ion-col>
     </ion-row>
@@ -110,6 +110,10 @@
     </ion-grid>
   </ion-list>
   <!-- 发送报价给客户 -->
+  <div *ngIf="iserrorReport">
+    <p style="color:red;margin-left:10px;font-size: 15px">核保失败</p>
+    <p style="margin-left:10px;">{{errorReport}}</p>
+  </div>
   <ion-list class="sendOffer">
     <ion-row>
       <span>发送报价给客户：</span>

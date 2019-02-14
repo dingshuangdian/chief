@@ -25,9 +25,6 @@ export class searchPjPage {
     },150);
   }
   ionViewDidLoad() {
-
-
-
   }
   searchPj(key) {
     if (key) {

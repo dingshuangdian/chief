@@ -4,7 +4,8 @@ import { LoadingController, AlertController, ToastController, ModalController, P
 
 @Injectable()
 export class CsModal {
-
+    loadingIsOpen: any;
+    loading: any;
     constructor(
         private loadingCtrl: LoadingController,
         private alertCtrl: AlertController,
@@ -95,6 +96,63 @@ export class CsModal {
 
         let alert = this.alertCtrl.create(option);
         alert.present();
+    }
+    public showLoading(content: any = ''): void {
+        if (typeof content != 'string') {
+            content = '';
+        }
+        if (!this.loadingIsOpen) {
+            this.loadingIsOpen = true;
+            this.loading = this.loadingCtrl.create({
+                content: content
+            });
+            this.loading.present();
+            setTimeout(() => { //最长显示10秒
+                this.loadingIsOpen && this.loading.dismiss();
+                this.loadingIsOpen = false;
+            }, 180000);
+        } else {
+            this.loading.setContent(content);
+        }
+    };
+    public hideLoading(): void {
+        this.loadingIsOpen && this.loading.dismiss();
+        this.loadingIsOpen = false;
+    };
+
+
+    private strNumSize(tempNum) {
+        var stringNum = tempNum.toString();
+        var index = stringNum.indexOf(".");
+        var newNum = stringNum;
+        if (index != -1) {
+            newNum = stringNum.substring(0, index)
+        };
+        return newNum.length;
+    }
+    public unitConvert(num) {
+        var moneyUnits = ["", "万", "亿", "万亿"];
+        var dividend = 10000;
+        var curentNum = num;
+        //转换数字
+        var curentUnit = moneyUnits[0];
+        //转换单位 
+        for (var i = 0; i < 4; i++) {
+            curentUnit = moneyUnits[i];
+            if (this.strNumSize(curentNum) < 5) {
+                var stringNum = curentNum.toString();
+                var index = stringNum.indexOf(".");
+                if (index == -1) {
+                    curentNum = curentNum + ".00";
+                }
+                break;
+            };
+            curentNum = curentNum / dividend;
+            if(curentNum.toString().split(".")[1].length>6){
+                curentNum= curentNum.toFixed(6)
+            }
+        };
+        return curentNum + curentUnit;
     }
 
 }

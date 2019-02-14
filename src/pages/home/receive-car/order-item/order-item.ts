@@ -101,7 +101,7 @@ export class orderItemPage {
         this.findService();
         if (this.navParams.get('carNum')) {
           let keyWords = this.navParams.get('carNum');
-          this.carInfo.plateNB=keyWords
+          this.carInfo.plateNB = keyWords
           if (this.csbzNave.checkCarNo(keyWords)) {
             this.carInfo.plateNB = keyWords.substr(1);
             this.carInfo.provinces = keyWords.substr(0, 1);
@@ -117,13 +117,13 @@ export class orderItemPage {
         this.isNewCustomer = false;
         this.findStoreExt();
         this.customer = this.navParams.get('customer') || { memberId: '0' };
-        this.findService(this.customer.memberId);
+        this.findService(this.customer.memberId, this.customer.autoId);
         this.findmember(this.customer.memberId);
         break;
       case 4:
         this.isNewCustomer = false;
         this.findStoreExt();
-        this.findService(this.customer.memberId);
+        this.findService(this.customer.memberId, this.customer.autoId);
         this.findmember(this.customer.memberId);
         break;
       case 5:
@@ -157,9 +157,8 @@ export class orderItemPage {
     })
   } true
   //获取接车信息
-  findService(memberId?, callback?) {
-    this.servicsData.loadService(memberId, true).then(res => {
-
+  findService(memberId?, autoId?, callback?) {
+    this.servicsData.loadService(memberId, autoId, true).then(res => {
       if (res['mcardServices']) this.mcardServices = res['mcardServices'];
       if (res['services']) this.servicesList = res['services'];
       if (callback) callback("ssss");
@@ -169,7 +168,7 @@ export class orderItemPage {
   //获取客户信息
   findmember(memberId, callback?) {
     let params = { memberId: memberId, auto: true }
-    this.Websites.httpPost('findmember', params,true).subscribe(res => {
+    this.Websites.httpPost('findmember', params, true).subscribe(res => {
       res.autoId = this.customer.autoId;
       this.amountUnpaid = res.suspendedMoney.amountUnpaid;
       if (res.hasOwnProperty('autos') && res.autos.length >= 0) {
@@ -204,12 +203,9 @@ export class orderItemPage {
 
   getBookOrder() {
     this.Websites.httpPost('getBookOrder', { orderId: this.navParams.get("orderId") }).subscribe(res => {
-      this.findService(this.customer.memberId, () => {
-
+      this.findService(this.customer.memberId, this.customer.autoId, () => {
         var allServices = this.mcardServices.concat(this.servicesList)
-
         let bookS = {};
-
         allServices.forEach(s => {
           s.childtypeList.forEach(sc => {
             res.services.forEach(rs => {
@@ -294,6 +290,7 @@ export class orderItemPage {
       this.selectCar = auto;
       this.customer.plateNumber = auto.plateNumber;
       this.customer.autoId = auto.autoId;
+      this.findService(this.customer.memberId, this.customer.autoId)
     }
   }
   changePlateNumber() {
@@ -344,7 +341,7 @@ export class orderItemPage {
 
   //选省份
   showProvince() {
-    this.csModal.showProvince(ProvincesPage, {}, 1,(data) => {
+    this.csModal.showProvince(ProvincesPage, {}, 1, (data) => {
       if (data == '无牌') {
         this.carInfo.plateNB = '无牌';
         this.carInfo.provinces = '';
@@ -585,12 +582,12 @@ export class orderItemPage {
   }
 
   onCX() {
-    //this.navCtrl.push(AutoInsurancePage, { "carNum": this.customer.plateNumber });
-    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1, "carNum": this.customer.plateNumber }, (res) => {
+    this.navCtrl.push(AutoInsurancePage, { "carNum": this.customer.plateNumber });
+    // cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1, "carNum": this.customer.plateNumber }, (res) => {
 
-    }, (error) => {
-      console.log(error);
-    })
+    // }, (error) => {
+    //   console.log(error);
+    // })
 
   }
 }

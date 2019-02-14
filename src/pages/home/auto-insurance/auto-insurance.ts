@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams, PopoverController, ToastController } from 'ionic-angular';
 import { CsModal } from '../../../providers/cs-modal';
 import { ProvincesPage } from '../../other/provinces/provinces';
@@ -11,6 +11,7 @@ import { CsbzNave } from '../../../providers/csbz-nave';
 import { RequotationPage } from './requotation/requotation';
 import { CarInsProgressPage } from '../auto-insurance/car-ins-progress/car-ins-progress';
 import { ModifyPolicyPage } from '../auto-insurance/modify-policy/modify-policy';
+import { WebConfig } from '../../../providers/web-config';
 /**
  * Generated class for the AutoInsurancePage page.
  *
@@ -23,7 +24,6 @@ import { ModifyPolicyPage } from '../auto-insurance/modify-policy/modify-policy'
 })
 export class AutoInsurancePage {
   cxData = [];
-
   licenseplateShort = [];//车牌简称列表
   selectedLicense;//车牌简称
   defaultCity;//投保地区
@@ -36,7 +36,6 @@ export class AutoInsurancePage {
   cucumber: boolean = true;//免责条款复选框
   userId;//用户id
   agentName;//agentName
-
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -45,6 +44,7 @@ export class AutoInsurancePage {
     public popoverCtrl: PopoverController,
     private csbzNave: CsbzNave,
     private toastCtrl: ToastController,
+    public changeDetectorRef:ChangeDetectorRef,
   ) {
     if (this.navParams.get("carNum")) {
       this.selectedLicense = this.navParams.get("carNum").substring(0, 1);
@@ -52,7 +52,6 @@ export class AutoInsurancePage {
     }
     this.currentDate = this.getNowFormatDate();
   }
-
   // 下一步
   nextOperation() {
     let CarNo = this.csbzNave.checkCarNo(this.selectedLicense + this.platmNum);
@@ -103,7 +102,6 @@ export class AutoInsurancePage {
           this.agentName = res.userName;
           this.userId = res.userId;
           localStorage.setItem('storeInfo', JSON.stringify(res));
-
           this.getcxData();
           this.getcxCity();
           this.getLicenseplateShort();
@@ -116,7 +114,7 @@ export class AutoInsurancePage {
 
   // 获取到期车险列表
   getcxData() {
-    this.websize.httpPost('getExpireInsuranceList', {}, true).subscribe(res => {
+    this.websize.httpPost('getExpireInsuranceList', {}).subscribe(res => {
       if (res) {
         this.cxData = res.rows;
       }
@@ -127,6 +125,7 @@ export class AutoInsurancePage {
   getcxCity() {
     this.websize.httpPost('getCityList', {}).subscribe(res => {
       if (res) {
+
         this.cityList = res;
         this.defaultCity = res[0].cityName;
         this.cityCode = res[0].cityCode;
@@ -165,13 +164,19 @@ export class AutoInsurancePage {
       }
     })
   }
-
   //获取默认城市
   getDefaultcity() {
     this.websize.httpPost('setDefaultAddress', {}).subscribe(res => {
       if (res) {
         //this.defaultCity = res;
       }
+    })
+  }
+  scanner() {
+    this.csbzNave.carIdSacn(id => {
+      this.selectedLicense = id.substring(0, 1);
+      this.platmNum = id.substr(1, id.length);
+      this.changeDetectorRef.detectChanges();
 
     })
   }

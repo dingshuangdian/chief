@@ -32,9 +32,15 @@ page-consumer-msg {
                 }
                 .item-ios {
                     font-size: 14px;
+                    padding-left: 0;
                 }
                 .item-inner {
                     border-bottom: 0.55px solid#eaeaea;
+                }
+                .delect{
+                    .item-inner{
+                        background-image: none;
+                    }
                 }
             }
         }
@@ -113,7 +119,7 @@ page-consumer-msg {
             .item-ios {
                 padding-left: 0;
                 p {
-                    font-size: 10px;
+                    font-size: 12px;
                 }
             }
             .list-ios {
@@ -136,7 +142,7 @@ page-consumer-msg {
                 align-items: center;
                 img {
                     width: 30%;
-                    height: 80px;
+                    height: 85px;
                     margin: 10px;
                 }
                 .btn-right {

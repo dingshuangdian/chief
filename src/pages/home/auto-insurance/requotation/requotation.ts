@@ -4,6 +4,7 @@ import { SelInsuranceCompPage } from '../sel-insurance-comp/sel-insurance-comp';
 import { WebSites } from '../../../../providers/web-sites';
 import { CsbzNave } from '../../../../providers/csbz-nave';
 import { AgentlistPopoverPage } from '../../../other/agentlist-popover/agentlist-popover';
+import { WebConfig } from '../../../../providers/web-config';
 
 
 /**
@@ -140,7 +141,6 @@ export class RequotationPage {
     this.getInsureenumval();//获取保险金额信息
     //this.getHolderPartytype();//获取单位个人信息
     this.getInsureAgentUList();//获取跟进人员列表
-    //this.getInsuranceInfo();
   }
 
   getIDCardtype() {
@@ -165,11 +165,10 @@ export class RequotationPage {
         this.xiuLiChangJinkou = res.xiuLiChangJinkou;
       }
     })
-
   }
   //获取单位个人信息
   getHolderPartytype() {
-    this.websize.httpPost("getHolderPartytype", {}).subscribe(res => {
+    this.websize.httpPost("getHolderPartytype",{}).subscribe(res => {
       if (res) {
       }
     })
@@ -177,7 +176,7 @@ export class RequotationPage {
   }
   //获取跟进人员列表
   getInsureAgentUList() {
-    this.websize.httpPost("getInsureAgentUList", {}).subscribe(res => {
+    this.websize.httpPost("getInsureAgentUList",{}).subscribe(res => {
       if (res) {
         this.insureAgent = res;
       }

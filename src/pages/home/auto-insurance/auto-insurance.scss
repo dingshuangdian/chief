@@ -55,17 +55,17 @@ page-auto-insurance {
         .cp {
             background-color: #fff;
             display: flex;
+            justify-content: space-between;
             align-items: center;
             margin-left: 5px;
             .button {
-                margin-left: 13px;
                 border-radius: 3px;
                 border: 0.55px solid #ccc;
                 width: 40px;
                 color: rgb(41, 38, 38);
                 font-size: 13px;
                 height: 20px;
-                background-color: aliceblue;
+                background-color: #fff;
             }
             input {
                 border: none;

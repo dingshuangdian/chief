@@ -19,10 +19,8 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
   <div class="cxt">
-
     <div class="cxdata">
       日期：{{currentDate}}
       <button ion-button full (click)="goCarInsProg()">车险进度</button>
@@ -32,28 +30,31 @@
   <div class="cxc">
     <ion-item>
       <div class="cp">
-        <img style="width: 16px;height: 14px;" src="assets/imgs/qqqq_03.gif">
-        <span style="margin: 0 5px;font-size: 13px;">车牌号：</span>
-        <button ion-button icon-end (click)="showProvince()">
-          {{selectedLicense}}
-          <ion-icon name="arrow-down"></ion-icon>
+        <div style="align-items: center;display: inline-flex;">
+          <img style="width: 16px;height: 14px;" src="assets/imgs/qqqq_03.gif">
+          <span style="margin: 0 5px;font-size: 13px;">车牌号：</span>
+          <button ion-button icon-end (click)="showProvince()">
+            {{selectedLicense}}
+            <ion-icon name="arrow-down"></ion-icon>
+          </button>
+          <input placeholder="请输入车牌" [(ngModel)]="platmNum" style="text-transform: uppercase">
+        </div>
+        <button ion-button icon-only color="light" (click)="scanner()" style="border:none">
+          <ion-icon name="qr-scanner"></ion-icon>
         </button>
-        <input placeholder="请输入车牌" [(ngModel)]="platmNum" style="text-transform: uppercase">
       </div>
     </ion-item>
     <ion-item>
       <div class="cp">
-        <img style="width: 16px;height: 14px;" src="assets/imgs/leftbar_address.png">
-        <span style="margin: 0 5px;font-size: 13px;">投保地区：</span>
-        <input style="border: 0.55px solid #ccc;border-radius: 3px;width: 40px;background-color: #fff;margin-left: 0;"
-          type="button" [(ngModel)]="defaultCity" (click)="SelectCity()">
+        <div>
+          <img style="width: 16px;height: 14px;" src="assets/imgs/leftbar_address.png">
+          <span style="margin: 0 5px;font-size: 13px;">投保地区：</span>
+          <input style="border: 0.55px solid #ccc;border-radius: 3px;width: 50px;background-color: #fff;margin-left: 0;"
+            type="button" [(ngModel)]="defaultCity" (click)="SelectCity()">
+        </div>
       </div>
     </ion-item>
-
-
     <button style="width: 80%;color: aliceblue;margin:20px 0;height: 40px;" ion-button color="btn" (click)="nextOperation()">下一步</button>
-
-
     <span style="color: #5462a4" (click)="toQuotedPrice()">新车,过户车等转人工报价>></span>
     <div class="chec">
       <ion-checkbox color="btn" [(ngModel)]="cucumber"></ion-checkbox>

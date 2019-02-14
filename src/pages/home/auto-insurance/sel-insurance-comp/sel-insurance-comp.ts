@@ -34,6 +34,7 @@ export class SelInsuranceCompPage {
   ) {
     if (this.navParams.get("carOrArtificial")) {
       this.carOrArtificial = this.navParams.get("carOrArtificial");
+      console.log(this.carOrArtificial)
       this.carPicList = this.carOrArtificial.data;
       this.paramsList = this.carOrArtificial.list;
     }

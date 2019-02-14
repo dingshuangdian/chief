@@ -56,7 +56,6 @@ export class SupplementaryInfoPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public csbzNave: CsbzNave,
     public webSites: WebSites,

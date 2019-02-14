@@ -73,7 +73,7 @@
     </button>
   </ion-list>
   <ion-list class="serveBanner" no-lines *ngIf="itemList.length == 8">
-    <button ion-item (click)="onCX()">
+    <button ion-item (click)="onCX()" *ngIf="InsuranceList.records!=0">
       <div class="serveTitle row">
         <img src="assets/imgs/home_32.gif" alt=""> 车险提醒
       </div>
@@ -87,6 +87,6 @@
       </div>
     </button>
   </ion-list>
- 
+
 
 </ion-content>

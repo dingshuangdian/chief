@@ -33,7 +33,7 @@ export class HomePage {
   tipMsg = { mcCount: '0', autoCount: '0', memberCount: '0', wxCount: '0', };
   itemList: any = [];
   unreadMsg: string = "0";
-  InsuranceList: any = { records: "", expireDate: "" }
+  InsuranceList: any = { records: "0", expireDate: "" }
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public userData: UserData,
@@ -65,23 +65,26 @@ export class HomePage {
   ionViewDidEnter() {
     this.csbzNave.appUpdate();
     //this.csbzNave.getRegistrationID();
-
   }
   ionViewWillEnter() {
     this.userData.getUserInfo().subscribe(data => {
       this.userInfo = data;
       this.userInfo['headImg'] = 'assets/imgs/6667_03.png';
     })
-
     this.websize.httpPost('getTodayIncrement', '').subscribe(res => {
       if (res) {
         this.tipMsg = res;
-      } 
+      }
     })
     this.websize.httpPost('getBookOrdersCount', '').subscribe(res => {
       if (res) { this.bookCount = res; }
     })
-
+    this.websize.httpPost('getExpireInsuranceList', {}).subscribe(res => {
+      if (res) {
+        this.InsuranceList.records = res.records;
+        this.InsuranceList.expireDate=res.rows[0].expireDate;
+      }
+    })
   }
 
 
@@ -153,12 +156,12 @@ export class HomePage {
     }, (msg) => { })
   }
   onCX() {
-    //this.navCtrl.push(AutoInsurancePage);
-    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
-      console.log(res);
-    }, (error) => {
-      console.log(error);
-    })
+    this.navCtrl.push(AutoInsurancePage);
+    // cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1 }, (res) => {
+    //   console.log(res);
+    // }, (error) => {
+    //   console.log(error);
+    // })
   }
   // test(){
   //   this.navCtrl.push(ReservationListPage);

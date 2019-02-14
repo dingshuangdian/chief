@@ -90,14 +90,14 @@ export class resourcesStaticProvider {
     })
   }
   //加载项目数据
-  loadService(memberId?, updata: boolean = false) {
+  loadService(memberId?, autoId?, updata: boolean = false) {
     let $this = this;
     return new Promise((resolve, reject) => {
       $this.storage.get('CZBSService').then((serviceData) => {
         if (serviceData && !updata) {
           $this.serviceData = serviceData;
           if (memberId) {
-            $this.webSites.httpPost('findService4Order', { memberId: memberId, service: false }).map($this.mcardServices, $this).subscribe(res => {
+            $this.webSites.httpPost('findService4Order', { memberId: memberId, autoId: autoId, service: false }).map($this.mcardServices, $this).subscribe(res => {
               resolve(res);
             });
           } else {
@@ -105,7 +105,7 @@ export class resourcesStaticProvider {
           }
         } else {
           if (memberId) {
-            $this.webSites.httpPost('findService4Order', { memberId: memberId, service: true }).map($this.mcardServices, $this).subscribe(res => {
+            $this.webSites.httpPost('findService4Order', { memberId: memberId, autoId: autoId,service: true }).map($this.mcardServices, $this).subscribe(res => {
               resolve(res);
             });
           } else {

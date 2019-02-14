@@ -84,6 +84,7 @@ page-wash-car {
                 }
             }
             button {
+       
                 margin: initial;
                 margin-left: 15px;
                 height: initial;
@@ -98,14 +99,18 @@ page-wash-car {
     }
     .itemGrid {
         background-color: #fff;
-        button {
+        .button {
             margin: 0;
             border-width: 1px;
             border-style: solid;
             border-radius: 5px;
             font-size: 1.4rem;
+            color: #000;
             white-space: initial;
             height: 3.3em;
+            .button-inner {
+                flex-direction: column;
+            }
         }
         .isSelect {
             background-color: color($colors, assist, base);

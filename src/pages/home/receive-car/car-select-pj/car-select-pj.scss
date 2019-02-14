@@ -19,7 +19,7 @@ page-car-select-pj {
             }
             .item-ios {
                 padding-left: 0px;
-                font-size: 1rem;
+                font-size: 1.3rem;
                 min-height: 35px;
             }
             .item-inner {
@@ -90,10 +90,7 @@ page-car-select-pj {
                 display: flex;
                 padding: 10px;
                 flex-direction: column;
-                p {
-                    //-webkit-margin-before: 1px;
-                    font-size: 1px;
-                }
+             
                 .f {
                     display: inline-flex;
                     justify-content: space-between;

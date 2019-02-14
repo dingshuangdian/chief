@@ -16,6 +16,8 @@ export class WebConfig {
         // static qiniuServe = "https://upload-z2.qbox.me";
         static img_path = ENV.img_path;
         static server_ = ENV.server_url;
+        static sercer_1="http://ibs.chiefchain.com:9080/ChiefOSS";
+        static img_path1="http://ibs.chiefchain.com:9080/OSS";
         static qiniuServe = ENV.qiniuServe_url;
         static API: any = {
                 login: '/CRUD/CRUD-CQ-user-login.do',
@@ -154,10 +156,6 @@ export class WebConfig {
                 getQuoteInfo: '/CRUD/CRUD-U-IBS-Insurance-getQuoteInfo.do',
                 //获取车辆核保信息
                 getQuoteSubmitInfo: '/CRUD/CRUD-U-IBS-Insurance-getQuoteSubmitInfo.do',
-
-
-
-
                 qryBackOrder: '/CRUD/CRUD-Q-IBS-Order-qryBackOrder.do',//已退回
                 qryUnderwritingOrder: '/CRUD/CRUD-Q-IBS-Order-qryUnderwritingOrder.do',//待核保
                 qryPayOrder: '/CRUD/CRUD-Q-IBS-Order-qryPayOrder.do',//待支付
@@ -168,14 +166,16 @@ export class WebConfig {
                 postMessage: '/CRUD/CRUD-Q-IBS-Order-postMessage.do',//发送短信
                 removeOrder: '/CRUD/CRUD-U-IBS-Order-removeOrder.do',//删除订单
                 supplementaryInformation: '/CRUD/CRUD-U-IBS-Order-supplementaryInformation.do',// 补充资料上传图片
-                payOrder: '/CRUD/CRUD-U-IBS-Order-payOrder',//提交保单
+                payOrder: '/CRUD/CRUD-U-IBS-Order-payOrder.do',//提交保单
                 getInfo: '/CRUD/CRUD-Q-Auth-getUserInfo.do',//用户信息
                 qryPayOrderInfo: '/CRUD/CRUD-Q-IBS-Order-qryPayOrderInfo.do',//支付
-                qryPayCode: '/CRUD/CRUD-Q-IBS-Order-qryPayCode.do',//支付二维码
+                qryPayCode: '/CRUD/CRUD-CQ-IBS-Order-qryPayCode.do',//支付二维码
                 autoInsuranceRenewal: '/CRUD/CRUD-U-IBS-Insurance-autoInsuranceRenewal.auth',//一键续保
                 findCouponsByMemberId: '/CRUD/CRUD-Q-coupon-findCouponsByMemberId.do',
+                
         };
         static phone = "4008313400";
+        static tokenId:"20190102-d23023ce-0e2d-11e9-9071-7cd30abeafe0"
 }
 
 

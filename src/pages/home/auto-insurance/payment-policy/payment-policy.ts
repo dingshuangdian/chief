@@ -20,33 +20,36 @@ export class PaymentPolicyPage {
   qryPayCode: any = {};//保单信息
   paymentMode = 1;//选择支付方式
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public webSites: WebSites,
     public popCtrl: PopoverController,
   ) {
     this.orderId = this.navParams.get('orderId');
   }
+  ionViewWillEnter() {
+    this.reqPay();
+  }
 
   //请求保单信息
-  reqPay(){
-    this.webSites.httpPost('qryPayOrderInfo',{
+  reqPay() {
+    this.webSites.httpPost('qryPayOrderInfo', {
       'orderId': this.orderId
     })
-    .subscribe(res => {
-      this.qryPayCode = res;
-      this.webSites.httpPost('qryPayCode',{
-        'orderId': this.orderId
-      },true)
       .subscribe(res => {
-        this.qryPayCode.codeUrl = res.codeUrl;
+        this.qryPayCode = res;
+        this.webSites.httpPost('qryPayCode', {
+          'orderId': this.orderId
+        }, true)
+          .subscribe(res => {
+            this.qryPayCode.codeUrl = res.codeUrl;
+          });
       });
-    });
   }
 
   //确认
-  payCertain(){
-    let popover = this.popCtrl.create(WxPayPopoverPage,{
+  payCertain() {
+    let popover = this.popCtrl.create(WxPayPopoverPage, {
       'codeUrl': this.qryPayCode.codeUrl,
     });
     // popover.onDidDismiss({});

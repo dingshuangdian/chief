@@ -94,7 +94,7 @@
   </div>
 
   <mcard-grid *ngIf="customer.memberId" [memberId]="customer.memberId"></mcard-grid>
-  
+
   <div class="row-distance mcardSCss">
     <ion-list class="lis-distance">
       <button ion-item class="itemRow">
@@ -103,8 +103,11 @@
       <div class="itemGrid">
         <ion-grid>
           <ion-row>
-            <ion-col col-4 *ngFor="let mcardP of mcardServices">
-              <button ion-button full color="selectItem" [ngClass]="{'isSelect': mcardP.select}" (click)="selectItem(mcardP)">{{mcardP.serviceName}}</button>
+            <ion-col col-6 *ngFor="let mcardP of mcardServices">
+              <button ion-button full color="selectItem" [ngClass]="{'isSelect': mcardP.select}" (click)="selectItem(mcardP)" [disabled]="mcardP.unable==0">
+                <div>{{mcardP.serviceName}}</div>
+                <div style="margin-top:5px;"><span style="font-size: 12px;color: #aaa">{{mcardP.mcardName}}&nbsp;|&nbsp;{{mcardP.mcardNo}}</span></div>
+              </button>
             </ion-col>
           </ion-row>
         </ion-grid>

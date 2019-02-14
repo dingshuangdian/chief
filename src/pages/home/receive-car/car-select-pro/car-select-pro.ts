@@ -16,6 +16,7 @@ export class carSelectProPage {
   memberId: string;
   PType: string;
   callback: any;
+  autoId: string;
 
   leftCate = [];
   rightCate = [];
@@ -31,14 +32,15 @@ export class carSelectProPage {
     this.memberId = this.navParams.get('memberId');
     this.PType = this.navParams.get('PType');
     this.services = this.navParams.get('services');
+    this.autoId = this.navParams.get("autoId");
   }
 
   ionViewDidLoad() {
-    this.getData(this.memberId);
+    this.getData(this.memberId, this.autoId);
   }
 
-  getData(memberId) {
-    this.servicsData.loadService(memberId).then(res => {
+  getData(memberId, autoId) {
+    this.servicsData.loadService(memberId, autoId).then(res => {
       if (res['mcardServices']) {
         this.mcardServices = res['mcardServices'];
         this.leftCate.push({ flName: "会员卡", select: false, service: this.mcardServices });
@@ -61,7 +63,7 @@ export class carSelectProPage {
       }
 
       if (this.PType == "conduct") {
-        this.websites.httpPost('findCustomService4Order',{}).subscribe(res => {
+        this.websites.httpPost('findCustomService4Order', {}).subscribe(res => {
           let newS = { flName: "自定义", select: false, service: res };
           this.leftCate.push(newS);
           this.dataConfig();

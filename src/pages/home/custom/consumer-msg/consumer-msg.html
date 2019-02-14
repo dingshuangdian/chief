@@ -21,7 +21,7 @@
       <img *ngIf='conacar.headImg' src="{{conacar.headImg}}">
       <div class="top-right">
         <button ion-item style="align-items: center" (click)="goEditCustom()">
-          <div style="display:flex;justify-content:space-around;align-items:center;">
+          <div style="display:flex;align-items:center;justify-content: space-between">
             <span style="display: inline-flex;overflow: hidden;">{{conacar.memberName}}
               ({{conacar.mobileNumber}})
             </span>
@@ -29,8 +29,10 @@
             <img *ngIf="bindUid" src="assets/imgs/ico-wechat1.png">
           </div>
         </button>
-        <ion-item>积分：{{pointBalanceNum}}</ion-item>
-
+        <button ion-item class="delect">
+          <span style="display:flex;align-items:center;overflow: hidden;">积分:{{pointBalanceNum}}<span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>消费(￥):{{amountConsum}}
+          </span>
+        </button>
         <!-- <p style="padding-bottom: 14px">
           <span style="border-bottom: none"></span>
         </p> -->
@@ -172,28 +174,32 @@
         <img src="assets/imgs/car_03.gif">
         <p>暂无优惠卷</p>
       </div>
-        <div class="yhj" *ngFor="let item of coupon">
-          <div class="lf">
-            <div>
-              <p style="color:black;font-weight: bold;font-size: larger">{{item.couponTypeName}}</p>
-            </div>
-            <div style="color:darkgray;font-size:xx-small;margin-bottom: 10px">
-              <!-- <span style="display:block;margin-bottom: 7px">{{item.area}}</span> -->
-              <span>有效期至：{{item.validityEtime}}</span>
-            </div>
+      <div class="yhj" *ngFor="let item of coupon">
+        <div class="lf">
+          <div>
+            <p style="color:black;font-weight: bold;font-size: larger">{{item.couponTypeName}}</p>
           </div>
-          <img *ngIf="item.couponStateId == 1" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-noused.gif" alt="">
-          <img *ngIf="item.couponStateId == 2" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-hadused.png" alt="">
-          <img *ngIf="item.couponStateId == 3" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-rescinded.gif" alt="">
-          <img *ngIf="item.couponStateId == 4" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/gq.png" alt="">
-          <div class="rf">
-            <img src="assets/imgs/line_03.gif" alt="">
-            <div style="display:inline-flex;flex-direction: column;align-items: center;justify-content: center;width: 70px">
-              <span style="display:block;color: #578cef;font-size: 20px">{{item.couponAmount}}元</span>
-              <span style="display:block;color:darkgray;font-size:xx-small;margin-top:5px">{{item.couponInfo}}</span>
-            </div>
+          <div style="color:darkgray;font-size:xx-small;margin-bottom: 10px">
+            <!-- <span style="display:block;margin-bottom: 7px">{{item.area}}</span> -->
+            <span>有效期至：{{item.validityEtime}}</span>
           </div>
         </div>
+        <img *ngIf="item.couponStateId == 1" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-noused.gif"
+          alt="">
+        <img *ngIf="item.couponStateId == 2" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-hadused.png"
+          alt="">
+        <img *ngIf="item.couponStateId == 3" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/icon-rescinded.gif"
+          alt="">
+        <img *ngIf="item.couponStateId == 4" style="left:50%;width:80px;height:80px;position: absolute" src="assets/imgs/gq.png"
+          alt="">
+        <div class="rf">
+          <img src="assets/imgs/line_03.gif" alt="">
+          <div style="display:inline-flex;flex-direction: column;align-items: center;justify-content: center;width: 70px">
+            <span style="display:block;color: #578cef;font-size: 20px">{{item.couponAmount}}元</span>
+            <span style="display:block;color:darkgray;font-size:xx-small;margin-top:5px">{{item.couponInfo}}</span>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="hycard" [hidden]='!courseTab[3].bol'>
       <div class="hycard" *ngIf="recordCar.length==0">

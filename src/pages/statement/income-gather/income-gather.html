@@ -33,7 +33,8 @@
       <div class="generalInfo">
         <ion-row class="dateInfo fineThread">
           <ion-col no-padding>
-            <ion-datetime displayFormat="YYYY/MM/DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="beginDate" (ngModelChange)="dateChange()">
+            <ion-datetime displayFormat="YYYY/MM/DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="beginDate"
+              (ngModelChange)="dateChange()">
             </ion-datetime>
             <ion-icon name="ios-arrow-down"></ion-icon>
           </ion-col>
@@ -41,7 +42,8 @@
             至
           </div>
           <ion-col no-padding>
-            <ion-datetime displayFormat="YYYY/MM/DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="endDate" (ngModelChange)="dateChange()">
+            <ion-datetime displayFormat="YYYY/MM/DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="endDate"
+              (ngModelChange)="dateChange()">
             </ion-datetime>
             <ion-icon name="ios-arrow-down"></ion-icon>
           </ion-col>
@@ -138,8 +140,8 @@
       <div class="selecDateInfo">
         <ion-item>
           <ion-label style="padding-left:5px;">查询月份</ion-label>
-          <ion-datetime displayFormat="YYYY/MM" pickerFormat="YYYY/MM" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="month"
-            (ngModelChange)="monthChange()">
+          <ion-datetime displayFormat="YYYY/MM" pickerFormat="YYYY/MM" cancelText="取消" doneText="确定" max="2030-12-31"
+            [(ngModel)]="month" (ngModelChange)="monthChange()">
           </ion-datetime>
           <button class="selectTimeBT" ion-button clear item-end>
             <ion-icon name="ios-arrow-forward"></ion-icon>
@@ -148,15 +150,15 @@
         <div class="tgrid intervalRow" text-center>
           <ion-row class="formHead">
             <ion-col>日期</ion-col>
-            <ion-col>收入</ion-col>
-            <ion-col>支出</ion-col>
-            <ion-col>盈亏</ion-col>
+            <ion-col>收入(￥)</ion-col>
+            <ion-col>支出(￥)</ion-col>
+            <ion-col>盈亏(￥)</ion-col>
           </ion-row>
           <ion-row *ngFor="let m of monthlyInfo">
-            <ion-col>{{m.settleDate}}</ion-col>
-            <ion-col>￥{{m.incomeAmount | number:'1.2-2'}}</ion-col>
-            <ion-col>￥{{m.costAmount | number:'1.2-2'}}</ion-col>
-            <ion-col>￥{{m.profitAmount | number:'1.2-2'}}</ion-col>
+            <ion-col col-sm-3>{{m.settleDate}}</ion-col>
+            <ion-col>{{m.incomeAmount}}</ion-col>
+            <ion-col>{{m.costAmount}}</ion-col>
+            <ion-col>{{m.profitAmount}}</ion-col>
           </ion-row>
         </div>
       </div>
@@ -165,8 +167,8 @@
       <div class="selecDateInfo">
         <ion-item>
           <ion-label style="padding-left:5px;">查询年份</ion-label>
-          <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="year"
-            (ngModelChange)="yeasChange()">
+          <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" cancelText="取消" doneText="确定" max="2030-12-31"
+            [(ngModel)]="year" (ngModelChange)="yeasChange()">
           </ion-datetime>
           <button class="selectTimeBT" ion-button clear item-end>
             <ion-icon name="ios-arrow-forward"></ion-icon>
@@ -174,16 +176,16 @@
         </ion-item>
         <div class="tgrid intervalRow" text-center>
           <ion-row class="formHead">
-            <ion-col>日期</ion-col>
-            <ion-col>收入</ion-col>
-            <ion-col>支出</ion-col>
-            <ion-col>盈亏</ion-col>
+            <ion-col col-sm-3>日期</ion-col>
+            <ion-col>收入(￥)</ion-col>
+            <ion-col>支出(￥)</ion-col>
+            <ion-col>盈亏(￥)</ion-col>
           </ion-row>
           <ion-row *ngFor="let y of annualInfo">
             <ion-col>{{y.settleDate}}</ion-col>
-            <ion-col>￥{{y.incomeAmount | number:'1.2-2'}}</ion-col>
-            <ion-col>￥{{y.costAmount | number:'1.2-2'}}</ion-col>
-            <ion-col>￥{{y.profitAmount | number:'1.2-2'}}</ion-col>
+            <ion-col>{{y.incomeAmount}}</ion-col>
+            <ion-col>{{y.costAmount}}</ion-col>
+            <ion-col>{{y.profitAmount}}</ion-col>
           </ion-row>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { WebConfig } from '../../../providers/web-config';
 
 /**
  * Generated class for the WxPayPopoverPage page.
@@ -13,7 +14,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'wx-pay-popover.html',
 })
 export class WxPayPopoverPage {
-
+  imgUrl=WebConfig.img_path1;
   codeUrl: '';//codeURL
   constructor(
     public navCtrl: NavController, 

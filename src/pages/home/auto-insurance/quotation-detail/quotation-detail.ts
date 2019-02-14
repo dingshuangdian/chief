@@ -29,9 +29,10 @@ export class QuotationDetailPage {
   iserrorReport;
   orderId;//订单id
   id;
-  btnWord;//按钮状态 1--预约出单 else--申请核保
+  btnWord = "等待中";//按钮状态 1--预约出单 else--申请核保
   hebaoModel;//核保信息
   insuranceCompanyId;//选择的保险公司id
+  companyCatgory;
   isShowFooter;//是否显示底部 true--显示 false--不显示
   insureAgentUname;//代理专员
   insureenumval = {//保险信息
@@ -54,13 +55,13 @@ export class QuotationDetailPage {
     public alertCtrl: AlertController,
   ) {
     this.listParams = this.navParams.get('listParams');
-  }
-
-  ionViewDidEnter() {
     this.getInsureenumval();
   }
+  ionViewDidEnter() {
+    //this.getInsureenumval();
+  }
   getInsureenumval() {
-    this.websize.httpPost("getInsureenumval", {},true).subscribe(res => {
+    this.websize.httpPost("getInsureenumval", {}, false).subscribe(res => {
       if (res) {
         for (var i in res.sanZhe) {
           this.insureenumval.sanZhe[res.sanZhe[i].enumValue] = res.sanZhe[i].enumKey;
@@ -91,6 +92,7 @@ export class QuotationDetailPage {
       this.insuranceCompanyList = JSON.parse(this.quotationList.insuranceCompanyList);
       for (var z in this.insuranceCompanyList) {
         this.insuranceCompanyId = this.insuranceCompanyList[z].insuranceCompanyId;
+        this.companyCatgory = this.insuranceCompanyList[z].companyCatgory;
         this.AutoQuotation();//自动报价
       };
     } else if (this.listParams.router == 5) {
@@ -101,80 +103,83 @@ export class QuotationDetailPage {
       this.isShowFooter = false;
       this.autoInsuranceRenewal();// 一键续保
     }
-
   }
   //自动报价
   AutoQuotation() {
+    this.csModal.showLoading('正在提交信息......')
     this.websize.httpPost('AutoQuotation', this.quotationList)
-    .subscribe(res => {
-      this.getQuoteInfo();
-    })
+      .subscribe(res => {
+          this.getQuoteInfo();
+      })
   }
-
   //获取车辆报价信息
   getQuoteInfo() {
+    this.csModal.showLoading('获取车辆报价信息......');
     this.websize.httpPost('getQuoteInfo', { licenseNo: this.licenseNo, quoteGroup: this.insuranceCompanyId })
-    .subscribe(res => {
-      if (res) {
-        if (res.QuoteStatus == 0 || res.QuoteStatus == -1) {
-          var self = this;
-          this.presentAlert(res.QuoteResult, function(){
-            self.navCtrl.popTo(self.navCtrl.getByIndex(self.navCtrl.length() - 4));
-          });
-        } else {
-          this.info = res;
-          this.info['sanZhe'] = this.insureenumval['sanZhe'][this.info['sanZhe']];
-          this.info['boLi'] = this.insureenumval['boLi'][this.info['boLi']];
-          this.info['chengKe'] = this.insureenumval['chengKe'][this.info['chengKe']];
-          this.info['huaHen'] = this.insureenumval['huaHen'][this.info['huaHen']];
-          this.info['siJi'] = this.insureenumval['siJi'][this.info['siJi']];
-          this.info['hcXiulichang'] = this.insureenumval['hcXiulichang'][this.info['hcXiulichang']];
-          this.info['daoQiang'] = this.info['daoQiang'] == 0 ? '不投保' : this.info['daoQiang'];
-          this.info['ziRan'] = this.info['ziRan'] == 0 ? '不投保' : this.info['ziRan'];
-          this.info['sheShui'] = this.info['sheShui'] == 0 ? '不投保' : this.info['sheShui'];
-          this.info['cheSun'] = this.info['cheSun'] == 0 ? '不投保' : this.info['cheSun'];
-          this.info['hcSanfangteyue'] = this.info['hcSanfangteyue'] == 0 ? '不投保' : '投保';
-          this.orderId = this.info['orderId'];
-          if (this.listParams.router == 4) {
-            this.getQuoteSubmitInfo();
+      .subscribe(res => {
+        if (res) {
+          if (res.QuoteStatus == 0 || res.QuoteStatus == -1) {
+            var self = this;
+            this.presentAlert(res.QuoteResult, function () {
+              self.navCtrl.popTo(self.navCtrl.getByIndex(self.navCtrl.length() - 4));
+              self.csModal.hideLoading();
+            });
+          } else {
+            this.info = res;
+            this.info['sanZhe'] = this.insureenumval['sanZhe'][this.info['sanZhe']];
+            this.info['boLi'] = this.insureenumval['boLi'][this.info['boLi']];
+            this.info['chengKe'] = this.insureenumval['chengKe'][this.info['chengKe']];
+            this.info['huaHen'] = this.insureenumval['huaHen'][this.info['huaHen']];
+            this.info['siJi'] = this.insureenumval['siJi'][this.info['siJi']];
+            this.info['hcXiulichang'] = this.insureenumval['hcXiulichang'][this.info['hcXiulichang']];
+            this.info['daoQiang'] = this.info['daoQiang'] == 0 ? '不投保' : this.info['daoQiang'];
+            this.info['ziRan'] = this.info['ziRan'] == 0 ? '不投保' : this.info['ziRan'];
+            this.info['sheShui'] = this.info['sheShui'] == 0 ? '不投保' : this.info['sheShui'];
+            this.info['cheSun'] = this.info['cheSun'] == 0 ? '不投保' : this.info['cheSun'];
+            this.info['hcSanfangteyue'] = this.info['hcSanfangteyue'] == 0 ? '不投保' : '投保';
+            this.orderId = this.info['orderId'];
+            if (this.listParams.router == 4) {
+              this.getQuoteSubmitInfo();
+            }
           }
         }
-      }
-    })
+      })
   }
 
   // 一键续保
   autoInsuranceRenewal() {
-    this.presentLoading('正在获取续保信息，请稍候......');
-        this.websize.httpPost('autoInsuranceRenewal', {
-            licenseNo: this.licenseNo
-        }).subscribe(
-          function(res) {
-            this.getQuoteInfo();
-          }, 
-          function(error) {
-            if (error.status < 0) {
-              this.presentLoading.dismiss();
-              this.csModal.showAlert('请求超时', function() {
-                this.navCtrl.push('AutoInsurancePage');
-              }, '', '确定', '', '');
-            }else{
-              this.presentLoading.dismiss();
-              this.csModal.showAlert('缺少参数', function(){
-                this.navCtrl.push('AutoInsurancePage');
-              }, '', '确定', '', '');
+    this.csModal.showLoading('正在获取续保信息，请稍候......')
+    this.websize.httpPost('autoInsuranceRenewal', {
+      licenseNo: this.licenseNo
+    }).subscribe(
+      function (res) {
+        this.getQuoteInfo();
+      },
+      function (error) {
+        if (error.status < 0) {
+          this.presentLoading.dismiss();
+          this.csModal.showAlert('请求超时', function () {
+            this.navCtrl.push('AutoInsurancePage');
+          }, '', '确定', '', '');
+        } else {
+          this.presentLoading.dismiss();
+          this.csModal.showAlert('缺少参数', function () {
+            this.navCtrl.push('AutoInsurancePage');
+          }, '', '确定', '', '');
 
-            }
-        })
+        }
+      })
   }
 
   //获取车辆核保信息
   getQuoteSubmitInfo() {
+    this.csModal.showLoading('获取车辆核保信息......')
     this.websize.httpPost('getQuoteSubmitInfo', {
       licenseNo: this.licenseNo,
       quoteGroup: this.insuranceCompanyId
     }).subscribe(res => {
       if (res) {
+        this.csModal.hideLoading();
         if (res.SubmitStatus == 1) {
           this.iserrorReport = false;
           this.id = 2;
@@ -205,7 +210,7 @@ export class QuotationDetailPage {
   }
 
   //alert
-  presentAlert(msg, callback?){
+  presentAlert(msg, callback?) {
     let alert = this.alertCtrl.create({
       title: '提示!',
       subTitle: msg,
@@ -213,7 +218,7 @@ export class QuotationDetailPage {
         {
           text: '确定',
           handler: data => {
-            if(callback){
+            if (callback) {
               callback();
             }
           }
@@ -228,29 +233,34 @@ export class QuotationDetailPage {
     let loading = this.loadingCtrl.create({
       content: msg
     });
-    loading.present();
+    // setTimeout(() => {
+    //   loading.dismiss();
+    // }, 60000);
+    if (!msg) {
+      loading.dismiss();
+    }
     return loading;
   }
 
   //发送短信
   sendSMS() {
-    this.websize.httpPost('qryMessage',{'orderId': this.orderId})
-    .subscribe(res => {
-      let smsModal = this.modalCtrl.create(SmsPopoverPage,{
-        'postMsg': res
-      },{
-        enableBackdropDismiss: true,
-        showBackdrop: true,
-        cssClass: 'smsModal'
+    this.websize.httpPost('qryMessage', { 'orderId': this.orderId })
+      .subscribe(res => {
+        let smsModal = this.modalCtrl.create(SmsPopoverPage, {
+          'postMsg': res
+        }, {
+            enableBackdropDismiss: true,
+            showBackdrop: true,
+            cssClass: 'smsModal'
+          });
+        smsModal.onDidDismiss(data => { });
+        smsModal.present();
       });
-      smsModal.onDidDismiss(data => {});
-      smsModal.present();
-    });
   }
 
   //预约出单 / 申请核保
-  toUploadData = function(id) {
-    if (id == 1) {
+  toUploadData() {
+    if (this.id == 1) {
       this.navCtrl.push(SupplementaryInfoPage, { orderId: this.orderId });
     } else {
       this.navCtrl.push(ReservationListPage, { orderId: this.orderId });

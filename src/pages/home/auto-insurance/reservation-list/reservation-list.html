@@ -33,18 +33,20 @@
     <ion-grid no-padding>
       <ion-row nowrap>
         <ion-col col-3>收件人姓名</ion-col>
-        <ion-col>{{consigneeMsg.consignee}}</ion-col>
+        <ion-col>
+          <ion-input type="" placeholder="请输入收件人姓名" [(ngModel)]="consigneeMsg.consignee"></ion-input>
+        </ion-col>
       </ion-row>
       <ion-row nowrap>
         <ion-col col-3>手机号码</ion-col>
-        <ion-col>{{consigneeMsg.consigneeMobile}}</ion-col>
+        <ion-col>
+          <ion-input type="number" placeholder="请输入手机号" [(ngModel)]="consigneeMsg.consigneeMobile"></ion-input>
+        </ion-col>
       </ion-row>
       <ion-row nowrap>
         <ion-col col-3>收件方式</ion-col>
         <ion-col>
-          <ion-list class="receiveMode" radio-group no-margin no-padding
-           [(ngModel)]="consigneeMsg.consigneeType"
-          >
+          <ion-list class="receiveMode" radio-group no-margin no-padding [(ngModel)]="consigneeMsg.consigneeType">
             <ion-item no-padding no-margin>
               <ion-radio value='1' checked></ion-radio>
               <ion-label>门店</ion-label>

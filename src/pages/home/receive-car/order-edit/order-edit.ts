@@ -95,7 +95,7 @@ export class orderEditPage {
   }
   findAsorderByOrderId() {
     let params = { orderId: this.orderId };
-    this.webSites.httpPost('findAsorderByOrderId', params,true).subscribe(res => {
+    this.webSites.httpPost('findAsorderByOrderId', params, true).subscribe(res => {
       if (res) {
         this.otherInfo.orderId = res['orderId'] || '';
         this.otherInfo.originalNo = res['originalNo'] || '';
@@ -124,7 +124,7 @@ export class orderEditPage {
 
 
   findmcardDiscount(memberId) {
-    let params = { memberId: memberId }
+    let params = { memberId: memberId, autoId: this.auto.autoId }
     this.webSites.httpPost('findmcardDiscount', params).subscribe(res => {
       this.discountCoefficient = res;
       if (this.discountCoefficient) {
@@ -317,7 +317,7 @@ export class orderEditPage {
         resolve();
       })
     }
-    this.navCtrl.push(carSelectProPage, { callback: callback, memberId: this.member.memberId, PType: "common", services: this.services });
+    this.navCtrl.push(carSelectProPage, { callback: callback, memberId: this.member.memberId, PType: "common", services: this.services, autoId: this.auto.autoId });
   }
   //选大类型
   changeSvctype(s) {

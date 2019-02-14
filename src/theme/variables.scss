@@ -27,7 +27,7 @@ $app-direction: ltr;
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
-$colors: ( primary: #2A398E, secondary: #fc5f3c, danger: #f53d3d, light: #f4f4f4, btn:#FFB606, dark: #222, assist:( base: #FFB606, contrast: #ffffff), selectItem: ( base: #fff, contrast: #888), cancelBT: ( base: #CFCFCF, contrast: #fff), selectPo: ( base: #5fc467, contrast: #fff), );
+$colors: (primary:  rgba(29, 32, 136, 1), secondary: #fc5f3c, danger: #f53d3d, light: #f4f4f4, btn:#FFB606, dark: #222, assist:( base: #FFB606, contrast: #ffffff), selectItem: ( base: #fff, contrast: #888), cancelBT: ( base: #CFCFCF, contrast: #fff), selectPo: ( base: #5fc467, contrast: #fff), );
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
@@ -36,6 +36,9 @@ $colors: ( primary: #2A398E, secondary: #fc5f3c, danger: #f53d3d, light: #f4f4f4
 // Material Design only Sass variables can go here
 // Use the primary color as the background for the toolbar-md-background
 $toolbar-background: color($colors, primary);
+// toolbar-background-ios{
+//     background:linear-gradient(270deg, rgba(35, 110, 240, 1), rgba(29, 32, 136, 1))!important;
+// }
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here

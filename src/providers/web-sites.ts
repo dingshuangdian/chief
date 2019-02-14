@@ -5,16 +5,15 @@ import { LoadingController, AlertController, ToastController, Events, NavControl
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
-
 import { WebConfig } from './web-config';
-import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { CsModal } from './cs-modal';
 
 @Injectable()
 export class WebSites {
 
 
-    constructor(public http: HttpClient, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, public events: Events, public appCtrl: App, ) {
+    constructor(public http: HttpClient, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, public events: Events, public appCtrl: App, private csm: CsModal) {
     }
 
     // 对参数进行编码
@@ -82,6 +81,30 @@ export class WebSites {
                 return Observable.throw(error);
             })
     }
+    // httpPost1(url, params, loader: boolean = false, isShowError: boolean = true, judgeUdf: boolean = true) {
+    //     let loading = this.loadingCtrl.create();
+    //     if (loader) loading.present();
+
+    //     const headers = new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded");
+
+    //     return this.http.post(WebConfig.sercer_1 + WebConfig.API[url], this.encode(params), { headers, withCredentials: true })
+    //         .map((data: any) => {
+
+    //             if (loader) loading.dismiss();
+
+    //             if (judgeUdf) this.handleResult(data.result);
+
+    //             return data == null ? '[]' : data.result;
+
+    //         })
+    //         .catch((error: HttpResponse<any>) => {
+    //             if (loader) loading.dismiss();
+
+    //             if (isShowError) this.handleError(error);
+
+    //             return Observable.throw(error);
+    //         })
+    // }
 
 
     qiniuUpload(dataInfo) {
@@ -158,13 +181,23 @@ export class WebSites {
                 this.events.publish('user:logout');
             } else {
                 msg = error.message;
+                if (this.csm.loadingIsOpen) {
+                    this.csm.hideLoading();
+                }
                 if (!msg) {
                     let self = this;
-                    this.alert(error.body.msg, function(){
+                    this.alert(error.body.msg, function () {
                         if (activeNav.canGoBack()) {
                             activeNav.pop();
+                            if (self.csm.loadingIsOpen) {
+                                self.csm.hideLoading();
+                            }
                         } else {
                             self.appCtrl.getRootNav().setRoot(TabsPage);
+                            if (self.csm.loadingIsOpen) {
+                                self.csm.hideLoading();
+                            }
+                            //activeNav.popTo(AutoInsurancePage);
                         }
                     })
                 }
@@ -191,15 +224,22 @@ export class WebSites {
             msg = '网络请求超时,请稍后重试!';
             let activeNav: NavController = this.appCtrl.getActiveNav();
             let self = this;
-            this.alert(msg, function(){
+            this.alert(msg, function () {
                 if (activeNav.canGoBack()) {
                     activeNav.pop();
+                    if (self.csm.loadingIsOpen) {
+                        self.csm.hideLoading();
+                    }
+
                 } else {
                     self.appCtrl.getRootNav().setRoot(TabsPage);
+                    if (self.csm.loadingIsOpen) {
+                        self.csm.hideLoading();
+                    }
                 }
             })
-            
-            return ;
+
+            return;
         }
 
         if (msg != '') {

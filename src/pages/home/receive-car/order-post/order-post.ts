@@ -91,12 +91,12 @@ export class orderPostPage {
     });
   }
   goInsurance() {
-    //this.navCtrl.push(AutoInsurancePage, { "carNum": this.auto.plateNumber });
-    cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1, "carNum": this.auto.plateNumber }, (res) => {
+    this.navCtrl.push(AutoInsurancePage, { "carNum": this.auto.plateNumber });
+    // cordova.BSTool.pushBSView({ "tokenId": this.userData.getToken(), "home": 1, "carNum": this.auto.plateNumber }, (res) => {
 
-    }, (error) => {
-      console.log(error);
-    })
+    // }, (error) => {
+    //   console.log(error);
+    // })
 
   }
   goBack() {

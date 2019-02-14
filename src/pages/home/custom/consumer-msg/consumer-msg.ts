@@ -35,6 +35,7 @@ export class ConsumerMsgPage {
     { "name": "消费记录", "bol": false, 'num': 0 }
   ];
   pointBalanceNum;
+  amountConsum;
   showOpenCard: boolean = false;
   consumer = { memberId: '', autoId: '' };
   bindUid;
@@ -108,6 +109,7 @@ export class ConsumerMsgPage {
         this.courseTab[0].num = this.carMsg.length;
       }
       this.pointBalanceNum = res.pointBalanceNum || 0;
+      this.amountConsum = res.amountConsum || 0;
       this.conacar = res;
       this.bindUid = res.bindUid;
       //var element = document.getElementById("wechat");
@@ -142,24 +144,24 @@ export class ConsumerMsgPage {
   //优惠券
   findCouponCard(memberId) {
     this.websites.httpPost('findCouponsByMemberId', { 'memberId': memberId }, true)
-    .subscribe(res => {
-      console.log(res);
-      this.coupon = res;
-      if (res != null) {
-        this.courseTab[2].num = this.coupon.length;
-        for(var i=0;i<this.coupon.length;i++){
-          if(this.coupon[i].validityEtime > this.getToday()){
-            this.coupon[i].expired = false;
-          }else{
-            this.coupon[i].expired = true;
+      .subscribe(res => {
+        console.log(res);
+        this.coupon = res;
+        if (res != null) {
+          this.courseTab[2].num = this.coupon.length;
+          for (var i = 0; i < this.coupon.length; i++) {
+            if (this.coupon[i].validityEtime > this.getToday()) {
+              this.coupon[i].expired = false;
+            } else {
+              this.coupon[i].expired = true;
+            }
           }
         }
-      }
-    });
+      });
   }
-  getToday(){
+  getToday() {
     var today = new Date();
-    var todayFormatDate = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+    var todayFormatDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
     return todayFormatDate;
   }
   goCarRecord(infiniteScroll) {
