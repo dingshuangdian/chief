@@ -125,6 +125,7 @@ export class washCarPage {
   getRecord(autoId) {
     this.Websites.httpPost('findOrderInfoByAutoId', { autoId: autoId }).subscribe(res => {
       if (res) {
+
         if (res.count4Working) {
           if (res.count4Working.length > 0) {
             this.hasNum = res.count4Working.length;
@@ -135,7 +136,6 @@ export class washCarPage {
             this.lastNum = res.count4Completed[0].settlementTime;
           }
         }
-
         if (res.hasOwnProperty('count4Working') && res.count4Working.length > 0) {
           let popover = this.popoverCtrl.create(toastProjectPopoverComponent, { msg: "当前已有车牌”" + this.customer.plateNumber + "“进行中的订单，请确认操作？" }, { cssClass: "addProjectPopover" });
           popover.onDidDismiss(data => {

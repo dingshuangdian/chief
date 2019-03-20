@@ -23,8 +23,11 @@ export class WebSites {
             for (var key in params) {
                 if (params.hasOwnProperty(key)) {
                     var value = params[key];
-                    if (typeof (value) == 'object') value = JSON.stringify(value);
-                    str += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
+                    if ('[object Array][object Object]'.includes(Object.prototype.toString.call(value)) ){
+                        value = JSON.stringify(value);
+                    } 
+                    str += encodeURIComponent(key) + '=' + (value !== null ? encodeURIComponent(value) : '') + '&';
+                
                 }
             }
             str = str.substring(0, str.length - 1);

@@ -17,6 +17,7 @@ import { CsbzNave } from '../../../../providers/csbz-nave';
 import { OrderDetailPage } from '../../../order/order-detail/order-detail';
 import { UserData } from '../../../../providers/user-data';
 import { AutoInsurancePage } from '../../../home/auto-insurance/auto-insurance';
+import { LoginPage } from 'pages/login/login';
 declare let cordova: any;
 
 
@@ -84,6 +85,10 @@ export class orderItemPage {
   }
 
   ionViewDidLoad() {
+    this.init();
+  }
+  init() {
+    console.log(this.customerType);
     switch (this.customerType) {
       case 1://无牌
         this.isNewCustomer = true;
@@ -129,13 +134,13 @@ export class orderItemPage {
       case 5:
         this.isNewCustomer = false;
         this.findStoreExt();
-        this.getBookOrder()
+        this.getBookOrder();
         break;
     }
   }
 
   getRecord(autoId) {
-    this.Websites.httpPost('findOrderInfoByAutoId', { autoId: autoId }).subscribe(res => {
+    this.Websites.httpPost('findOrderInfoByAutoId_', { autoId: autoId }).subscribe(res => {
       if (res) {
         if (res.count4Completed) {
           if (res.count4Completed.length > 0) {
@@ -143,16 +148,26 @@ export class orderItemPage {
             this.lastNum = res.count4Completed[0].settlementTime;
           }
         }
-        if (res.hasOwnProperty('count4Working') && res.count4Working.length > 0) {
-          let popover = this.popoverCtrl.create(toastProjectPopoverComponent, { msg: "当前已有车牌”" + this.customer.plateNumber + "“进行中的订单，请确认操作？" }, { cssClass: "addProjectPopover" });
+        if (res.count4Order && res.count4Order.length > 0) {
+          let popover = this.popoverCtrl.create(toastProjectPopoverComponent, { msg: "当前车牌”" + this.customer.plateNumber + "”最近三天的订单情况", count4Order: res.count4Order }, { cssClass: "addProjectPopover" });
           popover.onDidDismiss(data => {
             if (data) {
               //location.href = WebConfig.server_ + '/czbbb/order/orderDetailViewNew.jsp?orderId=' + res.count4Working[0].orderId;
-              this.navCtrl.push(OrderDetailPage, { orderId: res.count4Working[0].orderId });
+              this.navCtrl.push(OrderDetailPage, { orderId: res.count4Order[0].orderId });
             }
           });
           popover.present();
         }
+        // if (res.hasOwnProperty('count4Working') && res.count4Working.length > 0) {
+        //   let popover = this.popoverCtrl.create(toastProjectPopoverComponent, { msg: "当前已有车牌”" + this.customer.plateNumber + "“进行中的订单，请确认操作？" }, { cssClass: "addProjectPopover" });
+        //   popover.onDidDismiss(data => {
+        //     if (data) {
+        //       //location.href = WebConfig.server_ + '/czbbb/order/orderDetailViewNew.jsp?orderId=' + res.count4Working[0].orderId;
+        //       this.navCtrl.push(OrderDetailPage, { orderId: res.count4Working[0].orderId });
+        //     }
+        //   });
+        //   popover.present();
+        // }
       }
     })
   } true
@@ -163,6 +178,10 @@ export class orderItemPage {
       if (res['services']) this.servicesList = res['services'];
       if (callback) callback("ssss");
     })
+    if (autoId) {
+      this.getRecord(autoId);
+    }
+
   }
 
   //获取客户信息
@@ -184,9 +203,9 @@ export class orderItemPage {
         this.isNewCar = false;
       }
       this.customer = res;
-
-      this.getRecord(this.customer.autoId);
-
+      if (this.customer.autoId) {
+        this.getRecord(this.customer.autoId);
+      }
       if (typeof this.customer.mobileNumber == "string" && this.customer.mobileNumber.length > 0) this.isNullmobileNumber = false;
 
       if (callback) callback("ssss");
@@ -226,8 +245,10 @@ export class orderItemPage {
               a.test = this.test = !this.test;
               this.selectCar = a;
               this.customer.plateNumber = res.plateNumber;
+              this.customer.autoId = a.autoId;
             }
           });
+          this.getRecord(this.customer.autoId);
         }
       });
     })

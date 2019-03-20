@@ -44,6 +44,7 @@ export class WebConfig {
                 findAsorderByOrderId: '/CRUD/CRUD-Q-asorder-findAsorderByOrderId.do',//查询订单详情
                 saveAuto: '/CRUD/CRUD-U-auto-saveAuto.do',
                 findOrderInfoByAutoId: '/CRUD/CRUD-Q-member-findOrderInfoByAutoId.do',
+                findOrderInfoByAutoId_: '/CRUD/CRUD-Q-asorder-findOrderInfoByAutoId.do',
                 getMemberDetailedByTel: '/CRUD/CRUD-Q-member-getMemberDetailedByTel.do',
                 getMemberDetailedByPlateNumber: '/CRUD/CRUD-Q-member-getMemberDetailedByPlateNumber.do',
                 updateAutoMerge: '/CRUD/CRUD-U-auto-updateAutoMerge.do',
@@ -172,6 +173,7 @@ export class WebConfig {
                 qryPayCode: '/CRUD/CRUD-CQ-IBS-Order-qryPayCode.do',//支付二维码
                 autoInsuranceRenewal: '/CRUD/CRUD-U-IBS-Insurance-autoInsuranceRenewal.auth',//一键续保
                 findCouponsByMemberId: '/CRUD/CRUD-Q-coupon-findCouponsByMemberId.do',
+                findStoreConfig:"/CRUD/CRUD-Q-storeConfig-findStoreConfig.do",
                 
         };
         static phone = "4008313400";

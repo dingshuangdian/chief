@@ -57,9 +57,10 @@ export class memberOpenCertainPage {
   }
 
   findmcardtmpl() {
-    this.websites.httpPost('findmcardtmpl', { mcardtmplId: this.salecard.mcardtmplId, memberId: this.memberInfo.memberId },true).subscribe(res => {
+    this.websites.httpPost('findmcardtmpl', { mcardtmplId: this.salecard.mcardtmplId, memberId: this.memberInfo.memberId }, true).subscribe(res => {
       if (res) {
         this.salecardDetail = res;
+        //this.salecardDetail.mcardBalance=this.salecardDetail.mcardBalance?this.salecardDetail.mcardBalance:0;
         this.validityMonthChange();
         if (this.salecardDetail.mcard2svc) {
           this.methodSinglePrice();
@@ -200,14 +201,15 @@ export class memberOpenCertainPage {
         let paytype: any = {};
         paytype.money = this.salecardDetail.mcardPrice;
         paytype.paymentId = this.payment.paymentId;
-
         pamras.member = member;
         pamras.auto = this.carInfo;
         pamras.mcardNo = this.otherInfor.mcardNo;
         pamras.saleUid = this.saleInfo.userId;
         pamras.orderAmount = this.salecardDetail.mcardPrice;
         pamras.mcardDesc = this.salecardDetail.mcardDesc || '';
-        pamras.notifyTags = this.notifyTags;
+        if (this.notifyTags) {
+          pamras.notifyTags = this.notifyTags;
+        }
         pamras.payments = [];
         pamras.payments.push(paytype);
 
@@ -219,7 +221,7 @@ export class memberOpenCertainPage {
         }
 
         // this.navCtrl.push(memberOpenSuccessPage, { memberInfo: this.memberInfo, mcardNo: "80061" });
-       
+
         this.websites.httpPost("addCard", pamras).subscribe(res => {
           if (res) {
             this.navCtrl.push(memberOpenSuccessPage, { memberInfo: res, mcardNo: res.mcardNo });

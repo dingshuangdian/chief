@@ -55,10 +55,14 @@ export class newCarEditPage {
           let keyWords = this.navParams.get('carNum');
           if (this.csbzNave.checkTelephone(keyWords)) {
             this.postCar.mobileNumber = keyWords;
+
           }
         }
         break;
       case 2://新客户
+        this.websites.httpPost("findStoreConfig", { paramId: "def_city_tag" }).subscribe(res => {
+          this.carInfo.provinces = res[0].value;
+        });
         if (this.navParams.get('carNum')) {
           let keyWords = this.navParams.get('carNum');
           if (this.csbzNave.checkCarNo(keyWords)) {
@@ -72,7 +76,7 @@ export class newCarEditPage {
     }
   }
   showProvince() {
-    this.csModal.showProvince(ProvincesPage,{}, 1,(data) => {
+    this.csModal.showProvince(ProvincesPage, {}, 1, (data) => {
       if (data == '无牌') {
         this.carInfo.plateNumber = '无牌';
         this.carInfo.provinces = '';
@@ -110,10 +114,9 @@ export class newCarEditPage {
     this.carInfo.autoType = this.carInfo.autoType + ' ' + (data['automodelName'] ? data.automodelName : '');
     this.carInfo.autoType = this.carInfo.autoType + ' ' + (data['autotypeName'] ? data.autotypeName : '');
   }
-
   postEdit() {
     if (!this.postCar.mobileNumber && !this.postCar.memberName) {
-      this.presentToast('请填写客户电话或者客户名称');
+      this.presentToast("请输入客户电话或客户姓名");
       return;
     }
     let CarNo = this.csbzNave.checkCarNo(this.carInfo.provinces + this.carInfo.plateNumber);
@@ -163,7 +166,7 @@ export class newCarEditPage {
 
   moreEdit() {
 
-    
+
     if (this.flag) {
       this.flag = false;
       this.title = '点击完善更多信息';
@@ -226,8 +229,14 @@ export class newCarEditPage {
     })
   }
   changePlateNumber() {
-    let plateNumber = this.carInfo.provinces + this.carInfo.plateNumber.toLocaleUpperCase()
+    let plateNumber = this.carInfo.provinces + this.carInfo.plateNumber.toLocaleUpperCase();
+    if (this.csbzNave.checkCarNo(this.postCar.memberName)) {
+      this.postCar.memberName = "";
+    }
     if (this.csbzNave.checkCarNo(plateNumber)) {
+      if (!this.postCar.memberName) {
+        this.postCar.memberName = plateNumber;
+      }
       let params = { plateNumber: plateNumber }
       this.websites.httpPost('getMemberDetailedByPlateNumber', params).subscribe(res => {
         if (res) {

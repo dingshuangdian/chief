@@ -1,6 +1,9 @@
 <ion-grid>
-  <p style="font-size: 15px;font-weight: bold;">{{msg}}</p>
-  <div class="fineThread"></div>
+  <p style="font-size: 15px;font-weight: bold;text-align:center;">{{msg}}</p>
+
+  <div *ngFor="let item of count4Order">
+    <p style="margin-left:10px;font-weight: bold"> {{item.status}}：<span style="color:#f53d3d">{{item.count}}</span></p>
+  </div>
   <ion-row>
     <ion-col>
       <button ion-button block color="cancelBT" (click)="close(false)">继续接单</button>

@@ -172,14 +172,14 @@ export class carConductPage {
 
     if (!this.orderId) {
       this.findmember(this.saveAll.member.memberId);
-      this.websites.httpPost('findOrderInfoByAutoId', { autoId: this.saveAll.auto.autoId }).subscribe(res => {
+      this.websites.httpPost('findOrderInfoByAutoId_', { autoId: this.saveAll.auto.autoId }).subscribe(res => {
         if (res != null) {
-          if (res.count4Working && res.count4Working.length > 0) {
-            let popover = this.popoverCtrl.create(toastProjectPopoverComponent, { msg: "当前车牌”" + this.customer.plateNumber + "“存在未完成的维修订单，是否继续接单？" }, { cssClass: "addProjectPopover" });
+          if (res.count4Order && res.count4Order.length > 0) {
+            let popover = this.popoverCtrl.create(toastProjectPopoverComponent, { msg: "当前车牌”" + this.customer.plateNumber + "”最近三天的订单情况", count4Order: res.count4Order }, { cssClass: "addProjectPopover" });
             popover.onDidDismiss(data => {
               if (data) {
                 //location.href = WebConfig.server_ + '/czbbb/order/orderDetailViewNew.jsp?orderId=' + res.count4Working[0].orderId;
-                this.navCtrl.push(OrderDetailPage, { orderId: res.count4Working[0].orderId });
+                this.navCtrl.push(OrderDetailPage, { orderId: res.count4Order[0].orderId });
               }
             });
             popover.present();
@@ -201,7 +201,7 @@ export class carConductPage {
       if (this.bindUid) {
         element.setAttribute('src', 'assets/imgs/ico-wechat1.png');
       } else {
-        element.setAttribute('src', 'assets/imgs/msg_06.gif');
+        element.setAttribute('src', 'assets/imgs/msg_06.png');
       }
       if (res.cardNum > 0) {
         element1.setAttribute('src', 'assets/imgs/hasCard.png');
@@ -259,7 +259,7 @@ export class carConductPage {
 
   }
   showProvince() {
-    this.csModal.showProvince(MntcSelectPage, {},1, (data) => {
+    this.csModal.showProvince(MntcSelectPage, {}, 1, (data) => {
       this.selectCla = data;
       this.saveAll.mntcClassId = data.mntc_class_id;
 
@@ -328,7 +328,7 @@ export class carConductPage {
         resolve();
       })
     }
-    this.navCtrl.push(carSelectProPage, { memberId: memberId, callback: demo, PType: 'conduct' });
+    this.navCtrl.push(carSelectProPage, { memberId: memberId, autoId: this.customer.autoId, callback: demo, PType: 'conduct' });
   }
   selectPj(type) {
     let $this = this;

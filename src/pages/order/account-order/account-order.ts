@@ -78,7 +78,6 @@ export class AccountOrderPage {
     this.Websites.httpPost('accountOrder', { 'orderId': orderId }, true).subscribe(res => {
       // order
       if (res) {
-        console.log(res);
         let orderMsg = res.order;
         this.memberId = orderMsg.memberId;
         this.pointRatio = orderMsg.pointRatio;
@@ -226,7 +225,9 @@ export class AccountOrderPage {
       self.settlementParam['paidMoney'] = self.paidMoney;
       self.settlementParam['memo'] = self.memo ? self.memo : "";
       self.settlementParam['warmTips'] = self.warmTips ? self.warmTips : "";
-      self.settlementParam['notifyTags'] = self.notifyTags;
+      if (self.notifyTags) {
+        self.settlementParam['notifyTags'] = self.notifyTags;
+      }
       self.settlementParam['pointNum'] = self.pointNum ? self.pointNum : "";
       self.settlementParam['couponId'] = self.couponId ? self.couponId : "";
       let obj = self.payments.paymentId == 11 ? {
@@ -273,7 +274,10 @@ export class AccountOrderPage {
       self.hangUpParam['settlementTime'] = self.settlementTime;
       self.hangUpParam['memo'] = self.memo ? self.memo : '';
       self.hangUpParam['warmTips'] = self.warmTips ? self.warmTips : '';
-      self.hangUpParam['notifyTags'] = self.notifyTags;
+      if (self.notifyTags) {
+        self.hangUpParam['notifyTags'] = self.notifyTags;
+      }
+
       self.Websites.httpPost('susupendedAsorder', self.hangUpParam).subscribe(
         res => {
           self.alertbox(1, '提示', '挂账成功', '确定', '', function () {

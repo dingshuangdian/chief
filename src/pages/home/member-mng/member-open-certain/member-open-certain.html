@@ -61,7 +61,8 @@
                 单价
               </div>
               <ion-col>
-                <ion-input placeholder="0" type="number" [(ngModel)]="s.svcPrice" (ngModelChange)="inputChange()"></ion-input>
+                <ion-input placeholder="0" type="number" [(ngModel)]="s.svcPrice" (ngModelChange)="inputChange()">
+                </ion-input>
               </ion-col>
             </ion-row>
             <ion-row class="selectItem" *ngIf="!s.isInfinite">
@@ -69,7 +70,8 @@
                 数量
               </div>
               <ion-col>
-                <ion-input placeholder="0" type="number" [(ngModel)]="s.svcNum" (ngModelChange)="inputChange()"></ion-input>
+                <ion-input placeholder="0" type="number" [(ngModel)]="s.svcNum" (ngModelChange)="inputChange()">
+                </ion-input>
               </ion-col>
             </ion-row>
             <ion-row class="projectTitle" *ngIf="s.isInfinite">
@@ -96,7 +98,6 @@
       <span class="price dangerInfo">￥{{otherInfor.totalPrice}}</span>
     </div>
   </ion-list>
-
   <ion-row class="inputItem fineThread row-distance">
     <div class="titleColor">折扣描述</div>
     <ion-col>
@@ -108,7 +109,8 @@
     <ion-row class="inputItem fineThread">
       <div class="titleColor">卡有效期</div>
       <ion-col>
-        <ion-input type="number" placeholder="请输入有效期，0为永久" [(ngModel)]="salecardDetail.validityMonth" (ngModelChange)="validityMonthChange()"></ion-input>
+        <ion-input type="number" placeholder="请输入有效期，0为永久" [(ngModel)]="salecardDetail.validityMonth"
+          (ngModelChange)="validityMonthChange()"></ion-input>
       </ion-col>
       <div>
         个月
@@ -137,8 +139,8 @@
   <ion-row class="otherSelect fineThread row-distance" *ngIf="otherInfor.stopDate">
     <div class="titleColor">截止日期</div>
     <ion-col>
-      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31" [(ngModel)]="otherInfor.stopDate"
-        (ngModelChange)="dateChange()">
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" max="2030-12-31"
+        [(ngModel)]="otherInfor.stopDate" (ngModelChange)="dateChange()">
       </ion-datetime>
     </ion-col>
     <ion-icon name="ios-arrow-forward"></ion-icon>
@@ -159,15 +161,16 @@
 
   <pay-type (selectEvent)="selectPay($event)"></pay-type>
   <div class="meg" [hidden]="!notifys">
-      <h3>通知方式</h3>
-      <div class="meg-btn" style="border-top: 0.55px solid #f0f0f0;">
-        <button ion-button *ngFor="let notify of notifys;let i = index;" [ngClass]="notify.flag?'btnActive':'nobtnActive'" (click)='noticeWay(notify.notifyTag,i)'>{{notify.notifyTypeName}}</button>
-      </div>
-      <div class="notice" [hidden]="noticeFlag">
-        <span style="color:red;">注意：</span>
-        <input type="tel" placeholder="请输入手机号码才能使用短信通知" [(ngModel)]="mobileNumber" (ngModelChange)="btnActive($event)">
-      </div>
+    <h3>通知方式</h3>
+    <div class="meg-btn" style="border-top: 0.55px solid #f0f0f0;">
+      <button ion-button *ngFor="let notify of notifys;let i = index;" [ngClass]="notify.flag?'btnActive':'nobtnActive'"
+        (click)='noticeWay(notify.notifyTag,i)'>{{notify.notifyTypeName}}</button>
     </div>
+    <div class="notice" [hidden]="noticeFlag">
+      <span style="color:red;">注意：</span>
+      <input type="tel" placeholder="请输入手机号码才能使用短信通知" [(ngModel)]="mobileNumber" (ngModelChange)="btnActive($event)">
+    </div>
+  </div>
 </ion-content>
 <ion-footer class="certain">
   <button ion-button color="secondary" (click)="certain()">开卡</button>
